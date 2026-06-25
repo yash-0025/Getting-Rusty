@@ -10,12 +10,12 @@
 ## 📊 Quick Progress Snapshot
 *(Update this table as weeks complete — ask the AI to refresh it, it will propose the update and wait for approval.)*
 
-| Week | Topic Area | Status |
+| Week | Focus Area | Status |
 |---|---|---|
-| Week 1 | Foundations (Ownership, Types, Errors) | `[ ]` Not started |
-| Week 2 | Type System (Traits, Generics, Lifetimes) | `[ ]` Not started |
-| Week 3 | Concurrency, Async, Web Services | `[ ]` Not started |
-| Week 4 | Advanced (`unsafe`, Macros, Performance, Capstone) | `[ ]` Not started |
+| Week 1 | CLI Tools & Core Rust | `[ ]` Not started |
+| Week 2 | Libraries, Generics & Type System Mastery | `[ ]` Not started |
+| Week 3 | Concurrency, Async & Production Web Services | `[ ]` Not started |
+| Week 4 | Advanced Patterns & Production Capstone | `[ ]` Not started |
 
 ---
 
@@ -80,10 +80,10 @@
 
 | Project | Week | Status | Repo/Path | Notes |
 |---|---|---|---|---|
-| CLI Task Manager v2 | 1 | `[ ]` | — | — |
-| Generic KV Store Library | 2 | `[ ]` | — | — |
-| Production-Shaped REST API | 3 | `[ ]` | — | — |
-| Final Capstone | 4 | `[ ]` | — | — |
+| CLI Task Manager (polished) | 1 | `[ ]` | — | Week 1 capstone |
+| Generic Cache Library with TTL | 2 | `[ ]` | — | Week 2 capstone |
+| Production REST API (Docker) | 3 | `[ ]` | — | Week 3 capstone |
+| Final Capstone (TBD) | 4 | `[ ]` | — | Portfolio centerpiece |
 
 ---
 

@@ -64,6 +64,36 @@
 **Output Summary:** AI confirmed update succeeded, reinforced the "matched toolchain set" concept. Taught **Concept #2: The 4 cargo commands** — `cargo check` (type-check only, fastest, 90% of dev time), `cargo build` (debug binary), `cargo run` (build + run), `cargo build --release` (optimized binary, slow compile). Key insight: `cargo check` skips codegen, giving ~2x faster feedback than `cargo build` — critical for large projects. Showed real CI pipeline order: `fmt → clippy → test → build --release`. Contrasted with JS world (no compile step, V8 JIT at runtime). Assigned exercise: `cargo new hello-rust`, run `cargo check` then `cargo run`, paste output.
 **Outcome / Next Step:** Learner should scaffold `hello-rust` project and run cargo commands.
 
+### 2026-06-25 23:17 IST — Prompt #8
+**Prompt:** "There's still an issue — you're not showing what we're actually changing in LOGS.md. I need before/after code blocks with real content, and update the rules."
+**Context:** LOGS.md diffs were using abbreviated summaries with `...` instead of actual content. Learner also pushed workspace to GitHub (`origin/main` on `yash-0025/Getting-Rusty`).
+**Output Summary:** AI updated LOGS.md header with 5 explicit rules: (1) every file change logged, (2) full actual diffs required — no abbreviations/ellipses, (3) ROADMAP/LEARNING need approval, (4) LOGS.md is self-documenting, (5) new files show key content. Fixed existing abbreviated Prompt #7 entry to show full content. Updated entry format template to say "exact old/new line" instead of generic "removed/added." Added 3 new proper log entries to LOGS.md (rules update, Prompt #8 PROMPT_HISTORY entry, fixed Prompt #7 entry).
+**Outcome / Next Step:** Rules locked in. Continue Day 1 — scaffold `hello-rust` project.
+
+### 2026-06-25 23:25 IST — Prompt #9
+**Prompt:** "I can't see a production-level project which is being used in industry which can get me jobs in the roadmap. Please check and try to update things."
+**Context:** Learner reviewed ROADMAP.md and noted all projects are learning exercises, not portfolio-worthy industry projects. Currently viewing the tooling table at the end of ROADMAP.md.
+**Output Summary:** AI analyzed all 4 existing projects: Week 1 CLI Task Manager (learning exercise), Week 2 KV Store (learning exercise), Week 3 REST API (generic CRUD), Week 4 capstone (vague options). AI proposed keeping Week 1-3 as pedagogical stepping stones but replacing Days 27-29 capstone options with 3 industry-relevant, portfolio-worthy alternatives: (A) **Blockchain Transaction Indexer & API** — connects to Solana/EVM RPC, indexes to Postgres, exposes via REST+WebSocket; directly relevant to Web3 infra companies. (B) **Smart Contract Security Scanner CLI** — static analysis for vulnerability patterns in Solana programs; leverages audit background. (C) **High-Performance API Gateway / Rate Limiter** — reverse proxy with rate limiting, routing, health checks; pure systems-engineering signal. AI explicitly asked for approval before touching ROADMAP.md.
+**Outcome / Next Step:** Learner should approve/modify the proposed capstone options, then AI will update ROADMAP.md + LOGS.md.
+
+### 2026-06-25 23:29 IST — Prompt #10
+**Prompt:** "I still want you to refactor the whole roadmap... everything is too topic-based... I want everything to be project-based instead of this topic-based or theoretical."
+**Context:** Learner reviewed ROADMAP.md, wants every day centered around building something with concepts taught just-in-time. Wants updated curriculum reflecting June 2026 ecosystem.
+**Output Summary:** AI searched current Rust ecosystem (confirmed: tokio, axum, sqlx, serde, clap, tracing still the production stack; 2024 edition standard; 1.96.0 latest). AI searched job market (production experience, concurrency mastery, AI-augmented dev, Web3/fintech/infra hiring). Drafted complete project-based ROADMAP.md rewrite as implementation_plan.md artifact for review. Key changes: (1) every day starts with "Build ___" — no standalone topic days, (2) concepts taught because the project demands them, (3) 15+ deliverables across 30 days, (4) Week 1: CLI tools (unit converter, duplicate finder, task tracker, text analyzer), (5) Week 2: libraries (generic collections, plugin system, zero-copy parser, expression evaluator, file system tree), (6) Week 3: concurrency + web (parallel word counter, data pipeline, async health checker, scraper, REST API + DB + Docker), (7) Week 4: advanced + capstone (safe ring buffer for unsafe, macros, profiling, typestate, workspace, then 3-day portfolio project), (8) final capstone options: blockchain indexer, security scanner CLI, or API gateway. Same concepts covered, different structure.
+**Outcome / Next Step:** Learner should review the implementation_plan.md artifact and approve/modify before AI updates ROADMAP.md.
+
+### 2026-06-26 00:15 IST — Prompt #11
+**Prompt:** Learner approved the implementation plan (project-based ROADMAP.md rewrite).
+**Context:** Implementation plan artifact reviewed and approved. ROADMAP.md still had old topic-based content.
+**Output Summary:** AI applied the approved project-based curriculum to ROADMAP.md — complete rewrite from 368 lines of topic-based content to ~340 lines of project-based content. Every day now starts with "Build X." Final capstone options: Blockchain Indexer, Security Scanner CLI, API Gateway. Logged the rewrite in LOGS.md with full before/after diff showing all 30 day-title changes. Proposed LEARNING.md projects table update to match new project names, awaiting approval.
+**Outcome / Next Step:** Learner should approve LEARNING.md projects table update, then continue Day 1 (Build: "Hello Cargo" & Project Scaffold).
+
+### 2026-06-26 01:37 IST — Prompt #12
+**Prompt:** "Yes as of now i guess we can start if there's anything else will let you know in between."
+**Context:** Learner approved LEARNING.md update. All governance files now synced with project-based roadmap.
+**Output Summary:** AI applied LEARNING.md changes (week descriptions + projects table synced to new roadmap). All tracking files now consistent. Started Day 1 — assigned first exercise: `cargo new hello-rust`, `cargo check`, `cargo run`.
+**Outcome / Next Step:** Learner should run `cargo new hello-rust`, `cargo check`, `cargo run` and paste output.
+
 ---
 
 <!-- New entries appended below -->

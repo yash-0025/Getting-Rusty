@@ -1,345 +1,294 @@
-# 🦀 RUST MASTERY ROADMAP — 30-Day Intensive
+# 🦀 RUST MASTERY ROADMAP — 30-Day Intensive (Project-Based)
 
-> **Created:** 2026-06-25 · **Target completion:** 2026-07-25 · **Pace:** 5+ hrs/day
+> **Created:** 2026-06-25 · **Restructured:** 2026-06-26 · **Target completion:** 2026-07-25 · **Pace:** 5+ hrs/day
 > **Learner profile:** Full-stack (MERN) engineer, Web3/Solidity security background, prior light exposure to Rust via Solana/Anchor. Goal: become a production-grade Rust engineer capable of using Rust as core backend/systems architecture.
-> **Rust edition target:** 2024 Edition · **Toolchain:** stable (currently ~1.95.x as of this writing — always run `rustc --version` and treat that as ground truth, not this number)
+> **Rust edition target:** 2024 Edition · **Toolchain:** stable (1.96.0 as of 2026-06-25 — always run `rustc --version` and treat that as ground truth)
+> **Philosophy:** Every day starts with **"Build ___"**. Concepts are taught just-in-time because the project demands them. You never learn a concept in a vacuum.
 
 ---
 
 ## 🔒 GOVERNANCE RULES (read before touching any file)
 
 1. **No silent edits.** Neither `ROADMAP.md` nor `LEARNING.md` is ever modified by the AI without explicitly asking the learner first and getting a yes. This applies to checking off a topic, reordering, rewording, adding, or deleting anything.
-2. **Every change is logged.** Any edit to `ROADMAP.md` or `LEARNING.md` — once approved — gets a corresponding collapsible entry in `LOGS.md` (see that file's format). No exceptions, no batching silently.
-3. **`LEARNING.md` is the source of truth for progress.** `ROADMAP.md` is the static curriculum (it can evolve, but slowly and only with consent). `LEARNING.md` is the living journal of what's actually been learned, built, and understood.
+2. **Every change is logged.** Any edit to any file in this workspace — once made — gets a corresponding collapsible entry in `LOGS.md` with full before/after diffs (see that file's format). No exceptions, no batching silently.
+3. **`LEARNING.md` is the source of truth for progress.** `ROADMAP.md` is the curriculum. `LEARNING.md` is the living journal of what's actually been learned, built, and understood.
 4. **The roadmap cross-checks the learning log.** Before starting a new topic, the AI should glance at `LEARNING.md` to see what's marked done, what's marked shaky/needs-review, and adapt pacing — but it still asks before changing the roadmap itself.
 5. **Status markers used consistently across both files:**
    - `[ ]` Not started
    - `[~]` In progress
    - `[x]` Completed & understood
    - `[!]` Completed but shaky / needs revisit
-6. **One topic, one conversation thread of depth.** Don't dump 10 topics at once. Teach one concept fully — explanation, real-world "why", code example, optimized vs naive version, then a small exercise — before moving on, unless the learner explicitly asks to move faster.
+6. **One concept at a time, in project context.** Don't dump 10 concepts at once. Teach one concept fully — explanation, real-world "why", code in the project, optimized vs naive version — before moving on, unless the learner explicitly asks to move faster.
 
 ---
 
 ## 📐 HOW THIS ROADMAP IS STRUCTURED
 
-Each topic below has four tags where relevant:
-- **Concept** — what it is
-- **Reality check** — where this actually shows up in production code / why it exists
-- **Anti-pattern → Pattern** — the naive way vs. the idiomatic/optimized way
-- **Project hook** — which project (see Week-by-week projects) will force you to use it
+Each day has:
+- **You build** — the project/deliverable for the day
+- **Concepts you learn** — what the project teaches you (just-in-time, not in advance)
+- **Deliverable** — what you should have working by end of day
 
 ---
 
-## WEEK 1 — Foundations That Are Actually Hard (Ownership, Types, Error Handling)
+## WEEK 1 — CLI Tools & Core Rust (Days 1–7)
 
-> Goal: stop translating from JS/TS in your head. Start thinking in ownership.
+> Goal: Learn Rust's fundamentals by building real CLI tools. Every day ships a working binary.
 
-### Day 1 — Environment, Toolchain, and Cargo Mental Model
-- [ ] Install via `rustup`, understand `rustup`, `rustc`, `cargo` as three separate tools
-- [ ] `cargo new`, `cargo run`, `cargo build --release`, `cargo check` (and why `cargo check` is your 90%-of-the-time command — it skips codegen)
-- [ ] `Cargo.toml` vs `Cargo.lock` — what gets committed and why (lockfile = reproducibility, like `package-lock.json`)
-- [ ] Workspaces (`[workspace]`) — multi-crate projects, analogous to a monorepo with shared `node_modules` but with real dependency isolation
-- [ ] Editions: 2015/2018/2021/2024 — we build everything on **2024**
-- [ ] `rustfmt` and `clippy` — set these up now, not later. Clippy is not optional; it's your senior engineer's code review running locally
-- [ ] **Reality check**: every real Rust repo has a `rust-toolchain.toml` pinning the version, and CI runs `cargo fmt --check && cargo clippy -- -D warnings` before anything else
-- [ ] Project hook: scaffold `hello-rust` + a `justfile`/`Makefile` with `fmt`, `lint`, `test` targets (you'll reuse this skeleton all month)
+### Day 1 — Build: "Hello Cargo" & Project Scaffold
+- [ ] **You build:** A CLI tool that takes your name as a command-line argument and prints a formatted greeting. Then scaffold a reusable project skeleton with `fmt`, `lint`, `test` targets.
+- [ ] **Concepts:** `rustup`/`rustc`/`cargo` as three separate tools · `cargo new`/`cargo check`/`cargo run`/`cargo build --release` · `Cargo.toml` vs `Cargo.lock` (lockfile = reproducibility, like `package-lock.json`) · Workspaces (`[workspace]`) overview · Editions (2015/2018/2021/2024 — we use **2024**) · `rustfmt` + `clippy` setup from minute one · `rust-toolchain.toml` for pinning versions
+- [ ] **Reality check:** Every real Rust repo has a `rust-toolchain.toml` pinning the version, and CI runs `cargo fmt --check && cargo clippy -- -D warnings` before anything else
+- [ ] **Deliverable:** A `hello-rust` project + a reusable project skeleton you'll clone all month
 
-### Day 2 — Variables, Types, and Control Flow (fast pass — you know this shape from TS)
-- [ ] `let` vs `let mut` — immutability by default (contrast: `const` in JS is shallow; Rust's is deep unless `Cell`/`RefCell`)
-- [ ] Scalar types: `i8..i128`, `u8..u128`, `isize`/`usize`, `f32`/`f64`, `bool`, `char` (4 bytes, full Unicode scalar — not like JS's UTF-16 code units)
-- [ ] Integer overflow behavior: panics in debug, wraps in release (and why you should never rely on that — use `checked_add`, `wrapping_add`, `saturating_add` explicitly)
-- [ ] Compound types: tuples, arrays `[T; N]` (fixed size, stack), slices `&[T]` (the real workhorse)
-- [ ] `if`/`match`/`loop`/`while`/`for` as expressions, not statements — everything returns a value
-- [ ] Shadowing vs mutation — when to use which
-- [ ] **Anti-pattern → Pattern**: using `unwrap()` everywhere in a learning script (fine for Day 2) → returning `Result` properly (Day 4 onward)
-- [ ] Project hook: temperature converter / simple calculator CLI using `match` on an enum of operations
+### Day 2 — Build: Multi-Unit Converter CLI
+- [ ] **You build:** A CLI that converts between units (temperature, distance, weight). User picks a category, enters a value, gets the result. Uses `match` on an enum of conversion types.
+- [ ] **Concepts:** `let` vs `let mut` (immutability by default — deep, not shallow like JS `const`) · Scalar types: `i32`, `f64`, `usize`, `bool`, `char` (4 bytes, full Unicode scalar) · Integer overflow behavior: panics in debug, wraps in release — use `checked_add`/`saturating_add` · Compound types: tuples, arrays `[T; N]`, slices `&[T]` · `if`/`match`/`loop`/`for` as **expressions** (everything returns a value) · Shadowing vs mutation · Enums as tagged unions (real algebraic data types, not like TS enums) · `std::io` for reading user input
+- [ ] **Anti-pattern → Pattern:** Using `unwrap()` everywhere in a learning script (fine for Day 2) → returning `Result` properly (Day 5 onward)
+- [ ] **Deliverable:** Working unit converter. Clippy-clean.
 
-### Day 3 — Ownership, Move Semantics, Borrowing (THE topic — budget 2x time here)
-- [ ] Stack vs heap, and why Rust cares about this at compile time (no GC, no runtime tracing)
-- [ ] Move semantics: assignment moves by default for non-`Copy` types — `String` moves, `i32` copies
-- [ ] `Copy` vs `Clone` — what makes a type eligible for `Copy` (all-Copy fields, no heap pointers)
-- [ ] Borrowing: `&T` (shared/immutable) vs `&mut T` (exclusive/mutable) — the core invariant: **many readers OR one writer, never both**
-- [ ] The borrow checker as a compile-time data-race preventer — this is literally what replaces your mental model of "don't mutate shared state" that you've been doing manually in JS/Solidity
-- [ ] Dangling references are impossible — compare to a JS closure capturing a stale ref, or a Solidity storage pointer to deleted data
-- [ ] **Reality check**: this is why Rust has no segfaults/use-after-free/double-free *without* `unsafe`, and why companies like AWS, Discord, and Cloudflare rewrote hot paths in Rust — memory bugs were costing them outages and CVEs
-- [ ] **Anti-pattern → Pattern**: cloning everything to "make the borrow checker happy" (works, but is O(n) extra allocs) → designing function signatures that borrow correctly the first time
-- [ ] Project hook: a small "inventory" struct system where you deliberately try to break borrow rules, read the compiler errors, and fix them — this is the single best exercise in the entire roadmap
+### Day 3 — Build: File Duplicate Finder
+- [ ] **You build:** A CLI that walks a directory, groups files by size, then by content hash, and reports duplicates. This is the day ownership/borrowing clicks — because you *can't build this* without understanding them.
+- [ ] **Concepts:** Stack vs heap — why Rust cares at compile time (no GC, no runtime tracing) · **Move semantics**: `String` moves, `i32` copies — you'll hit this passing file paths around · `Copy` vs `Clone`: what makes a type eligible for `Copy` (all-Copy fields, no heap pointers) · **Borrowing**: `&T` (shared/immutable) vs `&mut T` (exclusive/mutable) — **many readers OR one writer, never both** · The borrow checker as a compile-time data-race preventer · `String` vs `&str` — owned vs borrowed, the #1 "fighting the compiler" topic for JS devs · `Vec<T>` — growth strategy, `with_capacity` to avoid reallocations · `HashMap<K, V>` for grouping files · `std::fs` for directory walking, file reading
+- [ ] **Reality check:** This is why Rust has no segfaults/use-after-free/double-free without `unsafe`, and why AWS, Discord, and Cloudflare rewrote hot paths in Rust — memory bugs were costing them outages and CVEs
+- [ ] **Anti-pattern → Pattern:** Cloning everything to "make the borrow checker happy" (works, but O(n) extra allocs) → designing function signatures that borrow correctly the first time
+- [ ] **Deliverable:** Working duplicate finder. You'll deliberately break borrow rules, read compiler errors, and fix them.
 
-### Day 4 — Structs, Enums, Pattern Matching, and `Option`
-- [ ] Struct types: named-field, tuple structs, unit structs
-- [ ] `impl` blocks, associated functions (`Self::new`) vs methods (`&self`/`&mut self`/`self`)
-- [ ] Enums as **tagged unions** (not like TS enums — much closer to a Rust enum being a real algebraic data type / like a Solidity-style discriminated struct but compiler-enforced)
-- [ ] `Option<T>` replacing `null`/`undefined` — and why this eliminates an entire CVE category (null pointer dereference / billion-dollar mistake)
-- [ ] `match` exhaustiveness — compiler forces you to handle every variant; no more forgetting an `else if`
-- [ ] `if let`, `while let`, `let...else`
-- [ ] Pattern matching on nested structures, guards (`match x { n if n > 5 => ... }`), `@` bindings
-- [ ] **Reality check**: in a Solana program (which you've touched), account state is basically structs + enums for instruction dispatch — this is the same discipline, just without the runtime
-- [ ] Project hook: build a `TrafficLight`/state-machine enum, then a small **task tracker** (CRUD on a `Vec<Task>` in memory) using structs + enums for status
+> ⚠️ **This is the hardest day.** Budget 2x time. Ownership is THE concept that makes Rust Rust. Everything else builds on it.
 
-### Day 5 — `Result`, Error Handling, and the `?` Operator
-- [ ] `Result<T, E>` as the explicit alternative to exceptions/try-catch
-- [ ] `?` operator — propagation, and how it desugars (calls `From::from` on the error type)
-- [ ] `panic!` vs `Result` — when each is appropriate (panic = programmer bug / unrecoverable; Result = expected failure mode)
-- [ ] Custom error enums with `thiserror` (for libraries — defines a precise error API)
-- [ ] `anyhow` (for applications — convenient `Result<T>` + `.context()` chains) — and **when to use which** (this is a real, common interview question)
-- [ ] Converting between error types, `From`/`Into` for errors
-- [ ] `unwrap()`, `expect()`, `unwrap_or`, `unwrap_or_else`, `unwrap_or_default` — and why `unwrap()` in production code outside of tests/prototypes is a smell
-- [ ] **Anti-pattern → Pattern**: stringly-typed errors (`Err("something broke".to_string())`) → structured error enums callers can `match` on
-- [ ] Project hook: rebuild Day 4's task tracker with **real error handling** — file-not-found, invalid input, etc. all become typed errors, not panics
+### Day 4 — Build: Task Tracker (In-Memory CRUD)
+- [ ] **You build:** A CLI task tracker — add, list, complete, delete tasks. Tasks have name, description, status (enum: Todo/InProgress/Done), created-at timestamp. All in-memory for now.
+- [ ] **Concepts:** Struct types: named-field, tuple structs, unit structs · `impl` blocks, `Self::new()` vs `&self`/`&mut self`/`self` methods · Enums with variants for task status · `Option<T>` replacing `null`/`undefined` — eliminates null pointer dereference bugs · `match` exhaustiveness — compiler forces you to handle every variant · `if let`, `while let`, `let...else` · Pattern matching on nested structures, guards (`n if n > 5`), `@` bindings · `Vec<Task>` as in-memory storage, iterator-based filtering
+- [ ] **Reality check:** In a Solana program (which you've touched), account state is basically structs + enums for instruction dispatch — this is the same discipline, just without the runtime
+- [ ] **Deliverable:** Working CRUD task tracker. No persistence yet — that's tomorrow.
 
-### Day 6 — Collections Deep Dive
-- [ ] `Vec<T>` — growth strategy (capacity doubling), `with_capacity` to avoid reallocations (this is your first real "optimized vs naive" lesson)
-- [ ] `String` vs `&str` — owned heap-allocated UTF-8 vs borrowed string slice; **why this distinction is the #1 source of "fighting the compiler" for JS devs**
-- [ ] `HashMap<K, V>` vs `BTreeMap<K, V>` — hashing cost vs ordered iteration, when you need which
-- [ ] `HashSet`, `BTreeSet`
-- [ ] `VecDeque` — when you need a queue/ring buffer (BFS, sliding window)
-- [ ] Iterators over collections: `.iter()` vs `.iter_mut()` vs `.into_iter()` — borrow vs mutate vs consume
-- [ ] **Reality check**: choosing `HashMap` over `BTreeMap` by default is the right call 95% of the time — ordered iteration is a real cost, not a free nicety
-- [ ] Project hook: word-frequency counter on a large text file — measure `HashMap` vs naive `Vec<(String, u32)>` linear scan performance difference yourself
+### Day 5 — Build: Persistent Task Tracker with Error Handling
+- [ ] **You build:** Take Day 4's task tracker, add JSON persistence (load from file on start, save on every change) and proper error handling. No more `unwrap()` — every failure is typed.
+- [ ] **Concepts:** `Result<T, E>` as the explicit alternative to exceptions/try-catch · `?` operator — propagation, how it desugars (`From::from` on the error type) · `panic!` vs `Result` — when each is appropriate (panic = programmer bug; Result = expected failure) · Custom error enums with `thiserror` (for libraries) · `anyhow` (for applications) — and **when to use which** (real interview question) · Converting between error types, `From`/`Into` for errors · `unwrap()`, `expect()`, `unwrap_or`, `unwrap_or_else`, `unwrap_or_default` — why `unwrap()` in production is a smell · `serde` + `serde_json` for serialization/deserialization · File I/O with proper error propagation
+- [ ] **Anti-pattern → Pattern:** Stringly-typed errors (`Err("something broke".to_string())`) → structured error enums callers can `match` on
+- [ ] **Deliverable:** Task tracker that persists to `tasks.json`, with typed errors for file-not-found, invalid JSON, etc.
 
-### Day 7 — Iterators, Closures, and Functional Patterns (Rust's biggest ergonomic weapon)
-- [ ] Closures: `Fn`, `FnMut`, `FnOnce` — what each means for capture-by-reference vs capture-by-value vs consuming captures
-- [ ] The `Iterator` trait — laziness: nothing runs until you call a consuming method (`.collect()`, `.sum()`, `.for_each()`, etc.)
-- [ ] Chaining: `.map()`, `.filter()`, `.fold()`, `.zip()`, `.enumerate()`, `.take()`, `.skip()`, `.chain()`, `.flat_map()`
-- [ ] Zero-cost abstraction claim — **prove it yourself**: compare a hand-rolled loop vs an iterator chain in `--release` mode and look at near-identical assembly/benchmark timing
-- [ ] `collect::<Vec<_>>()`, turbofish syntax explained
-- [ ] **Anti-pattern → Pattern**: writing index-based `for i in 0..v.len() { v[i] }` loops (bounds-checked, easy to get wrong) → iterator chains (often faster, definitely safer, definitely more idiomatic)
-- [ ] Project hook: refactor every loop from Days 2–6's projects into iterator chains; benchmark with `criterion` (mini intro) to see the zero-cost claim hold up
+### Day 6 — Build: Text Analytics Engine
+- [ ] **You build:** A CLI that reads a text file (or stdin) and produces: word frequency counts, most/least common words, average word length, sentence count, reading-level estimate. Processes large files efficiently.
+- [ ] **Concepts:** **Iterators**: the `Iterator` trait, laziness — nothing runs until you call a consuming method (`.collect()`, `.sum()`, `.for_each()`) · **Closures**: `Fn`, `FnMut`, `FnOnce` — capture-by-reference vs capture-by-value vs consuming captures · Chaining: `.map()`, `.filter()`, `.fold()`, `.zip()`, `.enumerate()`, `.flat_map()`, `.take()`, `.skip()`, `.chain()` · **Zero-cost abstraction**: compare iterator chain vs hand-rolled loop in `--release` mode · `collect::<Vec<_>>()`, turbofish syntax · `HashMap` entry API (`.entry().or_insert()`) · `BTreeMap` for sorted output vs `HashMap` for speed
+- [ ] **Anti-pattern → Pattern:** Index-based `for i in 0..v.len() { v[i] }` loops (bounds-checked, easy to get wrong) → iterator chains (often faster, definitely safer, definitely more idiomatic)
+- [ ] **Deliverable:** Working text analyzer. Benchmark iterator vs loop version with `std::time::Instant`.
 
-**🏁 Week 1 Capstone Project: CLI Task Manager v2**
-- Persists tasks to a JSON file (`serde` + `serde_json`)
-- Full error handling with custom error enum
-- Uses `clap` for argument parsing (subcommands: add, list, complete, delete)
-- Idiomatic iterator-based filtering/sorting
-- `cargo clippy` clean, `cargo fmt` applied, basic unit tests
+### Day 7 — 🏁 Week 1 Capstone: Polish & Ship the CLI Task Manager
+- [ ] **You build:** Take Days 4-5's task tracker, add `clap` for proper CLI parsing (subcommands: add, list, complete, delete, stats), refactor into modules, add unit tests, make it portfolio-ready.
+- [ ] **Concepts:** `clap` derive API for CLI argument parsing · Module system: `mod`, `pub`, `pub(crate)`, file-based modules (modern `foo.rs` + `foo/` style) · Refactoring into `models.rs`, `storage.rs`, `cli.rs`, `errors.rs` · Unit tests (`#[test]`, `assert_eq!`, `#[cfg(test)] mod tests`) · Iterator-based filtering/sorting for the `list` command · The **builder pattern** — refactor `Task::new()` into `TaskBuilder` · The **newtype pattern** — `struct TaskId(u64)` for type safety
+- [ ] **Deliverable:** A clippy-clean, tested, modular CLI task manager. First portfolio piece.
+
+**🏁 Week 1 Deliverables Summary:**
+- `hello-rust` scaffold
+- Multi-unit converter CLI
+- File duplicate finder
+- Persistent task tracker with error handling
+- Text analytics engine
+- **Polished CLI Task Manager** (portfolio piece #1)
 
 ---
 
-## WEEK 2 — Type System Mastery (Traits, Generics, Lifetimes) + Testing
+## WEEK 2 — Libraries, Generics & Type System Mastery (Days 8–14)
 
-> Goal: this week is what separates "can write Rust" from "writes Rust like it's meant to be written."
+> Goal: Learn to write reusable Rust libraries. Move from "Rust user" to "Rust library author."
 
-### Day 8 — Traits I: Shared Behavior
-- [ ] Defining traits, default methods, implementing for multiple types
-- [ ] Trait bounds on generic functions: `fn foo<T: Display>(x: T)`
-- [ ] `where` clauses for readability when bounds get complex
-- [ ] Deriving common traits: `Debug`, `Clone`, `PartialEq`, `Eq`, `Hash`, `Default`, `PartialOrd`, `Ord`
-- [ ] Operator overloading via `std::ops` traits (`Add`, `Sub`, `Index`, etc.)
-- [ ] **Reality check**: traits are how Rust does polymorphism *without* a class hierarchy — closer to TypeScript interfaces or Go interfaces than Java/C# inheritance, but compiler-checked everywhere
-- [ ] Project hook: build a small `Shape` trait (Circle, Rectangle, Triangle) with `area()`, `perimeter()` — classic but you'll extend it Day 9
+### Day 8 — Build: Generic Stack & Queue Collection Library
+- [ ] **You build:** A library crate with `Stack<T>` and `Queue<T>`, both implementing the `Iterator` trait for consumption, with push/pop/peek operations and capacity management.
+- [ ] **Concepts:** Defining traits, default methods, implementing for multiple types · Trait bounds: `fn foo<T: Display>(x: T)`, `where` clauses · Deriving common traits: `Debug`, `Clone`, `PartialEq`, `Eq`, `Hash`, `Default` · Generic structs, generic methods · Associated types (`type Item;` in `Iterator`) vs generic type params — when a trait should use which · Implementing a custom `Iterator` — internalizing associated types by writing one · Operator overloading via `std::ops` (`Add`, `Index`, etc.)
+- [ ] **Reality check:** `Iterator::Item` is the textbook example of "why associated type, not generic param" — a type can only iterate one way
+- [ ] **Deliverable:** A `collections` library crate with full tests and doc comments.
 
-### Day 9 — Traits II: Static vs Dynamic Dispatch
-- [ ] Generics + trait bounds = **monomorphization** (compiler generates a specialized copy per concrete type — zero runtime cost, but larger binary)
-- [ ] `dyn Trait` = **trait objects** (vtable-based dynamic dispatch — runtime cost of a pointer indirection, but one binary, heterogeneous collections)
-- [ ] `impl Trait` in argument and return position — when it's sugar for generics vs when it's necessary (returning unnameable closure/iterator types)
-- [ ] `Box<dyn Trait>` for heterogeneous collections (`Vec<Box<dyn Shape>>`)
-- [ ] Object safety rules — why some traits can't become `dyn Trait`
-- [ ] **Anti-pattern → Pattern**: reaching for `Box<dyn Trait>` everywhere "to be safe" (loses compiler's ability to inline/optimize, adds heap allocation) → using generics + bounds when the concrete type is known at compile time, `dyn` only when you genuinely need runtime polymorphism (e.g., plugin systems, heterogeneous lists)
-- [ ] Project hook: extend `Shape` into a `Vec<Box<dyn Shape>>` "shape collection" that computes total area — then write the *same* thing with an enum instead and discuss tradeoffs (this enum-vs-trait-object tradeoff is a real senior-level design question)
+### Day 9 — Build: Plugin-Based Shape Calculator
+- [ ] **You build:** A shape calculation system where shapes implement a `Shape` trait. Build both: (1) a generic/monomorphized version, (2) a `Vec<Box<dyn Shape>>` trait-object version. Compare them.
+- [ ] **Concepts:** **Static dispatch**: generics + monomorphization (compiler generates specialized copies — zero runtime cost, larger binary) · **Dynamic dispatch**: `dyn Trait` / trait objects (vtable-based, runtime cost, but heterogeneous collections) · `impl Trait` in argument and return position — when it's sugar for generics vs necessary · `Box<dyn Trait>` for heterogeneous collections · Object safety rules — why some traits can't become `dyn Trait` · **The enum-vs-trait-object design tradeoff** — a real senior-level architecture question
+- [ ] **Anti-pattern → Pattern:** `Box<dyn Trait>` everywhere "to be safe" (loses inlining, adds heap alloc) → generics when types are known at compile time, `dyn` only for genuine runtime polymorphism
+- [ ] **Deliverable:** Both versions working, with a written note on when you'd choose each approach.
 
-### Day 10 — Generics Deep Dive + Associated Types
-- [ ] Generic structs, enums, methods — `struct Wrapper<T> { value: T }`
-- [ ] Multiple type parameters, default type parameters
-- [ ] Associated types (`type Item;` in `Iterator`) vs generic type parameters — when a trait should use which (one output type per impl vs many possible)
-- [ ] `PhantomData<T>` — marking unused type parameters (you'll see this constantly in library code)
-- [ ] Const generics: `[T; N]` and `struct Matrix<const N: usize>` — compile-time-sized arrays without heap allocation
-- [ ] **Reality check**: `Iterator::Item` is the textbook example of "why associated type, not generic param" — a type can only iterate one way, so one output type per implementation makes sense
-- [ ] Project hook: implement a custom `Iterator` for a `Fibonacci` struct and for a simple `Stack<T>` — internalize associated types by writing one
+### Day 10 — Build: Zero-Copy Config Parser
+- [ ] **You build:** A config file parser (INI-style or custom format) that returns borrowed references into the original file content instead of allocating new `String`s for every value. Measure allocations saved.
+- [ ] **Concepts:** **Lifetimes**: what `'a` actually means — a description for the compiler, not a control mechanism · Lifetime elision rules — why 90% of functions need zero explicit annotations · Explicit lifetimes: `fn get_value<'a>(&'a self, key: &str) -> Option<&'a str>` · Lifetimes in structs: `struct Config<'a> { entries: Vec<(&'a str, &'a str)> }` · `'static` lifetime — what it really means · Lifetime bounds on generics: `T: 'a` · `From`/`Into`/`TryFrom`/`TryInto` for ergonomic conversions
+- [ ] **Reality check:** Lifetimes show up constantly in parsers, zero-copy deserialization (`serde` with `&'a str` fields), and any API that returns borrowed data — this is how you write genuinely fast Rust
+- [ ] **Anti-pattern → Pattern:** `.clone()` to dodge a lifetime error → reading the borrow-checker message and fixing the structural issue
+- [ ] **Deliverable:** Zero-copy parser with benchmarks showing allocation savings vs a clone-based version.
 
-### Day 11 — Lifetimes (the part everyone fears — demystified properly)
-- [ ] What a lifetime annotation actually is: **a description for the compiler, not a control mechanism** — you're not making references live longer, you're proving to the compiler how long they already live
-- [ ] Lifetime elision rules — why 90% of functions need zero explicit lifetime annotations
-- [ ] Explicit lifetimes: `fn longest<'a>(x: &'a str, y: &'a str) -> &'a str` — walk through *exactly* why the compiler needs this
-- [ ] Lifetimes in structs holding references — `struct Excerpt<'a> { part: &'a str }`
-- [ ] `'static` lifetime — what it really means (lives for the whole program; string literals, not "global" in the loose sense)
-- [ ] Lifetime bounds on generics: `T: 'a`
-- [ ] **Reality check**: lifetimes show up constantly in parsers, zero-copy deserialization (`serde` with `&'a str` fields), and any API that returns borrowed data instead of cloning — this is how you write genuinely fast Rust instead of clone-happy Rust
-- [ ] **Anti-pattern → Pattern**: sprinkling `.clone()` to dodge a lifetime error you don't understand → reading the actual borrow-checker message, understanding which reference outlives which scope, and fixing the real structural issue
-- [ ] Project hook: write a zero-copy CSV-line parser that returns `Vec<&str>` slices into the original line instead of allocating new `String`s — measure allocations saved
+> ⚠️ **This is the day lifetimes finally make sense** — because you're using them to solve a real performance problem (avoiding allocations), not learning them in the abstract.
 
-### Day 12 — Smart Pointers & Interior Mutability
-- [ ] `Box<T>` — heap allocation, recursive types (`enum List { Cons(i32, Box<List>), Nil }`)
-- [ ] `Rc<T>` — reference-counted shared ownership (single-threaded) — and why this is *not* a GC, it's deterministic refcounting
-- [ ] `RefCell<T>` — runtime-checked borrowing when the compiler can't prove safety statically (interior mutability pattern)
-- [ ] `Rc<RefCell<T>>` combo — the classic "shared mutable state, single-threaded" pattern, and its real costs (runtime panics on borrow violations, not compile-time safety)
-- [ ] `Weak<T>` — breaking reference cycles (parent/child tree structures)
-- [ ] Deref coercion — why `Box<T>`, `Rc<T>` etc. let you call `T`'s methods directly
-- [ ] **Reality check**: `Rc<RefCell<T>>` is everywhere in GUI/tree/graph code, but in *concurrent* code you reach for `Arc<Mutex<T>>` instead (Week 3) — knowing which "shared state wrapper" applies to which concurrency model is a real skill gap most people have
-- [ ] Project hook: build a simple doubly-linked-list-free **tree** structure (e.g., a file-system simulation) using `Rc<RefCell<Node>>`, including a parent pointer via `Weak`
+### Day 11 — Build: Expression Evaluator (Mini Calculator)
+- [ ] **You build:** An expression evaluator that parses and evaluates mathematical expressions like `(2 + 3) * 4 / 2`. Build an AST using recursive enums, evaluate it with pattern matching.
+- [ ] **Concepts:** `Box<T>` for recursive types (`enum Expr { Add(Box<Expr>, Box<Expr>), Num(f64) }`) · `Rc<T>` — reference-counted shared ownership (single-threaded, deterministic, not a GC) · `RefCell<T>` — runtime-checked borrowing (interior mutability) · Deref coercion — why `Box<T>`, `Rc<T>` let you call `T`'s methods directly · Deep pattern matching on nested enum structures
+- [ ] **Reality check:** Recursive enums + Box is how every parser, compiler, and interpreter in Rust works
+- [ ] **Deliverable:** Working expression evaluator handling `+`, `-`, `*`, `/`, parentheses, with error handling for malformed input.
 
-### Day 13 — Testing, Documentation, and Project Organization
-- [ ] Unit tests (`#[cfg(test)] mod tests`), `#[test]`, `assert!`/`assert_eq!`/`assert_ne!`
-- [ ] Integration tests (`tests/` directory) — testing your crate's public API like an external consumer
-- [ ] Doc tests — code examples in `///` comments that are actually compiled and run as tests (this is unique and excellent — your docs can't go stale and lie)
-- [ ] `#[should_panic]`, `Result`-returning tests
-- [ ] Test organization for larger projects, `mod` and `pub(crate)` visibility rules
-- [ ] Module system deep dive: `mod`, `pub`, `pub(crate)`, `pub(super)`, file-based modules (`mod.rs` vs `foo.rs` + `foo/` directory — modern style)
-- [ ] **Reality check**: doc tests are why crates.io documentation pages can show "this example actually compiles" — a real trust signal when picking a dependency
-- [ ] Project hook: take Week 1's task manager, split it into proper modules (`models`, `storage`, `cli`, `errors`), write unit + integration tests, write doc comments with working examples
+### Day 12 — Build: File System Tree Simulator
+- [ ] **You build:** A simulated file system with directories containing files and subdirectories. Support: mkdir, touch, ls, tree (recursive display), rm. Uses `Rc<RefCell<Node>>` for shared ownership and `Weak` for parent pointers.
+- [ ] **Concepts:** `Rc<RefCell<T>>` combo — the "shared mutable state, single-threaded" pattern, and its real costs (runtime panics, not compile-time safety) · `Weak<T>` — breaking reference cycles (parent/child tree structures) · When `Rc<RefCell<T>>` vs `Arc<Mutex<T>>` (single-threaded vs multi-threaded) · Tree traversal algorithms in Rust
+- [ ] **Reality check:** `Rc<RefCell<T>>` is everywhere in GUI/tree/graph code, but in concurrent code you reach for `Arc<Mutex<T>>` instead (Week 3)
+- [ ] **Deliverable:** Working file system simulator with tree display.
 
-### Day 14 — Closures Advanced, Function Pointers, and Builder Patterns
-- [ ] `Box<dyn Fn(...)  -> ...>` for storing heterogeneous closures
-- [ ] Function pointers (`fn` type) vs closures (`Fn` traits) — when a plain `fn` pointer suffices
-- [ ] The builder pattern in Rust (no method overloading, no default args — builder is the idiomatic answer)
-- [ ] The newtype pattern — wrapping a primitive in a struct for type safety (`struct UserId(u64)` instead of passing raw `u64` everywhere — sound familiar from strict TS code)
-- [ ] `From`/`Into`/`TryFrom`/`TryInto` for ergonomic conversions between your own types
-- [ ] **Reality check**: nearly every well-designed Rust HTTP client/config struct (e.g., `reqwest::ClientBuilder`) uses the builder pattern because Rust has no optional/default function parameters
-- [ ] Project hook: refactor task manager's `Task::new(...)` into a `TaskBuilder`; add newtypes for `TaskId`
+### Day 13 — Build: Comprehensive Test Suite + Documentation
+- [ ] **You build:** Take all Week 2 libraries (Days 8-12), write comprehensive tests and documentation. Learn testing as a *practice*, not a topic.
+- [ ] **Concepts:** Unit tests (`#[cfg(test)] mod tests`), `#[test]`, `assert!`/`assert_eq!`/`assert_ne!` · Integration tests (`tests/` directory) — testing your crate's public API like an external consumer · Doc tests — code examples in `///` comments that are compiled and run as tests · `#[should_panic]`, `Result`-returning tests · Test organization, `mod` and `pub(crate)` visibility rules · Module system deep dive: `mod.rs` vs `foo.rs` + `foo/` (modern style) · Function pointers (`fn` type) vs closures (`Fn` traits)
+- [ ] **Reality check:** Doc tests are why crates.io docs show "this example actually compiles" — a real trust signal when picking a dependency
+- [ ] **Deliverable:** 90%+ test coverage across all Week 2 crates, with doc comments containing working examples.
 
-**🏁 Week 2 Capstone Project: Generic In-Memory Key-Value Store Library**
-- Generic over key/value types with trait bounds
-- Public trait-based API (so it's swappable: `HashMap`-backed vs `BTreeMap`-backed implementation)
-- Proper error enum with `thiserror`
-- Full unit + integration + doc tests
-- Published as its own small crate structure (even if not actually published to crates.io) — this is your "I can write a real library" proof
+### Day 14 — 🏁 Week 2 Capstone: Generic In-Memory Cache with TTL
+- [ ] **You build:** A generic, thread-safe-ready cache library with TTL expiration: `Cache<K, V>` backed by `HashMap`, with `get`, `set`, `delete`, `cleanup_expired`. Trait-based API so the backing store is swappable.
+- [ ] **Concepts:** Combining everything from Week 2: generics, trait bounds, lifetimes, builder pattern · Multiple type parameters, default type parameters · Const generics for fixed-capacity variants · `PhantomData<T>` — marking unused type parameters · Feature flags (`[features]`) for optional capabilities · `Box<dyn Fn(...) -> ...>` for storing heterogeneous closures · Full unit + integration + doc tests · Published as its own crate structure
+- [ ] **Deliverable:** A polished library crate — your "I can write a real Rust library" proof. Portfolio piece #2.
+
+**🏁 Week 2 Deliverables Summary:**
+- Generic Stack & Queue library
+- Plugin-based Shape Calculator (static + dynamic dispatch)
+- Zero-copy Config Parser (lifetimes mastery)
+- Expression Evaluator (recursive types)
+- File System Tree Simulator (smart pointers)
+- Full test suite + documentation
+- **Generic Cache Library with TTL** (portfolio piece #2)
 
 ---
 
-## WEEK 3 — Concurrency, Async, and Building Real Services
+## WEEK 3 — Concurrency, Async & Production Web Services (Days 15–21)
 
-> Goal: go from "I understand ownership" to "I can build a production async service."
+> Goal: Go from "I understand ownership" to "I can build and deploy a production async service."
 
-### Day 15 — Concurrency Fundamentals: Threads
-- [ ] `std::thread::spawn`, `JoinHandle`, `.join()`
-- [ ] `move` closures for thread ownership transfer
-- [ ] `Arc<T>` — the multi-threaded version of `Rc<T>` (atomic refcounting)
-- [ ] `Mutex<T>` and `RwLock<T>` — exclusive vs read-heavy shared access; poisoning on panic and what that means
-- [ ] `Arc<Mutex<T>>` as the standard "shared mutable state across threads" pattern
-- [ ] Why Rust's type system makes data races a **compile-time error** (`Send`/`Sync` marker traits) — this is the single biggest "wait, that's actually incredible" moment for most learners
-- [ ] **Reality check**: this is the guarantee that makes companies trust Rust for systems where a C++ data race would cause a silent, unreproducible production bug
-- [ ] Project hook: parallel word-counter across multiple files using a thread pool, sharing results via `Arc<Mutex<HashMap<...>>>`, then compare against a channel-based version (Day 16)
+### Day 15 — Build: Parallel File Word Counter
+- [ ] **You build:** A CLI that counts word frequencies across many files in parallel using OS threads. Compare: (1) shared state with `Arc<Mutex<HashMap>>`, (2) thread-per-file with results joined.
+- [ ] **Concepts:** `std::thread::spawn`, `JoinHandle`, `.join()` · `move` closures for thread ownership transfer · `Arc<T>` — the multi-threaded `Rc` (atomic refcounting) · `Mutex<T>` and `RwLock<T>` — exclusive vs read-heavy shared access; poisoning on panic · `Arc<Mutex<T>>` as the standard "shared mutable state across threads" pattern · Why Rust's type system makes data races a **compile-time error** (`Send`/`Sync` marker traits)
+- [ ] **Reality check:** This `Send`/`Sync` guarantee is why companies trust Rust for systems where a C++ data race would cause a silent, unreproducible production bug
+- [ ] **Deliverable:** Parallel word counter with timing comparison: single-threaded vs multi-threaded.
 
-### Day 16 — Channels and Message Passing
-- [ ] `std::sync::mpsc` — multiple-producer single-consumer channels
-- [ ] `Sender`/`Receiver`, `.send()`, `.recv()`, iterating a receiver
-- [ ] "Share memory by communicating" philosophy vs "communicate by sharing memory" (`Arc<Mutex<T>>`) — knowing when each fits is a real architecture decision
-- [ ] Bounded vs unbounded channels — backpressure considerations
-- [ ] **Reality check**: channel-based pipelines are how you build producer/consumer/worker-pool architectures without manual locking — directly transferable to job queues, log processors, etc.
-- [ ] Project hook: build a multi-stage pipeline (read files → parse → aggregate) using channels between stages, compare ergonomics/performance against Day 15's mutex version
+### Day 16 — Build: Multi-Stage Data Pipeline with Channels
+- [ ] **You build:** A pipeline: Reader → Parser → Aggregator, connected by channels. Reader reads log files, Parser extracts structured data, Aggregator computes statistics. Compare channel-based vs mutex-based architectures.
+- [ ] **Concepts:** `std::sync::mpsc` channels — multiple-producer, single-consumer · `Sender`/`Receiver`, `.send()`, `.recv()`, iterating a receiver · "Share memory by communicating" vs "communicate by sharing memory" — when each fits · Bounded vs unbounded channels — backpressure considerations
+- [ ] **Reality check:** Channel-based pipelines are how you build producer/consumer/worker-pool architectures without manual locking — directly transferable to job queues, log processors, etc.
+- [ ] **Deliverable:** Working pipeline processing real log files, with architecture comparison doc.
 
-### Day 17 — Async Rust I: The Mental Model
-- [ ] Why async exists: I/O-bound concurrency without OS-thread-per-connection cost
-- [ ] `async fn`, `.await`, `Future` trait — futures are **lazy state machines**, not promises that start running immediately (critical difference from JS promises!)
-- [ ] Why you need a runtime (Tokio) — Rust's std lib ships no executor, by design
-- [ ] `#[tokio::main]`, `tokio::spawn`, tasks vs OS threads (green threads / cooperative scheduling)
-- [ ] `.await` points as the only place a task can be preempted — implications for holding a `Mutex` across an `.await` (classic bug source)
-- [ ] **Reality check**: this "futures don't run until polled/awaited" model is exactly the kind of thing that trips up JS developers, because in JS, once you call an async function, it *starts* executing synchronously up to the first await — in Rust, nothing happens until something polls the future
-- [ ] Project hook: convert Day 16's pipeline to async, fetch multiple URLs concurrently with `reqwest` + `tokio::join!`/`futures::future::join_all`
+### Day 17 — Build: Async URL Health Checker
+- [ ] **You build:** A CLI that takes a list of URLs, checks them all concurrently with configurable concurrency limit and timeout per request, reports status/latency for each.
+- [ ] **Concepts:** **Why async exists**: I/O-bound concurrency without OS-thread-per-connection cost · `async fn`, `.await`, `Future` trait — futures are **lazy state machines**, not promises that start running immediately (critical difference from JS!) · Why you need a runtime (Tokio) — Rust's std lib ships no executor, by design · `#[tokio::main]`, `tokio::spawn`, tasks vs OS threads (green threads / cooperative scheduling) · `.await` points as the only place a task can be preempted · `reqwest` for HTTP requests · `tokio::sync::Semaphore` for concurrency limiting
+- [ ] **Reality check:** "Futures don't run until polled" — in JS, once you call an async function, it starts executing synchronously up to the first await. In Rust, nothing happens until something polls the future.
+- [ ] **Deliverable:** Async health checker with configurable concurrency and timeout. Table output with status codes + latency.
 
-### Day 18 — Async Rust II: Practical Patterns
-- [ ] `tokio::select!` — racing multiple futures, cancellation patterns
-- [ ] Timeouts (`tokio::time::timeout`), intervals, sleep
-- [ ] `async-trait` crate vs native async fn in traits (note: native support has matured — check current state, since this was a long-standing pain point that's been evolving release to release)
-- [ ] Structured concurrency basics: ensuring spawned tasks don't outlive their intended scope, cancellation safety
-- [ ] Common pitfalls: blocking the async runtime with sync code (`std::thread::sleep` instead of `tokio::time::sleep`, CPU-heavy work without `spawn_blocking`)
-- [ ] `tokio::task::spawn_blocking` for CPU-bound or blocking I/O work inside an async context
-- [ ] **Anti-pattern → Pattern**: doing heavy synchronous computation directly inside an `async fn` (starves the runtime, stalls every other task on that worker thread) → `spawn_blocking` or a dedicated thread pool
-- [ ] Project hook: build a concurrent web scraper/health-checker that pings N URLs with a timeout and concurrency limit (`tokio::sync::Semaphore`)
+### Day 18 — Build: Rate-Limited Web Scraper
+- [ ] **You build:** A web scraper that crawls a site (or set of sites), extracts data, respects rate limits, handles errors gracefully, outputs structured results. Handles timeouts, retries, cancellation.
+- [ ] **Concepts:** `tokio::select!` — racing multiple futures, cancellation patterns · Timeouts (`tokio::time::timeout`), intervals, sleep · Native async fn in traits (check current 1.96 status) · Structured concurrency: ensuring spawned tasks don't outlive their scope · `tokio::task::spawn_blocking` for CPU-bound or blocking I/O work · **Anti-pattern → Pattern:** `std::thread::sleep` inside async (starves the runtime) → `tokio::time::sleep`
+- [ ] **Anti-pattern → Pattern:** Heavy synchronous computation inside `async fn` (starves the runtime) → `spawn_blocking` or dedicated thread pool
+- [ ] **Deliverable:** Working scraper with rate limiting, retry logic, and structured JSON/CSV output.
 
-### Day 19 — Building a Real Web Service with Axum
-- [ ] Axum's design: built on `tokio` + `hyper` + `tower` — middleware is `tower::Service`, not a bespoke system
+### Day 19–20 — Build: REST API with Database (2-day build)
+- [ ] **You build:** A full CRUD REST API for a "bookmarks" service — save, tag, search, delete URLs with metadata. Axum + SQLite/Postgres via sqlx. Proper error-to-HTTP-status mapping, JSON request/response.
+
+**Day 19 concepts:**
+- [ ] Axum's design: built on `tokio` + `hyper` + `tower` — middleware is `tower::Service`
 - [ ] Routing, handlers, extractors (`Path`, `Query`, `Json`, `State`)
-- [ ] Shared application state (`Arc<AppState>`) — connecting back to Day 15's concurrency primitives in a real context
+- [ ] Shared application state (`Arc<AppState>`)
 - [ ] Request/response JSON with `serde`
-- [ ] Custom error type implementing `IntoResponse` — proper error-to-HTTP-status mapping (ties Day 5's error handling directly into a real API)
-- [ ] Middleware via `tower-http`: tracing, CORS, compression, timeouts
-- [ ] **Reality check**: this Axum + Tower stack pattern is the de facto standard for production Rust web services as of 2026 — what you build here transfers directly to real job-ready backend work
-- [ ] Project hook: start the **Week 3 capstone** — a REST API
+- [ ] Custom error type implementing `IntoResponse`
+- [ ] Middleware via `tower-http`: CORS, compression, tracing
 
-### Day 20 — Persistence: Databases with `sqlx`
-- [ ] `sqlx` — compile-time checked SQL queries against Postgres/SQLite (a genuinely Rust-unique feature: query syntax errors caught at `cargo build` time)
-- [ ] Connection pooling (`PgPool`)
+**Day 20 concepts:**
+- [ ] `sqlx` — **compile-time checked SQL** (query errors caught at `cargo build`)
+- [ ] Connection pooling (`SqlitePool` / `PgPool`)
 - [ ] Migrations
 - [ ] Mapping rows to structs (`FromRow` / `query_as`)
-- [ ] Transactions, error handling on the DB layer (tying back into your `thiserror` custom error type from Day 19)
-- [ ] **Reality check**: compile-time query checking is the kind of thing that makes experienced backend engineers from any language go "wait, why doesn't every language do this"
-- [ ] Project hook: wire persistence into the Week 3 capstone API (replace in-memory state with Postgres or SQLite)
+- [ ] Transactions, DB-layer error handling
 
-### Day 21 — Observability, Logging, Config
-- [ ] `tracing` + `tracing-subscriber` — structured, async-aware logging/spans (replaces naive `println!` debugging entirely)
-- [ ] Log levels, `env-filter` for runtime-configurable verbosity
-- [ ] Configuration management: env vars, `.env` files, layered config (`config` crate or hand-rolled with `serde` + `envy`)
-- [ ] Graceful shutdown (`tokio::signal`, draining in-flight requests)
-- [ ] **Reality check**: `tracing` spans are how you correlate a single request across async task boundaries — `println!` debugging falls apart the moment you have concurrent requests interleaving output
-- [ ] Project hook: instrument the capstone API with tracing spans per request, structured JSON logs, graceful shutdown on SIGINT
+- [ ] **Reality check:** This Axum + Tower + sqlx stack is the de facto standard for production Rust web services as of 2026
+- [ ] **Deliverable:** Working REST API with 5+ endpoints, database persistence, proper errors.
 
-**🏁 Week 3 Capstone Project: Production-Shaped REST API**
-- Axum + Tower + sqlx (Postgres or SQLite)
-- Full CRUD resource (e.g., a "notes" or "links" service) with auth-ready structure (even a simple API-key middleware)
-- Structured errors → correct HTTP status codes
-- `tracing` instrumentation, env-based config, graceful shutdown
-- Dockerized (`Dockerfile` with multi-stage build — small image, this is itself a real optimization lesson: static vs dynamic linking, `distroless`/`scratch` base images)
-- README documenting how to run it — treat this like a real take-home assignment you'd submit for a job
+### Day 21 — 🏁 Week 3 Capstone: Production-Ready API Deployment
+- [ ] **You build:** Take Days 19-20's API, add observability, config management, graceful shutdown, Docker deployment, and a README. Make it look like a real take-home assignment.
+- [ ] **Concepts:** `tracing` + `tracing-subscriber` — structured, async-aware logging/spans · Log levels, `env-filter`, structured JSON logs · Configuration: env vars, `.env` files, layered config (`config` crate or `serde` + `envy`) · Graceful shutdown (`tokio::signal`, draining in-flight requests) · `Dockerfile` with multi-stage build — static linking, `scratch`/`distroless` base images
+- [ ] **Reality check:** `tracing` spans are how you correlate a single request across async task boundaries — `println!` debugging falls apart with concurrent requests interleaving
+- [ ] **Deliverable:** Dockerized, instrumented, documented REST API. README with setup instructions. Portfolio piece #3.
+
+**🏁 Week 3 Deliverables Summary:**
+- Parallel File Word Counter (threads + Arc + Mutex)
+- Multi-Stage Data Pipeline (channels)
+- Async URL Health Checker (tokio + reqwest)
+- Rate-Limited Web Scraper (select!, spawn_blocking)
+- **Production REST API** with DB, tracing, Docker (portfolio piece #3)
 
 ---
 
-## WEEK 4 — Advanced Rust: `unsafe`, Performance, Macros, and Capstone
+## WEEK 4 — Advanced Patterns & Production Capstone (Days 22–30)
 
-> Goal: the topics that separate "intermediate" from "exceptional" — what makes a senior Rust engineer dangerous-good.
+> Goal: The topics that separate "intermediate" from "exceptional." Then build something that gets you hired.
 
-### Day 22 — `unsafe` Rust, Properly Understood
-- [ ] What `unsafe` actually unlocks: raw pointer deref, calling `unsafe fn`/FFI, mutable statics, union field access, implementing unsafe traits — **and nothing else**. It does NOT disable the borrow checker generally.
-- [ ] Raw pointers `*const T`/`*mut T` vs references — no aliasing guarantees, no automatic validity
-- [ ] Writing a safe abstraction over unsafe internals (the actual discipline: `unsafe` blocks should be small, justified with a `// SAFETY:` comment explaining *why* the invariant holds)
-- [ ] Undefined behavior categories Rust protects you from normally: use-after-free, data races, invalid memory access, etc — and how `unsafe` reopens those doors if misused
-- [ ] FFI basics: `extern "C"`, calling into a C library, `#[repr(C)]`
-- [ ] **Reality check**: `unsafe` is not "turn off safety," it's "I am personally proving this invariant instead of the compiler" — production crates like `bytes`, `tokio`, and `serde` all contain small, heavily-commented `unsafe` blocks at their performance-critical core, surrounded by a 100%-safe public API
-- [ ] **Anti-pattern → Pattern**: reaching for `unsafe` to "make the borrow checker stop complaining" → treating every borrow-checker rejection as a design signal first, `unsafe` only as a last resort with a written safety proof
-- [ ] Project hook: implement a tiny safe wrapper around a raw-pointer-based fixed-size ring buffer; write the `// SAFETY:` justification comments yourself
+### Day 22 — Build: Safe Ring Buffer (Learning `unsafe`)
+- [ ] **You build:** A fixed-size ring buffer backed by raw pointers, wrapped in a 100% safe public API. Write `// SAFETY:` comments for every `unsafe` block.
+- [ ] **Concepts:** What `unsafe` actually unlocks: raw pointer deref, calling `unsafe fn`/FFI, mutable statics, union field access, implementing unsafe traits — and nothing else · Raw pointers `*const T`/`*mut T` vs references — no aliasing guarantees · Writing a safe abstraction over unsafe internals (small, justified `unsafe` blocks) · UB categories Rust protects you from: use-after-free, data races, invalid memory · FFI basics: `extern "C"`, `#[repr(C)]`
+- [ ] **Reality check:** `unsafe` is not "turn off safety" — it's "I am personally proving this invariant instead of the compiler." Production crates like `bytes`, `tokio`, and `serde` all contain small, heavily-commented `unsafe` blocks surrounded by safe APIs
+- [ ] **Anti-pattern → Pattern:** `unsafe` to "shut up the borrow checker" → treating borrow-checker errors as design signals, `unsafe` only as last resort with written safety proof
+- [ ] **Deliverable:** Safe ring buffer with full tests proving the safe API can't trigger UB.
 
-### Day 23 — Macros: `macro_rules!` and an Intro to Derive Macros
-- [ ] Declarative macros (`macro_rules!`) — pattern matching on token trees, repetition (`$(...),*`)
-- [ ] When a macro is the right tool vs when a generic function/trait would do (macros operate on syntax, not types — use them when you need to generate code shape, not just behavior)
-- [ ] Procedural macros overview: derive macros (`#[derive(MyTrait)]`), attribute macros, function-like macros — at least conceptually, even if you don't write a full proc-macro crate this month
-- [ ] How `serde`'s `#[derive(Serialize, Deserialize)]` works under the hood (conceptually) — demystify the "magic"
-- [ ] **Reality check**: most app-level Rust developers never write a proc-macro from scratch, but every senior engineer can read one and understand what code it expands to (`cargo expand` is the tool for this)
-- [ ] Project hook: write a small `macro_rules!` that generates boilerplate (e.g., a `hashmap!{}` literal macro, or a logging macro with file/line info)
+### Day 23 — Build: Custom `hashmap!{}` Macro + Derive Exploration
+- [ ] **You build:** (1) A `macro_rules!` `hashmap!{}` literal macro. (2) A logging macro with `file!()`, `line!()` info. (3) Use `cargo expand` to demystify `#[derive(Serialize)]`.
+- [ ] **Concepts:** Declarative macros (`macro_rules!`): token tree pattern matching, repetition (`$(...).*`) · When a macro is the right tool vs generic function/trait · Procedural macros overview: derive macros, attribute macros, function-like macros (conceptual) · How `serde`'s `#[derive(Serialize, Deserialize)]` works under the hood · `cargo expand`
+- [ ] **Reality check:** Most app-level Rust devs never write a proc-macro from scratch, but every senior engineer can read one and understand what code it expands to
+- [ ] **Deliverable:** Working macros, plus a written explanation of what `#[derive(Serialize)]` expands to for one of your structs.
 
-### Day 24 — Performance: Profiling and Optimization Mindset
-- [ ] Benchmarking properly with `criterion` (statistical rigor — not just `Instant::now()` subtraction, which lies due to noise/warmup/branch prediction)
-- [ ] `cargo flamegraph` / `perf` basics for finding real hotspots — **measure before optimizing, always**
-- [ ] Allocation awareness: every `.clone()`, `.to_string()`, `Vec::push` without capacity is a potential hidden cost — `cargo-flamegraph`/`dhat`/`heaptrack` style thinking
-- [ ] `#[inline]` hints, when they matter (rarely — trust the compiler first)
-- [ ] Release profile tuning: `opt-level`, `lto`, `codegen-units`, `panic = "abort"` tradeoffs in `Cargo.toml`
-- [ ] SIMD awareness (high-level — know it exists via `std::simd` or `packed_simd`-style crates, know when autovectorization already handles it)
-- [ ] **Reality check**: the actual senior-engineer skill here isn't "know every micro-optimization," it's "profile first, fix the actual bottleneck, and know which 5% of code is hot" — this is true in every language, but Rust gives you the tools to act on it with zero-cost abstractions
-- [ ] Project hook: take the slowest part of any prior project, profile it, optimize it, and document the before/after numbers — this becomes a portfolio-worthy writeup
+### Day 24 — Build: Profile & Optimize a Hot Path
+- [ ] **You build:** Take the slowest part of any prior project (duplicate finder, text analyzer, or word counter), profile it, optimize it, and document before/after numbers.
+- [ ] **Concepts:** `criterion` for statistically rigorous benchmarking (not just `Instant::now()` subtraction) · `cargo flamegraph` / profiling for finding real hotspots · Allocation awareness: every `.clone()`, `.to_string()`, `Vec::push` without capacity is a potential hidden cost · `#[inline]` hints, when they matter (rarely) · Release profile tuning: `opt-level`, `lto`, `codegen-units`, `panic = "abort"` in `Cargo.toml` · SIMD awareness (high-level)
+- [ ] **Reality check:** The actual senior-engineer skill is "profile first, fix the actual bottleneck" — not premature optimization
+- [ ] **Deliverable:** Before/after benchmark numbers, flamegraph screenshots, written optimization writeup. Portfolio-worthy.
 
-### Day 25 — Advanced Trait Patterns & API Design
-- [ ] Sealed traits (preventing external implementations of a trait — a real API-design technique)
-- [ ] Marker traits, blanket implementations (`impl<T: Display> MyTrait for T`)
-- [ ] Trait objects with generics combined carefully (object-safety edge cases)
-- [ ] The "typestate" pattern — encoding valid state transitions into the type system so invalid states are literally uncompilable (e.g., a `Connection<Disconnected>` vs `Connection<Connected>`)
-- [ ] API design principles: `#[non_exhaustive]`, semantic versioning discipline, when to expose a struct's fields vs force constructor use
-- [ ] **Reality check**: the typestate pattern is what "exceptional" Rust engineers reach for in real systems — e.g., a TCP connection type that makes it impossible to call `.send()` before `.connect()` *at compile time*
-- [ ] Project hook: redesign one of your earlier projects (e.g., the task manager or KV store) using the typestate pattern for at least one workflow
+### Day 25 — Build: Typestate Connection Manager
+- [ ] **You build:** A TCP/database connection type where invalid states are uncompilable: `Connection<Disconnected>` can call `.connect()` but not `.query()`. `Connection<Connected>` can `.query()` but not `.connect()` again.
+- [ ] **Concepts:** **Typestate pattern** — encoding valid state transitions into the type system so invalid states are literally uncompilable · Sealed traits (preventing external implementations) · Marker traits, blanket implementations (`impl<T: Display> MyTrait for T`) · Trait objects with generics combined carefully (object-safety edge cases) · API design: `#[non_exhaustive]`, semantic versioning, when to expose fields vs force constructor
+- [ ] **Reality check:** This is what exceptional Rust engineers reach for — e.g., a TCP connection that makes it impossible to call `.send()` before `.connect()` at compile time
+- [ ] **Deliverable:** Typestate connection manager where misuse literally doesn't compile.
 
-### Day 26 — Workspaces, Crate Publishing, and Dependency Hygiene
-- [ ] Multi-crate workspace layout for a real project (`core`, `cli`, `api` as separate crates sharing one workspace)
-- [ ] Feature flags (`[features]`) — conditional compilation, optional dependencies
-- [ ] `cargo audit`, `cargo vet`/`cargo deny` — supply-chain security awareness (genuinely important given recent crates.io supply-chain incidents)
-- [ ] Semantic versioning and `Cargo.toml` version constraints (`^`, `~`, exact)
-- [ ] (Conceptual) publishing to crates.io — README, `LICENSE`, `docs.rs` generation, what a good crate's metadata looks like
-- [ ] **Reality check**: this is the "how a real engineering org structures a Rust codebase" day — directly relevant to working at any company using Rust at scale
-- [ ] Project hook: restructure your Week 2 KV-store library + Week 3 API into a proper workspace sharing common types
+### Day 26 — Build: Multi-Crate Workspace
+- [ ] **You build:** Restructure your Week 2 cache library + Week 3 API into a proper workspace: `core`, `cli`, `api` as separate crates sharing types.
+- [ ] **Concepts:** Multi-crate workspace layout (`[workspace]` in root `Cargo.toml`) · Feature flags (`[features]`) — conditional compilation, optional dependencies · `cargo audit`, `cargo vet`/`cargo deny` — supply-chain security awareness · Semantic versioning and `Cargo.toml` version constraints (`^`, `~`, exact) · Publishing structure (even if not actually on crates.io)
+- [ ] **Reality check:** This is how a real engineering org structures a Rust codebase — directly relevant to working at any company using Rust at scale
+- [ ] **Deliverable:** Clean workspace with shared types, feature flags, and dependency audit.
 
-### Day 27–29 — FINAL CAPSTONE PROJECT (3 days, integrative)
-Choose (or combine) based on interest — discuss with the AI tutor before locking in:
-- [ ] **Option A**: A multi-threaded/async job-queue system (producer/consumer, persistence, retry logic, observability) — heavy concurrency + async focus
-- [ ] **Option B**: A full REST+WebSocket API service (e.g., a real-time chat or notification backend) with auth, persistence, tests, Docker, CI — heavy "production service" focus
-- [ ] **Option C**: A CLI dev-tool (e.g., a linter, a log-parser, a code-generator) with plugin-style trait architecture — heavy "systems tool" focus, good bridge toward future Solana/CLI tooling work given your background
-- [ ] Must include: proper error handling, tests (unit+integration), tracing/logging, README, at least one deliberate performance optimization you can explain with before/after numbers, and a short "design decisions" doc explaining *why* you chose the patterns you did
-- [ ] **Reality check**: this capstone is your portfolio piece — structure it like something you'd link from your GitHub profile next to your Solidity audit work
+### Days 27–29 — 🏆 FINAL CAPSTONE: Production Portfolio Project (3 days)
 
-### Day 30 — Review, Gaps, and What's Next
+Choose one — discuss with me before locking in. This is your **portfolio centerpiece**.
+
+#### Option A: Blockchain Transaction Indexer & API
+- [ ] A service that connects to a blockchain (Solana or EVM via RPC), listens for transactions/events in real-time, indexes them into a database, and exposes the indexed data via REST + WebSocket API.
+- **What it proves:** async I/O, concurrency, database, API design, error handling, observability
+- **Why it gets you hired:** every Web3 infra company (Helius, Jito, Alchemy, Quicknode) builds exactly this. Showing you built one from scratch in Rust is a killer signal.
+- **Tech:** tokio, reqwest/jsonrpc, sqlx, axum, serde, tracing, Docker
+
+#### Option B: Smart Contract Security Scanner CLI
+- [ ] A CLI that takes Solana program source/bytecode and runs static analysis checks for common vulnerability patterns: unchecked arithmetic, missing signer checks, PDA seed collisions, missing owner checks.
+- **What it proves:** parsing, pattern matching, trait-based plugin architecture, CLI design, testing
+- **Why it gets you hired:** directly leverages your audit background. Shows deep Rust + security + systems thinking. Unique in the market.
+- **Tech:** clap, syn (for parsing), serde, trait-based rule engine, comprehensive tests
+
+#### Option C: High-Performance API Gateway
+- [ ] A reverse-proxy with configurable routing, per-client rate limiting (token bucket/sliding window), request/response transformation, health checking, and metrics.
+- **What it proves:** async networking, concurrency, Tower middleware, benchmarking, systems design
+- **Why it gets you hired:** pure systems-engineering signal. Relevant to any infra/platform team (Cloudflare, AWS, Fastly).
+- **Tech:** tokio, hyper, tower, dashmap, serde, tracing, Docker
+
+**All options must include:** proper error handling, tests (unit + integration), tracing/logging, README, at least one deliberate performance optimization with before/after numbers, and a short "design decisions" doc explaining your architectural choices.
+
+> 💡 **This capstone is your portfolio piece — structure it like something you'd link from your GitHub profile next to your Solidity audit work.**
+
+### Day 30 — Review, Gaps & Next Steps
 - [ ] Full review pass across `LEARNING.md` — flag any `[!]` (shaky) topics for one more focused session
 - [ ] Mock technical discussion: AI tutor asks you to explain ownership, lifetimes, `Send`/`Sync`, and async to "a curious senior engineer" out loud/in writing — teaching it back is the real test of mastery
-- [ ] Plan the next month: candidates include `tonic`/gRPC, WASM (`wasm-bindgen`), embedded (`embassy`), or going deeper into Solana/Anchor now that core Rust is solid (directly relevant given your Web3 background) — **do not start this without discussing it together first**
+- [ ] Plan Month 2: candidates include `tonic`/gRPC, WASM (`wasm-bindgen`), embedded (`embassy`), or going deeper into Solana/Anchor now that core Rust is solid — **do not start this without discussing it together first**
+
+**🏁 Week 4 Deliverables Summary:**
+- Safe Ring Buffer (unsafe mastery)
+- Custom Macros + derive exploration
+- Profiling & optimization writeup
+- Typestate Connection Manager
+- Multi-crate workspace
+- **Production Capstone Project** (portfolio centerpiece)
 
 ---
 
-## 🧰 TOOLING & ECOSYSTEM REFERENCE (current as of June 2026 — verify versions yourself before pinning)
+## 🧰 TOOLING & ECOSYSTEM REFERENCE (verified June 2026)
 
 | Category | Crate/Tool | Why |
 |---|---|---|
@@ -358,10 +307,11 @@ Choose (or combine) based on interest — discuss with the AI tutor before locki
 | Formatting | `rustfmt` (built-in) | Non-negotiable |
 | Supply chain | `cargo-audit`, `cargo-deny` | Dependency vulnerability/license auditing |
 
-> ⚠️ Always verify exact current major versions of these crates yourself (e.g. via `cargo add <crate>` which fetches the latest, or crates.io) before pinning in a real project — this table intentionally omits version numbers since they will drift after this roadmap is written.
+> ⚠️ Always verify exact current major versions of these crates yourself (e.g. via `cargo add <crate>` which fetches the latest, or crates.io) before pinning in a real project. Rust stable is at **1.96.0** as of June 25, 2026.
 
 ---
 
 ## ✅ Approval Log for This File
 *(Don't edit the roadmap above without logging the change in `LOGS.md` — see that file's format.)*
 - 2026-06-25 — Initial roadmap created and approved by learner.
+- 2026-06-26 — Full restructure from topic-based to project-based curriculum. Approved by learner.
