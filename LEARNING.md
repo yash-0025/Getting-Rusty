@@ -5,6 +5,19 @@
 
 **Status legend:** `[ ]` not started · `[~]` in progress · `[x]` done & understood · `[!]` done but shaky, needs revisit
 
+### ⚙️ Environment
+- **OS:** Windows 11 + **WSL** (Ubuntu) — Rust toolchain is installed in WSL, NOT native Windows
+- **Toolchain:** rustc 1.96.0, cargo 1.96.0, rustup 1.28.2 (stable channel)
+- **IDE:** VS Code on Windows, connected to WSL
+- **Rule:** All `cargo`/`rustc` commands run in WSL. If the AI needs to execute commands, use WSL paths (`/mnt/c/Dev/Rust/...`), not Windows paths.
+
+### 🗣️ Teaching Style
+- **Use simple, everyday English.** No fancy words or dense academic writing. Talk like a friend explaining things, not like a textbook.
+- **Show through code, not words.** Short code examples are better than long paragraphs. Let the code do the talking.
+- **Use real-world analogies** from JS/TS/Solidity that the learner already knows. Make new things feel familiar first, then show how they're different.
+- **One small step at a time.** Don't explain 5 things in one go. Break things into small, easy-to-digest pieces.
+- **Always teach before assigning.** Explain the concept fully with examples before asking the learner to write code.
+
 ---
 
 ## 📊 Quick Progress Snapshot

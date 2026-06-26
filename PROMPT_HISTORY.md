@@ -94,6 +94,50 @@
 **Output Summary:** AI applied LEARNING.md changes (week descriptions + projects table synced to new roadmap). All tracking files now consistent. Started Day 1 — assigned first exercise: `cargo new hello-rust`, `cargo check`, `cargo run`.
 **Outcome / Next Step:** Learner should run `cargo new hello-rust`, `cargo check`, `cargo run` and paste output.
 
+### 2026-06-26 01:42 IST — Prompt #13
+**Prompt:** "Keep in mind I'm using WSL, Rust is installed in WSL not Windows, add this as a rule. Here's the cargo new/check/run output."
+**Context:** Day 1 in progress. Learner ran `cargo new hello-rust`, `cargo check` (5.23s), `cargo run` (1.48s) — all successful, prints "Hello, world!". Learner pushed to GitHub. Currently viewing `src/main.rs`.
+**Output Summary:** AI proposed adding an "Environment" section to LEARNING.md with WSL details (awaiting approval). Taught **Concept #3: Cargo.toml** — edition vs version (2024 edition ≠ rustc 1.96.0), `[dependencies]` section (crates.io = npm equivalent), `Cargo.lock` commit rules (commit for binaries, gitignore for libraries). Explained incremental compilation (why `cargo run` was faster than `cargo check` — cached work reused, only codegen step needed). Showed project structure (`Cargo.toml`, `Cargo.lock`, `src/`, `target/`). Assigned exercise: modify `main.rs` to accept a name via `std::env::args()` and print greeting, handle missing argument case.
+**Outcome / Next Step:** Learner should (1) approve LEARNING.md environment note, (2) write the `std::env::args()` greeting exercise in `main.rs`.
+
+### 2026-06-26 02:07 IST — Prompt #14
+**Prompt:** "Yes make the environment note. Also — how should I know things? You're only giving direct assignments. I didn't know what to do. Who will teach me?"
+**Context:** Learner correctly called out that AI was assigning exercises without teaching the concepts first. Learner had added `use std::env;` to main.rs but didn't know how to use it. Also created their own Notes.md with incremental compilation notes.
+**Output Summary:** AI acknowledged the mistake — was violating rule #1 (teach concept fully before exercising). Applied LEARNING.md environment note (WSL, rustc 1.96.0, WSL paths rule). Then properly taught `std::env::args()`: (1) compared to Node's `process.argv`, (2) explained iterator vs array (lazy, no allocation), (3) explained `.collect()` to materialize into `Vec<String>`, (4) showed beginner version with `args[0]`/`args[1]` and explained why `&args[1]` needs the `&` (can't move out of Vec index), (5) showed idiomatic version with `.nth(1)` returning `Option<String>`, (6) explained `Option` as Rust's null-killer — `Some(value)` or `None`, compiler forces handling both, (7) explained `match` exhaustiveness, `eprintln!` for stderr, `{n}` inline format capture, `std::process::exit(1)`. Assigned exercise: type the idiomatic version, run with and without args using `cargo run -- Yash`.
+**Outcome / Next Step:** Learner should type the code, run both `cargo run` and `cargo run -- Yash`, paste output.
+
+---
+
+### 2026-06-26 13:16 IST — Prompt #15
+**Prompt:** "Continue"
+**Context:** Next day session. main.rs still has `use std::env;` + original `println!("Hello, world!")` — learner hasn't typed the exercise yet.
+**Output Summary:** AI recapped the exercise, showed the code again with a line-by-line table explaining each piece, re-explained the `--` separator for cargo run arguments. Asked learner to type it and run both commands.
+**Outcome / Next Step:** Learner should type the idiomatic version into main.rs, run `cargo run` and `cargo run -- Yash`, paste both outputs.
+
+### 2026-06-26 14:18 IST — Prompt #16
+**Prompt:** Learner shared successful output of both `cargo run -- Yash` ("Hello, Yash! Welcome to Rust.") and `cargo run` ("Usage: hello-rust <name>"). Showed main.rs with both beginner version (commented out) and idiomatic version working.
+**Context:** Day 1 exercise completed. Learner also updated Notes.md with detailed notes on env::args(), Option, match, eprintln!, {n} format capture. Code has minor indentation inconsistency in None branch.
+**Output Summary:** AI acknowledged both versions working, praised note-taking in Notes.md. Gave two feedback points: (1) indentation inconsistent in None branch — introduced `cargo fmt` as mandatory formatter, told learner to run it after every save and that CI rejects non-formatted code, (2) introduced `cargo clippy` as automated code reviewer. Asked comprehension question: "What would happen if you tried `println!("Hello, {name}!")` directly on an `Option<String>` without match?" — testing whether learner understands why Rust won't let you treat Option<String> as String.
+**Outcome / Next Step:** Learner should (1) run `cargo fmt` and `cargo clippy`, (2) predict the compiler error for using Option<String> directly in println.
+
+### 2026-06-26 14:41 IST — Prompt #17
+**Prompt:** "Option is not a string it's an option and that's the reason we can't just use a string right?"
+**Context:** Comprehension check on Option<String> vs String. Learner ran `cargo fmt` (indentation fixed in main.rs). Added `cargo fmt` and `cargo clippy` notes to Notes.md.
+**Output Summary:** AI confirmed the answer is correct but deepened it: (1) compared to TypeScript's `string | undefined` which *allows* you to use it as string (silent bug, prints "undefined"), (2) Rust's `Option<String>` compiler-refuses to let you treat it as String — actual error is `Option<String> doesn't implement Display`, (3) explained this forces you to unwrap via match/if-let/unwrap and handle both cases, (4) connected to Tony Hoare's "billion-dollar mistake" — Rust makes null pointer errors *impossible* at compile time, not just unlikely. Moved to **Concept #4: Clippy** — explained it checks 700+ patterns beyond formatting (performance, bugs, style), showed production CI command `cargo clippy -- -D warnings`. Asked learner to run `cargo clippy` and share output.
+**Outcome / Next Step:** Learner should run `cargo clippy`, paste output, then set up reusable project skeleton to finish Day 1.
+
+### 2026-06-26 14:47 IST — Prompt #18
+**Prompt:** "Cargo clippy output is clean. Also — I'm struggling with the vocabulary, examples, and code explanations. Need simpler English, easier examples, more layman-friendly teaching. Add this as a rule."
+**Context:** Clippy passed with no warnings. Learner has been taking good notes but finding the language level too dense/academic.
+**Output Summary:** AI acknowledged clippy clean output. Proposed adding a "Teaching Style" section to LEARNING.md with 4 rules: (1) use simple everyday English, no fancy vocabulary, (2) show through code not words — short code examples > long paragraphs, (3) use real-world analogies from JS/TS/Solidity, (4) one small step at a time, break into bite-sized pieces. Awaiting LEARNING.md approval. Also taught the last Day 1 concept: `rust-toolchain.toml` (like `.nvmrc` for Node — pins the Rust version). Summarized Day 1 progress: all checklist items covered except the toolchain file.
+**Outcome / Next Step:** Learner should (1) approve LEARNING.md teaching style update, (2) create `rust-toolchain.toml`, then (3) do Day 1 wrap-up reflection.
+
+### 2026-06-26 14:50 IST — Prompt #19
+**Prompt:** "Yes update the learning.md file with better teaching style. Both things done."
+**Context:** Learner approved teaching style rule and created `toolchain.toml` (but named it `toolchain.toml` instead of `rust-toolchain.toml`).
+**Output Summary:** AI pointed out filename needs `rust-` prefix — must be `rust-toolchain.toml` for rustup to find it. Applied LEARNING.md teaching style section with 5 rules: simple English, code-first, real-world analogies, one step at a time, teach before assigning. Logged all changes to LOGS.md (LEARNING.md update, toolchain.toml creation, Notes.md update). Day 1 nearly complete — just need the rename and the wrap-up reflection.
+**Outcome / Next Step:** Learner should rename `toolchain.toml` → `rust-toolchain.toml`, then do Day 1 reflection.
+
 ---
 
 <!-- New entries appended below -->

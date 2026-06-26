@@ -33,6 +33,62 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-06-26 14:50 IST — [LEARNING.md] — Added Teaching Style section</summary>
+
+- **File:** LEARNING.md
+- **Change type:** Modified (new section added)
+- **Reason:** Learner requested simpler, more accessible teaching. Approved by learner.
+
+```diff
+  - **Rule:** All `cargo`/`rustc` commands run in WSL.
+ 
++ ### 🗣️ Teaching Style
++ - **Use simple, everyday English.** No fancy words or dense academic writing. Talk like a friend explaining things, not like a textbook.
++ - **Show through code, not words.** Short code examples are better than long paragraphs. Let the code do the talking.
++ - **Use real-world analogies** from JS/TS/Solidity that the learner already knows. Make new things feel familiar first, then show how they're different.
++ - **One small step at a time.** Don't explain 5 things in one go. Break things into small, easy-to-digest pieces.
++ - **Always teach before assigning.** Explain the concept fully with examples before asking the learner to write code.
++
+  ---
+```
+
+</details>
+
+---
+
+<details>
+<summary>2026-06-26 14:50 IST — [hello-rust/toolchain.toml] — Created by learner (needs rename to rust-toolchain.toml)</summary>
+
+- **File:** hello-rust/toolchain.toml
+- **Change type:** Created (by learner)
+- **Reason:** Day 1 deliverable — pinning Rust toolchain version. Note: filename should be `rust-toolchain.toml` not `toolchain.toml`.
+
+```diff
++ [toolchain]
++ channel = "stable"
+```
+
+</details>
+
+---
+
+<details>
+<summary>2026-06-26 14:47 IST — [Notes.md] — Learner added cargo clippy CI command note</summary>
+
+- **File:** Notes.md
+- **Change type:** Modified (by learner)
+- **Reason:** Learner's own notes — added `cargo clippy -- -D warnings` explanation.
+
+```diff
+  `cargo clippy` => It is an automated senior code reviewer.
++ `cargo clippy -- -D warnings` => Production CI command || -D warnings flag turns clippy warnings into hard errors - CI fails if clippy isn't happy.
+```
+
+</details>
+
+---
+
+<details>
 <summary>2026-06-26 01:37 IST — [LEARNING.md] — Updated week descriptions and projects table to match new roadmap</summary>
 
 - **File:** LEARNING.md
