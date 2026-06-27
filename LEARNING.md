@@ -25,7 +25,7 @@
 
 | Week | Focus Area | Status |
 |---|---|---|
-| Week 1 | CLI Tools & Core Rust | `[ ]` Not started |
+| Week 1 | CLI Tools & Core Rust | `[~]` In progress |
 | Week 2 | Libraries, Generics & Type System Mastery | `[ ]` Not started |
 | Week 3 | Concurrency, Async & Production Web Services | `[ ]` Not started |
 | Week 4 | Advanced Patterns & Production Capstone | `[ ]` Not started |
@@ -58,6 +58,21 @@
 - None yet — Day 1 starts the actual curriculum.
 **Mistakes the compiler caught that taught me something:**
 - N/A
+
+### Day 1 — Build: "Hello Cargo" & Project Scaffold — 2026-06-26
+**Status:** `[x]` done
+**What I actually understood:**
+- `rustup` manages versions, `rustc` compiles, `cargo` is the package manager/build tool.
+- Incremental compilation makes `cargo run` fast after `cargo check`.
+- `Option<String>` vs `String` — Rust makes null pointer errors impossible by forcing us to handle `None` via `match`.
+- `rust-toolchain.toml` pins the version.
+- `cargo fmt` to format, `cargo clippy -- -D warnings` for CI linting.
+**What's still fuzzy / questions I had:**
+- N/A
+**Code I wrote / project progress:**
+- Created `hello-rust` project, added `std::env::args()` parsing to accept a name argument.
+**Mistakes the compiler caught that taught me something:**
+- Moving out of a `Vec` index (e.g. `args[1]`) isn't allowed without a borrow (`&args[1]`) because `Vec` owns the strings.
 
 ---
 
@@ -93,7 +108,7 @@
 
 | Project | Week | Status | Repo/Path | Notes |
 |---|---|---|---|---|
-| CLI Task Manager (polished) | 1 | `[ ]` | — | Week 1 capstone |
+| CLI Task Manager (polished) | 1 | `[~]` | `hello-rust` | Week 1 capstone |
 | Generic Cache Library with TTL | 2 | `[ ]` | — | Week 2 capstone |
 | Production REST API (Docker) | 3 | `[ ]` | — | Week 3 capstone |
 | Final Capstone (TBD) | 4 | `[ ]` | — | Portfolio centerpiece |

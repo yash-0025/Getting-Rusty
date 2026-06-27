@@ -33,6 +33,51 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-06-26 17:35 IST — [LEARNING.md] & [ROADMAP.md] — Marked Day 1 Complete</summary>
+
+- **Files:** LEARNING.md, ROADMAP.md
+- **Change type:** Modified
+- **Reason:** Day 1 curriculum completed. Learner granted explicit permission to mark items as done and log the day's summary.
+
+```diff
+  # In ROADMAP.md
+- - [ ] **You build:** A CLI tool that takes your name...
+- - [ ] **Concepts:** `rustup`/`rustc`/`cargo` as three separate tools...
+- - [ ] **Reality check:** Every real Rust repo has a `rust-toolchain.toml`...
+- - [ ] **Deliverable:** A `hello-rust` project...
++ - [x] **You build:** A CLI tool that takes your name...
++ - [x] **Concepts:** `rustup`/`rustc`/`cargo` as three separate tools...
++ - [x] **Reality check:** Every real Rust repo has a `rust-toolchain.toml`...
++ - [x] **Deliverable:** A `hello-rust` project...
+
+  # In LEARNING.md
+- | Week 1 | CLI Tools & Core Rust | `[ ]` Not started |
++ | Week 1 | CLI Tools & Core Rust | `[~]` In progress |
+
+- | CLI Task Manager (polished) | 1 | `[ ]` | — | Week 1 capstone |
++ | CLI Task Manager (polished) | 1 | `[~]` | `hello-rust` | Week 1 capstone |
+
++ ### Day 1 — Build: "Hello Cargo" & Project Scaffold — 2026-06-26
++ **Status:** `[x]` done
++ **What I actually understood:**
++ - `rustup` manages versions, `rustc` compiles, `cargo` is the package manager...
++ - Incremental compilation makes `cargo run` fast after `cargo check`.
++ - `Option<String>` vs `String` — Rust makes null pointer errors impossible by forcing us to handle `None` via `match`.
++ - `rust-toolchain.toml` pins the version.
++ - `cargo fmt` to format, `cargo clippy -- -D warnings` for CI linting.
++ **What's still fuzzy / questions I had:**
++ - N/A
++ **Code I wrote / project progress:**
++ - Created `hello-rust` project, added `std::env::args()` parsing to accept a name argument.
++ **Mistakes the compiler caught that taught me something:**
++ - Moving out of a `Vec` index (e.g. `args[1]`) isn't allowed without a borrow (`&args[1]`) because `Vec` owns the strings.
+```
+
+</details>
+
+---
+
+<details>
 <summary>2026-06-26 14:50 IST — [LEARNING.md] — Added Teaching Style section</summary>
 
 - **File:** LEARNING.md

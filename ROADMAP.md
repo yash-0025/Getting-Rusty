@@ -36,10 +36,10 @@ Each day has:
 > Goal: Learn Rust's fundamentals by building real CLI tools. Every day ships a working binary.
 
 ### Day 1 — Build: "Hello Cargo" & Project Scaffold
-- [ ] **You build:** A CLI tool that takes your name as a command-line argument and prints a formatted greeting. Then scaffold a reusable project skeleton with `fmt`, `lint`, `test` targets.
-- [ ] **Concepts:** `rustup`/`rustc`/`cargo` as three separate tools · `cargo new`/`cargo check`/`cargo run`/`cargo build --release` · `Cargo.toml` vs `Cargo.lock` (lockfile = reproducibility, like `package-lock.json`) · Workspaces (`[workspace]`) overview · Editions (2015/2018/2021/2024 — we use **2024**) · `rustfmt` + `clippy` setup from minute one · `rust-toolchain.toml` for pinning versions
-- [ ] **Reality check:** Every real Rust repo has a `rust-toolchain.toml` pinning the version, and CI runs `cargo fmt --check && cargo clippy -- -D warnings` before anything else
-- [ ] **Deliverable:** A `hello-rust` project + a reusable project skeleton you'll clone all month
+- [x] **You build:** A CLI tool that takes your name as a command-line argument and prints a formatted greeting. Then scaffold a reusable project skeleton with `fmt`, `lint`, `test` targets.
+- [x] **Concepts:** `rustup`/`rustc`/`cargo` as three separate tools · `cargo new`/`cargo check`/`cargo run`/`cargo build --release` · `Cargo.toml` vs `Cargo.lock` (lockfile = reproducibility, like `package-lock.json`) · Workspaces (`[workspace]`) overview · Editions (2015/2018/2021/2024 — we use **2024**) · `rustfmt` + `clippy` setup from minute one · `rust-toolchain.toml` for pinning versions
+- [x] **Reality check:** Every real Rust repo has a `rust-toolchain.toml` pinning the version, and CI runs `cargo fmt --check && cargo clippy -- -D warnings` before anything else
+- [x] **Deliverable:** A `hello-rust` project + a reusable project skeleton you'll clone all month
 
 ### Day 2 — Build: Multi-Unit Converter CLI
 - [ ] **You build:** A CLI that converts between units (temperature, distance, weight). User picks a category, enters a value, gets the result. Uses `match` on an enum of conversion types.
