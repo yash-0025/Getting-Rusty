@@ -42,10 +42,10 @@ Each day has:
 - [x] **Deliverable:** A `hello-rust` project + a reusable project skeleton you'll clone all month
 
 ### Day 2 — Build: Multi-Unit Converter CLI
-- [ ] **You build:** A CLI that converts between units (temperature, distance, weight). User picks a category, enters a value, gets the result. Uses `match` on an enum of conversion types.
-- [ ] **Concepts:** `let` vs `let mut` (immutability by default — deep, not shallow like JS `const`) · Scalar types: `i32`, `f64`, `usize`, `bool`, `char` (4 bytes, full Unicode scalar) · Integer overflow behavior: panics in debug, wraps in release — use `checked_add`/`saturating_add` · Compound types: tuples, arrays `[T; N]`, slices `&[T]` · `if`/`match`/`loop`/`for` as **expressions** (everything returns a value) · Shadowing vs mutation · Enums as tagged unions (real algebraic data types, not like TS enums) · `std::io` for reading user input
-- [ ] **Anti-pattern → Pattern:** Using `unwrap()` everywhere in a learning script (fine for Day 2) → returning `Result` properly (Day 5 onward)
-- [ ] **Deliverable:** Working unit converter. Clippy-clean.
+- [x] **You build:** A CLI that converts between units (temperature, distance, weight). User picks a category, enters a value, gets the result. Uses `match` on an enum of conversion types.
+- [x] **Concepts:** `let` vs `let mut` (immutability by default — deep, not shallow like JS `const`) · Scalar types: `i32`, `f64`, `usize`, `bool`, `char` (4 bytes, full Unicode scalar) · Integer overflow behavior: panics in debug, wraps in release — use `checked_add`/`saturating_add` · Compound types: tuples, arrays `[T; N]`, slices `&[T]` · `if`/`match`/`loop`/`for` as **expressions** (everything returns a value) · Shadowing vs mutation · Enums as tagged unions (real algebraic data types, not like TS enums) · `std::io` for reading user input
+- [x] **Anti-pattern → Pattern:** Using `unwrap()` everywhere in a learning script (fine for Day 2) → returning `Result` properly (Day 5 onward)
+- [x] **Deliverable:** Working unit converter. Clippy-clean.
 
 ### Day 3 — Build: File Duplicate Finder
 - [ ] **You build:** A CLI that walks a directory, groups files by size, then by content hash, and reports duplicates. This is the day ownership/borrowing clicks — because you *can't build this* without understanding them.

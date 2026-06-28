@@ -192,6 +192,18 @@
 **Output Summary:** AI congratulated the learner for connecting all the dots. Issued the final boss challenge for Day 2: building out the remaining two functions, and creating an interactive menu that lets the user choose the category (1, 2, or 3) instead of hardcoding `choice`.
 **Outcome / Next Step:** Learner should make the menu interactive by asking the user for a choice, parsing it, and matching that choice to the Enum.
 
+### 2026-06-28 21:07 IST — Prompt #29
+**Prompt:** "I feel like there's is somthing incomplete here isn't it ?"
+**Context:** Learner attempted the final boss challenge for Day 2. They wrote the menu, added the new functions, read the menu choice, and matched the choice to the Enum. However, they made three common beginner mistakes: (1) wrote `f: 64` instead of `f: f64`, (2) parsed the menu choice as `f64` instead of `u32` (Rust forbids matching on floats), and (3) deleted the second `match choice` block that actually calls the functions, meaning the program just ends.
+**Output Summary:** AI praised the effort and explained the three specific errors in the code. Showed how to fix the `f64` typo, change the menu choice to `u32`, and add the final `match choice` block back in to actually print the results.
+**Outcome / Next Step:** Learner should fix the three issues, run `cargo check`, and test the complete CLI.
+
+### 2026-06-28 21:12 IST — Prompt #30
+**Prompt:** "Done..." (shows successful execution of 100 Miles to 160.934 Kilometers)
+**Context:** Learner fixed the three bugs (function signatures, u32 parsing for the menu, and adding the final match block). The program compiled successfully and accurately converted 100 miles to kilometers. Day 2 is officially finished.
+**Output Summary:** AI congratulated the learner for finishing the Day 2 project. Asked for explicit permission to check off Day 2 in ROADMAP.md and log it in LEARNING.md (following Governance Rule #1).
+**Outcome / Next Step:** Learner should give permission to log Day 2, after which the AI will move to Day 3.
+
 ---
 
 <!-- New entries appended below -->

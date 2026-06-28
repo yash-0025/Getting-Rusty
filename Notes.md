@@ -30,5 +30,6 @@
 `Type safety` => 
 `enums` => Just a fancy way of grouping numbers or strings
 `match` => We pair enums with match to control the flow of the program.
-`Functions and Implicit Returns ` => IN rust the last line of a block or function is automatically returned if you leave off the semicolon(;). This is called implicit return
+`Functions and Implicit Returns ` => IN rust the last line of a block or function is automatically returned if you leave off the semicolon(;). This is called implicit return .
+
 ```

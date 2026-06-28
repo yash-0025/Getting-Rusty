@@ -76,6 +76,28 @@
 
 ---
 
+### Day 2 — Build: Multi-Unit Converter CLI — 2026-06-28
+**Status:** `[x]` done
+**What I actually understood:**
+- Variables are immutable by default (`let`). Use `mut` to allow changing values.
+- Shadowing (re-declaring with `let`) allows changing data types (e.g. `String` to `f64`), unlike `mut` which only changes the value.
+- Enums are powerful algebraic data types, not just string/number mappings. They force exhaustive handling via `match`.
+- `std::io::stdin().read_line(&mut string)` borrows a mutable reference to fill a string with user input.
+- `match` is an expression and can return a value (e.g. `let choice = match ...`).
+- Functions implicitly return the last expression if you omit the semicolon (`;`).
+**What's still fuzzy / questions I had:**
+- Using `expect()` is fine for now but crashes the program on bad input. (Will learn better error handling soon).
+**Code I wrote / project progress:**
+- Built `unit-converter` project with a fully working CLI menu, input parsing, enums, match statements, and custom math functions.
+**Mistakes the compiler caught that taught me something:**
+- Unused variables and unused `mut` (caught by `cargo check`).
+- Modifying immutable variables (E0384).
+- Dead code / Unused imports warnings when things are defined but not used.
+- Attempting to use a number as a type (`f: 64` instead of `f: f64`).
+- Attempting to match on floats (parsing menu input as `f64` instead of `u32`), which Rust forbids due to precision issues.
+
+---
+
 <!-- New day entries get appended below this line. Ask the AI to draft an entry at the end of each session; approve or edit before it's saved. -->
 
 ---
