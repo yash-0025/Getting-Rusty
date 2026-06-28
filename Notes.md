@@ -17,4 +17,13 @@
 `cargo fmt` => To format the code 
 `cargo clippy` => It is an automated senior code reviewer.
 `cargo clippy -- -D warnings` => Production CI command || -D warnings falg turns clippy warnings into hard errors - CI fails if clippy isn't happy.
+
+`Shadowing` => We can use same variable name to store new value but it will be a new variable in memory. <br> 
+- `let x = 5;` => x is 5 <br>
+- `let x = x + 1;` => x is 6 <br>
+- `let x = x * 2;` => x is 12 <br>
+- `let x = "Hello";` => x is "Hello" <br>
+`Type safety` => 
+`enums` => Just a fancy way of grouping numbers or strings
+`match` => We pair enums with match to control the flow of the program.
 ```

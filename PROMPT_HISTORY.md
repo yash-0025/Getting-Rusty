@@ -156,6 +156,24 @@
 **Output Summary:** AI praised the learner for reading the compiler error (which literally says `help: consider making this binding mutable`). Moved to the next concept: Shadowing. Explained shadowing (using `let` again) vs mutating (reassigning a `mut` variable). Showed how shadowing allows changing data types (e.g. from String to Number).
 **Outcome / Next Step:** Learner should try shadowing by taking a string and shadowing it with an integer.
 
+### 2026-06-28 13:02 IST — Prompt #23
+**Prompt:** "Done check this now..."
+**Context:** Learner added the shadowing code to `main.rs`, running both `cargo check` and `cargo run`. They even went above and beyond by writing their own shadowing example (changing `name` from a number `1234` to a string `"Yash"`) before pasting my example.
+**Output Summary:** AI praised the learner for experimenting with their own shadowing example. Moved to the next Day 2 concept: Reading user input using `std::io::stdin()`. Explained how to create an empty mutable String, pass a mutable reference (`&mut`) to the read function, and print the result.
+**Outcome / Next Step:** Learner should try writing the input-reading code, run it, type something, and paste the output.
+
+### 2026-06-28 17:35 IST — Prompt #24
+**Prompt:** "Here's the output..." (shows successful execution of reading input)
+**Context:** Learner typed out the `std::io::stdin()` example and successfully read "12" from the terminal. 
+**Output Summary:** AI praised the success. Introduced Concept #4: Converting Strings to Numbers (parsing). Showed how to use `.trim()`, `.parse()`, and Shadowing to convert the String input into an `f64` (decimal number).
+**Outcome / Next Step:** Learner should update their code to parse the input and multiply it by 2, then run it to prove it's a real number.
+
+### 2026-06-28 18:09 IST — Prompt #25
+**Prompt:** "It worked..." (shows successful execution of parsing string to f64 and multiplying)
+**Context:** Learner added the parsing code to `main.rs` and ran `cargo run`, inputting 12 and getting 24. Learner also documented Shadowing and Type Safety well in their `Notes.md`.
+**Output Summary:** AI praised the result and the Notes.md update. Introduced Concept #5: Enums and Match for the Unit Converter. Compared TS enums (just numbers/strings under the hood) to Rust enums (Algebraic Data Types). Showed a simple enum `ConversionType` and how to use `match` to handle the variants.
+**Outcome / Next Step:** Learner should add the `ConversionType` enum to their code and write a `match` statement inside `main()` that prints a message based on a hardcoded variant.
+
 ---
 
 <!-- New entries appended below -->
