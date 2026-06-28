@@ -174,6 +174,24 @@
 **Output Summary:** AI praised the result and the Notes.md update. Introduced Concept #5: Enums and Match for the Unit Converter. Compared TS enums (just numbers/strings under the hood) to Rust enums (Algebraic Data Types). Showed a simple enum `ConversionType` and how to use `match` to handle the variants.
 **Outcome / Next Step:** Learner should add the `ConversionType` enum to their code and write a `match` statement inside `main()` that prints a message based on a hardcoded variant.
 
+### 2026-06-28 20:17 IST — Prompt #26
+**Prompt:** "Getting warings..." (shows unused import and dead code warnings for Enum variants)
+**Context:** Learner correctly wrote the `ConversionType` enum and the `match` statement. The code works and printed "You choose Fahrenheit to Celsius". Rust compiler gave two helpful warnings: `unused import std::io` (since learner commented out the io code) and `dead_code` for the enum variants they haven't used yet.
+**Output Summary:** AI explained the warnings, showing how the compiler catches unused imports and unused enum variants. Introduced the final concept for Day 2: Functions. Explained how to write a simple function and return a value using an implicit return (no `return` keyword, no semicolon).
+**Outcome / Next Step:** Learner should combine the IO reading, parsing, enums, and a conversion function into the final Unit Converter CLI.
+
+### 2026-06-28 20:22 IST — Prompt #27
+**Prompt:** "I need a .gitignore file in the root folder to stop committing the target folder..."
+**Context:** Learner is maintaining the root workspace and realized `target/` folders will bloat the git repo. They requested a global `.gitignore`. They also updated `Notes.md` with Day 2 concepts (shadowing, type safety, enums, match, implicit returns).
+**Output Summary:** AI created a root `.gitignore` at `c:\Dev\Rust\.gitignore` with `**/target/` to ignore all target directories recursively across all current and future projects. Also included standard Rust ignores like `**/*.rs.bk` (rustfmt backups).
+**Outcome / Next Step:** Learner should now complete the Day 2 Unit Converter CLI assignment.
+
+### 2026-06-28 20:33 IST — Prompt #28
+**Prompt:** "Yeyy It worked i guess..." (shows successful execution of unit converter for Fahrenheit to Celsius)
+**Context:** Learner completed the core Day 2 assignment: writing an implicit return function, asking for input, shadowing/parsing it to a float, and using a `match` statement on a hardcoded Enum variant to run the conversion function. 
+**Output Summary:** AI congratulated the learner for connecting all the dots. Issued the final boss challenge for Day 2: building out the remaining two functions, and creating an interactive menu that lets the user choose the category (1, 2, or 3) instead of hardcoding `choice`.
+**Outcome / Next Step:** Learner should make the menu interactive by asking the user for a choice, parsing it, and matching that choice to the Enum.
+
 ---
 
 <!-- New entries appended below -->
