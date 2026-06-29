@@ -204,6 +204,36 @@
 **Output Summary:** AI congratulated the learner for finishing the Day 2 project. Asked for explicit permission to check off Day 2 in ROADMAP.md and log it in LEARNING.md (following Governance Rule #1).
 **Outcome / Next Step:** Learner should give permission to log Day 2, after which the AI will move to Day 3.
 
+### 2026-06-28 21:24 IST — Prompt #31
+**Prompt:** "Okay let's go"
+**Context:** Learner set up the `duplicate-finder` project for Day 3 and updated `Notes.md` to prepare for Day 3.
+**Output Summary:** AI introduced the first concept of Day 3: Stack vs Heap and Ownership. Used an analogy (Sticky notes vs Library books) to explain why `i32` copies but `String` moves. Provided a code snippet demonstrating the "value borrowed here after move" error.
+**Outcome / Next Step:** Learner should type out the ownership error code, run `cargo check`, and observe Rust's famous borrow checker error.
+
+### 2026-06-28 21:48 IST — Prompt #32
+**Prompt:** "Got it so once the value is move we cannot read or borrow value... when we are assigning x to y the value of x is moved to y and x is gone right?"
+**Context:** Learner triggered the `E0382 borrow of moved value` error. They asked a brilliant clarifying question: Did `x` move to `y` and disappear just like `s1` moved to `s2`?
+**Output Summary:** AI clarified that `x` did NOT move, it was COPIED because it's a simple Stack type (implementing the `Copy` trait). `s1` MOVED because it's a Heap type (`String`). Explained Concept #3: `Copy` vs `Clone`. Showed how to fix the error using `.clone()` to deeply copy the heap data.
+**Outcome / Next Step:** Learner should fix their code using `.clone()` and run it successfully.
+
+### 2026-06-28 21:50 IST — Prompt #33
+**Prompt:** "I can't see any print statement here..."
+**Context:** Learner ran `cargo run` with the ownership error still in the code. They were confused why the first `println!` (line 6, which was perfectly valid) didn't print anything to the terminal.
+**Output Summary:** AI explained that Rust is a compiled language. If there is an error anywhere in the file (like line 11), the compiler refuses to build the executable at all, meaning no code runs—not even line 6. Reminded the learner to actually apply the `.clone()` fix in their editor and run it again.
+**Outcome / Next Step:** Learner should change `let s2 = s1;` to `let s2 = s1.clone();`, run `cargo run`, and see the print statements work.
+
+### 2026-06-28 22:01 IST — Prompt #34
+**Prompt:** "Got it done... But now i have another question does .clone() is only for strings ? because we have i64, f64..."
+**Context:** Learner fixed the error using `.clone()` and the code ran perfectly. They documented the behavior in their code comments. They then asked if `.clone()` is exclusive to Strings or if it applies to types like `i64`, `f64`, etc.
+**Output Summary:** AI praised the question and explained that `.clone()` works for almost everything (Vectors, HashMaps, etc.). However, simple Stack types (`i64`, `bool`) implement both `Clone` AND `Copy`. Because they implement `Copy`, Rust calls `Copy` automatically on assignment, so we never *need* to type `.clone()` for them. Introduced Concept #4: Borrowing (`&T`) as the alternative to slow cloning.
+**Outcome / Next Step:** Learner should try passing a String to a function using a reference (`&String`) instead of moving it or cloning it.
+
+### 2026-06-29 12:22 IST — Prompt #35
+**Prompt:** "It suggested to use .clone()..." (shows borrow of moved value error caused by passing to a function)
+**Context:** Learner wrote the functions to demonstrate borrowing vs taking ownership. The program successfully failed on line 36 after the string was moved into `take_ownership`. Learner noted that the compiler suggested using `.clone()`.
+**Output Summary:** AI explained why the compiler suggested `.clone()`, but pointed out the other hint the compiler gave: "consider changing this parameter type in function take_ownership to borrow instead if owning the value isn't necessary". AI explained the rule of thumb: "Many readers OR one writer, never both." Introduced the final concept before building the project: `&mut T` (Mutable References).
+**Outcome / Next Step:** Learner should try writing a function that takes a mutable reference (`&mut String`), appends text to it, and prints it in `main` to see how mutable borrowing works without taking ownership.
+
 ---
 
 <!-- New entries appended below -->
