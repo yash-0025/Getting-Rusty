@@ -1,3 +1,5 @@
+use std::fs;
+
 // fn main() {
  
 //     let x = 5;
@@ -40,15 +42,37 @@
 
 // Mutable Borrowing
 
-fn append_surname(name: &mut String) {
-    name.push_str(" Patel");
-}
+// fn append_surname(name: &mut String) {
+//     name.push_str(" Patel");
+// }
+
+// fn main() {
+
+//   let mut my_name = String::from("Yash");
+
+//   append_surname(&mut my_name);
+
+//   println!("My full name is : {}", my_name);
+// }
 
 fn main() {
 
-  let mut my_name = String::from("Yash");
+    // REad the current directory ./
+    //  expect() will crash the program if the folder doesn't exist 
+    let folders = fs::read_dir("./").expect("Failed to read directory");
 
-  append_surname(&mut my_name);
+    // Looping through every item in the folder
+    for item in folders {
+        // Unpack the item because reading a specific file can also fail!
+        let file = item.expect("Failed to read file");
 
-  println!("My full name is : {}", my_name);
+        let metadata = file.metadata().expect("Failed to get metadata");
+
+        if metadata.is_file() {
+            let size = metadata.len(); // returns the size in bytes as u64
+        
+            println!("File: {:?} | Size; {} bytes", file.file_name(), size);
+
+        }
+    }
 }

@@ -240,6 +240,18 @@
 **Output Summary:** AI congratulated the learner for grasping the hardest concept in Rust. Transitioned from concepts to building the Day 3 project (File Duplicate Finder). Explained the first step of the project: reading files from a directory using `std::fs::read_dir`. Provided a small code snippet to read the current directory and print the file names.
 **Outcome / Next Step:** Learner should write the directory reading code, run it, and observe how Rust interacts with the filesystem.
 
+### 2026-06-30 17:10 IST — Prompt #37
+**Prompt:** "This is the output i get..." (shows output of directory contents)
+**Context:** Learner successfully ran `fs::read_dir("./")` and iterated over it, printing the file names. Learner also took fantastic notes predicting the use of `HashMap<String, Vec<String>>` for grouping hashes to paths.
+**Output Summary:** AI praised the learner's foresight regarding HashMaps. Introduced Step 2: Filtering out folders (checking metadata) and getting the file size in bytes (`file.metadata()`).
+**Outcome / Next Step:** Learner should update their loop to ignore folders and print the file size in bytes next to the file name.
+
+### 2026-06-30 17:20 IST — Prompt #38
+**Prompt:** "Exactly it only shows files now no folders..."
+**Context:** Learner successfully filtered out folders by checking `metadata.is_file()` and printed the file names and sizes in bytes. They updated their `Notes.md` with definitions for `std::fs`, `.expect()`, `HashMap`, and `.metadata()`.
+**Output Summary:** AI congratulated the learner. Introduced Step 3: Grouping files by size using `HashMap`. Explained the concept of `HashMap<u64, Vec<PathBuf>>` where the key is the file size and the value is a list of file paths. Showed how to use `.entry().or_insert()` to insert data into a HashMap.
+**Outcome / Next Step:** Learner should update their code to bring `HashMap` into scope, create the HashMap, insert file paths into it grouped by size, and print the map at the end.
+
 ---
 
 <!-- New entries appended below -->

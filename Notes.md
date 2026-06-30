@@ -67,3 +67,10 @@
 
 
 <h1>Building Project</h1>
+
+- `std::fs` => To talk with our filesystem we need this 
+- `fs::read_dir("/")` => To read the directory we use this 
+- `.expect("error")` => If the value is None this will print error and exit the program.
+- `HashMap` => We use this to store the hash of the file and the path to the file. `HashMap<String, Vec<String>>` => Key is the hash of the file and value is the vector of paths to the file.
+- `{:?}` => We use it instead of {} when we want to print things that are meant for developers{debugging} rather than formatted for end-users
+- `.metadata()` => To filter out folders like getting the data like created date and file type.
