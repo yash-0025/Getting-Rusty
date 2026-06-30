@@ -63,3 +63,7 @@
 - We can borrow a string to look at it &String . But what if we want to borrow a string change it and then give it back there we use **Mutable Reference** &mut String. 
 - We can have many readers &T or exactly one writer &mut T, but never both at the same time.
 - If we have a mutable reference a writer nobody else is allowed to look at the data until we are done . This prevent data races (like two functions trying to edit a file at the exact same millisecond).`
+- `&mut` => When we have to change something without destroying it we use it.
+
+
+<h1>Building Project</h1>

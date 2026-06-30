@@ -15,23 +15,40 @@
 //     println!("s1 is {} and s2 is {}", s1,s2);
 // }
 
-fn take_ownership(s: String) {
-    println!("The function owns: {}", s);
-}
+// Borrowing
+// fn take_ownership(s: String) {
+//     println!("The function owns: {}", s);
+// }
 
-fn borrow_string(s: &String) {
-    println!("The function is borrowing: {}", s);
+// fn borrow_string(s: &String) {
+//     println!("The function is borrowing: {}", s);
+// }
+
+// fn main() {
+
+//     let my_name = String::from("Yash");
+
+//     borrow_string(&my_name);
+
+//     println!("I still own: {}", my_name);
+
+//     take_ownership(my_name);
+
+//     println!("Can i print it? {}", my_name)
+// }
+
+
+// Mutable Borrowing
+
+fn append_surname(name: &mut String) {
+    name.push_str(" Patel");
 }
 
 fn main() {
 
-    let my_name = String::from("Yash");
+  let mut my_name = String::from("Yash");
 
-    borrow_string(&my_name);
+  append_surname(&mut my_name);
 
-    println!("I still own: {}", my_name);
-
-    take_ownership(my_name);
-
-    println!("Can i print it? {}", my_name)
+  println!("My full name is : {}", my_name);
 }

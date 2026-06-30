@@ -234,6 +234,12 @@
 **Output Summary:** AI explained why the compiler suggested `.clone()`, but pointed out the other hint the compiler gave: "consider changing this parameter type in function take_ownership to borrow instead if owning the value isn't necessary". AI explained the rule of thumb: "Many readers OR one writer, never both." Introduced the final concept before building the project: `&mut T` (Mutable References).
 **Outcome / Next Step:** Learner should try writing a function that takes a mutable reference (`&mut String`), appends text to it, and prints it in `main` to see how mutable borrowing works without taking ownership.
 
+### 2026-06-30 00:59 IST — Prompt #36
+**Prompt:** "it worked..." (shows successful execution of mutable borrowing)
+**Context:** Learner successfully ran the mutable borrowing example, appending text to the string via `&mut String` without transferring ownership. Learner documented Borrowing and Mutable Borrowing with the "Golden Rule" in `Notes.md`.
+**Output Summary:** AI congratulated the learner for grasping the hardest concept in Rust. Transitioned from concepts to building the Day 3 project (File Duplicate Finder). Explained the first step of the project: reading files from a directory using `std::fs::read_dir`. Provided a small code snippet to read the current directory and print the file names.
+**Outcome / Next Step:** Learner should write the directory reading code, run it, and observe how Rust interacts with the filesystem.
+
 ---
 
 <!-- New entries appended below -->
