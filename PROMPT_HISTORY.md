@@ -252,6 +252,18 @@
 **Output Summary:** AI congratulated the learner. Introduced Step 3: Grouping files by size using `HashMap`. Explained the concept of `HashMap<u64, Vec<PathBuf>>` where the key is the file size and the value is a list of file paths. Showed how to use `.entry().or_insert()` to insert data into a HashMap.
 **Outcome / Next Step:** Learner should update their code to bring `HashMap` into scope, create the HashMap, insert file paths into it grouped by size, and print the map at the end.
 
+### 2026-06-30 17:35 IST — Prompt #39
+**Prompt:** "I guess it worked..." (shows output of HashMap grouped by size)
+**Context:** Learner implemented the HashMap, successfully grouping files by size. Learner also committed the code to Git and updated their `Notes.md` regarding `.entry().or_insert()`.
+**Output Summary:** AI confirmed the output is perfect. Instructed the learner to create some dummy duplicate files (e.g. copying `Cargo.toml`) so that there is actually duplicate data to test. Introduced Step 4: Iterating over the HashMap to find sizes that have more than 1 file path. 
+**Outcome / Next Step:** Learner should create a duplicate file, loop through the HashMap (`for (size, paths) in groups`), and print only the paths where `paths.len() > 1`.
+
+### 2026-06-30 22:36 IST — Prompt #40
+**Prompt:** "Yes but whyit didn't print cargo.lock ? Is it becasue it is only one file with that size..."
+**Context:** Learner implemented the loop to print sizes where `paths.len() > 1`. They successfully tested it with the duplicated `Cargo.toml` files, and asked a clarifying question to ensure they correctly understood why `Cargo.lock` was ignored.
+**Output Summary:** AI confirmed the learner's understanding: `Cargo.lock` only had 1 path in its bucket, so it failed the `paths.len() > 1` condition. Introduced the final step (Step 5): Hashing file contents to guarantee files are exact duplicates, using `std::fs::read` and `DefaultHasher`.
+**Outcome / Next Step:** Learner should read the file contents as bytes, hash them, and group the hashes into a second HashMap to find exact content duplicates.
+
 ---
 
 <!-- New entries appended below -->

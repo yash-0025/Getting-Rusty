@@ -1,4 +1,6 @@
 use std::fs;
+use std::collections::HashMap;
+use std::path::PathBuf;
 
 // fn main() {
  
@@ -61,6 +63,9 @@ fn main() {
     //  expect() will crash the program if the folder doesn't exist 
     let folders = fs::read_dir("./").expect("Failed to read directory");
 
+    // Creating HashMap
+    let mut groups: HashMap<u64, Vec<PathBuf>> = HashMap::new();
+
     // Looping through every item in the folder
     for item in folders {
         // Unpack the item because reading a specific file can also fail!
@@ -71,8 +76,23 @@ fn main() {
         if metadata.is_file() {
             let size = metadata.len(); // returns the size in bytes as u64
         
-            println!("File: {:?} | Size; {} bytes", file.file_name(), size);
+            // println!("File: {:?} | Size; {} bytes", file.file_name(), size);
 
+            // Getting the files path 
+            let path = file.path();
+
+            groups.entry(size).or_insert(Vec::new()).push(path);
+
+        }
+    }
+
+    // println!("{:#?}", groups);
+    // Looping through hashmaps
+    for (size , paths) in groups {
+        if paths.len() > 1 {
+            println!("Found {} files with size {} bytes", paths.len(), size);
+
+            println!("Paths: {:#?}", paths)
         }
     }
 }

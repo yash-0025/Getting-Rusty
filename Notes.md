@@ -74,3 +74,5 @@
 - `HashMap` => We use this to store the hash of the file and the path to the file. `HashMap<String, Vec<String>>` => Key is the hash of the file and value is the vector of paths to the file.
 - `{:?}` => We use it instead of {} when we want to print things that are meant for developers{debugging} rather than formatted for end-users
 - `.metadata()` => To filter out folders like getting the data like created date and file type.
+- `.entry().or_insert()` => It is a hashmap method to insert a value into a hashmap if the key doesn't exist.
+- `{:#?}` => Use it instead of `{:?}` when you want to pretty print the output. 
