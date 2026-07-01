@@ -76,3 +76,18 @@
 - `.metadata()` => To filter out folders like getting the data like created date and file type.
 - `.entry().or_insert()` => It is a hashmap method to insert a value into a hashmap if the key doesn't exist.
 - `{:#?}` => Use it instead of `{:?}` when you want to pretty print the output. 
+
+
+<h1> Day 4 </h1>
+
+- `Custom Data Types` => `Structs` => If we want to use multiple data types together we will need a struct for that 
+
+- `Concept 2` => `Deriving Traits [Printing structs]` => We can't print the whole struct with ```println!("{}", struct_name)``` like this it will throw an error we need to use a macro `#[derive(Debug)]` above the struct to tell Rust to automatically write the debuggin code for our struct.
+
+- `Concept 3` => `impl` - Blocks {methods and constructors} => Eg - Suppose we want is_done a boolean in the struct to always default to false when task is created then we will use implemetation block (impl).
+- `Self` => In rust when we are inside an impl block , Self (with a capital S) is just a shortcut alias for the type we are implementing . So anywhere inside impl Task, writing Self is exactly the same as writing Task.
+
+- `Concept 4` => `Methods vs Associcated functions` => (&mut self) -->> The new function we wrote is called Associated function.
+- `self` => (the function has access to the instance)
+- `&self` => (the function only borrows the instance)
+- `&mut self` => (the function borrows the instance mutably)

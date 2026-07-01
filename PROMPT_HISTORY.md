@@ -290,4 +290,16 @@
 **Output Summary:** AI acknowledged the mistake, apologized, and immediately updated PROMPT_HISTORY.md for both Prompt #43 and #44. AI then proceeded to execute the approved updates: checking off Day 3 in ROADMAP.md, logging Day 3 in LEARNING.md, uncommenting line 95 in `duplicate-finder/src/main.rs`, and logging all these file changes in LOGS.md.
 **Outcome / Next Step:** All tracking files are fully synced. Ready to start Day 4 (Task Tracker - In-Memory CRUD).
 
+### 2026-07-01 19:22 IST — Prompt #45
+**Prompt:** Learner successfully scaffolded the task-tracker project, added the Task struct, and ran it. Pasted the output which included dead_code warnings for `description` and `is_done`.
+**Context:** Day 4 started. Learner also added Day 4 notes to `Notes.md` explaining Structs.
+**Output Summary:** AI praised the success and explained the `dead_code` warnings as helpful compiler nudges. Introduced Concept #2: `#[derive(Debug)]` to print whole structs, and Concept #3: `impl` blocks (methods and constructors) using `Self::new()`.
+**Outcome / Next Step:** Learner should add the Debug derive macro, print the whole struct, and create an `impl` block with a `new` function to clean up task creation.
+
+### 2026-07-01 19:35 IST — Prompt #46
+**Prompt:** "I have a complain you use Self in the code without teaching me and letting me know what it is . I completed the code here's the output..." Learner successfully implemented `#[derive(Debug)]` and `Task::new()`, and the dead code warning disappeared.
+**Context:** Day 4. Learner took notes on `derive(Debug)` and `impl`. Rightfully called out the AI for using `Self` without explaining it first.
+**Output Summary:** AI apologized and explicitly explained what `Self` (capital S) means as a type alias inside an `impl` block. Then introduced Concept #4: Methods vs Associated Functions (`&mut self`), showing how to write a `.mark_done()` method to change the task's state.
+**Outcome / Next Step:** Learner should add the `mark_done` method, call it in `main`, and print the task again to see the state change.
+
 <!-- New entries appended below -->
