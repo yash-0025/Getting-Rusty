@@ -1,6 +1,8 @@
 use std::fs;
 use std::collections::HashMap;
 use std::path::PathBuf;
+use std::collections::hash_map::DefaultHasher;
+use std::hash::{Hash, Hasher};
 
 // fn main() {
  
@@ -87,12 +89,30 @@ fn main() {
     }
 
     // println!("{:#?}", groups);
-    // Looping through hashmaps
+    // Looping through hashmaps to check files with same sizes 
     for (size , paths) in groups {
         if paths.len() > 1 {
             println!("Found {} files with size {} bytes", paths.len(), size);
 
-            println!("Paths: {:#?}", paths)
+            // println!("Paths: {:#?}", paths)
+
+            for path in paths {
+    
+                // REading the raw bytes of the file
+                let bytes = fs::read(&path).expect("Failed to read file");
+    
+                // Creating a new hasher
+                let mut hasher = DefaultHasher::new();
+    
+                // Feeding the bytes into the hasher
+                bytes.hash(&mut hasher);
+    
+    
+                // Get the final fingerprint u64
+                let fingerprint = hasher.finish();
+    
+                println!("File: {:?} | Hash: {}", path, fingerprint);
+            }
         }
     }
 }

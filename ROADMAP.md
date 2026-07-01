@@ -48,11 +48,11 @@ Each day has:
 - [x] **Deliverable:** Working unit converter. Clippy-clean.
 
 ### Day 3 — Build: File Duplicate Finder
-- [ ] **You build:** A CLI that walks a directory, groups files by size, then by content hash, and reports duplicates. This is the day ownership/borrowing clicks — because you *can't build this* without understanding them.
-- [ ] **Concepts:** Stack vs heap — why Rust cares at compile time (no GC, no runtime tracing) · **Move semantics**: `String` moves, `i32` copies — you'll hit this passing file paths around · `Copy` vs `Clone`: what makes a type eligible for `Copy` (all-Copy fields, no heap pointers) · **Borrowing**: `&T` (shared/immutable) vs `&mut T` (exclusive/mutable) — **many readers OR one writer, never both** · The borrow checker as a compile-time data-race preventer · `String` vs `&str` — owned vs borrowed, the #1 "fighting the compiler" topic for JS devs · `Vec<T>` — growth strategy, `with_capacity` to avoid reallocations · `HashMap<K, V>` for grouping files · `std::fs` for directory walking, file reading
-- [ ] **Reality check:** This is why Rust has no segfaults/use-after-free/double-free without `unsafe`, and why AWS, Discord, and Cloudflare rewrote hot paths in Rust — memory bugs were costing them outages and CVEs
-- [ ] **Anti-pattern → Pattern:** Cloning everything to "make the borrow checker happy" (works, but O(n) extra allocs) → designing function signatures that borrow correctly the first time
-- [ ] **Deliverable:** Working duplicate finder. You'll deliberately break borrow rules, read compiler errors, and fix them.
+- [x] **You build:** A CLI that walks a directory, groups files by size, then by content hash, and reports duplicates. This is the day ownership/borrowing clicks — because you *can't build this* without understanding them.
+- [x] **Concepts:** Stack vs heap — why Rust cares at compile time (no GC, no runtime tracing) · **Move semantics**: `String` moves, `i32` copies — you'll hit this passing file paths around · `Copy` vs `Clone`: what makes a type eligible for `Copy` (all-Copy fields, no heap pointers) · **Borrowing**: `&T` (shared/immutable) vs `&mut T` (exclusive/mutable) — **many readers OR one writer, never both** · The borrow checker as a compile-time data-race preventer · `String` vs `&str` — owned vs borrowed, the #1 "fighting the compiler" topic for JS devs · `Vec<T>` — growth strategy, `with_capacity` to avoid reallocations · `HashMap<K, V>` for grouping files · `std::fs` for directory walking, file reading
+- [x] **Reality check:** This is why Rust has no segfaults/use-after-free/double-free without `unsafe`, and why AWS, Discord, and Cloudflare rewrote hot paths in Rust — memory bugs were costing them outages and CVEs
+- [x] **Anti-pattern → Pattern:** Cloning everything to "make the borrow checker happy" (works, but O(n) extra allocs) → designing function signatures that borrow correctly the first time
+- [x] **Deliverable:** Working duplicate finder. You'll deliberately break borrow rules, read compiler errors, and fix them.
 
 > ⚠️ **This is the hardest day.** Budget 2x time. Ownership is THE concept that makes Rust Rust. Everything else builds on it.
 

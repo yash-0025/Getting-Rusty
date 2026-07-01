@@ -264,6 +264,30 @@
 **Output Summary:** AI confirmed the learner's understanding: `Cargo.lock` only had 1 path in its bucket, so it failed the `paths.len() > 1` condition. Introduced the final step (Step 5): Hashing file contents to guarantee files are exact duplicates, using `std::fs::read` and `DefaultHasher`.
 **Outcome / Next Step:** Learner should read the file contents as bytes, hash them, and group the hashes into a second HashMap to find exact content duplicates.
 
+### 2026-07-01 02:05 IST — Prompt #41
+**Prompt:** "You didnt tell me that we need this borrow but compiler is saying that why ?"
+**Context:** Learner copy-pasted the AI's provided snippet (`fs::read(path)`), which intentionally/accidentally lacked a borrow (`&path`). The compiler threw an `E0382 borrow of moved value` error because `fs::read` took ownership of the `PathBuf`, making it unavailable for the `println!` later.
+**Output Summary:** AI admitted the mistake in the snippet but used it as a perfect teaching moment. Explained that passing `path` to `fs::read` moved ownership into the standard library function. By changing it to `&path`, we are simply *borrowing* the path (Concept #4) so we still own it for the `println!`.
+**Outcome / Next Step:** Learner should change `fs::read(path)` to `fs::read(&path)` and run the code to see the hashes.
+
+### 2026-07-01 14:06 IST — Prompt #42
+**Prompt:** "There is a warning but it runs..." (shows matching hash output)
+**Context:** Learner passed the path as a reference (`&path`), fixing the borrow checker error. The program outputted the identical fingerprint (`14457158255713946951`) for all three identical `Cargo.toml` copies. The compiler threw a warning about an unused variable (`size`).
+**Output Summary:** AI praised the outcome, confirming the hashing proved the files are exact duplicates. Explained the unused variable warning and how to fix it by uncommenting the `println!` that uses `size`. Formally congratulated the learner for completing the Day 3 File Duplicate Finder project.
+**Outcome / Next Step:** Learner should uncomment the `println!`, give permission to mark Day 3 complete in the `ROADMAP.md` and `LEARNING.md`, and wrap up the session.
+
 ---
+
+### 2026-07-01 15:37 IST — Prompt #43
+**Prompt:** "The chat history of us is gone i am not able to find it but lastly i guess we completed the day 3 part check the prompt-history file and other things so that we can conitnue"
+**Context:** Learner lost chat history but remembered finishing Day 3.
+**Output Summary:** AI read PROMPT_HISTORY.md, ROADMAP.md, LEARNING.md, and the duplicate-finder code. Confirmed Day 3 was mostly complete except for checking it off and uncommenting a `println!` to fix an unused variable warning. Drafted the Day 3 LEARNING.md log entry and asked for explicit permission to update files (per Governance Rule #1).
+**Outcome / Next Step:** Learner needs to approve the updates.
+
+### 2026-07-01 16:19 IST — Prompt #44
+**Prompt:** "In the previous response you didn;t updated teh prompt history you are forgetting rules and missing on things and update the log entry"
+**Context:** Learner caught the AI failing to update PROMPT_HISTORY.md after Prompt #43, violating the governance rule. Learner also approved updating the log entry and other files.
+**Output Summary:** AI acknowledged the mistake, apologized, and immediately updated PROMPT_HISTORY.md for both Prompt #43 and #44. AI then proceeded to execute the approved updates: checking off Day 3 in ROADMAP.md, logging Day 3 in LEARNING.md, uncommenting line 95 in `duplicate-finder/src/main.rs`, and logging all these file changes in LOGS.md.
+**Outcome / Next Step:** All tracking files are fully synced. Ready to start Day 4 (Task Tracker - In-Memory CRUD).
 
 <!-- New entries appended below -->

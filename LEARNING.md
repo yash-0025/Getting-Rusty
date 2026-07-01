@@ -98,6 +98,25 @@
 
 ---
 
+### Day 3 — Build: File Duplicate Finder — 2026-07-01
+**Status:** `[x]` done
+**What I actually understood:**
+- Stack vs Heap: Stack is fast/fixed size (like `i32`), Heap is for dynamic/growing data (like `String`).
+- Move Semantics: Data has one owner. Passing a `String` moves ownership to avoid double-free bugs.
+- `Copy` vs `Clone`: Simple stack types copy automatically. Heap types require explicit `.clone()` to duplicate data.
+- Borrowing (`&T`): Looking at data without taking ownership (like looking at a library card).
+- Mutable Borrowing (`&mut T`): "Many readers OR one writer, never both." Prevents data races.
+- Reading directories and metadata using `std::fs`.
+- Grouping data using `HashMap` and the `.entry().or_insert()` pattern.
+- Hashing files using `DefaultHasher` to find exact content matches.
+**What's still fuzzy / questions I had:**
+- None for now.
+**Code I wrote / project progress:**
+- Completed the `duplicate-finder` CLI that finds duplicate files based on size and content hash.
+**Mistakes the compiler caught that taught me something:**
+- E0382 "borrow of moved value": Learned that passing a `PathBuf` to `fs::read` moves it, so we must pass it as a reference (`&path`).
+- Unused variable warnings: The compiler points out when a variable (like `size`) is declared in a loop but never used.
+
 <!-- New day entries get appended below this line. Ask the AI to draft an entry at the end of each session; approve or edit before it's saved. -->
 
 ---
