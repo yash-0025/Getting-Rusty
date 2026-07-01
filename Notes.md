@@ -92,5 +92,20 @@
 - `&self` => (the function only borrows the instance)
 - `&mut self` => (the function borrows the instance mutably)
 
-`Concept 5` => `Enums inside Structs` 
-`Concept 6` => `Storing Structs in Vec` => In  rust dynamically sized arrays that can grow are called vectors.
+- `Concept 5` => `Enums inside Structs` 
+- `Concept 6` => `Storing Structs in Vec` => In  rust dynamically sized arrays that can grow are called vectors.
+
+- `Concept 7 ` => Using match with enum
+- Eg - suppose we need a Cancelled status we add Cancelled to our code but forget to update the if/else chain . Now in js it will be a silent bug or it might return undefined . But in rust match is Exhaustive . It means that compiler forces us to handle every single varianant of ENUM in each method . Supppose if we add cancelled in our TAskStatus our program will refuse to compile unitl didn't add the match statement 
+
+- `Concept 8 ` => Option [The Null Killer] --> Suppose if we try to find an item in array and it doesn't exist it returns null in javascript or undefined but in Rust there is no null instead function return an option.
+- An option is just an in built Enum with two variants
+- `Some(value)` => I found it here is the data
+- `None` => I didn't find it .
+- `.find()` => Returns and Option
+- `.iter()` => Help us look through the vector
+
+- `Concept 9` => Closures [Rust arrow functions]
+- Eg - In javascript when we want to find an item in an array we use arrow function like this let task = tasklist.find(t => t.name = "something");
+- Similarly in Rust arrow function is called closure instead of an arrow => Rust puts the variable inside two vertical pipes | | .
+- Eg - let task = task_list.iter().find(|t| t.name == "Something")

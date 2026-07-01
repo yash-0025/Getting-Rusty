@@ -320,4 +320,16 @@
 **Output Summary:** AI explained the core philosophy of `match`: Exhaustiveness. Contrasted it with `if/else` chains in JS, explaining how `match` prevents runtime bugs if an enum is updated in the future. AI then introduced Concept #8: `Option<T>` for handling "maybe null" cases without null pointers, demonstrating how to use `.iter().find()` to search the vector.
 **Outcome / Next Step:** Learner should read the explanation of `match`, then write code to find a task by name using `iter().find()` and match on the resulting `Option<T>`.
 
+### 2026-07-02 01:13 IST — Prompt #50
+**Prompt:** Learner encountered `E0382: borrow of moved value` on `task_list`. Also correctly called out AI for using `|t|` syntax without explaining closures.
+**Context:** Day 4. Learner added `.iter().find()` after a `for` loop that consumed the vector.
+**Output Summary:** AI apologized for skipping the closure explanation and taught Concept #9: Closures (Rust's version of JS arrow functions). AI then explained the `E0382` error as a direct application of Day 3 ownership: `for task in task_list` consumes the vector, while `for task in &task_list` borrows it.
+**Outcome / Next Step:** Learner should change the loop to use `&task_list`, understand the closure syntax, and run the code again.
+
+### 2026-07-02 01:33 IST — Prompt #51
+**Prompt:** "I guess everythings working" - Learner fixed the loop, documented Closures in `Notes.md`, and ran the code successfully.
+**Context:** Day 4. `E0382` error fixed. `Option<T>` matched successfully.
+**Output Summary:** AI praised the learner's fix and note-taking. Introduced Concept #10: `if let` syntax as a shorthand for `match` when you only care about one variant (e.g., `Some`).
+**Outcome / Next Step:** Learner should replace the full `match` statement for `found_task` with the `if let` shorthand.
+
 <!-- New entries appended below -->

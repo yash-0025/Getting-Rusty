@@ -59,7 +59,7 @@ fn main() {
     task_list.push(task2);
 
 
-    for task in task_list {
+    for task in &task_list {
         let status_string = match task.status {
             TaskStatus::Todo => "🔴 To-Do",
             TaskStatus::InProgress => "🔵 In Progress",
@@ -68,4 +68,14 @@ fn main() {
 
       println!("[{}] {} - {}", status_string, task.name, task.description);
     }
+
+
+    let found_task = task_list.iter().find(|t| t.name == "Learning Vectors");
+
+    match found_task {
+        Some(task) => println!("Found it: {}", task.description),
+        None => println!("Task not found!")
+    }
 }
+
+
