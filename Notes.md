@@ -91,3 +91,6 @@
 - `self` => (the function has access to the instance)
 - `&self` => (the function only borrows the instance)
 - `&mut self` => (the function borrows the instance mutably)
+
+`Concept 5` => `Enums inside Structs` 
+`Concept 6` => `Storing Structs in Vec` => In  rust dynamically sized arrays that can grow are called vectors.

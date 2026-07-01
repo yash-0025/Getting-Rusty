@@ -302,4 +302,22 @@
 **Output Summary:** AI apologized and explicitly explained what `Self` (capital S) means as a type alias inside an `impl` block. Then introduced Concept #4: Methods vs Associated Functions (`&mut self`), showing how to write a `.mark_done()` method to change the task's state.
 **Outcome / Next Step:** Learner should add the `mark_done` method, call it in `main`, and print the task again to see the state change.
 
+### 2026-07-01 20:49 IST — Prompt #47
+**Prompt:** "done - [output shows is_done: true]" Learner successfully implemented the `.mark_done()` method, updated `Notes.md` with definitions for `self`, `&self`, and `&mut self`, and committed the changes to Git.
+**Context:** Day 4 in progress. Learner has mastered structs, derives, and basic `impl` blocks.
+**Output Summary:** AI praised the excellent note-taking and successful commit. Introduced Concept #5: Enums with variants for task status (Todo, InProgress, Done) to replace the boolean `is_done`. Explained how to integrate the enum into the `Task` struct and `new` function.
+**Outcome / Next Step:** Learner should replace `is_done: bool` with `status: TaskStatus`, update the constructor and method, and print the output to see the new enum in action.
+
+### 2026-07-01 21:25 IST — Prompt #48
+**Prompt:** "Done - [output shows status: Done]" Learner successfully integrated the `TaskStatus` enum.
+**Context:** Day 4 in progress. Learner implemented the enum and saw the warning that `InProgress` was never constructed, which is expected.
+**Output Summary:** AI confirmed the successful output and explained that the `InProgress` warning just means it hasn't been used yet. Introduced Concept #6: Vectors for storage (`Vec<Task>`) and Concept #7: `match` statements for the Enum to format printing. Provided the code to create a vector, push tasks into it, and loop over them using a `match` statement.
+**Outcome / Next Step:** Learner should update `main()` to store multiple tasks in a `Vec<Task>`, loop over them, and use a `match` statement on the task status to print a user-friendly string.
+
+### 2026-07-01 22:24 IST — Prompt #49
+**Prompt:** "Done - But i have a little doubt understanding match like why to use and when to use..." Learner successfully ran the code, output is cleanly formatted. Learner expressed confusion about the underlying "why" of `match` compared to standard conditionals.
+**Context:** Day 4. Learner ran the loop with the match statement. Saw expected warnings for unused `Done` variant and `mark_done` method.
+**Output Summary:** AI explained the core philosophy of `match`: Exhaustiveness. Contrasted it with `if/else` chains in JS, explaining how `match` prevents runtime bugs if an enum is updated in the future. AI then introduced Concept #8: `Option<T>` for handling "maybe null" cases without null pointers, demonstrating how to use `.iter().find()` to search the vector.
+**Outcome / Next Step:** Learner should read the explanation of `match`, then write code to find a task by name using `iter().find()` and match on the resulting `Option<T>`.
+
 <!-- New entries appended below -->
