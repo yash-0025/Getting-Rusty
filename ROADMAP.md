@@ -63,10 +63,11 @@ Each day has:
 - [x] **Deliverable:** Working CRUD task tracker. No persistence yet — that's tomorrow.
 
 ### Day 5 — Build: Persistent Task Tracker with Error Handling
-- [ ] **You build:** Take Day 4's task tracker, add JSON persistence (load from file on start, save on every change) and proper error handling. No more `unwrap()` — every failure is typed.
-- [ ] **Concepts:** `Result<T, E>` as the explicit alternative to exceptions/try-catch · `?` operator — propagation, how it desugars (`From::from` on the error type) · `panic!` vs `Result` — when each is appropriate (panic = programmer bug; Result = expected failure) · Custom error enums with `thiserror` (for libraries) · `anyhow` (for applications) — and **when to use which** (real interview question) · Converting between error types, `From`/`Into` for errors · `unwrap()`, `expect()`, `unwrap_or`, `unwrap_or_else`, `unwrap_or_default` — why `unwrap()` in production is a smell · `serde` + `serde_json` for serialization/deserialization · File I/O with proper error propagation
-- [ ] **Anti-pattern → Pattern:** Stringly-typed errors (`Err("something broke".to_string())`) → structured error enums callers can `match` on
-- [ ] **Deliverable:** Task tracker that persists to `tasks.json`, with typed errors for file-not-found, invalid JSON, etc.
+- [x] **You build:** Take Day 4's task tracker, add JSON persistence (load from file on start, save on every change) and proper error handling. No more `unwrap()` — every failure is typed.
+- [x] **Concepts:** `Result<T, E>` as the explicit alternative to exceptions/try-catch · `?` operator — propagation, how it desugars (`From::from` on the error type) · `panic!` vs `Result` — when each is appropriate (panic = programmer bug; Result = expected failure) · Custom error enums with `thiserror` (for libraries) · `anyhow` (for applications) — and **when to use which** (real interview question) · Converting between error types, `From`/`Into` for errors · `unwrap()`, `expect()`, `unwrap_or`, `unwrap_or_else`, `unwrap_or_default` — why `unwrap()` in production is a smell · `serde` + `serde_json` for serialization/deserialization · File I/O with proper error propagation
+- [x] **Reality check:** Solana programs don't have files, but they DO have persistence (accounts) and error handling (`ProgramError`). You'll use `Result` constantly.
+- [x] **Anti-pattern → Pattern:** Stringly-typed errors (`Err("something broke".to_string())`) → structured error enums callers can `match` on
+- [x] **Deliverable:** Task tracker that persists to `tasks.json`, with typed errors for file-not-found, invalid JSON, etc.
 
 ### Day 6 — Build: Text Analytics Engine
 - [ ] **You build:** A CLI that reads a text file (or stdin) and produces: word frequency counts, most/least common words, average word length, sentence count, reading-level estimate. Processes large files efficiently.

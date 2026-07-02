@@ -173,4 +173,13 @@ let json_string = serde_json::to_string_pretty(&task_list)?;
 std::fs::write("tasks.json", json_string);
 ```
 
+-  `Concept 5` => Deserialization - Now as we are saving our tasks list at the end of the program , we need to load them at the beginning of the program so they persist across sessions
+- For eg -
+```javascript
+const fileContent = fs.readFileSync("tasks.json", "utf8");
+let taskList = JSON.parse(fileContent);
+```
+- In rust it is similar but with error handling . We read the file and then ask serde_json to parse the string back into Vec<Task>.
 
+- `Concept 6` => The #[must_use] Attribute (No Silent Failures)
+- IN javascript if a function return something and we ignore it . javascript don't care but IN rust std::fs::write returns a Result because writing to a disk can fail . Rust tags the Result enum with a special attribute call `#[must_use]`. If we call a function that returns a Result and we don't check it using (match, .unwrap() or ?) the compiler warns us that we are ingnoring failures.

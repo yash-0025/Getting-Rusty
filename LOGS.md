@@ -33,6 +33,47 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-03 01:42 IST — [Multiple Files] — Marked Day 5 Complete</summary>
+
+- **Files:** ROADMAP.md, LEARNING.md, PROMPT_HISTORY.md
+- **Change type:** Modified
+- **Reason:** Day 5 curriculum completed. Learner granted permission to log the day's summary and check off roadmap items.
+
+```diff
+  # In ROADMAP.md
+- - [ ] **You build:** Take Day 4's task tracker...
+- - [ ] **Concepts:** `Result<T, E>` as the explicit alternative...
+- - [ ] **Reality check:** Solana programs don't have files...
+- - [ ] **Deliverable:** Persistent CRUD CLI.
++ - [x] **You build:** Take Day 4's task tracker...
++ - [x] **Concepts:** `Result<T, E>` as the explicit alternative...
++ - [x] **Reality check:** Solana programs don't have files...
++ - [x] **Deliverable:** Persistent CRUD CLI.
+
+  # In LEARNING.md
++ ### Day 5 — Build: Persistent Task Tracker with Error Handling — 2026-07-03
++ **Status:** `[x]` done
++ **What I actually understood:**
++ - `Result<T, E>` handles expected failures gracefully without crashing.
++ - `?` operator is a shortcut to automatically return `Err` if a function fails.
++ - `main()` can be changed to return a `Result` to bubble errors up to the OS.
++ - `serde` and `serde_json` handle converting structs to/from JSON strings.
++ - We must add `#[derive(Serialize, Deserialize)]` to our structs.
++ - `#[must_use]` warns us when we ignore a `Result` that might contain an error.
++ **What's still fuzzy / questions I had:**
++ - Type inference for generic functions like `serde_json::from_str` can be tricky...
++ **Code I wrote / project progress:**
++ - Created `persistent-tracker`. Upgraded the Day 4 task tracker...
++ **Mistakes the compiler caught that taught me something:**
++ - `E0282: type annotations needed`. Learned that `from_str` needs to know what type it's parsing into...
++ - Unused `Result` warning. Learned to add `?` to `fs::write`...
+
+  # In PROMPT_HISTORY.md
++ ### 2026-07-03 01:40 IST — Prompt #65
++ ...
+```
+
+</details>
 <summary>2026-07-02 15:10 IST — [Multiple Files] — Marked Day 4 Complete & Fixed Prompt History</summary>
 
 - **Files:** ROADMAP.md, LEARNING.md, PROMPT_HISTORY.md

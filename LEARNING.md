@@ -136,6 +136,23 @@
 - Dead code / Unused warnings (expected when building out enums/methods not used in `main` yet).
 - `E0382: borrow of moved value` on vectors. Fixed by iterating over a reference `&task_list`.
 
+### Day 5 — Build: Persistent Task Tracker with Error Handling — 2026-07-03
+**Status:** `[x]` done
+**What I actually understood:**
+- `Result<T, E>` handles expected failures gracefully without crashing.
+- `?` operator is a shortcut to automatically return `Err` if a function fails.
+- `main()` can be changed to return a `Result` to bubble errors up to the OS.
+- `serde` and `serde_json` handle converting structs to/from JSON strings.
+- We must add `#[derive(Serialize, Deserialize)]` to our structs.
+- `#[must_use]` warns us when we ignore a `Result` that might contain an error.
+**What's still fuzzy / questions I had:**
+- Type inference for generic functions like `serde_json::from_str` can be tricky when variables aren't strictly typed.
+**Code I wrote / project progress:**
+- Created `persistent-tracker`. Upgraded the Day 4 task tracker to load and save tasks to `tasks.json`.
+**Mistakes the compiler caught that taught me something:**
+- `E0282: type annotations needed`. Learned that `from_str` needs to know what type it's parsing into via the variable assignment.
+- Unused `Result` warning. Learned to add `?` to `fs::write` to handle file writing errors.
+
 <!-- New day entries get appended below this line. Ask the AI to draft an entry at the end of each session; approve or edit before it's saved. -->
 
 ---

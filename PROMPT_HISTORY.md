@@ -392,4 +392,28 @@
 **Output Summary:** AI pulled the `tasks.json` file to show the learner the successful result. Introduced Concept #5: Deserialization. Showed how to read the file into a String and parse it back into a `Vec<Task>`.
 **Outcome / Next Step:** Learner should implement the deserialization logic at the top of `main()` to load tasks when the program starts.
 
+### 2026-07-03 00:22 IST — Prompt #62
+**Prompt:** Learner implemented deserialization but got an `E0282: type annotations needed` compiler error. Learner playfully called out AI for "teaching wrong things".
+**Context:** Concept 5 (Deserialization). Learner commented out the explicit `Vec<Task>` type annotation, breaking type inference for `serde_json::from_str`.
+**Output Summary:** AI explained the `E0282` error as a classic Rust type inference lesson. Because `serde_json::from_str` is generic, it relies on the left side of the assignment (`let mut task_list: Vec<Task>`) to know what shape to parse the JSON into.
+**Outcome / Next Step:** Learner should add `: Vec<Task>` back to the variable declaration.
+
+### 2026-07-03 00:24 IST — Prompt #63
+**Prompt:** Learner added the type annotation and the program compiled. The output showed three warnings (unused mut, dead code, and unused Result). Nothing was printed to the terminal because the `for` loop was deleted.
+**Context:** Concept 5 (Deserialization) working silently.
+**Output Summary:** AI explained the `unused Result` warning as Rust's `#[must_use]` feature preventing silent failures. Instructed the learner to fix it by adding the missing `?` and to add the `for` loop back to actually print the loaded tasks.
+**Outcome / Next Step:** Learner should fix the warning, restore the print loop, and run the program to see the persisted tasks.
+
+### 2026-07-03 00:38 IST — Prompt #64
+**Prompt:** Learner successfully fixed the warning, added the print loop, and ran `cargo run`. The terminal displayed the previously saved tasks correctly!
+**Context:** Day 5 complete! The `persistent-tracker` loaded JSON into a vector, printed it, and saved it back to disk.
+**Output Summary:** AI praised the final working result, concluding the Day 5 objectives.
+**Outcome / Next Step:** AI asks for permission to log Day 5 in `LEARNING.md`, check it off in `ROADMAP.md`, and move on to Day 6.
+
+### 2026-07-03 01:40 IST — Prompt #65
+**Prompt:** "Mark day 5 as complete"
+**Context:** Day 5 is finished. Learner gave permission to update the trackers.
+**Output Summary:** AI executed the updates across `ROADMAP.md`, `LEARNING.md`, `LOGS.md`, and `PROMPT_HISTORY.md`, then outlined the start of Day 6.
+**Outcome / Next Step:** Proceed to Day 6 (Text Analytics Engine).
+
 <!-- New entries appended below -->
