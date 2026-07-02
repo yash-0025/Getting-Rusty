@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Learning Vectors",
+    "description": "Understanding Vec in Rust",
+    "status": "Todo"
+  },
+  {
+    "name": "Lean match",
+    "description": "Use match with Enum",
+    "status": "InProgress"
+  }
+]

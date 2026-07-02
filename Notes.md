@@ -146,3 +146,31 @@
 - The catch for `main()` => Because `?` might return an error , you can only use it inside a function that actually returns a `Result` Right now , our `main()` function returns nothing.
 - To use `?` in `main()` we have to change its signature so it can return an error to the operating system.
 - Note- () is Rust's empty tuple , it basically just means nothing or void
+
+- `Concept 3` => Serialization with serde => If We want our Vec<Task> to survive when the program closes we need to save it to a file. The easiest way is to convert it to JSON .
+- IN rust `converting structs to strings (serialization)` and `strings to struct Deserialization` is handled by most famous crate in Rust ecosystem `serde [SERialize/DEserialize]`
+- Rust is strictly typed, serde needs to write code for our exact TAsk struct to figure out how to turn it into JSON. It does thsi using MACROS (specifically derive macros). Instead of writing a hundred lines of parsing logic we just add `#[derive(Serialize, Deserialize)]` above our structs and serde writes all the parsing code for us at compile time.
+```rust  
+//Installation
+cargo add serde --features derive
+cargo add serde_json
+```
+- To use  => `use serde::{Serialize, Deserialize};`
+
+- `Concept 4` => Saving to JSON . Once our struct knows how to turn themselves into JSON after adding Serialize and Deserialize to macros .
+- For eg - 
+```javascript
+const jsonString = JSON.stringify(taskList, null, 2);
+fs.writeFileSync("tasks.json", jsonString);
+```
+- In Rust => 
+```rust
+// 1. Convert Vec<Task> into a formatted JSON  string
+// This can fail eg if the struct has a circular reference so we use ?
+let json_string = serde_json::to_string_pretty(&task_list)?;
+// 2. Write string to that file
+// This can also fail so we will use ? here too
+std::fs::write("tasks.json", json_string);
+```
+
+

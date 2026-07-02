@@ -374,4 +374,22 @@
 **Output Summary:** AI reintroduced Concept 2 (`?` operator). Explained that `?` replaces the boilerplate of `match` by propagating errors up. Showed how `main()` must be modified to return `Result<(), std::io::Error>` to use `?`.
 **Outcome / Next Step:** Learner should implement the `?` operator and update `main()` signature.
 
+### 2026-07-02 16:56 IST — Prompt #59
+**Prompt:** Learner successfully ran the `?` operator code in `main` and pasted the resulting `Os { ... NotFound }` error output.
+**Context:** Concept 2 (`?` operator) working. Learner temporarily cleared out the Day 4 structs to isolate the test.
+**Output Summary:** AI praised the result, explaining how returning `Result` from `main` lets the OS gracefully print the error bubbled up by `?`. Introduced Concept #3: Serialization with `serde`. Assigned adding `serde` dependencies and restoring the `Task` structs with `Serialize`/`Deserialize` derives.
+**Outcome / Next Step:** Learner should run `cargo add` commands, restore structs, add derives, and run `cargo check`.
+
+### 2026-07-02 20:21 IST — Prompt #60
+**Prompt:** Learner added `serde` and `serde_json`, restored the `Task` structs with `#[derive(Serialize, Deserialize)]`, and ran `cargo check` successfully.
+**Context:** Concept 3 (Serialization derives) complete.
+**Output Summary:** AI confirmed the derives worked perfectly. Introduced Concept #4: Writing JSON to a file using `serde_json::to_string_pretty` and `std::fs::write`.
+**Outcome / Next Step:** Learner should implement the code to serialize and save the `task_list` to `tasks.json`.
+
+### 2026-07-02 21:21 IST — Prompt #61
+**Prompt:** Learner added the serialization code, ran `cargo run`, and the program compiled and executed successfully.
+**Context:** Concept 4 (Serialization) is complete. The tasks were correctly saved to `tasks.json`.
+**Output Summary:** AI pulled the `tasks.json` file to show the learner the successful result. Introduced Concept #5: Deserialization. Showed how to read the file into a String and parse it back into a `Vec<Task>`.
+**Outcome / Next Step:** Learner should implement the deserialization logic at the top of `main()` to load tasks when the program starts.
+
 <!-- New entries appended below -->
