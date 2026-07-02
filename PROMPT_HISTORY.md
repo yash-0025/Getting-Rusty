@@ -344,4 +344,34 @@
 **Output Summary:** AI acknowledged the mistake and prepared to execute file updates.
 **Outcome / Next Step:** AI must backfill PROMPT_HISTORY.md, then update ROADMAP.md, LEARNING.md, and LOGS.md for Day 4 completion.
 
+### 2026-07-02 15:14 IST — Prompt #54
+**Prompt:** "Let's dive into Day 5"
+**Context:** User is ready to start Day 5 (Persistent Task Tracker).
+**Output Summary:** AI introduced Concept #1: The `Result<T, E>` Enum vs Exceptions. Explained the difference between `.expect()` crashing and `match` handling errors gracefully. Instructed the learner to write code attempting to read a fake file and match on the result in their existing `task-tracker`.
+**Outcome / Next Step:** Learner should write the code and run it to see graceful error handling.
+
+### 2026-07-02 15:16 IST — Prompt #55
+**Prompt:** Learner called out the AI for forgetting the standard ritual of creating a new project/setup for the new day.
+**Context:** AI told the learner to write the new code inside the Day 4 `task-tracker` project, violating the pattern of keeping each day's code separate.
+**Output Summary:** AI acknowledged the mistake, apologized, and pivoted to the proper Day 5 setup ritual.
+**Outcome / Next Step:** Learner should scaffold the new Day 5 project.
+
+### 2026-07-02 16:02 IST — Prompt #56
+**Prompt:** Learner pasted the output of the new setup, which successfully caught the file reading error for Concept 1 without panicking.
+**Context:** Setup complete. Concept 1 code working.
+**Output Summary:** AI rushed into Concept 2 (`?` operator) without properly unpacking the Concept 1 output.
+**Outcome / Next Step:** Learner called out the AI for rushing and skipping the explanation.
+
+### 2026-07-02 16:09 IST — Prompt #57
+**Prompt:** "Okay Need you to fix this things now and take care of it in future... when the settup is done you directly skipped to concept 2 now how should i know"
+**Context:** Learner took notes on Concept 1 in `Notes.md` but was frustrated by the AI's pacing and lack of review for the Concept 1 output in the new setup.
+**Output Summary:** AI apologized for rushing, acknowledged the pacing mistake, and stepped back to properly review the Concept 1 output.
+**Outcome / Next Step:** Solidify Concept 1 before moving forward.
+
+### 2026-07-02 16:11 IST — Prompt #58
+**Prompt:** "Ok let's move to Concept 2 now"
+**Context:** Concept 1 (Result/Match) is fully understood and verified.
+**Output Summary:** AI reintroduced Concept 2 (`?` operator). Explained that `?` replaces the boilerplate of `match` by propagating errors up. Showed how `main()` must be modified to return `Result<(), std::io::Error>` to use `?`.
+**Outcome / Next Step:** Learner should implement the `?` operator and update `main()` signature.
+
 <!-- New entries appended below -->

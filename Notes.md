@@ -114,3 +114,35 @@
 - So like while using match instead of using if else we will use if let
 - For eg if we use match we have to take care of both Some and None otherwise it will not compile but when we don't want all to work like we didnt want None to be described we can use if let 
 - Rust give us a special shortand for this called if let . It reads like this - if let task equal Some(found_task) then do this 
+
+
+<h1>Day 5</h1>
+
+- `Concept 1` => The `Result<T, E>` -> Enum vs Exceptions => In JS if reading a file fails the function throws error we have to wrap it in try/catch block otherwise the whole app crashes at runtime. 
+- Rust doesn't have exception intead if a function can fail it returns a Reslt enum. It looks exactly like the Option enum but instead of Some and None it has Ok and Err.
+- Eg 
+```rust 
+    enum Result<T, E> {
+        Ok(T), // Contains the success value 
+        Err(E), // Contains the Error value
+    }
+ ```
+ - When we try to read file , Rust doesn't give us a string . it gives us a Result<String, std::io::Error>. The compiler forces us to deal with the possibility of failure befor we can access the string inside.
+ - So the thing is befoe we are using .expect and if we use that it moslty crashes our app all the times when we didn't have anything but with Result error we can just log it as a danger and avoid crashes everytime.
+
+ - `Concept 2` => `The ? Operator` [Error Propagation] => Like writing out a full match statement every time we want to read a file , write a file or parse JSON gets super repetitive. LIke if a file fails to read we don't want to handle it right on the exact line . we just want to get out of the current function an pass the error back up to whoever called us.
+ - `?` It means if it works, unwrap the value inside Ok.If it fails ,  immediately stop this function and return the Err. 
+ - Eg - 
+```rust
+    let content = std::fs::read_to_string("tasks.json")?;
+ ```
+ - Eg Previously without ? => 
+```rust
+    let content = match std::fs::read_to_string("tasks.json") {
+        Ok(c) => c,
+        Err(e) => return Err(e),
+    }
+  ```
+- The catch for `main()` => Because `?` might return an error , you can only use it inside a function that actually returns a `Result` Right now , our `main()` function returns nothing.
+- To use `?` in `main()` we have to change its signature so it can return an error to the operating system.
+- Note- () is Rust's empty tuple , it basically just means nothing or void
