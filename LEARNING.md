@@ -117,6 +117,25 @@
 - E0382 "borrow of moved value": Learned that passing a `PathBuf` to `fs::read` moves it, so we must pass it as a reference (`&path`).
 - Unused variable warnings: The compiler points out when a variable (like `size`) is declared in a loop but never used.
 
+### Day 4 — Build: Task Tracker (In-Memory CRUD) — 2026-07-02
+**Status:** `[x]` done
+**What I actually understood:**
+- Structs group data together. `derive(Debug)` lets us print them.
+- `impl` blocks contain methods (`&self`, `&mut self`) and constructors (`Self::new()`).
+- Enums represent states (like `TaskStatus::Todo`).
+- Vectors (`Vec<Task>`) store multiple tasks.
+- `match` forces handling every enum variant exhaustively.
+- `Option<T>` handles "maybe null" cases safely without null pointers.
+- Closures (`|t|`) are like arrow functions.
+- `if let` is a shorthand for matching on a single variant like `Some`.
+**What's still fuzzy / questions I had:**
+- None for now.
+**Code I wrote / project progress:**
+- Built `task-tracker` project (in-memory CRUD) using Structs, Enums, Vectors, Option, and iterator search.
+**Mistakes the compiler caught that taught me something:**
+- Dead code / Unused warnings (expected when building out enums/methods not used in `main` yet).
+- `E0382: borrow of moved value` on vectors. Fixed by iterating over a reference `&task_list`.
+
 <!-- New day entries get appended below this line. Ask the AI to draft an entry at the end of each session; approve or edit before it's saved. -->
 
 ---

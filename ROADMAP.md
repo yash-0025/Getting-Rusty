@@ -57,10 +57,10 @@ Each day has:
 > ⚠️ **This is the hardest day.** Budget 2x time. Ownership is THE concept that makes Rust Rust. Everything else builds on it.
 
 ### Day 4 — Build: Task Tracker (In-Memory CRUD)
-- [ ] **You build:** A CLI task tracker — add, list, complete, delete tasks. Tasks have name, description, status (enum: Todo/InProgress/Done), created-at timestamp. All in-memory for now.
-- [ ] **Concepts:** Struct types: named-field, tuple structs, unit structs · `impl` blocks, `Self::new()` vs `&self`/`&mut self`/`self` methods · Enums with variants for task status · `Option<T>` replacing `null`/`undefined` — eliminates null pointer dereference bugs · `match` exhaustiveness — compiler forces you to handle every variant · `if let`, `while let`, `let...else` · Pattern matching on nested structures, guards (`n if n > 5`), `@` bindings · `Vec<Task>` as in-memory storage, iterator-based filtering
-- [ ] **Reality check:** In a Solana program (which you've touched), account state is basically structs + enums for instruction dispatch — this is the same discipline, just without the runtime
-- [ ] **Deliverable:** Working CRUD task tracker. No persistence yet — that's tomorrow.
+- [x] **You build:** A CLI task tracker — add, list, complete, delete tasks. Tasks have name, description, status (enum: Todo/InProgress/Done), created-at timestamp. All in-memory for now.
+- [x] **Concepts:** Struct types: named-field, tuple structs, unit structs · `impl` blocks, `Self::new()` vs `&self`/`&mut self`/`self` methods · Enums with variants for task status · `Option<T>` replacing `null`/`undefined` — eliminates null pointer dereference bugs · `match` exhaustiveness — compiler forces you to handle every variant · `if let`, `while let`, `let...else` · Pattern matching on nested structures, guards (`n if n > 5`), `@` bindings · `Vec<Task>` as in-memory storage, iterator-based filtering
+- [x] **Reality check:** In a Solana program (which you've touched), account state is basically structs + enums for instruction dispatch — this is the same discipline, just without the runtime
+- [x] **Deliverable:** Working CRUD task tracker. No persistence yet — that's tomorrow.
 
 ### Day 5 — Build: Persistent Task Tracker with Error Handling
 - [ ] **You build:** Take Day 4's task tracker, add JSON persistence (load from file on start, save on every change) and proper error handling. No more `unwrap()` — every failure is typed.

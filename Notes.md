@@ -109,3 +109,8 @@
 - Eg - In javascript when we want to find an item in an array we use arrow function like this let task = tasklist.find(t => t.name = "something");
 - Similarly in Rust arrow function is called closure instead of an arrow => Rust puts the variable inside two vertical pipes | | .
 - Eg - let task = task_list.iter().find(|t| t.name == "Something")
+
+- `Concept 10 ` => The if let syntax
+- So like while using match instead of using if else we will use if let
+- For eg if we use match we have to take care of both Some and None otherwise it will not compile but when we don't want all to work like we didnt want None to be described we can use if let 
+- Rust give us a special shortand for this called if let . It reads like this - if let task equal Some(found_task) then do this 

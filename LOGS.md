@@ -33,6 +33,53 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-02 15:10 IST — [Multiple Files] — Marked Day 4 Complete & Fixed Prompt History</summary>
+
+- **Files:** ROADMAP.md, LEARNING.md, PROMPT_HISTORY.md
+- **Change type:** Modified
+- **Reason:** Day 4 curriculum completed. Learner granted permission to log the day's summary, check off roadmap items, and demanded the missed prompt history be backfilled.
+
+```diff
+  # In ROADMAP.md
+- - [ ] **You build:** A CLI task tracker...
+- - [ ] **Concepts:** Struct types...
+- - [ ] **Reality check:** In a Solana program...
+- - [ ] **Deliverable:** Working CRUD task tracker...
++ - [x] **You build:** A CLI task tracker...
++ - [x] **Concepts:** Struct types...
++ - [x] **Reality check:** In a Solana program...
++ - [x] **Deliverable:** Working CRUD task tracker...
+
+  # In LEARNING.md
++ ### Day 4 — Build: Task Tracker (In-Memory CRUD) — 2026-07-02
++ **Status:** `[x]` done
++ **What I actually understood:**
++ - Structs group data together. `derive(Debug)` lets us print them.
++ - `impl` blocks contain methods (`&self`, `&mut self`) and constructors (`Self::new()`).
++ - Enums represent states (like `TaskStatus::Todo`).
++ - Vectors (`Vec<Task>`) store multiple tasks.
++ - `match` forces handling every enum variant exhaustively.
++ - `Option<T>` handles "maybe null" cases safely without null pointers.
++ - Closures (`|t|`) are like arrow functions.
++ - `if let` is a shorthand for matching on a single variant like `Some`.
++ **What's still fuzzy / questions I had:**
++ - None for now.
++ **Code I wrote / project progress:**
++ - Built `task-tracker` project (in-memory CRUD) using Structs, Enums, Vectors, Option, and iterator search.
++ **Mistakes the compiler caught that taught me something:**
++ - Dead code / Unused warnings (expected when building out enums/methods not used in `main` yet).
++ - `E0382: borrow of moved value` on vectors. Fixed by iterating over a reference `&task_list`.
+
+  # In PROMPT_HISTORY.md
++ ### 2026-07-02 15:05 IST — Prompt #52
++ ...
++ ### 2026-07-02 15:07 IST — Prompt #53
++ ...
+```
+
+</details>
+
+<details>
 <summary>2026-07-01 16:21 IST — [Multiple Files] — Marked Day 3 Complete & Fixed Code Warning</summary>
 
 - **Files:** ROADMAP.md, LEARNING.md, duplicate-finder/src/main.rs, PROMPT_HISTORY.md

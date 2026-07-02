@@ -332,4 +332,16 @@
 **Output Summary:** AI praised the learner's fix and note-taking. Introduced Concept #10: `if let` syntax as a shorthand for `match` when you only care about one variant (e.g., `Some`).
 **Outcome / Next Step:** Learner should replace the full `match` statement for `found_task` with the `if let` shorthand.
 
+### 2026-07-02 15:05 IST — Prompt #52
+**Prompt:** Learner provided `match` output and requested continuation. AI reviewed history and noticed the `if let` shorthand instruction was missed.
+**Context:** Day 4 wrap-up. Learner ran `match` code successfully but lacked `if let` completion.
+**Output Summary:** AI explained Concept #10: `if let` syntax, comparing it to the full `match` statement. Instructed learner to replace the `match` block with `if let Some(task) = found_task { ... }`.
+**Outcome / Next Step:** Learner should make the change in `main.rs`, run it, and paste output.
+
+### 2026-07-02 15:07 IST — Prompt #53
+**Prompt:** Learner completed the `if let` replacement, ran successfully, but received warnings for unused `Done` variant and `mark_done` method. Learner also pointed out AI forgot to update PROMPT_HISTORY.md.
+**Context:** Day 4 complete. Code runs perfectly. Learner granted permission to mark Day 4 complete but demanded adherence to the logging rules.
+**Output Summary:** AI acknowledged the mistake and prepared to execute file updates.
+**Outcome / Next Step:** AI must backfill PROMPT_HISTORY.md, then update ROADMAP.md, LEARNING.md, and LOGS.md for Day 4 completion.
+
 <!-- New entries appended below -->

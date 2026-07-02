@@ -72,9 +72,15 @@ fn main() {
 
     let found_task = task_list.iter().find(|t| t.name == "Learning Vectors");
 
-    match found_task {
-        Some(task) => println!("Found it: {}", task.description),
-        None => println!("Task not found!")
+    // match found_task {
+    //     Some(task) => println!("Found it: {}", task.description),
+    //     None => println!("Task not found!")
+    // }
+
+    if let Some(task) = found_task {
+        println!("Found it : {}", task.description);
+    } else {
+        println!("Task not found");
     }
 }
 
