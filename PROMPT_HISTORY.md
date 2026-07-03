@@ -470,4 +470,16 @@
 **Output Summary:** AI praised the achievement. Pointed out a crucial detail: the learner passed `word` directly into the HashMap instead of using `String::from()`. This naturally introduced Concept #4: `String` vs `&str` (String Slices), explaining why iterators yield references rather than copying memory.
 **Outcome / Next Step:** Learner will learn the difference between `String` and `&str`.
 
+### 2026-07-04 02:00 IST — Prompt #75
+**Prompt:** Learner successfully ran the script on `book.txt` and pasted the giant HashMap output.
+**Context:** Concept 4 (String Slices) complete. The program is analyzing real files.
+**Output Summary:** AI pointed out that the output contains dirty data like `"plan,"` (with a comma) and `"The"` vs `"the"` (capitalization differences). Introduced the concept of cleaning data (lowercasing and removing punctuation) as the next natural step for building a real text analytics engine.
+**Outcome / Next Step:** Learner will implement data cleaning logic before counting.
+
+### 2026-07-04 02:08 IST — Prompt #76
+**Prompt:** Learner successfully applied data cleaning (`.to_lowercase().replace()`) and pasted the resulting HashMap.
+**Context:** Concept 5 (Data Cleaning) complete. The data is now properly sanitized and grouped.
+**Output Summary:** AI praised the clean data. Introduced the next step of the text analytics engine: finding the most common word. Explained that HashMaps are unsorted by design, and introduced Concept #6: Closures and Sorting (converting the HashMap into a `Vec` and sorting it).
+**Outcome / Next Step:** Learner will implement the sorting logic to find the most common words.
+
 <!-- New entries appended below -->

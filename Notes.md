@@ -225,3 +225,25 @@ let words = "apple apple banana".splite(" ");
 ```
 - In Rust strings are much more complex because they handle UTF-8 encoding[emojis, chinese characters etc]. But rust gives us a super powerful tool for this called an iterator
 - So instead of creating a giant new array[Vector] in memory to hold all the words an iterator just points to the string and hands us one word at a time. It is blazing fast and uses almost zero memory. To get an iterator of words we use .split_whitespace()
+
+- `Concept 4` => `String vs &str(String slices)` => In javascript string is a string but in Rust there are two main types of string . 
+- `String` => The Owner / The physical house from the example
+- `&str` => A String slice / A reference
+- let;s understand this with example - So when we do this 
+```rust
+let text = String::from("rust is fast and rust is safe")
+```
+- This creates a whole string . It asks computer for RAM, allocated physical space on the heap and stores the letters . it is heavy and expensive . 
+- Now what does .split_whitespace() do ? Does it create 7 brand new String object for all 7 words and take up 7x more RAM .
+- Nooo The iterator gives us a `&str`.  REmember `&` means reference / pointer
+- A `&str` is just a piece of paper that says - Look at the original text String in memory , specifically starting at character 0 and ending at character 4.
+- So suppose if we are finding a word rust , it just points to the word rust that already exist inside our original sentence , it doesn't copy memory , it is just fast and uses zero extra RAM. 
+Suppose we passed a word (which is &str) into the HashMap , Rust automatically inferred our HashMap type to be HashMap<&str, i32>. Out entire HashMap is storing pointers to the original sentence
+
+- `Concept 5` => Cleaning Data [String Manipulation] => Before we start counting words we need to sanitize the text . Like we do everything .toLowerCase() in javascript , In rust we can do this by chaining methods. 
+- `.to_lowercase()` => converts string to lowercase
+- `.trim()` => removes whitespace from both ends
+- `.chars()` => returns an iterator of characters
+- `.contains()` => checks if the string contains a substring
+- `.replace()` => replaces a substring with another substring
+- `.split()` => splits the string into an iterator of substrings

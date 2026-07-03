@@ -23,7 +23,8 @@ fn main() {
     // let c3 = word_counts.entry(String::from("banana")).or_insert(0);
     // *c3 += 1;
 
-    let text = String::from("rust is fast and rust is safe");
+    // let text = String::from("rust is fast and rust is safe");
+    let text = std::fs::read_to_string("book.txt").expect("Failed to read book.txt").to_lowercase().replace(",", "").replace(".", "");
 
     for word in text.split_whitespace() {
         println!("I found a  word: {}", word);
