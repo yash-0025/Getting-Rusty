@@ -416,4 +416,52 @@
 **Output Summary:** AI executed the updates across `ROADMAP.md`, `LEARNING.md`, `LOGS.md`, and `PROMPT_HISTORY.md`, then outlined the start of Day 6.
 **Outcome / Next Step:** Proceed to Day 6 (Text Analytics Engine).
 
+### 2026-07-03 13:12 IST — Prompt #66
+**Prompt:** "Let's staart"
+**Context:** User scaffolded `text-analyzer` and is ready for Day 6.
+**Output Summary:** AI introduced Concept #1: HashMaps. Explained how they are the Rust equivalent of JavaScript Objects/Maps for key-value storage. Provided a small exercise to create, populate, and print a `HashMap` in `main.rs`.
+**Outcome / Next Step:** Learner should write the HashMap code in `main.rs`, run it, and paste the output.
+
+### 2026-07-03 13:18 IST — Prompt #67
+**Prompt:** Learner implemented the `HashMap`, ran the code, and pasted the output.
+**Context:** Concept 1 (HashMap creation and insertion) complete. Learner accidentally used capital "Hello" instead of lowercase "hello" for the overwrite step, resulting in two separate keys.
+**Output Summary:** AI pointed out the case-sensitivity bug as a perfect accident. Introduced Concept #2: The `Entry` API, which is the idiomatic way to increment counters in a Rust `HashMap`.
+**Outcome / Next Step:** Learner should implement the `entry().or_insert()` pattern to dynamically count words.
+
+### 2026-07-03 13:24 IST — Prompt #68
+**Prompt:** Learner paused the Entry API exercise to ask a fundamental question about how HashMaps work under the hood: why keys overwrite each other instead of keeping both, and how the data is actually laid out in memory.
+**Context:** Concept 1 & 2 transition. Learner wants a deeper conceptual understanding of HashMaps before writing more code.
+**Output Summary:** AI provided a breakdown of the "Unique Key" rule and explained the concept of a "Hash Function" (turning a string into a memory bucket address) in everyday English.
+**Outcome / Next Step:** Learner should review the explanation, confirm understanding, and then run the `Entry` API code.
+
+### 2026-07-03 13:27 IST — Prompt #69
+**Prompt:** Learner called out the AI for introducing the `*` (dereference) syntax in the `Entry` API example without first teaching what referencing and dereferencing are.
+**Context:** Concept 2 (`Entry` API) introduced a pointer dereference `*count += 1`. Learner correctly recognized this was a skipped fundamental concept.
+**Output Summary:** AI acknowledged the mistake, apologized for skipping the fundamental concept, and introduced Concept #3: Pointers, References (`&`), and Dereferencing (`*`). Used a real-world analogy (a house vs. a house address) to explain how the Entry API returns an address, and `*` follows that address to modify the actual value in the HashMap.
+**Outcome / Next Step:** Learner will review the explanation of references/dereferencing before proceeding with the `Entry` API code.
+
+### 2026-07-03 13:40 IST — Prompt #70
+**Prompt:** Learner asked for clarification on the *logic* of `*c += 1`. They understood the pointer mechanics but were confused about why we insert 0 and then immediately add 1, rather than just inserting 1.
+**Context:** Concept 2 (`Entry` API). Learner is struggling to map the pointer syntax to the actual real-world logic of counting words.
+**Output Summary:** AI explained the "tally chart" logic. Broke down how `or_insert(0)` handles the first time a word is seen, and `+= 1` acts as the universal "add one to the tally" whether it's the first time or the 100th time.
+**Outcome / Next Step:** Learner should review the tally chart analogy and run the code to see it in action.
+
+### 2026-07-03 13:42 IST — Prompt #71
+**Prompt:** "so c1 is our main data and with dereferecning *c1 we are pointing there to increment it right"
+**Context:** Concept 2 (`Entry` API) logic verification.
+**Output Summary:** AI enthusiastically confirmed the learner's "Aha!" moment. Clarified that `c1` is the address pointer, and `*c1` follows the pointer to the main data inside the HashMap to increment it.
+**Outcome / Next Step:** Learner should run the `cargo run` command to verify the output of their HashMap tally code.
+
+### 2026-07-03 13:44 IST — Prompt #72
+**Prompt:** "so which is the actual data here the HashMap itself? The reference here is word_counts is it ?"
+**Context:** Concept 2 (`Entry` API) clarification. Learner is confused about who owns the data vs who is the reference.
+**Output Summary:** AI clarified the Ownership vs Reference distinction. Explained that `word_counts` is the HashMap (the actual house/owner of the data), while `c1` is the reference (the piece of paper pointing to a specific room inside the house).
+**Outcome / Next Step:** Learner will run `cargo run` to see the final HashMap output now that the mental model is clear.
+
+### 2026-07-03 17:28 IST — Prompt #73
+**Prompt:** Learner confirmed the explanation and successfully ran the `Entry` API code.
+**Context:** Concept 2 (`Entry` API) complete. The HashMap properly grouped and tallied "apple": 2 and "banana": 1.
+**Output Summary:** AI praised the successful execution. Introduced Concept #3: Iterators. Explained how to take a real string of text, split it into words using `.split_whitespace()`, and combine it with the `Entry` API to count words dynamically in a loop.
+**Outcome / Next Step:** Learner will implement a `for` loop to dynamically count words in a sentence.
+
 <!-- New entries appended below -->

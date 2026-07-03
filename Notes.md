@@ -183,3 +183,38 @@ let taskList = JSON.parse(fileContent);
 
 - `Concept 6` => The #[must_use] Attribute (No Silent Failures)
 - IN javascript if a function return something and we ignore it . javascript don't care but IN rust std::fs::write returns a Result because writing to a disk can fail . Rust tags the Result enum with a special attribute call `#[must_use]`. If we call a function that returns a Result and we don't check it using (match, .unwrap() or ?) the compiler warns us that we are ingnoring failures.
+
+
+<h1>Day 6</h1>
+
+- `Iterators & Closures` => `.map , .filter , .collect` -> something like .map() and .filter() from javascript
+- `Hashmaps` - Store key value pairs natively 
+
+- `Concept 1` => `Hashmaps [Key Value storage]` => It maps a key [the word] to a value[the count] . Just like Vec, it is stored on the heap and can grow  or shrink dynamically
+- HashMaps aren't used in every single Rust file unlike Vec or String so they aren't loaded into scope by default. We have to bring them in from the standard library std.
+
+- `use std::collections::HashMap`
+
+- `Concept 2` => `The Entry API`[Counting things idiomaticaly] => If we have thousands of words already inthe hashmap and want to add more we can't keep on checking everytime using match if the key exists , extracts the value and add it and all those things. 
+- In Rust  we have Entry API = It is the absolute most idiomatic way to count things in Rust
+```rust
+let count = words_counts.entry(String::from("apple")).or_insert(0);
+```
+
+- `References[&] and Dereferencing(*)` => Suppose you buy a physical house. The house is the actual data in our computers memory like number 1 sitting in our HashMap bucket
+- If we want to hire a painter to pain the house , we don't physically pick up our house and give it to painter instead we write down house address on a piece of paper and give it to them .
+- The House => The actual data in memory
+- The Address => A reference (also known as pointer) . It is just a  piece of paper that says . The house is located at memory bucket #2483788990
+- In Rust when we use Entry API , Rust does not give us the actual number 0 back . If it did, we would jsut have a copy of the number 0 in hand and changing it wouldn't affect the hashmap at all.
+```rust
+let count = word_counts.entry(String::from("apple")).or_insert(0);
+```
+- Instead Rust gives us the Address &mut i32. It gives us a piece of paper that says `The count for apple is located at bucket #980909090 and you have the permission to change it mutable`.
+
+- `Dereferrecning(*)` => If we have a piece of paper with an address on it we can't just slap paint onto the piece of paper . We have to physically drive to the address to paint the actual house. That is what the dereference * operator does 
+```rust
+*count += 1;
+```
+- So we are telling rust that don't try to add 1 to the piece of paper . Follow the address (*) to the actual bucket in memory and add 1 to the actual number inside it.
+- `& ` => Gives me the address to the data
+- `*`  => Follow this address so I can touch the actual data
