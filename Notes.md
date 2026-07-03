@@ -218,3 +218,10 @@ let count = word_counts.entry(String::from("apple")).or_insert(0);
 - So we are telling rust that don't try to add 1 to the piece of paper . Follow the address (*) to the actual bucket in memory and add 1 to the actual number inside it.
 - `& ` => Gives me the address to the data
 - `*`  => Follow this address so I can touch the actual data
+
+- `Concept 3` => `Iterators` [.split_whitespace()] => In javascript when we have a string and we want to turn it into an array of words we do this 
+```javascript
+let words = "apple apple banana".splite(" ");
+```
+- In Rust strings are much more complex because they handle UTF-8 encoding[emojis, chinese characters etc]. But rust gives us a super powerful tool for this called an iterator
+- So instead of creating a giant new array[Vector] in memory to hold all the words an iterator just points to the string and hands us one word at a time. It is blazing fast and uses almost zero memory. To get an iterator of words we use .split_whitespace()

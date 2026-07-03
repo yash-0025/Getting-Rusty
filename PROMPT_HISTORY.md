@@ -464,4 +464,10 @@
 **Output Summary:** AI praised the successful execution. Introduced Concept #3: Iterators. Explained how to take a real string of text, split it into words using `.split_whitespace()`, and combine it with the `Entry` API to count words dynamically in a loop.
 **Outcome / Next Step:** Learner will implement a `for` loop to dynamically count words in a sentence.
 
+### 2026-07-04 00:55 IST — Prompt #74
+**Prompt:** Learner successfully ran the text analyzer loop and pasted the output.
+**Context:** Concept 3 (Iterators combined with the Entry API) complete. The code correctly counted word frequencies in a sentence.
+**Output Summary:** AI praised the achievement. Pointed out a crucial detail: the learner passed `word` directly into the HashMap instead of using `String::from()`. This naturally introduced Concept #4: `String` vs `&str` (String Slices), explaining why iterators yield references rather than copying memory.
+**Outcome / Next Step:** Learner will learn the difference between `String` and `&str`.
+
 <!-- New entries appended below -->
