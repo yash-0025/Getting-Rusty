@@ -494,4 +494,10 @@
 **Output Summary:** AI celebrated the milestone. Introduced the next roadmap objective (Average Word Length and Sentence Count) and Concept #7: Iterator Adapters (`.map()`, `.filter()`, `.count()`, `.sum()`). Explained how to chain these adapters to perform complex calculations on iterators in a single line of code.
 **Outcome / Next Step:** Learner will implement these iterator chains to calculate word count, character count, and average word length.
 
+### 2026-07-04 18:32 IST — Prompt #79
+**Prompt:** Learner implemented `.count()`, `.map()`, and `.sum::<usize>()` successfully and pasted the updated analytics report.
+**Context:** Concept 7 (Iterator Adapters part 1) complete. The CLI now calculates total words, total characters, and average word length.
+**Output Summary:** AI praised the comprehensive output. Noted that the roadmap still requires "Sentence Count", which introduces a problem: the periods were replaced during the cleaning phase. Introduced Concept #8: `.filter()` and accessing the raw text before it is cleaned.
+**Outcome / Next Step:** Learner will load the raw text separately and use `.chars().filter()` to calculate the sentence count.
+
 <!-- New entries appended below -->

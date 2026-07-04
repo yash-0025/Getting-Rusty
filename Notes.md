@@ -252,3 +252,18 @@ Suppose we passed a word (which is &str) into the HashMap , Rust automatically i
 - `Closures and Sorting` => IN javascript if we want to sort an array of object by specific properly we use arrow functions. In rust arrow function is called closures. Instead of (a,b) => In Rust we do like this - |a,b|.
 - `.into_iter()` => Drains the hashmap
 - `.collect()` => Gathers it into Vec
+
+
+- `Concept 6` => Iteratoros Adapters `.map(), .filter(), .sum(), .count()`
+- An iterator adapter is a method that takes an iterator and transforms it into a new iterator or consumes it to calculate a single value. 
+- Ex 1 - Counting total words instead of  a for loop we can just ask the iterator how many items it has . 
+```rust
+let total_words = text.split_whitespace().count();
+```
+- Ex 2 - Mapping and Summing - If we want the total numbers of characters across all words, we can use .map() {just like in Javascript} to turn the iterator of words into an iterator of lengths, and then sum them up.
+```rust
+// split into words
+// .map() turns every word into a number (its lenght) using a closure |word|
+// .sum::<usize()> adds all the numbers together! We have to tell it the type is usize
+let total_chars = text.split_whitespace().map(|word| word.len()).sum::<usize>();
+```

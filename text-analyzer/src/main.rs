@@ -36,6 +36,16 @@ fn main() {
     let mut count_vec: Vec<(&str, i32)> = word_counts.into_iter().collect();
     count_vec.sort_by(|a,b| b.1.cmp(&a.1));
 
+    let total_words = text.split_whitespace().count();
+
+    let total_chars = text.split_whitespace().map(|word| word.len()).sum::<usize>();
+
+    let average_length = total_chars / total_words;
+
+    println!("Total words : {}", total_words);
+    println!("Total Characters : {}", total_chars);
+    println!("Average word length : {}", average_length);
+
     // println!("{:#?}", word_counts);
     // Printing the top 5 words only
     println!("----TOP 5 WORDS---");
