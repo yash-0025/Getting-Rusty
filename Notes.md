@@ -254,7 +254,7 @@ Suppose we passed a word (which is &str) into the HashMap , Rust automatically i
 - `.collect()` => Gathers it into Vec
 
 
-- `Concept 6` => Iteratoros Adapters `.map(), .filter(), .sum(), .count()`
+- `Concept 6` => Iterators Adapters `.map(), .filter(), .sum(), .count()`
 - An iterator adapter is a method that takes an iterator and transforms it into a new iterator or consumes it to calculate a single value. 
 - Ex 1 - Counting total words instead of  a for loop we can just ask the iterator how many items it has . 
 ```rust
@@ -267,3 +267,18 @@ let total_words = text.split_whitespace().count();
 // .sum::<usize()> adds all the numbers together! We have to tell it the type is usize
 let total_chars = text.split_whitespace().map(|word| word.len()).sum::<usize>();
 ```
+
+-`Concept 7` => Sentence Counting `.filter()` => So we have to count how many sentences are in the text. How can we do this ? 
+- We know a sentence ends with a period .
+- So we can split the entire text by  
+- Just like javascript .filter(), it iterates over a list and only keeps item that match a certain condition returning true or false from a closure
+```rust
+// Loading the raw, uncleaned text
+let raw_text = std::fs::read_to_string("book.txt").expect("Failed to read book raw");
+
+// Turn the string into iterator of individual characters (.chars())
+// Filter it Keep the character only if it is a period, exclamation or question mark
+// count how many passed the filter
+let sentence_count = raw_text.chars().filter(|c| *c == '.' || *c == '!' || *c == '?').count();
+```
+- Because .chars() gives us a reference to the character we use *c to dereference it so we can compare it to actual characters like '.' '!'

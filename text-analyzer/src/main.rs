@@ -24,7 +24,16 @@ fn main() {
     // *c3 += 1;
 
     // let text = String::from("rust is fast and rust is safe");
-    let text = std::fs::read_to_string("book.txt").expect("Failed to read book.txt").to_lowercase().replace(",", "").replace(".", "");
+    // let text = std::fs::read_to_string("book.txt").expect("Failed to read book.txt").to_lowercase().replace(",", "").replace(".", "");
+
+
+    // REading the file and keeping it raw
+    let raw_text = std::fs::read_to_string("book.txt").expect("Failed to read raw");
+
+    let sentence_count = raw_text.chars().filter(|c| *c == '.' || *c == '!' || *c == '?').count();
+
+
+    let text = raw_text.to_lowercase().replace(", ", " ").replace(".", "").replace("!", "").replace("?", "");
 
     for word in text.split_whitespace() {
         // println!("I found a  word: {}", word);
@@ -42,10 +51,16 @@ fn main() {
 
     let average_length = total_chars / total_words;
 
+    // So this is the reading formula for calculate the reading level
+    // and it is called theautomated reading test
+    let reading_level = (4.71 * (total_chars as f64 / total_words as f64)) + (0.5 * (total_words as f64 / sentence_count as f64)) - 21.43;
+
     println!("Total words : {}", total_words);
     println!("Total Characters : {}", total_chars);
     println!("Average word length : {}", average_length);
 
+    println!("Sentence Count : {}", sentence_count);
+    println!("Reading level : {}", reading_level);
     // println!("{:#?}", word_counts);
     // Printing the top 5 words only
     println!("----TOP 5 WORDS---");

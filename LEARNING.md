@@ -153,6 +153,22 @@
 - `E0282: type annotations needed`. Learned that `from_str` needs to know what type it's parsing into via the variable assignment.
 - Unused `Result` warning. Learned to add `?` to `fs::write` to handle file writing errors.
 
+### Day 6 — Build: Text Analytics Engine — 2026-07-04
+**Status:** `[x]` done
+**What I actually understood:**
+- HashMaps are powerful key-value stores.
+- The `Entry` API (`.entry().or_insert()`) makes updating HashMaps much cleaner than checking if a key exists first.
+- Pointer/References (`&` and `*`): `&` is a reference (pointer) to data, and `*` dereferences it so we can read or write the actual value.
+- `String` vs `&str`: `String` owns data on the heap, `&str` just points to a slice of a string. This saves huge amounts of memory.
+- Iterator Adapters (`.map()`, `.filter()`, `.count()`, `.sum()`) allow us to process streams of data efficiently without writing manual loops.
+- Closures (`|x|`) are like arrow functions in JS, allowing inline logic for iterators.
+**What's still fuzzy / questions I had:**
+- The concept of ownership feels slightly complex when sorting vectors of references, but chaining iterator methods is feeling much more natural.
+**Code I wrote / project progress:**
+- Created `text-analyzer` project that calculates word frequency, sentence counts, average length, and reading level using Iterators.
+**Mistakes the compiler caught that taught me something:**
+- Missed parentheses when defining a tuple inside a Vector (`Vec<&str, i32>` vs `Vec<(&str, i32)>`), causing completely unrelated allocator errors. Learning to read the `help:` line!
+
 <!-- New day entries get appended below this line. Ask the AI to draft an entry at the end of each session; approve or edit before it's saved. -->
 
 ---

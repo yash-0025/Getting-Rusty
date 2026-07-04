@@ -70,10 +70,10 @@ Each day has:
 - [x] **Deliverable:** Task tracker that persists to `tasks.json`, with typed errors for file-not-found, invalid JSON, etc.
 
 ### Day 6 — Build: Text Analytics Engine
-- [ ] **You build:** A CLI that reads a text file (or stdin) and produces: word frequency counts, most/least common words, average word length, sentence count, reading-level estimate. Processes large files efficiently.
-- [ ] **Concepts:** **Iterators**: the `Iterator` trait, laziness — nothing runs until you call a consuming method (`.collect()`, `.sum()`, `.for_each()`) · **Closures**: `Fn`, `FnMut`, `FnOnce` — capture-by-reference vs capture-by-value vs consuming captures · Chaining: `.map()`, `.filter()`, `.fold()`, `.zip()`, `.enumerate()`, `.flat_map()`, `.take()`, `.skip()`, `.chain()` · **Zero-cost abstraction**: compare iterator chain vs hand-rolled loop in `--release` mode · `collect::<Vec<_>>()`, turbofish syntax · `HashMap` entry API (`.entry().or_insert()`) · `BTreeMap` for sorted output vs `HashMap` for speed
-- [ ] **Anti-pattern → Pattern:** Index-based `for i in 0..v.len() { v[i] }` loops (bounds-checked, easy to get wrong) → iterator chains (often faster, definitely safer, definitely more idiomatic)
-- [ ] **Deliverable:** Working text analyzer. Benchmark iterator vs loop version with `std::time::Instant`.
+- [x] **You build:** A CLI that reads a text file (or stdin) and produces: word frequency counts, most/least common words, average word length, sentence count, reading-level estimate. Processes large files efficiently.
+- [x] **Concepts:** **Iterators**: the `Iterator` trait, laziness — nothing runs until you call a consuming method (`.collect()`, `.sum()`, `.for_each()`) · **Closures**: `Fn`, `FnMut`, `FnOnce` — capture-by-reference vs capture-by-value vs consuming captures · Chaining: `.map()`, `.filter()`, `.fold()`, `.zip()`, `.enumerate()`, `.flat_map()`, `.take()`, `.skip()`, `.chain()` · **Zero-cost abstraction**: compare iterator chain vs hand-rolled loop in `--release` mode · `collect::<Vec<_>>()`, turbofish syntax · `HashMap` entry API (`.entry().or_insert()`) · `BTreeMap` for sorted output vs `HashMap` for speed
+- [x] **Anti-pattern → Pattern:** Index-based `for i in 0..v.len() { v[i] }` loops (bounds-checked, easy to get wrong) → iterator chains (often faster, definitely safer, definitely more idiomatic)
+- [x] **Deliverable:** Working text analyzer. Benchmark iterator vs loop version with `std::time::Instant`.
 
 ### Day 7 — 🏁 Week 1 Capstone: Polish & Ship the CLI Task Manager
 - [ ] **You build:** Take Days 4-5's task tracker, add `clap` for proper CLI parsing (subcommands: add, list, complete, delete, stats), refactor into modules, add unit tests, make it portfolio-ready.

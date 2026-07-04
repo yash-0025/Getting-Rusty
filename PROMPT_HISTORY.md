@@ -500,4 +500,16 @@
 **Output Summary:** AI praised the comprehensive output. Noted that the roadmap still requires "Sentence Count", which introduces a problem: the periods were replaced during the cleaning phase. Introduced Concept #8: `.filter()` and accessing the raw text before it is cleaned.
 **Outcome / Next Step:** Learner will load the raw text separately and use `.chars().filter()` to calculate the sentence count.
 
+### 2026-07-04 19:21 IST — Prompt #80
+**Prompt:** Learner implemented `.filter()` for sentence counting and the reading-level math, then pasted the perfect final output.
+**Context:** Day 6 curriculum is entirely complete. The Text Analytics CLI fulfills all requirements.
+**Output Summary:** AI congratulated the learner on completing a very concept-heavy day (Iterators, Closures, HashMaps, References). Asked for permission to officially mark Day 6 as complete in the tracking files (`ROADMAP.md`, `LEARNING.md`, `LOGS.md`).
+**Outcome / Next Step:** Learner will grant permission to wrap up Day 6.
+
+### 2026-07-04 19:22 IST — Prompt #81
+**Prompt:** Learner granted permission to mark Day 6 as complete.
+**Context:** Day 6 is finished.
+**Output Summary:** AI replaced the content in `ROADMAP.md` (check off tasks), `LEARNING.md` (add Day 6 journal entry), and `LOGS.md` (log the diffs). Transitioning to Day 7.
+**Outcome / Next Step:** Learner will start Day 7 (Week 1 Capstone: Polish & Ship the CLI Task Manager).
+
 <!-- New entries appended below -->
