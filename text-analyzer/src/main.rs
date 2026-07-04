@@ -27,10 +27,20 @@ fn main() {
     let text = std::fs::read_to_string("book.txt").expect("Failed to read book.txt").to_lowercase().replace(",", "").replace(".", "");
 
     for word in text.split_whitespace() {
-        println!("I found a  word: {}", word);
+        // println!("I found a  word: {}", word);
         let count = word_counts.entry(word).or_insert(0);
         *count += 1;
     }
 
-    println!("{:#?}", word_counts);
+    // .1 is for accessig the second item in the tuple for first item we use .0
+    let mut count_vec: Vec<(&str, i32)> = word_counts.into_iter().collect();
+    count_vec.sort_by(|a,b| b.1.cmp(&a.1));
+
+    // println!("{:#?}", word_counts);
+    // Printing the top 5 words only
+    println!("----TOP 5 WORDS---");
+    for i in 0..5 {
+        println!("{}: {} times", count_vec[i].0, count_vec[i].1);
+    }
+
 }

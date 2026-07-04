@@ -247,3 +247,8 @@ Suppose we passed a word (which is &str) into the HashMap , Rust automatically i
 - `.contains()` => checks if the string contains a substring
 - `.replace()` => replaces a substring with another substring
 - `.split()` => splits the string into an iterator of substrings
+
+
+- `Closures and Sorting` => IN javascript if we want to sort an array of object by specific properly we use arrow functions. In rust arrow function is called closures. Instead of (a,b) => In Rust we do like this - |a,b|.
+- `.into_iter()` => Drains the hashmap
+- `.collect()` => Gathers it into Vec

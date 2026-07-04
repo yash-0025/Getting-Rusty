@@ -482,4 +482,16 @@
 **Output Summary:** AI praised the clean data. Introduced the next step of the text analytics engine: finding the most common word. Explained that HashMaps are unsorted by design, and introduced Concept #6: Closures and Sorting (converting the HashMap into a `Vec` and sorting it).
 **Outcome / Next Step:** Learner will implement the sorting logic to find the most common words.
 
+### 2026-07-04 13:45 IST — Prompt #77
+**Prompt:** Learner implemented the sorting logic but encountered a massive wall of scary compiler errors (`trait bound i32: Allocator`, `unstable library feature`).
+**Context:** Concept 6 (Sorting). Learner made a tiny syntax error when defining the Vector's tuple type.
+**Output Summary:** AI pointed out that the learner missed the parentheses around the tuple type (`Vec<&str, i32>` instead of `Vec<(&str, i32)>`). Showed how the Rust compiler's `help:` line actually diagnosed the exact issue perfectly.
+**Outcome / Next Step:** Learner will fix the parentheses and run the code again to see the top 5 words.
+
+### 2026-07-04 14:50 IST — Prompt #78
+**Prompt:** Learner fixed the syntax error and successfully outputted the top 5 most common words in the text.
+**Context:** Concept 6 (Sorting) complete. The Text Analytics Engine now produces a sorted top-5 report.
+**Output Summary:** AI celebrated the milestone. Introduced the next roadmap objective (Average Word Length and Sentence Count) and Concept #7: Iterator Adapters (`.map()`, `.filter()`, `.count()`, `.sum()`). Explained how to chain these adapters to perform complex calculations on iterators in a single line of code.
+**Outcome / Next Step:** Learner will implement these iterator chains to calculate word count, character count, and average word length.
+
 <!-- New entries appended below -->
