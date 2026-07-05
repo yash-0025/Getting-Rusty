@@ -64,7 +64,7 @@ impl Task {
 fn main() -> Result<(), std::io::Error> {
 
     let cli = Cli::parse();
-    println!("Parsed CLI : {:#?}", cli);
+    // println!("Parsed CLI : {:#?}", cli);
     
     // let file_result = std::fs::read_to_string("LOGS.md");
    
@@ -77,13 +77,33 @@ fn main() -> Result<(), std::io::Error> {
     //  let mut task_list: Vec<Task> = Vec::new();
 
     // 1. We will try to read file but using match instead of ? because if it fails we just want an empty vec , not a crash!
-    // let mut task_list: Vec<Task> = match std::fs::read_to_string("tasks.json") {
-    //     // If the file exist we parse the string into a Vec<Task>
-    //     // .unwrap_or_else means =>If the JSON is corrupted just give me an empty Vec instead of panicking
-    //     Ok(json_content) => serde_json::from_str(&json_content).unwrap_or_else(|_| Vec::new()),
+    let mut task_list: Vec<Task> = match std::fs::read_to_string("tasks.json") {
+        // If the file exist we parse the string into a Vec<Task>
+        // .unwrap_or_else means =>If the JSON is corrupted just give me an empty Vec instead of panicking
+        Ok(json_content) => serde_json::from_str(&json_content).unwrap_or_else(|_| Vec::new()),
     //     // If the file doesn't exist yet , just start with an empty Vec
-    //     Err(_) => Vec::new(),
-    // };
+        Err(_) => Vec::new(),
+    };
+
+    match cli.command {
+        Commands::Add {name, description} => {
+            let new_task = Task::new(name, description);
+            task_list.push(new_task);
+            println!("✅ Task Added ");
+        }
+        Commands::List => {
+            println!("---ALL TASKS---");
+            for task in &task_list {
+                let status_string = match task.status{
+                    TaskStatus::Todo => "🔴 TO-DO",
+                    TaskStatus::InProgress => "🔵 IN PROGRESS",
+                    TaskStatus::Done => "✅ DONE",
+                };
+
+                println!("[{}] {} - {}", status_string, task.name, task.description);
+            }
+        }
+    }
 
     // let task1 = Task::new(String::from("Learning Vectors"), String::from("Understanding Vec in Rust"));
     // let mut task2 = Task::new(String::from("Lean match"), String::from("Use match with Enum"));
@@ -106,8 +126,8 @@ fn main() -> Result<(), std::io::Error> {
     //     println!("[{}] {} - {}", status_string, task.name, task.description);
     // }
 
-    // let json_string = serde_json::to_string_pretty(&task_list)?;
-    // std::fs::write("tasks.json", json_string)?;
+    let json_string = serde_json::to_string_pretty(&task_list)?;
+    std::fs::write("tasks.json", json_string)?;
 
     // Return Ok at the very end to signal the program finished succesfully
     Ok(())

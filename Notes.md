@@ -309,3 +309,4 @@ struct Cli {
 - `///` Clap reads those three slash and turns them into the descriptions in the --help menu
 
 
+- `Concept 2 - Writing CLI commands to logic`

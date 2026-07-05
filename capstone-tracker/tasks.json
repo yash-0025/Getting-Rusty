@@ -8,5 +8,10 @@
     "name": "Lean match",
     "description": "Use match with Enum",
     "status": "InProgress"
+  },
+  {
+    "name": "Buy Groceried",
+    "description": "Milk, Eggs, Bread",
+    "status": "Todo"
   }
 ]

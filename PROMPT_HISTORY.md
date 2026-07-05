@@ -524,4 +524,10 @@
 **Output Summary:** AI celebrated the working CLI parser. Taught how to connect the parsed CLI enum to the actual application logic using a `match cli.command` block. Assigned the learner to uncomment the file loading/saving logic and insert the `match` block to make the app fully functional from the terminal.
 **Outcome / Next Step:** Learner will implement the `match` block, tying the CLI inputs to the task list logic, and test adding/listing tasks from the terminal.
 
+### 2026-07-05 20:53 IST — Prompt #84
+**Prompt:** Learner completed the `match` block and successfully added and listed tasks via the CLI, with full JSON persistence.
+**Context:** Day 7 (Concept 2: Wiring CLI). The Capstone project is now fully functional as a single-file application.
+**Output Summary:** AI praised the achievement of building a fully working persistent CLI app. Pointed out that `main.rs` is getting crowded (130+ lines). Introduced Day 7 Concept #3: The Module System (`mod`, `pub`, `use`). Explained how Rust modules differ from JS `module.exports`. Assigned the first refactoring step: creating `models.rs` and moving the `Task` and `TaskStatus` structures there.
+**Outcome / Next Step:** Learner will create `models.rs`, add `pub` visibility to the structs and their fields, and import them into `main.rs`.
+
 <!-- New entries appended below -->
