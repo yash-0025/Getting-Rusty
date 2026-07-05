@@ -317,3 +317,11 @@ struct Cli {
 - 2. Make the specific things inside the file public using the pub keyword everthing in Rust is private by default
 - Create a separate file name models.rs inside src and add enums and structs in there 
 - Import that file calling `mod models`  so that rust will look for models.rs file .
+
+- `Concept 4` => `Extractin Logic (Storage)` => Creating a storage module to handle all database / file operations 
+- `crate` => We use crate to refer to the root of our project , then models module 
+```rust
+// Here crate means root of the poject then look for models file and then module which we want to use from the models file
+use crate::models::Task;
+```
+

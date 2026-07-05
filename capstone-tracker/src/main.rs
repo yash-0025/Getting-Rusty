@@ -3,7 +3,9 @@ use serde::{Serialize, Deserialize};
 use clap::{Parser, Subcommand};
 
 mod models; // This tells rust to look up for a models.rs file
+mod storage;
 use models::{Task, TaskStatus};// This brings them into scope so we don't have to type models::Task
+
 
 
 // The struct which represents the entire CLI application
@@ -36,24 +38,7 @@ fn main() -> Result<(), std::io::Error> {
     let cli = Cli::parse();
     // println!("Parsed CLI : {:#?}", cli);
     
-    // let file_result = std::fs::read_to_string("LOGS.md");
-   
-
-    // match file_result {
-    //     Ok(content) => println!("File contents: {}", content),
-    //     Err(error) => println!("Oops, failed to read file: {}", error),
-    // }
-
-    //  let mut task_list: Vec<Task> = Vec::new();
-
-    // 1. We will try to read file but using match instead of ? because if it fails we just want an empty vec , not a crash!
-    let mut task_list: Vec<Task> = match std::fs::read_to_string("tasks.json") {
-        // If the file exist we parse the string into a Vec<Task>
-        // .unwrap_or_else means =>If the JSON is corrupted just give me an empty Vec instead of panicking
-        Ok(json_content) => serde_json::from_str(&json_content).unwrap_or_else(|_| Vec::new()),
-    //     // If the file doesn't exist yet , just start with an empty Vec
-        Err(_) => Vec::new(),
-    };
+    let mut task_list = storage::load_tasks();
 
     match cli.command {
         Commands::Add {name, description} => {
@@ -75,30 +60,7 @@ fn main() -> Result<(), std::io::Error> {
         }
     }
 
-    // let task1 = Task::new(String::from("Learning Vectors"), String::from("Understanding Vec in Rust"));
-    // let mut task2 = Task::new(String::from("Lean match"), String::from("Use match with Enum"));
-
-    // my_task.mark_done();
-    // task2.status = TaskStatus::InProgress;
-
-    // println!("Task: {}", my_task.name);
-    // println!("{:#?}", my_task);
-    // task_list.push(task1);
-    // task_list.push(task2);
-
-    // println!("---- LOADED TASKS ----");
-    // for task in &task_list {
-    //     let status_string = match task.status {
-    //      TaskStatus::Todo => "🔴 To-Do",
-    //      TaskStatus::InProgress => "🔵 In Progress",
-    //      TaskStatus::Done => "✅ Done",
-    //     };
-    //     println!("[{}] {} - {}", status_string, task.name, task.description);
-    // }
-
-    let json_string = serde_json::to_string_pretty(&task_list)?;
-    std::fs::write("tasks.json", json_string)?;
-
+    storage::save_tasks(&task_list)?;
     // Return Ok at the very end to signal the program finished succesfully
     Ok(())
     

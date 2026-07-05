@@ -536,4 +536,10 @@
 **Output Summary:** AI pointed out that the code compiled perfectly (which means the module refactor was flawless!), but explained *why* the tasks didn't show up: the learner ran `cargo run` from inside the `src/` directory, so Rust looked for `"tasks.json"` inside `src/` instead of the project root. Assigned the next refactoring step: creating `storage.rs` with `pub fn load_tasks()` and `pub fn save_tasks()`.
 **Outcome / Next Step:** Learner will step back to the root directory, create `storage.rs`, move the file I/O logic there, and update `main.rs`.
 
+### 2026-07-05 23:25 IST — Prompt #86
+**Prompt:** Learner implemented `storage.rs` and ran `cargo run -- list` from the correct directory, successfully printing the tasks.
+**Context:** Day 7 (Concept 4: Storage Refactor). The codebase is now successfully modularized into `models.rs`, `storage.rs`, and `main.rs`.
+**Output Summary:** AI congratulated the learner on the significantly cleaner `main.rs`. Introduced Day 7 Concept #5: Unit Testing (`#[cfg(test)]`, `#[test]`, and `assert_eq!`). Explained that in Rust, unit tests live in the exact same file as the source code they are testing. Assigned the user to add a `tests` module to the bottom of `models.rs` to test the `Task` logic, and then run `cargo test`.
+**Outcome / Next Step:** Learner will write their first Rust unit tests in `models.rs` and run `cargo test`.
+
 <!-- New entries appended below -->
