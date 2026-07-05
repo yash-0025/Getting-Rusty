@@ -512,4 +512,16 @@
 **Output Summary:** AI replaced the content in `ROADMAP.md` (check off tasks), `LEARNING.md` (add Day 6 journal entry), and `LOGS.md` (log the diffs). Transitioning to Day 7.
 **Outcome / Next Step:** Learner will start Day 7 (Week 1 Capstone: Polish & Ship the CLI Task Manager).
 
+### 2026-07-05 16:15 IST — Prompt #82
+**Prompt:** Learner copied the project, installed `clap`, and ran it successfully.
+**Context:** Day 7 setup complete. The project now has `clap` as a dependency.
+**Output Summary:** AI verified the setup. Introduced Day 7 Concept #1: `clap` and the `Parser` derive macro. Showed how to define a `Cli` struct and a `Commands` enum to represent terminal commands like `add` and `list`.
+**Outcome / Next Step:** Learner will implement the `clap` structs/enums at the top of `main.rs` and update `main()` to parse and print the arguments.
+
+### 2026-07-05 18:42 IST — Prompt #83
+**Prompt:** Learner successfully defined the `clap` structs, ran the `--help` command, and successfully parsed `add` and `list` terminal arguments.
+**Context:** Day 7 (Concept 1: Clap). The CLI parser is successfully parsing user inputs into a structured enum.
+**Output Summary:** AI celebrated the working CLI parser. Taught how to connect the parsed CLI enum to the actual application logic using a `match cli.command` block. Assigned the learner to uncomment the file loading/saving logic and insert the `match` block to make the app fully functional from the terminal.
+**Outcome / Next Step:** Learner will implement the `match` block, tying the CLI inputs to the task list logic, and test adding/listing tasks from the terminal.
+
 <!-- New entries appended below -->

@@ -282,3 +282,30 @@ let raw_text = std::fs::read_to_string("book.txt").expect("Failed to read book r
 let sentence_count = raw_text.chars().filter(|c| *c == '.' || *c == '!' || *c == '?').count();
 ```
 - Because .chars() gives us a reference to the character we use *c to dereference it so we can compare it to actual characters like '.' '!'
+
+
+<h1>Day 7</h1>
+
+- Installing Clap => 
+```bash
+cargo add clap --features derive
+```
+- `Concept 1 = CLI Parsing with clap`
+- When we use GIT , we type comands like git status or git commit -m "msg". right now our task tracker runs from top to bottom we want to do this - 
+- cargo run --add "Buy Milk" "Go to the store"
+- cargo run --list :: Note- The -- tells cargo to pass the rest of the arguments to our program instead of  cargo itslef
+- To do all this we use `clap crate`. Clap provides feature called derive , which lets us define our terminal commands purely by writing rust structs and enums. It automatically handles all the parsing, error messages and even generates a --help menu! . 
+```rust
+use clap::{Parser, Subcommand}
+
+#[derive(Parser, Debug)]
+#[command(name = "Task Tracker")]
+#[command(about = "A simple CLItask manager", long_about=None)]
+struct Cli {
+    #[command(subcommand)]
+    command: Commands,
+}
+```
+- `///` Clap reads those three slash and turns them into the descriptions in the --help menu
+
+
