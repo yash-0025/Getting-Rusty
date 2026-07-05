@@ -530,4 +530,10 @@
 **Output Summary:** AI praised the achievement of building a fully working persistent CLI app. Pointed out that `main.rs` is getting crowded (130+ lines). Introduced Day 7 Concept #3: The Module System (`mod`, `pub`, `use`). Explained how Rust modules differ from JS `module.exports`. Assigned the first refactoring step: creating `models.rs` and moving the `Task` and `TaskStatus` structures there.
 **Outcome / Next Step:** Learner will create `models.rs`, add `pub` visibility to the structs and their fields, and import them into `main.rs`.
 
+### 2026-07-05 23:12 IST — Prompt #85
+**Prompt:** Learner created `models.rs`, added the `pub` visibility keywords, and successfully ran the code, but no tasks printed.
+**Context:** Day 7 (Concept 3: Modules). The `models.rs` refactor was successful, but the execution yielded unexpected empty results.
+**Output Summary:** AI pointed out that the code compiled perfectly (which means the module refactor was flawless!), but explained *why* the tasks didn't show up: the learner ran `cargo run` from inside the `src/` directory, so Rust looked for `"tasks.json"` inside `src/` instead of the project root. Assigned the next refactoring step: creating `storage.rs` with `pub fn load_tasks()` and `pub fn save_tasks()`.
+**Outcome / Next Step:** Learner will step back to the root directory, create `storage.rs`, move the file I/O logic there, and update `main.rs`.
+
 <!-- New entries appended below -->

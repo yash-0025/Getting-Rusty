@@ -310,3 +310,10 @@ struct Cli {
 
 
 - `Concept 2 - Writing CLI commands to logic`
+
+- `Concept 3` - Modules => In javascript we create new file and write module.exports = Task Then in index.js we write const Task  = require("./models").
+- In Rust it works slightly different . A new file is automatically considered a module but we have to :
+- 1. tell Rust the file exists using the mod keyword in main.rs
+- 2. Make the specific things inside the file public using the pub keyword everthing in Rust is private by default
+- Create a separate file name models.rs inside src and add enums and structs in there 
+- Import that file calling `mod models`  so that rust will look for models.rs file .

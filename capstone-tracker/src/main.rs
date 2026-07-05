@@ -2,6 +2,9 @@
 use serde::{Serialize, Deserialize};
 use clap::{Parser, Subcommand};
 
+mod models; // This tells rust to look up for a models.rs file
+use models::{Task, TaskStatus};// This brings them into scope so we don't have to type models::Task
+
 
 // The struct which represents the entire CLI application
 #[derive(Parser, Debug)]
@@ -23,39 +26,6 @@ enum Commands {
     },
     /// List all tasks
     List,
-}
-
-
-#[derive(Debug, Serialize, Deserialize)]
-enum TaskStatus {
-    Todo,
-    InProgress,
-    Done,
-}
-
-
-#[derive(Debug, Serialize, Deserialize)]
-struct Task {
-    name: String,
-    description: String,
-    status: TaskStatus,
-}
-
-
-impl Task {
-    // A constructor funcion . 'Self' means task
-    fn new (name: String, description: String) -> Self {
-        Self {
-            name,
-            description,
-            status: TaskStatus::Todo,
-        }
-    }
-
-    fn mark_done(&mut self) {
-        // self.is_done = true;
-        self.status = TaskStatus::Done;
-    }
 }
 
 
