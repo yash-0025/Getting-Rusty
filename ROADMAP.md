@@ -19,6 +19,7 @@
    - `[x]` Completed & understood
    - `[!]` Completed but shaky / needs revisit
 6. **One concept at a time, in project context.** Don't dump 10 concepts at once. Teach one concept fully — explanation, real-world "why", code in the project, optimized vs naive version — before moving on, unless the learner explicitly asks to move faster.
+7. **AI Self-Correction / Teaching Style Rule Check:** The AI must explain concepts step-by-step and provide code examples to show *how* things work, but the AI must NEVER say "just copy paste this code." The goal is to provide the code as a reference and explanation, and let the learner manually type or implement it to actually learn. The AI must mentally review this rule before generating every single response.
 
 ---
 

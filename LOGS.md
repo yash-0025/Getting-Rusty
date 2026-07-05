@@ -33,6 +33,36 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-05 23:35 IST — [ROADMAP.md] — Modified Rule 7</summary>
+
+- **Files:** ROADMAP.md
+- **Change type:** Modified
+- **Reason:** Learner clarified the exact teaching behavior required: explain step-by-step and show the code to explain *how* it works, but never say "just copy paste this" so they can type it and learn it.
+
+```diff
+  # In ROADMAP.md
+- 7. **AI Self-Correction / Rule Check:** The AI must mentally review these governance and teaching style rules before generating every single response to ensure it doesn't fall into "copy-paste tutorial mode" or break established constraints.
++ 7. **AI Self-Correction / Teaching Style Rule Check:** The AI must explain concepts step-by-step and provide code examples to show *how* things work, but the AI must NEVER say "just copy paste this code." The goal is to provide the code as a reference and explanation, and let the learner manually type or implement it to actually learn. The AI must mentally review this rule before generating every single response.
+```
+
+</details>
+
+<details>
+<summary>2026-07-05 23:32 IST — [ROADMAP.md] — Added Rule 7</summary>
+
+- **Files:** ROADMAP.md
+- **Change type:** Modified
+- **Reason:** Learner explicitly requested a rule to force the AI to remember the teaching style rules before prompting, because the AI slipped into "copy-paste tutorial mode" instead of teaching.
+
+```diff
+  # In ROADMAP.md
+  6. **One concept at a time, in project context.** Don't dump 10 concepts at once...
++ 7. **AI Self-Correction / Rule Check:** The AI must mentally review these governance and teaching style rules before generating every single response to ensure it doesn't fall into "copy-paste tutorial mode" or break established constraints.
+```
+
+</details>
+
+<details>
 <summary>2026-07-04 19:22 IST — [Multiple Files] — Marked Day 6 Complete</summary>
 
 - **Files:** ROADMAP.md, LEARNING.md, PROMPT_HISTORY.md

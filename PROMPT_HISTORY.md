@@ -542,4 +542,22 @@
 **Output Summary:** AI congratulated the learner on the significantly cleaner `main.rs`. Introduced Day 7 Concept #5: Unit Testing (`#[cfg(test)]`, `#[test]`, and `assert_eq!`). Explained that in Rust, unit tests live in the exact same file as the source code they are testing. Assigned the user to add a `tests` module to the bottom of `models.rs` to test the `Task` logic, and then run `cargo test`.
 **Outcome / Next Step:** Learner will write their first Rust unit tests in `models.rs` and run `cargo test`.
 
+### 2026-07-05 23:32 IST — Prompt #87
+**Prompt:** Learner called out the AI for forgetting the teaching style rules and providing a full copy-paste block instead of letting them write the code. Requested a new rule be added to force the AI to remember the rules.
+**Context:** Day 7. AI provided the exact code for the unit tests instead of guiding the user to write it.
+**Output Summary:** AI sincerely apologized for slipping into "copy-paste tutorial" mode and breaking the "Always teach before assigning" / "One small step at a time" rules. Applied the requested rule to `ROADMAP.md` (Rule 7) and logged the file diff in `LOGS.md`. Encouraged the user to continue writing the unit tests in `models.rs` and run them.
+**Outcome / Next Step:** Learner will implement the unit tests manually and run `cargo test`.
+
+### 2026-07-05 23:35 IST — Prompt #88
+**Prompt:** Learner clarified exactly how they want to be taught: explain step-by-step and show the code so they can see *how* it works, but never instruct them to "just copy paste it" because it skips the learning process. Requested Rule 7 be updated to reflect this.
+**Context:** Day 7. Adjusting the pedagogical approach based on user feedback.
+**Output Summary:** AI agreed with the clarification, understanding that typing the code out is crucial for muscle memory and learning. Updated Rule 7 in `ROADMAP.md` and logged the change in `LOGS.md`. Handed control back to the user to finish typing the tests.
+**Outcome / Next Step:** Learner will finish typing the unit tests in `models.rs` and run `cargo test`.
+
+### 2026-07-05 23:43 IST — Prompt #89
+**Prompt:** Learner successfully typed out and executed the unit tests, and they both passed.
+**Context:** Day 7 (Concept 5: Unit Testing). Tests are verifying the logic in `models.rs`.
+**Output Summary:** AI celebrated the passing tests. Introduced Concept #6: Extracting `cli.rs` and the `pub(crate)` visibility modifier. Explained how `pub(crate)` makes something public to the current project but keeps it private from the outside world. Provided step-by-step explanation and reference code for moving the CLI logic into `cli.rs`.
+**Outcome / Next Step:** Learner will create `cli.rs`, extract the `Cli` and `Commands` structs, apply `pub(crate)`, and clean up `main.rs`.
+
 <!-- New entries appended below -->

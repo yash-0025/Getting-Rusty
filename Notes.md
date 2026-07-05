@@ -325,3 +325,16 @@ struct Cli {
 use crate::models::Task;
 ```
 
+
+- `Concept 5` => `Unit testing #[test]` -> In Javascript we usually create a separate folder like __tests__ and write test('adds 1 + 2 ', () =. ...) . 
+- In rust the culture is completely differnt Unit test live in the exact same file as the code we are testing
+- So we don't have to jump between files to see  what function does . Rust achieves this using attributes the `#[...]` syntax
+- `#[cfg(test)]` => This tells the compiler "Do not include this code in the final production binary. Only compile this when i run cargo test" - This means our tests takes up zero space in prodcution
+- `#[test]` => This tells rust that the function immediately below it is a test case 
+- `assert_eq!` => We use it to check if the two values are exactly the same or not 
+- `matches!` => We have to use matches! macro because we can't easily compare Enums unless we add `#[derive(PartialEq)]` to them.
+```rust
+assert!(matches!())
+```
+
+- 
