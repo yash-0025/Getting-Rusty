@@ -337,4 +337,21 @@ use crate::models::Task;
 assert!(matches!())
 ```
 
-- 
+- `Concept 6` - `Extraction & pub(crate)`
+- There are two types of public in Rust 
+- 1. pub - This makes the struct public to our entire project and if we ever published this code to crates.io as library anyone in the world could import and use it .
+- 2. pub(crate) - This makes the struct public to every file in our current project only and strictly hides it from outside world
+
+
+- `Concept 7 - The Newtype Pattern` => Suppose we could just add `pub id:u64` to our `Task` struct. BUt what if we accidentally pass an age or a price to a function that expects a task ID? The compiler wouldn't catch it because they are both just `u64` numbers
+- In rust we solve this using Newtype Pattern. We create a tuple struct that wraps the base type turning it into it's own distinct 
+```rust
+// here is how we define NewType 
+// We did pub u64 inside the paranthesis . This allows us to access the inner number by using `.0` [like id.0]
+#[derive(Debug, Serialize, Deserialize, PartialEq)]
+pub struct TaskId(pub u64);
+```
+- We added PartialEq so we can easily compare if two ID's are equal using `==`
+- `.iter_mut()` => This lets us modify the items we are iterating over
+- `.find()` => It helps us search for the firt item that matches our condition
+- `.find()` => It returns an Option [Some if it found it , None if it didn't]

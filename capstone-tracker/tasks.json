@@ -1,17 +1,14 @@
 [
   {
-    "name": "Learning Vectors",
-    "description": "Understanding Vec in Rust",
-    "status": "Todo"
+    "id": 1,
+    "name": "Learn Newtype",
+    "description": "Wrapping u64 for type safety",
+    "status": "Done"
   },
   {
-    "name": "Lean match",
-    "description": "Use match with Enum",
-    "status": "InProgress"
-  },
-  {
-    "name": "Buy Groceried",
-    "description": "Milk, Eggs, Bread",
+    "id": 2,
+    "name": "Complete command",
+    "description": "Using iter_mut to change status",
     "status": "Todo"
   }
 ]

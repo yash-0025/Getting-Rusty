@@ -1,35 +1,13 @@
 
 use serde::{Serialize, Deserialize};
-use clap::{Parser, Subcommand};
+use clap::Parser;
 
 mod models; // This tells rust to look up for a models.rs file
 mod storage;
+mod cli;
+
 use models::{Task, TaskStatus};// This brings them into scope so we don't have to type models::Task
-
-
-
-// The struct which represents the entire CLI application
-#[derive(Parser, Debug)]
-#[command(name = "Task Manager")]
-#[command(about = "A Simple CLI Task Manager", long_about = None)]
-struct Cli {
-    #[command(subcommand)]
-    command: Commands,
-}
-
-
-// The enum represents the different commands the user can type
-#[derive(Subcommand, Debug)]
-enum Commands {
-    // Add a new task
-    Add {
-        name: String,
-        description: String,
-    },
-    /// List all tasks
-    List,
-}
-
+use cli::{Cli, Commands};
 
 
 // Telling Rust main can fall and return an IO error
@@ -42,7 +20,8 @@ fn main() -> Result<(), std::io::Error> {
 
     match cli.command {
         Commands::Add {name, description} => {
-            let new_task = Task::new(name, description);
+            let next_id = (task_list.len() as u64) + 1;
+            let new_task = Task::new(next_id, name, description);
             task_list.push(new_task);
             println!("✅ Task Added ");
         }
@@ -55,7 +34,20 @@ fn main() -> Result<(), std::io::Error> {
                     TaskStatus::Done => "✅ DONE",
                 };
 
-                println!("[{}] {} - {}", status_string, task.name, task.description);
+                println!("[ID: {}] [{}] {} - {}",task.id.0, status_string, task.name, task.description);
+            }
+        }
+        Commands::Complete { id } => {
+            let target_task = task_list.iter_mut().find(|task| task.id.0 == id);
+
+            match target_task {
+                Some(task) => {
+                    task.mark_done();
+                    println!("✅ Task {} marked as completed!", id);
+                }
+                None => {
+                    println!("❌ Could not find a task with ID {}", id);
+                }
             }
         }
     }

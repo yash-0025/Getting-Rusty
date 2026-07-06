@@ -560,4 +560,46 @@
 **Output Summary:** AI celebrated the passing tests. Introduced Concept #6: Extracting `cli.rs` and the `pub(crate)` visibility modifier. Explained how `pub(crate)` makes something public to the current project but keeps it private from the outside world. Provided step-by-step explanation and reference code for moving the CLI logic into `cli.rs`.
 **Outcome / Next Step:** Learner will create `cli.rs`, extract the `Cli` and `Commands` structs, apply `pub(crate)`, and clean up `main.rs`.
 
+### 2026-07-06 00:28 IST — Prompt #90
+**Prompt:** Learner ran into E0423 and E0425 errors when running `cargo check` after extracting `cli.rs`.
+**Context:** Day 7 (Concept 6: Extracting cli.rs).
+**Output Summary:** AI explained that the error was a naming collision between the module `cli` (lowercase) and the variable `cli`. The learner had accidentally deleted `let cli = Cli::parse();` and replaced it with `cli::parse();`. Because the variable no longer existed, `match cli.command` thought it was trying to access a field on the `cli` module itself. Explained the fix.
+**Outcome / Next Step:** Learner will restore the `let cli = Cli::parse();` line in `main.rs` and re-run `cargo check`.
+
+### 2026-07-06 00:31 IST — Prompt #91
+**Prompt:** Learner restored the variable but was confused by the AI's previous rambly instruction about "bringing the Parser trait into scope." Asked for clarification on what that actually meant.
+**Context:** Day 7 (Concept 6). Resolving confusion over Trait scope.
+**Output Summary:** AI apologized for the confusing wording in the previous prompt. Explained a key Rust concept: "Traits must be in scope." Even if you have the `Cli` struct, the `.parse()` method doesn't belong to the struct itself; it belongs to the `clap::Parser` trait. Therefore, `use clap::Parser;` must be at the top of `main.rs` for the compiler to allow calling `.parse()`.
+**Outcome / Next Step:** Learner will understand the trait scope rule and run `cargo check` to verify the code is clean.
+
+### 2026-07-06 00:33 IST — Prompt #92
+**Prompt:** Learner ran `cargo check` and everything successfully compiled, leaving only unused code warnings.
+**Context:** Day 7. Module refactoring is fully complete.
+**Output Summary:** AI celebrated the clean build. Used the `mark_done is never used` warning to naturally transition to the next feature: the `Complete` command. Introduced Concept #7: The Newtype Pattern (`struct TaskId(pub u64)`). Explained how wrapping a primitive type prevents passing the wrong data type (e.g. accidentally passing an `age` instead of an `id`). Provided step-by-step instructions and reference code to update `models.rs` and `cli.rs`.
+**Outcome / Next Step:** Learner will implement `TaskId`, update the `Task` struct to include it, and add the `Complete` variant to the `Commands` enum in `cli.rs`.
+
+### 2026-07-06 13:31 IST — Prompt #93
+**Prompt:** Learner implemented the Newtype pattern but hit two compiler errors: E0425 (missing `TaskId`) and E0061 (missing argument in `Task::new`).
+**Context:** Day 7 (Concept 7). Implementing the `TaskId` Newtype pattern.
+**Output Summary:** AI analyzed the errors. Pointed out that the learner wrote the `TaskId` struct in `Notes.md` but forgot to actually put it in `models.rs` (fixing E0425). Explained that modifying the `Task::new` signature to require an `id` broke the `Add` command in `main.rs` (fixing E0061). Explained how to generate a simple ID using `task_list.len() as u64 + 1`.
+**Outcome / Next Step:** Learner will define `TaskId` in `models.rs` and fix the `Commands::Add` logic in `main.rs`.
+
+### 2026-07-06 13:50 IST — Prompt #94
+**Prompt:** Learner fixed the previous errors but hit E0004 (`non-exhaustive patterns`).
+**Context:** Day 7 (Concept 7: Newtype / Complete Command).
+**Output Summary:** AI explained that E0004 is one of Rust's greatest safety features: exhaustive pattern matching. Because the learner added `Commands::Complete` to the enum, Rust forces them to handle it in the `match` block. Explained how to implement the `Complete` match arm using `.iter_mut().find()` to locate the task by ID and call `.mark_done()`. Provided step-by-step code reference.
+**Outcome / Next Step:** Learner will implement the `Commands::Complete` arm in `main.rs`.
+
+### 2026-07-06 15:47 IST — Prompt #95
+**Prompt:** Learner successfully compiled the `Complete` command but asked why `cargo run -- list` returned an empty list, wiping out the previous tasks.
+**Context:** Day 7 (Concept 7: Newtype). Troubleshooting a schema change.
+**Output Summary:** AI explained that this was a classic "database schema migration" issue. Because the learner added the `id` field to the `Task` struct, `serde_json` could no longer parse the old `tasks.json` file (which didn't have IDs). It gracefully hit the `.unwrap_or_else(|_| Vec::new())` fallback, created an empty list, and then overwrote the file on exit. Instructed the learner to add a new task to see the new data structure in action.
+**Outcome / Next Step:** Learner will add a new task from the terminal, test the list command, and see the IDs.
+
+### 2026-07-06 15:50 IST — Prompt #96
+**Prompt:** Learner successfully added tasks, completed one, and listed them showing the updated statuses and IDs.
+**Context:** Day 7 (Concept 7 Completed). The CLI is now fully persistent with type-safe IDs.
+**Output Summary:** AI celebrated the perfectly working application. Introduced Concept #8: The Builder Pattern. Explained how constructors with too many arguments become unreadable, and how the Builder pattern solves this through method chaining (e.g. `.name().description().build()`). Provided reference code for `TaskBuilder` and step-by-step instructions.
+**Outcome / Next Step:** Learner will implement `TaskBuilder` in `models.rs` and update the `Add` command in `main.rs` to construct tasks using the builder.
+
 <!-- New entries appended below -->
