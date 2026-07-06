@@ -19,5 +19,8 @@ pub(crate) enum Commands {
     Complete {
         id: u64,
     },
+    Delete {
+        id: u64,
+    },
 }
 

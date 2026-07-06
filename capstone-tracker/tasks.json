@@ -1,11 +1,5 @@
 [
   {
-    "id": 1,
-    "name": "Learn Newtype",
-    "description": "Wrapping u64 for type safety",
-    "status": "Done"
-  },
-  {
     "id": 2,
     "name": "Complete command",
     "description": "Using iter_mut to change status",

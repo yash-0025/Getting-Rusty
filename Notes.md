@@ -365,4 +365,7 @@ let new_task = Task::builder(next_id)
     .build();
 ```
 
-- `Conc`
+- `Concept 9 - The Delete Command and .retain()` => To Delete a task we could write a for loop find the index of the task and call task_list.remove(index). But in rust we have a powerful iterator methods
+- The most idiomatic way to remove items from a Vector based on condition is the .retain() method . 
+- `.retain()` loops through the entire vector. if our closure returns true, the item is kept if it returns false the item is deleted
+

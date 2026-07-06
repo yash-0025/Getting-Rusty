@@ -51,6 +51,18 @@ fn main() -> Result<(), std::io::Error> {
                 }
             }
         }
+        Commands::Delete { id } => {
+            let intial_len = task_list.len();
+
+            // Keep every task Except the one where the ID matches
+            task_list.retain(|task| task.id.0 != id);
+
+            if task_list.len() < intial_len {
+                println!("Task {} deleted successfully", id);
+            } else {
+                println!("Could not find a task with ID {}", id);
+            }
+        }
     }
 
     storage::save_tasks(&task_list)?;
