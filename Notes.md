@@ -355,3 +355,14 @@ pub struct TaskId(pub u64);
 - `.iter_mut()` => This lets us modify the items we are iterating over
 - `.find()` => It helps us search for the firt item that matches our condition
 - `.find()` => It returns an Option [Some if it found it , None if it didn't]
+
+- `Concept 8` => The Builder Pattern - In rust when constructing complex objects we use the Builder Pattern .
+- Instead of passing 10 arguments into a single function we create temporary Builder struct that lets us chain methods together one by one .
+```rust
+let new_task = Task::builder(next_id)
+    .name(name)
+    .description(description)
+    .build();
+```
+
+- `Conc`

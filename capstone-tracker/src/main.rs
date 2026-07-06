@@ -21,7 +21,8 @@ fn main() -> Result<(), std::io::Error> {
     match cli.command {
         Commands::Add {name, description} => {
             let next_id = (task_list.len() as u64) + 1;
-            let new_task = Task::new(next_id, name, description);
+            // let new_task = Task::new(next_id, name, description);
+            let new_task = Task::builder(next_id).name(name).description(description).build();
             task_list.push(new_task);
             println!("✅ Task Added ");
         }

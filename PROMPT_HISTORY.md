@@ -602,4 +602,16 @@
 **Output Summary:** AI celebrated the perfectly working application. Introduced Concept #8: The Builder Pattern. Explained how constructors with too many arguments become unreadable, and how the Builder pattern solves this through method chaining (e.g. `.name().description().build()`). Provided reference code for `TaskBuilder` and step-by-step instructions.
 **Outcome / Next Step:** Learner will implement `TaskBuilder` in `models.rs` and update the `Add` command in `main.rs` to construct tasks using the builder.
 
+### 2026-07-06 19:08 IST — Prompt #97
+**Prompt:** Learner implemented the Builder pattern but hit an `E0308: mismatched types` error when running tests.
+**Context:** Day 7 (Concept 8: Builder Pattern).
+**Output Summary:** AI explained the type mismatch: the `.name()` method expects a heap-allocated `String`, but the tests were passing a hardcoded `&str` (like `"Test"`). Reminded the learner of the difference between `&str` and `String`, and explained how to fix it using `.to_string()` or `String::from()`. Proactively pointed out a missing `mut` in the second test that would cause the next compiler error.
+**Outcome / Next Step:** Learner will fix the string types in the tests, add `mut`, and run `cargo test`.
+
+### 2026-07-06 19:12 IST — Prompt #98
+**Prompt:** Learner fixed the type errors and mutability issues, and the tests passed successfully.
+**Context:** Day 7 (Concept 8: Builder Pattern). Tests are green.
+**Output Summary:** AI celebrated the clean test run. Introduced Concept #9: The `Delete` Command and the `.retain()` method. Explained that the most idiomatic way to remove items from a Vector in Rust is using `.retain()`, which keeps elements that return `true` for a given closure. Provided step-by-step instructions and reference code to implement the `Delete` subcommand across `cli.rs` and `main.rs`.
+**Outcome / Next Step:** Learner will implement the `Delete` command, updating both the `clap` enum and the main execution loop.
+
 <!-- New entries appended below -->
