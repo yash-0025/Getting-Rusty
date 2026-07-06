@@ -25,7 +25,7 @@
 
 | Week | Focus Area | Status |
 |---|---|---|
-| Week 1 | CLI Tools & Core Rust | `[~]` In progress |
+| Week 1 | CLI Tools & Core Rust | `[x]` Done |
 | Week 2 | Libraries, Generics & Type System Mastery | `[ ]` Not started |
 | Week 3 | Concurrency, Async & Production Web Services | `[ ]` Not started |
 | Week 4 | Advanced Patterns & Production Capstone | `[ ]` Not started |
@@ -169,6 +169,26 @@
 **Mistakes the compiler caught that taught me something:**
 - Missed parentheses when defining a tuple inside a Vector (`Vec<&str, i32>` vs `Vec<(&str, i32)>`), causing completely unrelated allocator errors. Learning to read the `help:` line!
 
+### Day 7 — Build: Polished CLI Task Manager (Capstone) — 2026-07-06
+**Status:** `[x]` done
+**What I actually understood:**
+- Module system (`mod`, `pub`, `pub(crate)`) and refactoring into multiple files (`models.rs`, `storage.rs`, `cli.rs`).
+- `clap` with the derive API simplifies building robust CLIs.
+- Unit testing with `#[cfg(test)]`, `#[test]`, and `assert_eq!`.
+- The Newtype pattern (`struct TaskId(pub u64)`) prevents passing the wrong type by mistake.
+- The Builder pattern makes object creation readable and scalable using method chaining (`.name().build()`).
+- Iterators (`.retain()`, `.filter()`, `.count()`) are incredibly powerful for manipulating and querying vectors safely.
+- Modifying a struct's schema (adding an ID) will break parsing of older JSON files (data migration).
+**What's still fuzzy / questions I had:**
+- None for now.
+**Code I wrote / project progress:**
+- Completed `capstone-tracker` with a fully featured, modular CLI using `clap`. Implemented Add, List, Complete, Delete, and Stats commands using persistent JSON storage and unit tests.
+**Mistakes the compiler caught that taught me something:**
+- E0423/E0425: Variable vs module name collisions (deleting a variable and trying to use it).
+- Traits must be in scope to use their methods (e.g., `use clap::Parser`).
+- E0004: Non-exhaustive patterns in `match` (Rust forces us to handle new Enum variants).
+- E0308: Mismatched types — passing a string slice `&str` when a heap-allocated `String` is required by the Builder pattern.
+
 <!-- New day entries get appended below this line. Ask the AI to draft an entry at the end of each session; approve or edit before it's saved. -->
 
 ---
@@ -201,7 +221,7 @@
 
 | Project | Week | Status | Repo/Path | Notes |
 |---|---|---|---|---|
-| CLI Task Manager (polished) | 1 | `[~]` | `hello-rust` | Week 1 capstone |
+| CLI Task Manager (polished) | 1 | `[x]` | `capstone-tracker` | Week 1 capstone |
 | Generic Cache Library with TTL | 2 | `[ ]` | — | Week 2 capstone |
 | Production REST API (Docker) | 3 | `[ ]` | — | Week 3 capstone |
 | Final Capstone (TBD) | 4 | `[ ]` | — | Portfolio centerpiece |

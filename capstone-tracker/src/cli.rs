@@ -22,5 +22,6 @@ pub(crate) enum Commands {
     Delete {
         id: u64,
     },
+    Stats,
 }
 

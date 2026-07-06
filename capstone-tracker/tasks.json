@@ -4,5 +4,17 @@
     "name": "Complete command",
     "description": "Using iter_mut to change status",
     "status": "Todo"
+  },
+  {
+    "id": 2,
+    "name": "Testing 1",
+    "description": "Testing the task 1 in code",
+    "status": "Todo"
+  },
+  {
+    "id": 3,
+    "name": "Testing 2",
+    "description": "Testing the task 2 in code",
+    "status": "Todo"
   }
 ]

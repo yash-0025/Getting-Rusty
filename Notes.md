@@ -369,3 +369,6 @@ let new_task = Task::builder(next_id)
 - The most idiomatic way to remove items from a Vector based on condition is the .retain() method . 
 - `.retain()` loops through the entire vector. if our closure returns true, the item is kept if it returns false the item is deleted
 
+
+- `Concept 10 ` = `The Stats Command and Iterator Aggregation` => If we want to know how many tasks are Todo, InProgress and Done we could write for loop and increment 3 different counter variales . But again iterators save the day .
+- We can use `.iter() , .filter(), .coun()`

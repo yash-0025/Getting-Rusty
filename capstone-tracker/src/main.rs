@@ -1,5 +1,3 @@
-
-use serde::{Serialize, Deserialize};
 use clap::Parser;
 
 mod models; // This tells rust to look up for a models.rs file
@@ -62,6 +60,21 @@ fn main() -> Result<(), std::io::Error> {
             } else {
                 println!("Could not find a task with ID {}", id);
             }
+        }
+
+        Commands::Stats => {
+            let total = task_list.len();
+
+            // We use the matches! macro to check the enum variant inside the filter closuer
+            let todo = task_list.iter().filter(|t| matches!(t.status, TaskStatus::Todo)).count();
+            let in_progress = task_list.iter().filter(|t| matches!(t.status, TaskStatus::InProgress)).count();
+            let done = task_list.iter().filter(|t| matches!(t.status, TaskStatus::Done)).count();
+
+            println!("---STATS---");
+            println!("Total: {}", total);
+            println!("To-Do: {}", todo);
+            println!("In Progress: {}", in_progress);
+            println!("Done: {}", done);
         }
     }
 
