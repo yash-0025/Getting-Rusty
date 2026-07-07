@@ -96,10 +96,10 @@ Each day has:
 > Goal: Learn to write reusable Rust libraries. Move from "Rust user" to "Rust library author."
 
 ### Day 8 — Build: Generic Stack & Queue Collection Library
-- [ ] **You build:** A library crate with `Stack<T>` and `Queue<T>`, both implementing the `Iterator` trait for consumption, with push/pop/peek operations and capacity management.
-- [ ] **Concepts:** Defining traits, default methods, implementing for multiple types · Trait bounds: `fn foo<T: Display>(x: T)`, `where` clauses · Deriving common traits: `Debug`, `Clone`, `PartialEq`, `Eq`, `Hash`, `Default` · Generic structs, generic methods · Associated types (`type Item;` in `Iterator`) vs generic type params — when a trait should use which · Implementing a custom `Iterator` — internalizing associated types by writing one · Operator overloading via `std::ops` (`Add`, `Index`, etc.)
-- [ ] **Reality check:** `Iterator::Item` is the textbook example of "why associated type, not generic param" — a type can only iterate one way
-- [ ] **Deliverable:** A `collections` library crate with full tests and doc comments.
+- [x] **You build:** A library crate with `Stack<T>` and `Queue<T>`, both implementing the `Iterator` trait for consumption, with push/pop/peek operations and capacity management.
+- [x] **Concepts:** Defining traits, default methods, implementing for multiple types · Trait bounds: `fn foo<T: Display>(x: T)`, `where` clauses · Deriving common traits: `Debug`, `Clone`, `PartialEq`, `Eq`, `Hash`, `Default` · Generic structs, generic methods · Associated types (`type Item;` in `Iterator`) vs generic type params — when a trait should use which · Implementing a custom `Iterator` — internalizing associated types by writing one · Operator overloading via `std::ops` (`Add`, `Index`, etc.)
+- [x] **Reality check:** `Iterator::Item` is the textbook example of "why associated type, not generic param" — a type can only iterate one way
+- [x] **Deliverable:** A `collections` library crate with full tests and doc comments.
 
 ### Day 9 — Build: Plugin-Based Shape Calculator
 - [ ] **You build:** A shape calculation system where shapes implement a `Shape` trait. Build both: (1) a generic/monomorphized version, (2) a `Vec<Box<dyn Shape>>` trait-object version. Compare them.

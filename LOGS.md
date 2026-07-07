@@ -33,6 +33,49 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-07 16:45 IST — [LEARNING.md] & [ROADMAP.md] — Marked Day 8 Complete</summary>
+
+- **Files:** LEARNING.md, ROADMAP.md
+- **Change type:** Modified
+- **Reason:** Day 8 curriculum completed.
+
+```diff
+  # In ROADMAP.md
+- - [ ] **You build:** A library crate with `Stack<T>` and `Queue<T>`, both implementing the `Iterator` trait for consumption, with push/pop/peek operations and capacity management.
+- - [ ] **Concepts:** Defining traits, default methods, implementing for multiple types · Trait bounds: `fn foo<T: Display>(x: T)`, `where` clauses · Deriving common traits: `Debug`, `Clone`, `PartialEq`, `Eq`, `Hash`, `Default` · Generic structs, generic methods · Associated types (`type Item;` in `Iterator`) vs generic type params — when a trait should use which · Implementing a custom `Iterator` — internalizing associated types by writing one · Operator overloading via `std::ops` (`Add`, `Index`, etc.)
+- - [ ] **Reality check:** `Iterator::Item` is the textbook example of "why associated type, not generic param" — a type can only iterate one way
+- - [ ] **Deliverable:** A `collections` library crate with full tests and doc comments.
++ - [x] **You build:** A library crate with `Stack<T>` and `Queue<T>`, both implementing the `Iterator` trait for consumption, with push/pop/peek operations and capacity management.
++ - [x] **Concepts:** Defining traits, default methods, implementing for multiple types · Trait bounds: `fn foo<T: Display>(x: T)`, `where` clauses · Deriving common traits: `Debug`, `Clone`, `PartialEq`, `Eq`, `Hash`, `Default` · Generic structs, generic methods · Associated types (`type Item;` in `Iterator`) vs generic type params — when a trait should use which · Implementing a custom `Iterator` — internalizing associated types by writing one · Operator overloading via `std::ops` (`Add`, `Index`, etc.)
++ - [x] **Reality check:** `Iterator::Item` is the textbook example of "why associated type, not generic param" — a type can only iterate one way
++ - [x] **Deliverable:** A `collections` library crate with full tests and doc comments.
+
+  # In LEARNING.md
+- | Week 2 | Libraries, Generics & Type System Mastery | `[ ]` Not started |
++ | Week 2 | Libraries, Generics & Type System Mastery | `[~]` In progress |
+
++ ### Day 8 — Build: Generic Stack & Queue Collection Library — 2026-07-07
++ **Status:** `[x]` done
++ **What I actually understood:**
++ - **Library Crates (`lib.rs`)**: How to build code for other developers to use instead of a binary app.
++ - **Generic Structs (`<T>`)**: Building data structures that can hold any type.
++ - `VecDeque`: Rust's Double-Ended Queue for O(1) front/back insertions and removals.
++ - **Deriving Traits**: Using `#[derive(Debug, Clone)]` to automatically implement traits, with the rule that the inner generic type must also implement them.
++ - **Defining Traits**: Creating custom traits (interfaces) like `Collection`, complete with default method implementations (`is_empty`).
++ - **Associated Types vs Generic Parameters**: Why `Iterator` uses `type Item = T;` (a struct can only iterate one way) rather than `Iterator<T>` (where it could implement it multiple times).
++ - **Operator Overloading**: Using traits in `std::ops` (like `Add`) to redefine how operators like `+` work for custom structs.
++ **What's still fuzzy / questions I had:**
++ - None for now.
++ **Code I wrote / project progress:**
++ - Created a `collections` library with fully generic `Stack<T>` and `Queue<T>` data structures, complete with custom traits, standard trait implementations (`Iterator`, `Add`), and unit tests.
++ **Mistakes the compiler caught that taught me something:**
++ - N/A
+```
+
+</details>
+
+
+<details>
 <summary>2026-07-06 21:40 IST — [LEARNING.md] & [ROADMAP.md] — Marked Day 7 and Week 1 Complete</summary>
 
 - **Files:** LEARNING.md, ROADMAP.md

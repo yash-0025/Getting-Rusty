@@ -1,4 +1,7 @@
 use std::collections::VecDeque;
+use std::ops::Add;
+
+
 
 #[derive(Debug, Clone)]
 pub struct Stack<T> {
@@ -82,6 +85,22 @@ impl<T> Iterator for Stack<T> {
     }
 }
 
+
+impl<T> Add for Stack<T> {
+    // Add also uses an Associated type to declare what the Result of the addition is
+    // When we add two stacks together , we should get a new stack out
+    type Output = Stack<T>;
+
+    // the add method takes ownership of self the left side of the +
+    // and rhs right hand side of the +
+    fn add(mut self, mut rhs: Stack<T>) -> Self::Output {
+        // We append the right side items into the left side items
+        self.items.append(&mut rhs.items);
+        // And returns the newly combined stack
+        self
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -125,6 +144,22 @@ mod tests {
         assert_eq!(my_queue.is_empty(), true);
         assert_eq!(my_queue.dequeue(), None);
 
+    }
+
+
+    #[test]
+    fn test_add_stacks() {
+        let mut stack1: Stack<i32> = Stack::new();
+        stack1.push(1);
+
+        let mut stack2: Stack<i32> = Stack::new();
+        stack2.push(2);
+
+        let mut combined_stack = stack1 + stack2;
+
+        // The last item pushed was 2 so it should pop first
+        assert_eq!(combined_stack.pop(), Some(2));
+        assert_eq!(combined_stack.pop(), Some(1));
 
     }
 }

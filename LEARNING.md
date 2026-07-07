@@ -26,7 +26,7 @@
 | Week | Focus Area | Status |
 |---|---|---|
 | Week 1 | CLI Tools & Core Rust | `[x]` Done |
-| Week 2 | Libraries, Generics & Type System Mastery | `[ ]` Not started |
+| Week 2 | Libraries, Generics & Type System Mastery | `[~]` In progress |
 | Week 3 | Concurrency, Async & Production Web Services | `[ ]` Not started |
 | Week 4 | Advanced Patterns & Production Capstone | `[ ]` Not started |
 
@@ -188,6 +188,23 @@
 - Traits must be in scope to use their methods (e.g., `use clap::Parser`).
 - E0004: Non-exhaustive patterns in `match` (Rust forces us to handle new Enum variants).
 - E0308: Mismatched types — passing a string slice `&str` when a heap-allocated `String` is required by the Builder pattern.
+
+### Day 8 — Build: Generic Stack & Queue Collection Library — 2026-07-07
+**Status:** `[x]` done
+**What I actually understood:**
+- **Library Crates (`lib.rs`)**: How to build code for other developers to use instead of a binary app.
+- **Generic Structs (`<T>`)**: Building data structures that can hold any type.
+- `VecDeque`: Rust's Double-Ended Queue for O(1) front/back insertions and removals.
+- **Deriving Traits**: Using `#[derive(Debug, Clone)]` to automatically implement traits, with the rule that the inner generic type must also implement them.
+- **Defining Traits**: Creating custom traits (interfaces) like `Collection`, complete with default method implementations (`is_empty`).
+- **Associated Types vs Generic Parameters**: Why `Iterator` uses `type Item = T;` (a struct can only iterate one way) rather than `Iterator<T>` (where it could implement it multiple times).
+- **Operator Overloading**: Using traits in `std::ops` (like `Add`) to redefine how operators like `+` work for custom structs.
+**What's still fuzzy / questions I had:**
+- None for now.
+**Code I wrote / project progress:**
+- Created a `collections` library with fully generic `Stack<T>` and `Queue<T>` data structures, complete with custom traits, standard trait implementations (`Iterator`, `Add`), and unit tests.
+**Mistakes the compiler caught that taught me something:**
+- N/A
 
 <!-- New day entries get appended below this line. Ask the AI to draft an entry at the end of each session; approve or edit before it's saved. -->
 
