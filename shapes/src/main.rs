@@ -14,6 +14,35 @@ pub struct Rectangle {
     pub height: f64,
 }
 
+// A trait taht return Self
+// pub trait ObjectUnsafe {
+//     fn clone_me(&self) -> Self;
+// }
+
+// // A struct that implements it 
+// pub struct SomeStruct;
+// impl ObjectUnsafe for SomeStruct {
+//     fn clone_me(&self) -> Self {
+//         SomeStruct
+//     }
+// }
+
+// We define an enum that can be either a circle or a rectangle
+pub enum ShapeEnum {
+    CircleWrapper(Circle),
+    RectanlgeWrapper(Rectangle),
+}
+
+impl ShapeEnum {
+    pub fn get_area(&self) -> f64 {
+        match self {
+            ShapeEnum::CircleWrapper(c) => c.area(),
+            ShapeEnum::RectanlgeWrapper(r) => r.area(),
+        }
+    }
+}
+
+
 impl Shape for Circle {
     fn area(&self) -> f64 {
         std::f64::consts::PI * self.radius * self.radius
@@ -77,4 +106,16 @@ fn main() {
 
     print_area_dynamic(shape.as_ref());
    }
+
+//    let bad_list: Vec<Box<dyn ObjectUnsafe>> = vec![Box::new(SomeStruct)];
+
+let enum_shapes: Vec<ShapeEnum> = vec![
+    ShapeEnum::CircleWrapper(Circle { radius: 10.0 }),
+    ShapeEnum::RectanlgeWrapper(Rectangle { width: 2.0, height: 3.0}),
+];
+
+println!("\n--- Iterating through Vec<ShapeEnum> ---");
+for shape in enum_shapes {
+    println!("(Enum) Area is {:.2}", shape.get_area());
+}
 }

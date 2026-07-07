@@ -491,4 +491,17 @@ pub fn print_area_static(shape: &impl Shape) {
 - We can read this like - This function takes a reference to some type that implements the Shape trait
 
 
+- `Concept 4 - Object Safety rules`
+- We cannot magically turns every trait into a dyn Trait. A trait must be Object Safe to be used dynamically
+- When is a trait NOT Object Safe?
+- 1. When it returns Self - Think back to the builder pattern. The methods return self [The struct itself]. If we try to use dyn Builder the compiler panics because the vtable doesn't know how many bytes Self is at runtime since it could be any struct
+- 2. When it has generic methods - If our trait has a method like `fn do_things<U>(&self, arg:U)` the vtable would need to hold an infinite number of pointers for every possible type`U` we might pass in . the compiler won't allow this
+- If trait breaks this rules we must use Static Dispatch Generics to use it 
 
+- `Concept 5 The Enum vs Trait Object TradeOff [Senior Design Decision]`
+- If we are building a system that needs to handle multiple types of things like a list of Circle and REctangle we have two choices in Rust
+- 1. Wrap them in an Enum(enum Shape {Circle(Circle), Rectangle(Rectangle)})
+- 2. Use Trait Objects (Box<dyn Shape>)
+- How Do we choose ?
+- > Use an ENUM when our system is closed . If we know every single shape that will ever exist in our app its a closed set we can use enum
+- > Use Trait Objects (Box<dyn Trait>) when our system is open . If we are writing a library and want other develolpers to be able to create their own custom shapes like a Hexagon and pass them into our library without modifying our source code we must use dyn Trait
