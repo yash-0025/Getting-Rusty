@@ -626,4 +626,28 @@
 **Output Summary:** AI excitedly congratulated the learner on completing their very first production-grade Rust application. Summarized everything they achieved this week (modules, unit tests, Clap CLI, JSON serialization, Builder/Newtype patterns, Iterator aggregation). Updated `LEARNING.md` to formally mark Week 1 and Day 7 as fully complete. Prompted the learner on whether they want to take a break or jump into Week 2 (Libraries, Generics & Type System Mastery).
 **Outcome / Next Step:** Learner will decide what to do next (start Week 2 or review).
 
+### 2026-07-06 21:40 IST — Prompt #101
+**Prompt:** Learner asked to proceed to Week 2.
+**Context:** Kicking off Week 2, Day 8 (Generics & Type System).
+**Output Summary:** AI updated `ROADMAP.md` to fully check off Day 7. Introduced the overarching goal of Week 2: transitioning from a "Rust User" (building executables) to a "Rust Library Author" (building reusable libraries). Explained the difference between binary crates (`main.rs`) and library crates (`lib.rs`). Prompted the learner to generate a new library crate using `cargo new collections --lib`.
+**Outcome / Next Step:** Learner will create the `collections` project, cd into it, and run `cargo test` to see the default library test pass.
+
+### 2026-07-06 21:41 IST — Prompt #102
+**Prompt:** Learner caught the AI breaking Rule #2 (failing to update `LOGS.md` after modifying `ROADMAP.md` and `LEARNING.md`).
+**Context:** AI silently updated the governance files in Prompts 100/101 without logging the file diffs.
+**Output Summary:** AI apologized for breaking Rule #2, admitting it failed to write the required diffs into `LOGS.md`. AI immediately backfilled the missing entries into `LOGS.md` with the full diffs of the Day 7 / Week 1 completion updates.
+**Outcome / Next Step:** Learner can now proceed with Day 8 (`cargo new collections --lib`).
+
+### 2026-07-07 12:43 IST — Prompt #103
+**Prompt:** Learner successfully ran `cargo test` on the new `collections` library crate.
+**Context:** Day 8 (Generics & Traits). Beginning the Generic Stack & Queue library.
+**Output Summary:** AI validated the library setup. Introduced Concept #11: Generic Structs (`<T>`). Explained how `<T>` stands for any type, allowing us to build data structures that hold anything (like `Stack<i32>` or `Stack<String>`). Provided reference code for defining a `Stack<T>` struct that wraps a `Vec<T>`, and implementing `new()`, `push()`, and `pop()` methods. Guided the learner to clear out the default `lib.rs` and write the generic stack along with a new unit test.
+**Outcome / Next Step:** Learner will implement the generic `Stack<T>` in `lib.rs`, write a unit test to push and pop items, and run `cargo test`.
+
+### 2026-07-07 13:01 IST — Prompt #104
+**Prompt:** Learner successfully ran `cargo test` and the `test_stack` unit test passed.
+**Context:** Day 8 (Generics & Traits). The generic `Stack<T>` is complete.
+**Output Summary:** AI celebrated the successful implementation. Introduced Concept #12: `Queue<T>` and the `VecDeque` standard collection. Explained that while a `Vec` is great for a Stack (adding/removing from the end is fast), it is terrible for a Queue (removing from the front requires shifting every element left, O(N)). Introduced `std::collections::VecDeque` for fast O(1) front operations. Provided reference code for a `Queue<T>` struct with `enqueue()` and `dequeue()` methods.
+**Outcome / Next Step:** Learner will implement `Queue<T>` using `VecDeque` in `lib.rs`, add a `test_queue` unit test, and run `cargo test`.
+
 <!-- New entries appended below -->

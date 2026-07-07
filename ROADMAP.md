@@ -77,9 +77,9 @@ Each day has:
 - [x] **Deliverable:** Working text analyzer. Benchmark iterator vs loop version with `std::time::Instant`.
 
 ### Day 7 — 🏁 Week 1 Capstone: Polish & Ship the CLI Task Manager
-- [ ] **You build:** Take Days 4-5's task tracker, add `clap` for proper CLI parsing (subcommands: add, list, complete, delete, stats), refactor into modules, add unit tests, make it portfolio-ready.
-- [ ] **Concepts:** `clap` derive API for CLI argument parsing · Module system: `mod`, `pub`, `pub(crate)`, file-based modules (modern `foo.rs` + `foo/` style) · Refactoring into `models.rs`, `storage.rs`, `cli.rs`, `errors.rs` · Unit tests (`#[test]`, `assert_eq!`, `#[cfg(test)] mod tests`) · Iterator-based filtering/sorting for the `list` command · The **builder pattern** — refactor `Task::new()` into `TaskBuilder` · The **newtype pattern** — `struct TaskId(u64)` for type safety
-- [ ] **Deliverable:** A clippy-clean, tested, modular CLI task manager. First portfolio piece.
+- [x] **You build:** Take Days 4-5's task tracker, add `clap` for proper CLI parsing (subcommands: add, list, complete, delete, stats), refactor into modules, add unit tests, make it portfolio-ready.
+- [x] **Concepts:** `clap` derive API for CLI argument parsing · Module system: `mod`, `pub`, `pub(crate)`, file-based modules (modern `foo.rs` + `foo/` style) · Refactoring into `models.rs`, `storage.rs`, `cli.rs`, `errors.rs` · Unit tests (`#[test]`, `assert_eq!`, `#[cfg(test)] mod tests`) · Iterator-based filtering/sorting for the `list` command · The **builder pattern** — refactor `Task::new()` into `TaskBuilder` · The **newtype pattern** — `struct TaskId(u64)` for type safety
+- [x] **Deliverable:** A clippy-clean, tested, modular CLI task manager. First portfolio piece.
 
 **🏁 Week 1 Deliverables Summary:**
 - `hello-rust` scaffold

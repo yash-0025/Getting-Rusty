@@ -33,6 +33,54 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-06 21:40 IST — [LEARNING.md] & [ROADMAP.md] — Marked Day 7 and Week 1 Complete</summary>
+
+- **Files:** LEARNING.md, ROADMAP.md
+- **Change type:** Modified
+- **Reason:** Day 7 and Week 1 curriculum completed. The AI updated these files without logging the diffs in LOGS.md, violating Rule 2. Catching up the required logs here.
+
+```diff
+  # In ROADMAP.md
+- - [ ] **You build:** Take Days 4-5's task tracker, add `clap` for proper CLI parsing (subcommands: add, list, complete, delete, stats), refactor into modules, add unit tests, make it portfolio-ready.
+- - [ ] **Concepts:** `clap` derive API for CLI argument parsing · Module system: `mod`, `pub`, `pub(crate)`, file-based modules (modern `foo.rs` + `foo/` style) · Refactoring into `models.rs`, `storage.rs`, `cli.rs`, `errors.rs` · Unit tests (`#[test]`, `assert_eq!`, `#[cfg(test)] mod tests`) · Iterator-based filtering/sorting for the `list` command · The **builder pattern** — refactor `Task::new()` into `TaskBuilder` · The **newtype pattern** — `struct TaskId(u64)` for type safety
+- - [ ] **Deliverable:** A clippy-clean, tested, modular CLI task manager. First portfolio piece.
++ - [x] **You build:** Take Days 4-5's task tracker, add `clap` for proper CLI parsing (subcommands: add, list, complete, delete, stats), refactor into modules, add unit tests, make it portfolio-ready.
++ - [x] **Concepts:** `clap` derive API for CLI argument parsing · Module system: `mod`, `pub`, `pub(crate)`, file-based modules (modern `foo.rs` + `foo/` style) · Refactoring into `models.rs`, `storage.rs`, `cli.rs`, `errors.rs` · Unit tests (`#[test]`, `assert_eq!`, `#[cfg(test)] mod tests`) · Iterator-based filtering/sorting for the `list` command · The **builder pattern** — refactor `Task::new()` into `TaskBuilder` · The **newtype pattern** — `struct TaskId(u64)` for type safety
++ - [x] **Deliverable:** A clippy-clean, tested, modular CLI task manager. First portfolio piece.
+
+  # In LEARNING.md
+- | Week 1 | CLI Tools & Core Rust | `[~]` In progress |
++ | Week 1 | CLI Tools & Core Rust | `[x]` Done |
+
+- | CLI Task Manager (polished) | 1 | `[~]` | `hello-rust` | Week 1 capstone |
++ | CLI Task Manager (polished) | 1 | `[x]` | `capstone-tracker` | Week 1 capstone |
+
++ ### Day 7 — Build: Polished CLI Task Manager (Capstone) — 2026-07-06
++ **Status:** `[x]` done
++ **What I actually understood:**
++ - Module system (`mod`, `pub`, `pub(crate)`) and refactoring into multiple files (`models.rs`, `storage.rs`, `cli.rs`).
++ - `clap` with the derive API simplifies building robust CLIs.
++ - Unit testing with `#[cfg(test)]`, `#[test]`, and `assert_eq!`.
++ - The Newtype pattern (`struct TaskId(pub u64)`) prevents passing the wrong type by mistake.
++ - The Builder pattern makes object creation readable and scalable using method chaining (`.name().build()`).
++ - Iterators (`.retain()`, `.filter()`, `.count()`) are incredibly powerful for manipulating and querying vectors safely.
++ - Modifying a struct's schema (adding an ID) will break parsing of older JSON files (data migration).
++ **What's still fuzzy / questions I had:**
++ - None for now.
++ **Code I wrote / project progress:**
++ - Completed `capstone-tracker` with a fully featured, modular CLI using `clap`. Implemented Add, List, Complete, Delete, and Stats commands using persistent JSON storage and unit tests.
++ **Mistakes the compiler caught that taught me something:**
++ - E0423/E0425: Variable vs module name collisions (deleting a variable and trying to use it).
++ - Traits must be in scope to use their methods (e.g., `use clap::Parser`).
++ - E0004: Non-exhaustive patterns in `match` (Rust forces us to handle new Enum variants).
++ - E0308: Mismatched types — passing a string slice `&str` when a heap-allocated `String` is required by the Builder pattern.
+```
+
+</details>
+
+
+
+<details>
 <summary>2026-07-05 23:35 IST — [ROADMAP.md] — Modified Rule 7</summary>
 
 - **Files:** ROADMAP.md

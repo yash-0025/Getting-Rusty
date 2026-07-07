@@ -1,0 +1,44 @@
+
+pub struct Stack<T> {
+    items: Vec<T>,
+}
+
+// We must put <T> after impl to tell Rust that T is a generic type and then <T> after stack to say we are implementing this specific generic struct
+impl<T> Stack<T> {
+    pub fn new() -> Self {
+        Stack {
+            items: Vec::new(),
+        }
+    }
+// item must be exactly the type T
+    pub fn push(&mut self, item: T) {
+        self.items.push(item);
+    }
+
+    pub fn pop(&mut self) -> Option<T> {
+        self.items.pop()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // #[test]
+    // fn it_works() {
+    //     let result = add(2, 2);
+    //     assert_eq!(result, 4);
+    // }
+
+    #[test]
+    fn test_stack() {
+        let mut my_stack: Stack<i32> = Stack::new();
+
+        my_stack.push(10);
+        my_stack.push(20);
+
+        assert_eq!(my_stack.pop(), Some(20));
+        assert_eq!(my_stack.pop(), Some(10));
+        assert_eq!(my_stack.pop(), None)
+    }
+}

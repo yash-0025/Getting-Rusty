@@ -372,3 +372,19 @@ let new_task = Task::builder(next_id)
 
 - `Concept 10 ` = `The Stats Command and Iterator Aggregation` => If we want to know how many tasks are Todo, InProgress and Done we could write for loop and increment 3 different counter variales . But again iterators save the day .
 - We can use `.iter() , .filter(), .coun()`
+
+
+<h1>Day 8</h1>
+
+- `Generic Stack and Queue Collection library`
+- To create a library instead of an application we use a slightly different cargo command .
+```bash
+cargo new collections --lib
+```
+- When we create using `--lib` we didn't get main.rs instead we get lib.rs
+
+- `Concept 1 - Generic Structs <T>`
+- When we built our Task Tracker our Vec held a very specific type `Vec<Task>` But Vec can hold anything. That's because under the hood developers of standard library defined it using Generic `Vec<T>`
+- The `T` stands for Type . It tells the rust compiler that i don't know exactly what type of data this will hold yet but whatever type the user passes in lock it in and use it everywhere.
+- We are going to build a Stack [Last in First out data structure]
+
