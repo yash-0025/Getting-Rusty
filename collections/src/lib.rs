@@ -1,8 +1,13 @@
+use std::collections::VecDeque;
 
 pub struct Stack<T> {
     items: Vec<T>,
 }
 
+
+pub struct Queue<T> {
+    items: VecDeque<T>,
+}
 // We must put <T> after impl to tell Rust that T is a generic type and then <T> after stack to say we are implementing this specific generic struct
 impl<T> Stack<T> {
     pub fn new() -> Self {
@@ -17,6 +22,22 @@ impl<T> Stack<T> {
 
     pub fn pop(&mut self) -> Option<T> {
         self.items.pop()
+    }
+}
+
+impl<T> Queue<T> {
+    pub fn new() -> Self {
+        Queue {
+            items: VecDeque::new(),
+        }
+    }
+
+    pub fn enqueue(&mut self, item: T) {
+        self.items.push_back(item);
+    }
+
+    pub fn dequeue(&mut self) -> Option<T> {
+        self.items.pop_front()
     }
 }
 
@@ -40,5 +61,19 @@ mod tests {
         assert_eq!(my_stack.pop(), Some(20));
         assert_eq!(my_stack.pop(), Some(10));
         assert_eq!(my_stack.pop(), None)
+    }
+
+    #[test]
+    fn test_queue() {
+        let mut my_queue: Queue<i32> = Queue::new();
+
+        my_queue.enqueue(10);
+        my_queue.enqueue(20);
+
+        assert_eq!(my_queue.dequeue(), Some(10));
+        assert_eq!(my_queue.dequeue(), Some(20));
+        assert_eq!(my_queue.dequeue(), None);
+
+
     }
 }

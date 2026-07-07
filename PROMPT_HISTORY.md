@@ -650,4 +650,10 @@
 **Output Summary:** AI celebrated the successful implementation. Introduced Concept #12: `Queue<T>` and the `VecDeque` standard collection. Explained that while a `Vec` is great for a Stack (adding/removing from the end is fast), it is terrible for a Queue (removing from the front requires shifting every element left, O(N)). Introduced `std::collections::VecDeque` for fast O(1) front operations. Provided reference code for a `Queue<T>` struct with `enqueue()` and `dequeue()` methods.
 **Outcome / Next Step:** Learner will implement `Queue<T>` using `VecDeque` in `lib.rs`, add a `test_queue` unit test, and run `cargo test`.
 
+### 2026-07-07 14:12 IST — Prompt #105
+**Prompt:** Learner successfully ran `cargo test` and both `test_stack` and `test_queue` passed.
+**Context:** Day 8 (Generics & Traits). The generic collections are built.
+**Output Summary:** AI celebrated the successful test. Introduced Concept #13: Deriving Traits on Generic Types (`Debug`, `Clone`). Explained how `#[derive(Debug, Clone)]` automatically implements these common traits for our custom collections so they can be printed and duplicated. Highlighted a crucial rule of generics: Rust will only let you print a `Stack<T>` if the inner type `T` *also* implements `Debug`. Guided the learner to add the derives to both structs and add a `println!` to their test.
+**Outcome / Next Step:** Learner will add `#[derive(Debug, Clone)]` to `Stack` and `Queue`, add a `println!` in their test, and run `cargo test -- --nocapture` to see the output.
+
 <!-- New entries appended below -->

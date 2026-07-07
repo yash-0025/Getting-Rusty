@@ -388,3 +388,13 @@ cargo new collections --lib
 - The `T` stands for Type . It tells the rust compiler that i don't know exactly what type of data this will hold yet but whatever type the user passes in lock it in and use it everywhere.
 - We are going to build a Stack [Last in First out data structure]
 
+
+- `Concept 2 - Queue<T> and VecDeque` => To build a queue we need to push items to the back and pop them from the front
+- we could just use a Vec<T> again call self.items.remove(0) . But in vector if we remove the 0th item Rust has to shift every single other item one spot to the left . 
+- If we have 1 million items that is going to incredible slow O(N) time complexity
+- Rust standard library provides a solution VecDeque ( Vector Double-Ended Queue)
+- A VecDeque is essentially a ring buffer under the hood , meaning pushing and popping from the front OR the back is blazingly fast O(1) time complexity
+- To use we have to use 
+```rust
+use std::collections::VecDeque;
+```
