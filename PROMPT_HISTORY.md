@@ -716,4 +716,10 @@
 **Output Summary:** AI agreed that theoretical explanations aren't enough and apologized for rushing. AI provided a two-part practical exercise: (1) Writing an object-unsafe trait that returns `Self` to explicitly trigger compiler error `E0038`, proving why it can't be used as a `dyn Trait`. (2) Implementing the `enum` version of the shape collection so the learner can see exactly how it avoids the heap (`Box`) and dynamic dispatch (`dyn`).
 **Outcome / Next Step:** Learner will add the breaking code to see the object safety error, then implement the enum version to compare architectural approaches in code.
 
+### 2026-07-08 01:50 IST — Prompt #116
+**Prompt:** Learner committed Day 9 to GitHub and asked if all tracking files were updated so they can move to Day 10.
+**Context:** Transitioning to Day 10 (Zero-Copy Config Parser), focusing on Rust's infamous Lifetimes.
+**Output Summary:** AI confirmed that all Day 9 tracking files (`ROADMAP.md`, `LEARNING.md`, `LOGS.md`) were fully updated just before the practical exercises. Welcomed the learner to Day 10. Directed the learner to scaffold a new binary crate (`cargo new config_parser`). Introduced Concept #22: What is a Lifetime? Explained that lifetimes (`'a`) do not control memory; they are purely descriptive labels that help the compiler prove a reference won't outlive its underlying data. Explained Lifetime Elision (why we rarely have to type `'a` for simple functions).
+**Outcome / Next Step:** Learner will create the `config_parser` project and await the first explicit lifetime exercise.
+
 <!-- New entries appended below -->
