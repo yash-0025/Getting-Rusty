@@ -416,3 +416,24 @@ cargo test -- --nocapture
 - In Typescript or Java we use interface to define a contract of shared behaviour , In Rust we use Traits.
 - Let's imagine we want to guarantee that any collection in our library can report its length and whether it is empty. We can create a Collection trait
 - We can provide a default method implementation if a type implements len() we can figure out it is empty without them writing any extra code
+
+
+- `Concept 5 - Associated Types vs Generic Type Parameters`
+- if we look at standard library, the `iterator` trait is defined like this 
+```rust
+pub trait Iterator {
+    type: Item; // What is this ?
+    fn next(&mut self) -> Option<Self::Item>;
+}
+```
+- Why did Rust use type Item instead of generic type like `pub trait Iterator<T>` => This is called an Associated Type
+- We use Generic Parameters(Trait<T>) when a struct could implement the trait multiple times for different types
+- We use Associated types (type Item) when a stuct should only ever implement the trait exactly ONE way.
+- A Stack<i32> can only iterate over i32 . It makes no sense to let someone implement Iterator<String> on a Stack<i32>. By using an associated type Rust enforces that a collection only has ONE way to iterate
+
+- `Concept 6 - Operator Overloading (std::ops)`
+- Waht if we wanted to take stack1 and stack2 and just add them together using + operator?
+- In many languages we cant redefine what + does , In rust we can . Rust maps operators to standard triats in the std::ops module
+- `+` operator is mapped to the `std::ops::Add` trait
+- `*` operator is mapped to the `std::ops::Mul` trait
+- `==` operator is mapped to the `std::cmp::PartialEq` trait which is why #[derive(PartialEq)] works

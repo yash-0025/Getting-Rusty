@@ -668,4 +668,10 @@
 **Output Summary:** AI celebrated the successful implementation of a custom trait. Introduced Concept #15: Implementing Standard Traits & Associated Types. Explained the architectural difference between Generic Type Parameters (e.g., `Trait<T>`, used when multiple implementations are possible) and Associated Types (e.g., `type Item`, used when there is strictly one implementation). Demonstrated how to implement the standard library's `Iterator` trait for `Stack<T>` by defining `type Item = T;` and mapping the required `next()` method directly to our existing `pop()` method.
 **Outcome / Next Step:** Learner will implement `Iterator` for `Stack<T>`, add a `for` loop to their unit test to automatically pop all items, and run `cargo test`.
 
+### 2026-07-07 16:35 IST — Prompt #108
+**Prompt:** Learner ran `cargo test -- --nocapture` and successfully iterated over their Stack using a `for` loop.
+**Context:** Day 8 (Generics & Traits). Exploring the final concepts: Operator Overloading and Trait Bounds.
+**Output Summary:** AI celebrated the fact that the custom generic struct can now be treated like any native Rust iterator. Introduced Concept #16: Operator Overloading and Trait Bounds. Explained how Rust allows custom types to use built-in operators (like `+`) by implementing traits from `std::ops`. Provided reference code for implementing `std::ops::Add` for `Stack<T>`, showing how to combine the inner vectors of two stacks.
+**Outcome / Next Step:** Learner will implement `Add` for `Stack<T>`, write a test to combine two stacks using the `+` operator, and run `cargo test`.
+
 <!-- New entries appended below -->

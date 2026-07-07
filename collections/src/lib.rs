@@ -70,6 +70,18 @@ impl<T> Collection for Queue<T> {
     }
 }
 
+impl<T> Iterator for Stack<T> {
+    // We lock in the associated type
+    // we are telling rust the items this iterator yield will be of type T
+    type Item = T;
+
+    // We must return an Option of our Associated type
+    fn next(&mut self) -> Option<Self::Item> {
+        // Our existing pop() method already does exactly what we need
+        self.pop()
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -87,9 +99,15 @@ mod tests {
         my_stack.push(10);
         my_stack.push(20);
 
-        assert_eq!(my_stack.pop(), Some(20));
-        assert_eq!(my_stack.pop(), Some(10));
-        assert_eq!(my_stack.pop(), None)
+        // assert_eq!(my_stack.pop(), Some(20));
+        // assert_eq!(my_stack.pop(), Some(10));
+        // assert_eq!(my_stack.pop(), None)
+
+        // Because Stack implements iterator, we can use it direclty in a for loop
+        // Note:: This will drain the stack because our next calls pop
+        for item in my_stack {
+            println!("Popped: {}", item);
+        }
     }
 
     #[test]
