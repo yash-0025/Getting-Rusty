@@ -398,3 +398,16 @@ cargo new collections --lib
 ```rust
 use std::collections::VecDeque;
 ```
+
+- `Concept 3 - Deriving Traits and Generic Types` => We can automatically implement common traits like Debug[For printing] and Clone[for duplicating memory] using the `#[derive(...)]` macro.
+```rust
+#[derive(Debug,Clone)]
+```
+- The golden rule of Generic - Because Queue<T> is generic, Rust only allow us to print Queue<T> if the inner type T also implements Debug
+- For eg -  Queue<i32> can be printed because integers implement Debug
+- Queue<String> can be printed because strings implement Debug
+- But if we made a custom struct `struct MyData {}` and did not add `#[derive(Debug)]` to it, and still tries to print Queue<MyData> the compiler will block us
+- **Note** - When running tests , cargo hides printing statements by default. To force it to show them we have to run this 
+```bash
+cargo test -- --nocapture
+```

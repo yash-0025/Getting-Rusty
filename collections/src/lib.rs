@@ -1,10 +1,12 @@
 use std::collections::VecDeque;
 
+#[derive(Debug, Clone)]
 pub struct Stack<T> {
     items: Vec<T>,
 }
 
 
+#[derive(Debug, Clone)]
 pub struct Queue<T> {
     items: VecDeque<T>,
 }
@@ -69,6 +71,8 @@ mod tests {
 
         my_queue.enqueue(10);
         my_queue.enqueue(20);
+
+        println!("My Queue state: {:?}", my_queue);
 
         assert_eq!(my_queue.dequeue(), Some(10));
         assert_eq!(my_queue.dequeue(), Some(20));

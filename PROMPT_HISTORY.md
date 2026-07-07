@@ -656,4 +656,10 @@
 **Output Summary:** AI celebrated the successful test. Introduced Concept #13: Deriving Traits on Generic Types (`Debug`, `Clone`). Explained how `#[derive(Debug, Clone)]` automatically implements these common traits for our custom collections so they can be printed and duplicated. Highlighted a crucial rule of generics: Rust will only let you print a `Stack<T>` if the inner type `T` *also* implements `Debug`. Guided the learner to add the derives to both structs and add a `println!` to their test.
 **Outcome / Next Step:** Learner will add `#[derive(Debug, Clone)]` to `Stack` and `Queue`, add a `println!` in their test, and run `cargo test -- --nocapture` to see the output.
 
+### 2026-07-07 14:26 IST — Prompt #106
+**Prompt:** Learner successfully ran `cargo test -- --nocapture` and saw the internal state of the `Queue` printed.
+**Context:** Day 8 (Generics & Traits). Moving from standard library traits to custom traits.
+**Output Summary:** AI validated the successful trait derivation and print output. Introduced Concept #14: Defining Custom Traits. Explained that traits are like interfaces in other languages (TypeScript/Java)—they define a contract of shared behavior. Showed how to define a `Collection` trait with a required method (`len`) and a default method (`is_empty`). Provided reference code to implement this trait for both `Stack<T>` and `Queue<T>`.
+**Outcome / Next Step:** Learner will write the `Collection` trait, implement it for both collections, and test the default `is_empty()` method.
+
 <!-- New entries appended below -->
