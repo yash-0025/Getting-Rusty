@@ -692,4 +692,16 @@
 **Output Summary:** AI validated the output. Introduced Concept #18: The Heterogeneous Collection Problem and Dynamic Dispatch. Explained that Static Dispatch completely breaks down when you need a single collection (like a `Vec`) to hold multiple *different* types of shapes, because the compiler needs to know the exact size of elements in a `Vec` at compile time. Introduced `Box<dyn Trait>` (Trait Objects) to solve this: storing the shapes on the heap (where sizes can vary) and using a "vtable" to look up the correct method at runtime (Dynamic Dispatch). Provided reference code for a `Vec<Box<dyn Shape>>`.
 **Outcome / Next Step:** Learner will implement a heterogeneous `Vec` using `Box<dyn Shape>` in `main.rs`, iterate over it, and run `cargo run`.
 
+### 2026-07-07 19:01 IST — Prompt #112
+**Prompt:** Learner successfully ran the dynamic dispatch code but expressed frustration that the AI glossed over `Box`, the `{:.2}` syntax, and the `vec![]` macro without properly explaining them (violating Rule #7). Learner correctly pointed out that `Box` had not been covered in Day 3 as the AI previously claimed.
+**Context:** Day 9. Learner caught the AI failing to provide step-by-step, thorough syntax explanations.
+**Output Summary:** AI sincerely apologized for hallucinating the Day 3 curriculum and for glossing over syntax. AI provided a deep-dive explanation into the three missed concepts: (1) `Box` (what it is, how it moves data from the Stack to the Heap, and why we need it to guarantee a known size for Trait Objects), (2) The `vec![]` macro (how it initializes a Vector with elements in one step), and (3) The `{:.2}` syntax (how it tells the formatter to round floating-point numbers to 2 decimal places).
+**Outcome / Next Step:** Learner will read the explanations and the AI awaits the learner's cue to proceed to the next concept in Day 9.
+
+### 2026-07-07 19:55 IST — Prompt #113
+**Prompt:** Learner accepted the explanation, updated their notes, and asked to move on.
+**Context:** Day 9. Exploring `impl Trait` as syntactic sugar for generics.
+**Output Summary:** AI thanked the learner for updating their notes so thoroughly. Introduced Concept #19: `impl Trait` Syntax. Explained that writing full generic bounds like `<T: Shape>(shape: &T)` can become verbose. Rust provides `(shape: &impl Shape)` as syntactic sugar for Static Dispatch. It tells the compiler the exact same thing (Monomorphization), but makes the function signature much cleaner. Provided reference code to refactor the static function.
+**Outcome / Next Step:** Learner will refactor `print_area_static` to use `impl Shape` instead of `<T: Shape>`, and run `cargo run` to verify it behaves identically.
+
 <!-- New entries appended below -->

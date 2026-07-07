@@ -41,6 +41,14 @@ pub fn print_area_static<T: Shape>(shape: &T) {
     println!("The area of the {} is {:.2}", shape.name(), shape.area());
 }
 
+// Dynamic dispatch - A function that takes a Trait object 
+// Notice we use &dyn Shape instead of a generic <T:Shape>
+pub fn print_area_dynamic(shape: &dyn Shape) {
+    println!("(Dynamic) The Area of the {} is {:.2}", shape.name(), shape.area());
+}
+
+
+
 
 
 fn main() {
@@ -51,4 +59,18 @@ fn main() {
 
    print_area_static(&my_circle);
    print_area_static(&my_rectangle);
+
+
+   let shapes: Vec<Box<dyn Shape>> = vec![
+    Box::new(Circle { radius: 10.0 }),
+    Box::new(Rectangle { width: 2.0, height: 3.0 }),
+   ];
+
+   println!("\n--- Iterating through Box<dyn Shape> ---");
+   for shape in shapes {
+    // Because shape is a Box we can use it like a reference to dyn shape
+    // we use .as_ref() to pass it to our dynamic function
+
+    print_area_dynamic(shape.as_ref());
+   }
 }

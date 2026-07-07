@@ -445,3 +445,33 @@ pub trait Iterator {
 - When we compile this code rust performs monomorphization mono=one morp=shape. The compiler looks at everywhere we called that function and literally copy paste a specialized hardcoded version of the function for every unique type we used
 - Pros - Zero runtime cost. It is as fast as if we hand wrote separate functions for Circle and Rectangle
 - Cons - Slightly larger binary size since the compiler generates multiple copies of the function
+
+- `Concept 2 - Dynamic Dispatch (dyn Trait) and Trait Objects` => Instead of putting the raw shpaes into the Vector we wrap them in a Box . A Box puts the data on the Heap and leaves a Pointer on the Stack
+- Since all the pointer are the exact same size in memory (8 bytes on a 64 bit system) the Vec is happy
+- We call this a Trait Object Box<dyn Shape>. The dyn keyword stands for dynamic . At runtime Rust doesn't know exactly what shape is behind the pointer so it looks at a hidden table the vtable to figure out where to call the circle's area() or the Rectangle's area()
+
+- What is Box and why do we need it ?
+- When we create a struct like Circle { radius: 10.0}. Rust by default stores it on the Stack. The Stack is very fast but everything on it must have a known fixed size at compile time
+- A circle is 8 butes one f64
+- A rectangle is 16 bytes two f64
+- A vec also required that every single itme inside it be the exact same size. So Vec<Shape> is illegal because Rust says I don't know how big a shpae is Some are 8 bytes some are 16 bytes 
+- This is where Box comes in Box::new(...) is a way to tell Rust
+- "Take this data move it off the stack and put it on the heap the dynamic memory " Then leave a pointer behind on the stack that tells me where to find it .
+- A pointer is essentially just a memory address. No matter how big the data on the Heap is , a pointer is alwyas exactly 8 bytes on a 64bit computer
+- So when we write Vec<Box<dyn Shape>> we are telling the Vector - You are going to hold a bunch of pointers. Every pointer is exactly 8 bytes so you are perfectly safe. Those pointers will point to data on the heap that implements the Shape trait
+
+- What is `vec![]`?
+- In past to create Vector and put things inside it we use 
+```rust
+let mut my_list = Vec::new()
+my_list.push(1);
+my_list.push(2);
+```
+- this takes 3 line of code and required the variable to be mut . 
+- `vec![]` is a macro like `println!()` . It is just a shortcut provided by Rust that lets us create a Vector and fill it with data in one single step.
+```rust
+let my_list = vec![1,2];
+```
+- `{:.2}` in the print statement => When we use {} in println! . Rust will print out the full number . If teh area of the circle was 314.15789797.... it would print the whole thing which looks messy
+- `:` - This says I want to apply some special foramtting
+- `.2` - This says Round this floating point numer to exactly 2 decimal places 
