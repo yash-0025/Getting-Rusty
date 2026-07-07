@@ -102,10 +102,10 @@ Each day has:
 - [x] **Deliverable:** A `collections` library crate with full tests and doc comments.
 
 ### Day 9 — Build: Plugin-Based Shape Calculator
-- [ ] **You build:** A shape calculation system where shapes implement a `Shape` trait. Build both: (1) a generic/monomorphized version, (2) a `Vec<Box<dyn Shape>>` trait-object version. Compare them.
-- [ ] **Concepts:** **Static dispatch**: generics + monomorphization (compiler generates specialized copies — zero runtime cost, larger binary) · **Dynamic dispatch**: `dyn Trait` / trait objects (vtable-based, runtime cost, but heterogeneous collections) · `impl Trait` in argument and return position — when it's sugar for generics vs necessary · `Box<dyn Trait>` for heterogeneous collections · Object safety rules — why some traits can't become `dyn Trait` · **The enum-vs-trait-object design tradeoff** — a real senior-level architecture question
-- [ ] **Anti-pattern → Pattern:** `Box<dyn Trait>` everywhere "to be safe" (loses inlining, adds heap alloc) → generics when types are known at compile time, `dyn` only for genuine runtime polymorphism
-- [ ] **Deliverable:** Both versions working, with a written note on when you'd choose each approach.
+- [x] **You build:** A shape calculation system where shapes implement a `Shape` trait. Build both: (1) a generic/monomorphized version, (2) a `Vec<Box<dyn Shape>>` trait-object version. Compare them.
+- [x] **Concepts:** **Static dispatch**: generics + monomorphization (compiler generates specialized copies — zero runtime cost, larger binary) · **Dynamic dispatch**: `dyn Trait` / trait objects (vtable-based, runtime cost, but heterogeneous collections) · `impl Trait` in argument and return position — when it's sugar for generics vs necessary · `Box<dyn Trait>` for heterogeneous collections · Object safety rules — why some traits can't become `dyn Trait` · **The enum-vs-trait-object design tradeoff** — a real senior-level architecture question
+- [x] **Anti-pattern → Pattern:** `Box<dyn Trait>` everywhere "to be safe" (loses inlining, adds heap alloc) → generics when types are known at compile time, `dyn` only for genuine runtime polymorphism
+- [x] **Deliverable:** Both versions working, with a written note on when you'd choose each approach.
 
 ### Day 10 — Build: Zero-Copy Config Parser
 - [ ] **You build:** A config file parser (INI-style or custom format) that returns borrowed references into the original file content instead of allocating new `String`s for every value. Measure allocations saved.

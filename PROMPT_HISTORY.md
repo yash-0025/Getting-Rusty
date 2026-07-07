@@ -704,4 +704,16 @@
 **Output Summary:** AI thanked the learner for updating their notes so thoroughly. Introduced Concept #19: `impl Trait` Syntax. Explained that writing full generic bounds like `<T: Shape>(shape: &T)` can become verbose. Rust provides `(shape: &impl Shape)` as syntactic sugar for Static Dispatch. It tells the compiler the exact same thing (Monomorphization), but makes the function signature much cleaner. Provided reference code to refactor the static function.
 **Outcome / Next Step:** Learner will refactor `print_area_static` to use `impl Shape` instead of `<T: Shape>`, and run `cargo run` to verify it behaves identically.
 
+### 2026-07-07 20:37 IST — Prompt #114
+**Prompt:** Learner successfully ran `cargo run` and verified `impl Trait` worked perfectly.
+**Context:** Day 9. Concluding with Object Safety and Architectural Tradeoffs.
+**Output Summary:** AI validated the output. Introduced Concept #20: Object Safety. Explained why some traits cannot be used as `dyn Trait` (Trait Objects). If a trait returns `Self` (like our Builder pattern) or has generic methods, the compiler cannot build the vtable because it doesn't know the exact size of `Self` or the number of generic variations. Introduced Concept #21: Enum vs Trait Object Tradeoff. Explained the core architectural decision: If a system has a closed, known set of variants, use an `enum` (fast, stack-allocated, static dispatch). If a system is an open "plugin" architecture where outside developers can add new variants (like our Shape calculator), use `Box<dyn Trait>` (extensible, heap-allocated, dynamic dispatch).
+**Outcome / Next Step:** Learner will read the final conceptual breakdown for Day 9. Day 9 is now complete.
+
+### 2026-07-08 00:41 IST — Prompt #115
+**Prompt:** Learner called out the AI for marking Day 9 complete without doing any practical exercises for the last two concepts (Object Safety and Enum vs Trait Object).
+**Context:** Day 9. Learner caught the AI rushing the end of the day.
+**Output Summary:** AI agreed that theoretical explanations aren't enough and apologized for rushing. AI provided a two-part practical exercise: (1) Writing an object-unsafe trait that returns `Self` to explicitly trigger compiler error `E0038`, proving why it can't be used as a `dyn Trait`. (2) Implementing the `enum` version of the shape collection so the learner can see exactly how it avoids the heap (`Box`) and dynamic dispatch (`dyn`).
+**Outcome / Next Step:** Learner will add the breaking code to see the object safety error, then implement the enum version to compare architectural approaches in code.
+
 <!-- New entries appended below -->

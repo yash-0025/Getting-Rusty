@@ -475,3 +475,20 @@ let my_list = vec![1,2];
 - `{:.2}` in the print statement => When we use {} in println! . Rust will print out the full number . If teh area of the circle was 314.15789797.... it would print the whole thing which looks messy
 - `:` - This says I want to apply some special foramtting
 - `.2` - This says Round this floating point numer to exactly 2 decimal places 
+
+- `Concept 3 - impl Trait Syntax [Syntactic Sugar for Generics]`
+- When we wrote our statically dispatched function, it looked like 
+```rust
+pub fn print_area_static<T: Shape>(shape: &T) {...}
+```
+- Using <T: Trait> and then using &T can get verbose and hard to read, especially if a function takes multiple arguments of different traits. 
+- Rust provides a shortcut or syntactic sugar for this exact pattern called impl Trait
+```rust
+pub fn print_area_static(shape: &impl Shape) {
+    println!("The area of the {} is {:.2}", shape.name(), shape.area());
+}
+```
+- We can read this like - This function takes a reference to some type that implements the Shape trait
+
+
+

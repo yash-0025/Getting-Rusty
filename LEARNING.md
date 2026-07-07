@@ -206,6 +206,22 @@
 **Mistakes the compiler caught that taught me something:**
 - N/A
 
+### Day 9 — Build: Plugin-Based Shape Calculator — 2026-07-07
+**Status:** `[x]` done
+**What I actually understood:**
+- **Static Dispatch (Monomorphization)**: Fast, zero-runtime-cost generics where the compiler copy-pastes a version of the function for every type used (e.g., `<T: Shape>`).
+- **Dynamic Dispatch (`dyn Trait`)**: Using a vtable at runtime to determine which method to call, allowing heterogeneous collections (`Vec<Box<dyn Shape>>`). 
+- **`Box` with Trait Objects**: Since trait objects have dynamic sizes, they must be boxed so the `Vec` can hold uniformly-sized pointers (8 bytes).
+- **`impl Trait`**: Syntactic sugar for generics (`fn print_area(shape: &impl Shape)`).
+- **Object Safety**: You cannot use `dyn Trait` if the trait returns `Self` or has generic methods (because the vtable cannot be constructed).
+- **Enum vs Trait Object Tradeoff**: Use `enum` for closed, known sets of variants (faster, stack-based). Use `Box<dyn Trait>` for open, plugin-based architectures where outside code can add new variants.
+**What's still fuzzy / questions I had:**
+- None for now.
+**Code I wrote / project progress:**
+- Created the `shapes` binary project showcasing both static and dynamic dispatch.
+**Mistakes the compiler caught that taught me something:**
+- N/A
+
 <!-- New day entries get appended below this line. Ask the AI to draft an entry at the end of each session; approve or edit before it's saved. -->
 
 ---

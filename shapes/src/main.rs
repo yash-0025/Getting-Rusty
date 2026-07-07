@@ -37,7 +37,11 @@ impl Shape for Rectangle {
 
 // Static dispatch - A generic function restricted to types that implement types
 // Rust will copy paste this function under the hood for each type we pass it 
-pub fn print_area_static<T: Shape>(shape: &T) {
+// pub fn print_area_static<T: Shape>(shape: &T) {
+//     println!("The area of the {} is {:.2}", shape.name(), shape.area());
+// }
+
+pub fn print_area_static(shape: &impl Shape) {
     println!("The area of the {} is {:.2}", shape.name(), shape.area());
 }
 

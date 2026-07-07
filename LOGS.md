@@ -33,6 +33,45 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-08 00:38 IST — [LEARNING.md] & [ROADMAP.md] — Marked Day 9 Complete</summary>
+
+- **Files:** LEARNING.md, ROADMAP.md
+- **Change type:** Modified
+- **Reason:** Day 9 curriculum completed.
+
+```diff
+  # In ROADMAP.md
+- - [ ] **You build:** A shape calculation system where shapes implement a `Shape` trait. Build both: (1) a generic/monomorphized version, (2) a `Vec<Box<dyn Shape>>` trait-object version. Compare them.
+- - [ ] **Concepts:** **Static dispatch**: generics + monomorphization (compiler generates specialized copies — zero runtime cost, larger binary) · **Dynamic dispatch**: `dyn Trait` / trait objects (vtable-based, runtime cost, but heterogeneous collections) · `impl Trait` in argument and return position — when it's sugar for generics vs necessary · `Box<dyn Trait>` for heterogeneous collections · Object safety rules — why some traits can't become `dyn Trait` · **The enum-vs-trait-object design tradeoff** — a real senior-level architecture question
+- - [ ] **Anti-pattern → Pattern:** `Box<dyn Trait>` everywhere "to be safe" (loses inlining, adds heap alloc) → generics when types are known at compile time, `dyn` only for genuine runtime polymorphism
+- - [ ] **Deliverable:** Both versions working, with a written note on when you'd choose each approach.
++ - [x] **You build:** A shape calculation system where shapes implement a `Shape` trait. Build both: (1) a generic/monomorphized version, (2) a `Vec<Box<dyn Shape>>` trait-object version. Compare them.
++ - [x] **Concepts:** **Static dispatch**: generics + monomorphization (compiler generates specialized copies — zero runtime cost, larger binary) · **Dynamic dispatch**: `dyn Trait` / trait objects (vtable-based, runtime cost, but heterogeneous collections) · `impl Trait` in argument and return position — when it's sugar for generics vs necessary · `Box<dyn Trait>` for heterogeneous collections · Object safety rules — why some traits can't become `dyn Trait` · **The enum-vs-trait-object design tradeoff** — a real senior-level architecture question
++ - [x] **Anti-pattern → Pattern:** `Box<dyn Trait>` everywhere "to be safe" (loses inlining, adds heap alloc) → generics when types are known at compile time, `dyn` only for genuine runtime polymorphism
++ - [x] **Deliverable:** Both versions working, with a written note on when you'd choose each approach.
+
+  # In LEARNING.md
++ ### Day 9 — Build: Plugin-Based Shape Calculator — 2026-07-07
++ **Status:** `[x]` done
++ **What I actually understood:**
++ - **Static Dispatch (Monomorphization)**: Fast, zero-runtime-cost generics where the compiler copy-pastes a version of the function for every type used (e.g., `<T: Shape>`).
++ - **Dynamic Dispatch (`dyn Trait`)**: Using a vtable at runtime to determine which method to call, allowing heterogeneous collections (`Vec<Box<dyn Shape>>`). 
++ - **`Box` with Trait Objects**: Since trait objects have dynamic sizes, they must be boxed so the `Vec` can hold uniformly-sized pointers (8 bytes).
++ - **`impl Trait`**: Syntactic sugar for generics (`fn print_area(shape: &impl Shape)`).
++ - **Object Safety**: You cannot use `dyn Trait` if the trait returns `Self` or has generic methods (because the vtable cannot be constructed).
++ - **Enum vs Trait Object Tradeoff**: Use `enum` for closed, known sets of variants (faster, stack-based). Use `Box<dyn Trait>` for open, plugin-based architectures where outside code can add new variants.
++ **What's still fuzzy / questions I had:**
++ - None for now.
++ **Code I wrote / project progress:**
++ - Created the `shapes` binary project showcasing both static and dynamic dispatch.
++ **Mistakes the compiler caught that taught me something:**
++ - N/A
+```
+
+</details>
+
+
+<details>
 <summary>2026-07-07 16:45 IST — [LEARNING.md] & [ROADMAP.md] — Marked Day 8 Complete</summary>
 
 - **Files:** LEARNING.md, ROADMAP.md
