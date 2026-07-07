@@ -662,4 +662,10 @@
 **Output Summary:** AI validated the successful trait derivation and print output. Introduced Concept #14: Defining Custom Traits. Explained that traits are like interfaces in other languages (TypeScript/Java)—they define a contract of shared behavior. Showed how to define a `Collection` trait with a required method (`len`) and a default method (`is_empty`). Provided reference code to implement this trait for both `Stack<T>` and `Queue<T>`.
 **Outcome / Next Step:** Learner will write the `Collection` trait, implement it for both collections, and test the default `is_empty()` method.
 
+### 2026-07-07 14:47 IST — Prompt #107
+**Prompt:** Learner successfully ran tests after implementing the custom `Collection` trait with its default method.
+**Context:** Day 8 (Generics & Traits). Moving to Associated Types and implementing standard library traits.
+**Output Summary:** AI celebrated the successful implementation of a custom trait. Introduced Concept #15: Implementing Standard Traits & Associated Types. Explained the architectural difference between Generic Type Parameters (e.g., `Trait<T>`, used when multiple implementations are possible) and Associated Types (e.g., `type Item`, used when there is strictly one implementation). Demonstrated how to implement the standard library's `Iterator` trait for `Stack<T>` by defining `type Item = T;` and mapping the required `next()` method directly to our existing `pop()` method.
+**Outcome / Next Step:** Learner will implement `Iterator` for `Stack<T>`, add a `for` loop to their unit test to automatically pop all items, and run `cargo test`.
+
 <!-- New entries appended below -->

@@ -10,6 +10,18 @@ pub struct Stack<T> {
 pub struct Queue<T> {
     items: VecDeque<T>,
 }
+
+pub trait Collection {
+    // Required method : Whoever implements this trait must write this logic
+    fn len(&self) -> usize;
+
+    // Default method : Whoever implements this trait gets this for Free
+    fn is_empty(&self) -> bool {
+        self.len() == 0
+    }
+}
+
+
 // We must put <T> after impl to tell Rust that T is a generic type and then <T> after stack to say we are implementing this specific generic struct
 impl<T> Stack<T> {
     pub fn new() -> Self {
@@ -40,6 +52,21 @@ impl<T> Queue<T> {
 
     pub fn dequeue(&mut self) -> Option<T> {
         self.items.pop_front()
+    }
+}
+
+
+impl<T> Collection for Stack<T> {
+    fn len(&self) -> usize {
+        self.items.len()
+    }
+
+    // We do not need to implement is_empty() here we get it for free
+}
+
+impl<T> Collection for Queue<T> {
+    fn len(&self) -> usize {
+        self.items.len()
     }
 }
 
@@ -76,6 +103,8 @@ mod tests {
 
         assert_eq!(my_queue.dequeue(), Some(10));
         assert_eq!(my_queue.dequeue(), Some(20));
+
+        assert_eq!(my_queue.is_empty(), true);
         assert_eq!(my_queue.dequeue(), None);
 
 

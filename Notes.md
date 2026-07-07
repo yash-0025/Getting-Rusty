@@ -411,3 +411,8 @@ use std::collections::VecDeque;
 ```bash
 cargo test -- --nocapture
 ```
+
+- `Concept 4 - Defining Custom Traits and Default Methods`
+- In Typescript or Java we use interface to define a contract of shared behaviour , In Rust we use Traits.
+- Let's imagine we want to guarantee that any collection in our library can report its length and whether it is empty. We can create a Collection trait
+- We can provide a default method implementation if a type implements len() we can figure out it is empty without them writing any extra code
