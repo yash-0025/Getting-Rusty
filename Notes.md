@@ -437,3 +437,11 @@ pub trait Iterator {
 - `+` operator is mapped to the `std::ops::Add` trait
 - `*` operator is mapped to the `std::ops::Mul` trait
 - `==` operator is mapped to the `std::cmp::PartialEq` trait which is why #[derive(PartialEq)] works
+
+
+<h1>Day 9</h1>
+
+- `Concept 1 - Static Dispatch (Monomorphization)` -> If we create Shape trait and implement it for a circle and a rectangle we can write a function that takes any shape using Generics<T: Shape>
+- When we compile this code rust performs monomorphization mono=one morp=shape. The compiler looks at everywhere we called that function and literally copy paste a specialized hardcoded version of the function for every unique type we used
+- Pros - Zero runtime cost. It is as fast as if we hand wrote separate functions for Circle and Rectangle
+- Cons - Slightly larger binary size since the compiler generates multiple copies of the function

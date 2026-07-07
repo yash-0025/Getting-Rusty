@@ -680,4 +680,16 @@
 **Output Summary:** AI celebrated the completion of Day 8. Confirmed that the learner successfully transitioned into a "Rust Library Author". The AI silently updated `ROADMAP.md` and `LEARNING.md` to check off Day 8 and properly logged the exact diffs in `LOGS.md` (following Rule #2 this time!). Summarized all the advanced trait concepts learned today: Generics, Associated Types, Custom Traits, Default Methods, and Operator Overloading.
 **Outcome / Next Step:** Learner will review their progress and decide whether to take a break or proceed to Day 9 (Plugin-Based Shape Calculator).
 
+### 2026-07-07 17:05 IST — Prompt #110
+**Prompt:** Learner committed and pushed Day 8 to GitHub, and asked to start Day 9.
+**Context:** Kicking off Day 9 (Plugin-Based Shape Calculator) focused on Static vs Dynamic Dispatch.
+**Output Summary:** AI introduced Day 9 and Concept #17: Static Dispatch (Monomorphization). Explained that when we write a generic function like `fn print_area<T: Shape>(shape: &T)`, the Rust compiler generates a specialized, hardcoded copy of that function for every unique type passed to it at compile time. This means zero performance cost at runtime, but slightly larger binary sizes. Provided reference code for defining a `Shape` trait, a `Circle` and `Rectangle`, and a statically dispatched `print_area` function. Directed the learner to scaffold a new project (`cargo new shapes`).
+**Outcome / Next Step:** Learner will create the `shapes` binary crate, implement the trait, shapes, and generic function, and run `cargo run`.
+
+### 2026-07-07 18:48 IST — Prompt #111
+**Prompt:** Learner successfully ran `cargo run` and verified that static dispatch worked for `print_area_static`.
+**Context:** Day 9. Exploring the limitations of Static Dispatch and transitioning to Dynamic Dispatch (`dyn Trait`).
+**Output Summary:** AI validated the output. Introduced Concept #18: The Heterogeneous Collection Problem and Dynamic Dispatch. Explained that Static Dispatch completely breaks down when you need a single collection (like a `Vec`) to hold multiple *different* types of shapes, because the compiler needs to know the exact size of elements in a `Vec` at compile time. Introduced `Box<dyn Trait>` (Trait Objects) to solve this: storing the shapes on the heap (where sizes can vary) and using a "vtable" to look up the correct method at runtime (Dynamic Dispatch). Provided reference code for a `Vec<Box<dyn Shape>>`.
+**Outcome / Next Step:** Learner will implement a heterogeneous `Vec` using `Box<dyn Shape>` in `main.rs`, iterate over it, and run `cargo run`.
+
 <!-- New entries appended below -->
