@@ -543,3 +543,8 @@ fn get_first_word(s: &'a str) -> &'a str {...}
 - Suppose we have a physical Backpack a generic struct Because it is a generic backpack <T> it can hold absolutely anything we can put a heavy iron dumbbell String in it or we can put a sandwich &str in it
 - Dumbell will lasts forever but sandwich has an expiry if our backpack exists for 5 days but we put a 2 day old sandwich in it and by day 3 we will reach into our backpack and grab rotten garbage a Dangling pointer
 - to prevernt this `T:'a` we put a strict rule on the Backpack like - We don't care what we put in this backpack `T` but whatever it is , its expiration date must be longer than the 5 days this backpack exists `'a`
+
+- `Concept 4 - Ergonomic Conversions (From and Into traits)`
+- In rust standard library From<T> and Into<T> are twin traits used for value to value conversions . The magic of rust is taht we can never implement into trait ourself'
+- If we implement From<A> for B meaning define how to create to create type B out of type A . Rust compiler uses a feature called a Blanket Implementation to automatically write Into<B> for A on our behalf.
+- It is heavily used in function arguments to make API's ergonomic .Instead of forcing ther user to pass a very specific type we accept impl Into<T>

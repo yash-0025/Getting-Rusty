@@ -18,6 +18,16 @@ pub struct Wrapper<'a, T: 'a> {
 }
 // Now the compiler guarantees that whatever data we put in inner - will never expire before the Wrapper itself expires
 
+// instead of this forces the user to pass an exact string
+fn print_name(name: String) {
+    println!("{}", name);
+}
+
+// We write this Accepts anything that can be converted into a string
+fn print_name(name: impl Into<String>) {
+    let exact_string: String = name.into(); // Converts it using the From trait
+    println!("{}", exact_string);
+}
 
 impl<'a> Config<'a> {
     // the parser takes a string slice and returns a config
@@ -71,4 +81,7 @@ fn main() {
     for (key, value) in my_config.entries {
         println!("Key: {} -> Value: {}", key,value);
     }
+
+    print_name(String::from("Yash")); // It passes an owned string
+    print_name("Yash"); // It passes a &'static str reference
 }
