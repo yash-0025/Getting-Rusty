@@ -537,3 +537,9 @@ fn get_first_word(s: &'a str) -> &'a str {...}
 - If we see a reference tagged with `'static` like `&'static str` it means the data will never ever be destroyed . It will live for the entire duration of the program
 - Every single time we write a hardcoded string surrounded by quotes in our code we are creating a 'static reference
 - Becayse when we compile our Rust code into an executable .exe or binary the text "Yash" is literally baked directly into the hard drive file of our binary . When we run the program it loads that binary into a permanent, read only section of RAM . It physically cannot be deleted until the program shuts down. Therefore the compiler assings it `&'static str`lifetime meaning it's guranteed to live forever
+
+- `Concept - 3 Lifetime Bounds on Generics (T: 'a)`
+- We know that we can use <T> to make a struct that can hold anything but what if we put a reference inside that generic struct. How the compiler know how long it will live
+- Suppose we have a physical Backpack a generic struct Because it is a generic backpack <T> it can hold absolutely anything we can put a heavy iron dumbbell String in it or we can put a sandwich &str in it
+- Dumbell will lasts forever but sandwich has an expiry if our backpack exists for 5 days but we put a 2 day old sandwich in it and by day 3 we will reach into our backpack and grab rotten garbage a Dangling pointer
+- to prevernt this `T:'a` we put a strict rule on the Backpack like - We don't care what we put in this backpack `T` but whatever it is , its expiration date must be longer than the 5 days this backpack exists `'a`

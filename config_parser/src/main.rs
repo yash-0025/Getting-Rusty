@@ -11,6 +11,14 @@ pub struct Config<'a> {
     pub entries: Vec<(&'a str, &'a str)>,
 }
 
+// Declare the lifetime 'a and the generic T
+// Add the bound T: 'a T must live at least as long as 'a
+pub struct Wrapper<'a, T: 'a> {
+    pub inner: T,
+}
+// Now the compiler guarantees that whatever data we put in inner - will never expire before the Wrapper itself expires
+
+
 impl<'a> Config<'a> {
     // the parser takes a string slice and returns a config
     // Thanks to lifetime elision rust konws the returned config is pointing at document

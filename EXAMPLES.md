@@ -129,3 +129,30 @@ This document serves as a comprehensive reference for all "Explain Like I'm 5" (
 * **Regular Lifetimes (`'a`):** When you create a normal variable, it is like writing your grocery list on a piece of paper. You use it for a little while, but eventually, you leave the store and throw the paper in the trash. The data gets destroyed when the function ends.
 * **The `'static` Lifetime:** This is like taking a chisel and carving words directly into the physical stone wall of your house. Those words cannot be thrown in the trash. They will exist exactly as long as the house itself exists.
 * **Rust Context:** When you write a hardcoded string literal in your code (`let name = "Yash";`), the text `"Yash"` is literally carved into the final compiled `.exe` binary file on your hard drive. When you run the program, it loads that binary into a permanent, read-only section of RAM. It physically cannot be deleted until the program shuts down. Therefore, the compiler assigns it the `&'static str` lifetime, meaning it is guaranteed to live forever.
+
+---
+
+### 14. Lifetime Bounds on Generics (`T: 'a`) (Day 10)
+**Core Concept:** Forcing a generic type `<T>` to live at least as long as a specific lifetime, so that the struct holding it doesn't outlive its contents.
+
+**The Analogy: The Backpack and the Snack**
+* **The Setup:** Imagine you have a physical Backpack (a Struct). Because it is a generic backpack (`<T>`), it can hold absolutely anything. You can put a heavy iron dumbbell (`String`) in it, or you can put a sandwich (`&str`) in it.
+* **The Danger:** A dumbbell lasts forever. But a sandwich has an expiration date! If your backpack exists for 5 days, but you put a 2-day-old sandwich in it, by day 3 you will reach into your backpack and grab rotten garbage (a Dangling Pointer).
+* **The Solution (`T: 'a`):** To prevent this, you put a strict rule on the Backpack. You say: *"I don't care WHAT you put in this backpack (`T`), but whatever it is, its expiration date MUST be longer than the 5 days this backpack exists (`'a`)."* 
+* **Rust Context (Technical):** When you write `struct Wrapper<'a, T: 'a>`, you are establishing a lifetime bound. It tells the compiler's borrow checker: "This `Wrapper` lives for `'a`. Whatever generic type `T` is placed inside it must also live for *at least* `'a`." The compiler analyzes the exact memory duration of `T` and prevents the creation of the struct if `T` is a reference that will go out of scope before the `Wrapper` does.
+
+---
+
+### 15. Ergonomic Conversions (`From` and `Into` traits) (Day 10)
+**Core Concept:** The standard library traits used to safely and ergonomically convert one type into another type without writing custom `.to_string()` style methods for everything.
+
+**The Analogy: The Currency Exchange Kiosk**
+* **The Setup:** You have US Dollars (Type A). You want to buy a train ticket in Europe, which requires Euros (Type B).
+* **The `From` trait (The Kiosk):** You walk up to a currency exchange kiosk that has a sign saying: *"I know how to make Euros from Dollars"*. You hand them Dollars, and they build you exact Euros.
+* **The `Into` trait (The Superpower):** Because the kiosk exists, you magically gain a superpower. You can walk straight up to the train ticket machine with your Dollars and just say *"Turn this `Into` Euros"*, and the machine secretly routes your money through the kiosk automatically.
+* **`TryFrom` / `TryInto`:** What if you try to exchange Monopoly Money? The kiosk might fail. The `Try` versions are kiosks that don't just hand you Euros; they hand you a Gift Box (`Result`) that either contains your Euros (`Ok`) or an error (`Err`).
+
+**Rust Context (Technical Explanation):** 
+In Rust, `From<T>` and `Into<T>` are twin traits. 
+If you implement `From<A> for B` (meaning you define how to create type B out of type A), the Rust compiler uses a "Blanket Implementation" to automatically give you `Into<B> for A` completely for free. 
+This is heavily used in function arguments. Instead of a function taking exactly a `String`, a function will take `impl Into<String>`. This allows the caller to pass either a `&str` or a `String`, and the function will magically convert it inside by calling `.into()`. It drastically reduces boilerplate code.

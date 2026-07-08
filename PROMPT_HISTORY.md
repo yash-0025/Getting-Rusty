@@ -776,4 +776,10 @@
 **Output Summary:** AI sincerely apologized for dropping the ball on the new governance rule. Provided an ELI5 analogy for `'static` (Carving into Stone vs Writing on Paper). Explained that regular variables are written on paper and thrown away, but string literals are physically carved into the binary of the program and therefore live forever. Appended this analogy (Concept #13) to `EXAMPLES.md` with deep detail, and logged the change in `LOGS.md`.
 **Outcome / Next Step:** Learner will review the ELI5 analogy for `'static` and signal when ready to move on.
 
+### 2026-07-08 22:54 IST — Prompt #126
+**Prompt:** Learner successfully updated their notes and asked to move on to the next concept.
+**Context:** Day 10. Transitioning to Lifetime Bounds on Generics (`T: 'a`).
+**Output Summary:** AI introduced Concept #26: Lifetime Bounds on Generics. Provided an ELI5 analogy (The Backpack and the Snack) to explain how a lifetime bound forces a generic type `T` to have an "expiration date" that lasts at least as long as `'a`. Appended this analogy (Concept #14) to `EXAMPLES.md` to strictly follow Rule 8. Provided reference code showing how `struct Wrapper<'a, T: 'a>` guarantees the generic type won't expire before the struct does.
+**Outcome / Next Step:** Learner will read the theory and signal when ready to move to the final Day 10 concept: Ergonomic Conversions (`From` / `Into`).
+
 <!-- New entries appended below -->

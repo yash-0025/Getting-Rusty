@@ -33,6 +33,41 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-08 23:07 IST — [ROADMAP.md] & [EXAMPLES.md] — Updated Rule 8 to require Technical Explanations</summary>
+
+- **Files:** ROADMAP.md, EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** User requested that analogies must be accompanied by deep technical explanations so they don't miss out on technical vocabulary.
+
+```diff
+  # In ROADMAP.md
+- 8. **ELI5 Analogy Storage & Detail:** Whenever the AI explains any analogy in terms of ELI5 (Explain Like I'm 5), the AI MUST store that analogy with rich, deep, and proper content details in `c:\Dev\Rust\EXAMPLES.md`.
++ 8. **ELI5 Analogy Storage & Detail:** Whenever the AI explains any concept, the AI MUST provide BOTH a simple ELI5 analogy AND a rigorous, deep technical explanation. The AI must store both the analogy and the technical details in `c:\Dev\Rust\EXAMPLES.md`.
+
+  # In EXAMPLES.md
++ Added technical context to Concept 14.
++ Added Concept 15: Ergonomic Conversions (`From` / `Into` traits) with full analogy and technical explanation.
+```
+
+</details>
+
+<details>
+<summary>2026-07-08 22:54 IST — [EXAMPLES.md] — Added Lifetime Bounds analogy</summary>
+
+- **Files:** EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** Adhering to Rule 8 for new concept (Lifetime bounds on generics).
+
+```diff
+  # In EXAMPLES.md
++ ### 14. Lifetime Bounds on Generics (`T: 'a`) (Day 10)
++ **Core Concept:** Forcing a generic type `<T>` to live at least as long as a specific lifetime, so that the struct holding it doesn't outlive its contents.
++ **The Analogy: The Backpack and the Snack**
+```
+
+</details>
+
+<details>
 <summary>2026-07-08 22:48 IST — [EXAMPLES.md] — Added 'static lifetime analogy</summary>
 
 - **Files:** EXAMPLES.md
