@@ -33,6 +33,22 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-08 22:48 IST — [EXAMPLES.md] — Added 'static lifetime analogy</summary>
+
+- **Files:** EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** AI failed to provide an ELI5 analogy for the `'static` lifetime. User requested adherence to Rule 8.
+
+```diff
+  # In EXAMPLES.md
++ ### 13. The `'static` Lifetime (Day 10)
++ **Core Concept:** A special reserved lifetime that dictates a piece of data will never be destroyed and will live for the entire duration of the program.
++ **The Analogy: Carving into Stone vs. Writing on Paper**
+```
+
+</details>
+
+<details>
 <summary>2026-07-08 19:20 IST — [EXAMPLES.md] — Backfilled all missing analogies</summary>
 
 - **Files:** EXAMPLES.md

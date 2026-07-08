@@ -770,4 +770,10 @@
 **Output Summary:** AI celebrated the completion of the zero-copy parser. Introduced Concept #25: The `'static` Lifetime. Explained that `'static` is a special reserved lifetime that means "this data will never be destroyed until the program completely shuts down." Pointed out that string literals (like `"localhost"`) are automatically `&'static str` because they are physically baked into the final `.exe` binary. 
 **Outcome / Next Step:** Learner will read the concept and prepare to move to Lifetime Bounds on Generics (`T: 'a`).
 
+### 2026-07-08 22:48 IST — Prompt #125
+**Prompt:** Learner called out the AI for explaining the `'static` lifetime without using an ELI5 analogy, and for failing to update `EXAMPLES.md`.
+**Context:** Day 10. AI failed to strictly enforce Rule 8 on new concepts.
+**Output Summary:** AI sincerely apologized for dropping the ball on the new governance rule. Provided an ELI5 analogy for `'static` (Carving into Stone vs Writing on Paper). Explained that regular variables are written on paper and thrown away, but string literals are physically carved into the binary of the program and therefore live forever. Appended this analogy (Concept #13) to `EXAMPLES.md` with deep detail, and logged the change in `LOGS.md`.
+**Outcome / Next Step:** Learner will review the ELI5 analogy for `'static` and signal when ready to move on.
+
 <!-- New entries appended below -->

@@ -119,3 +119,13 @@ This document serves as a comprehensive reference for all "Explain Like I'm 5" (
 * **The Fast Way (References):** You don't write anything. Instead, your `Config` struct is just your physical finger **pointing** at the words on the original recipe paper. 
 * **The Danger:** What if someone takes the original recipe paper and throws it in the trash incinerator? Your finger is now pointing at empty air (a Dangling Pointer). If you try to read what you're pointing at, the program crashes!
 * **The Solution (The Lifetime `<'a>`):** Rust forces you to put a physical **sticky note** on both your pointing finger and the recipe paper. That sticky note is the lifetime tag (like `'a`). The sticky note is a binding legal promise to the compiler: *"I promise I will lower my hand and stop pointing my finger BEFORE this paper gets thrown in the trash."* Because the compiler tracks this sticky note, it mathematically guarantees your program will never crash from a dangling pointer.
+
+---
+
+### 13. The `'static` Lifetime (Day 10)
+**Core Concept:** A special reserved lifetime that dictates a piece of data will never be destroyed and will live for the entire duration of the program.
+
+**The Analogy: Carving into Stone vs. Writing on Paper**
+* **Regular Lifetimes (`'a`):** When you create a normal variable, it is like writing your grocery list on a piece of paper. You use it for a little while, but eventually, you leave the store and throw the paper in the trash. The data gets destroyed when the function ends.
+* **The `'static` Lifetime:** This is like taking a chisel and carving words directly into the physical stone wall of your house. Those words cannot be thrown in the trash. They will exist exactly as long as the house itself exists.
+* **Rust Context:** When you write a hardcoded string literal in your code (`let name = "Yash";`), the text `"Yash"` is literally carved into the final compiled `.exe` binary file on your hard drive. When you run the program, it loads that binary into a permanent, read-only section of RAM. It physically cannot be deleted until the program shuts down. Therefore, the compiler assigns it the `&'static str` lifetime, meaning it is guaranteed to live forever.

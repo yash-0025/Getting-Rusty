@@ -532,3 +532,8 @@ fn get_first_word(s: &'a str) -> &'a str {...}
 - `.lines()` gives us an iterator that goes line by line
 - `.split_once()` cuts the line into two pieces at the '='
 
+- `The static Lifetime` 
+- In rust we can name our lifetime anything we want. We could use <'a> , <'b> or even <'cool_lifetime> It is just a community standard to use 'a 'b to keep things short . However there is one special lifetime name that is reserved by teh compiler `'static`
+- If we see a reference tagged with `'static` like `&'static str` it means the data will never ever be destroyed . It will live for the entire duration of the program
+- Every single time we write a hardcoded string surrounded by quotes in our code we are creating a 'static reference
+- Becayse when we compile our Rust code into an executable .exe or binary the text "Yash" is literally baked directly into the hard drive file of our binary . When we run the program it loads that binary into a permanent, read only section of RAM . It physically cannot be deleted until the program shuts down. Therefore the compiler assings it `&'static str`lifetime meaning it's guranteed to live forever
