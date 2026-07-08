@@ -728,4 +728,10 @@
 **Output Summary:** AI validated the compiler's error message, which perfectly described the ambiguity: *"does not say whether it is borrowed from `content` or `prefix`"*. Introduced Concept #23: Explicit Lifetimes in Functions. Explained the syntax: declare the lifetime `<'a>` after the function name, and then apply it to the specific input and output references that are linked. Showed the solution: `fn strip_prefix<'a>(content: &'a str, prefix: &str) -> &'a str`. Highlighted that `prefix` doesn't get the `'a` label because the returned string slice never borrows data from it.
 **Outcome / Next Step:** Learner will fix the function signature using the `'a` lifetime and run `cargo check`.
 
+### 2026-07-08 16:32 IST — Prompt #118
+**Prompt:** Learner successfully ran `cargo check` and confirmed the explicit lifetime `'a` fixed the compilation error `E0106`.
+**Context:** Day 10. Transitioning from functions to Lifetimes in Structs (Zero-Copy Parsers).
+**Output Summary:** AI celebrated the fix. Introduced Concept #24: Lifetimes in Structs & Zero-Copy Architecture. Explained that if a struct holds a reference (`&str`), it MUST declare a lifetime (e.g., `struct Config<'a>`). This guarantees the struct gets destroyed before the data it points to gets deleted. Showed how this allows us to build a "Zero-Copy" parser that parses a file without ever allocating a single new `String` on the heap! Provided reference code for a `Config<'a>` struct and a `parse` function that splits a string by `=` and stores the slices.
+**Outcome / Next Step:** Learner will implement `Config<'a>` and its `parse` method, then write code in `main()` to test parsing a mock config string.
+
 <!-- New entries appended below -->

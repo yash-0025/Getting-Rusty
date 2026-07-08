@@ -521,3 +521,6 @@ fn get_first_word(s: &str) -> &str {...}
 fn get_first_word(s: &'a str) -> &'a str {...}
 ```
 - But when there are two input reference the compiler cannot guess , We have to setp in and apply labels manually
+
+- `Explicit Lifetimes in Functions` => To use a lifetime label , we first have to declare it on the function just like we have to declare generic types <T> and then we tag the referecnes with it.
+
