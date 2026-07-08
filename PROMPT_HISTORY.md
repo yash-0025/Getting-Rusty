@@ -722,4 +722,10 @@
 **Output Summary:** AI confirmed that all Day 9 tracking files (`ROADMAP.md`, `LEARNING.md`, `LOGS.md`) were fully updated just before the practical exercises. Welcomed the learner to Day 10. Directed the learner to scaffold a new binary crate (`cargo new config_parser`). Introduced Concept #22: What is a Lifetime? Explained that lifetimes (`'a`) do not control memory; they are purely descriptive labels that help the compiler prove a reference won't outlive its underlying data. Explained Lifetime Elision (why we rarely have to type `'a` for simple functions).
 **Outcome / Next Step:** Learner will create the `config_parser` project and await the first explicit lifetime exercise.
 
+### 2026-07-08 15:57 IST — Prompt #117
+**Prompt:** Learner successfully forced a lifetime error (`E0106: missing lifetime specifier`) by writing a function with two input references and one output reference.
+**Context:** Day 10. Resolving the missing lifetime by adding explicit labels.
+**Output Summary:** AI validated the compiler's error message, which perfectly described the ambiguity: *"does not say whether it is borrowed from `content` or `prefix`"*. Introduced Concept #23: Explicit Lifetimes in Functions. Explained the syntax: declare the lifetime `<'a>` after the function name, and then apply it to the specific input and output references that are linked. Showed the solution: `fn strip_prefix<'a>(content: &'a str, prefix: &str) -> &'a str`. Highlighted that `prefix` doesn't get the `'a` label because the returned string slice never borrows data from it.
+**Outcome / Next Step:** Learner will fix the function signature using the `'a` lifetime and run `cargo check`.
+
 <!-- New entries appended below -->

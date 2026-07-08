@@ -505,3 +505,19 @@ pub fn print_area_static(shape: &impl Shape) {
 - How Do we choose ?
 - > Use an ENUM when our system is closed . If we know every single shape that will ever exist in our app its a closed set we can use enum
 - > Use Trait Objects (Box<dyn Trait>) when our system is open . If we are writing a library and want other develolpers to be able to create their own custom shapes like a Hexagon and pass them into our library without modifying our source code we must use dyn Trait
+
+<h1>Day 10</h1>
+
+- `Concept 1 - What is Lifetime` => When we pass a reference like &str into a function and reutrn a reference , the Rust compiler is terrified of a Dangling Pointer (returning a reference to memory that has been deleted)
+- A lifetime (`'a`, read as tick a) does not control how long memory lives. It is a descriptive label we give to compiler to prove that the returned reference is tied to the input reference.
+- If we write a function that takes two strings and returns one of them the compiler will panic, because it doesn't know which string you are returning and therefore doesn't know if its safe.
+
+- We have written functions that take references before like fn name(&self) -> &str. Why didn't we have to use lifetimes there? because of lifetime ellision rules. The compiler is smart enough to guress the lifetimes in 90% of cases. The main rule is :If there is exactly one input reference , Rust assumes the output reference is tied to it 
+
+```rust
+// What we write
+fn get_first_word(s: &str) -> &str {...}
+// What Rust silently turns it into [Lifetime Elision]
+fn get_first_word(s: &'a str) -> &'a str {...}
+```
+- But when there are two input reference the compiler cannot guess , We have to setp in and apply labels manually
