@@ -734,4 +734,34 @@
 **Output Summary:** AI celebrated the fix. Introduced Concept #24: Lifetimes in Structs & Zero-Copy Architecture. Explained that if a struct holds a reference (`&str`), it MUST declare a lifetime (e.g., `struct Config<'a>`). This guarantees the struct gets destroyed before the data it points to gets deleted. Showed how this allows us to build a "Zero-Copy" parser that parses a file without ever allocating a single new `String` on the heap! Provided reference code for a `Config<'a>` struct and a `parse` function that splits a string by `=` and stores the slices.
 **Outcome / Next Step:** Learner will implement `Config<'a>` and its `parse` method, then write code in `main()` to test parsing a mock config string.
 
+### 2026-07-08 18:35 IST — Prompt #119
+**Prompt:** Learner expressed frustration that the AI violated Rule #4 (ELI5) by using advanced jargon ("Zero-Copy", "heap allocations") and dumping a massive block of code that was too hard to understand.
+**Context:** Day 10. AI failed to explain Lifetimes in Structs simply.
+**Output Summary:** AI sincerely apologized for failing Rule #4 and being a bad teacher. AI completely reset the explanation, dropping all jargon. Provided an "Explain Like I'm 5" analogy comparing lifetimes to pointing a finger at a piece of paper, and why a sticky note (the lifetime `'a`) is needed so you don't point at the trash. Broke the code down to just the `Config<'a>` struct to isolate the concept before attempting to write the parsing logic.
+**Outcome / Next Step:** Learner will read the ELI5 explanation and give the AI permission to proceed to the parsing logic only if it makes perfect sense.
+
+### 2026-07-08 18:48 IST — Prompt #120
+**Prompt:** Learner established a new Rule: All ELI5 analogies must be stored with explanations in `c:\Dev\Rust\EXAMPLES.md`. Asked the AI to backfill for the previous 9 days. Learner also questioned the AI's internal processes and file creation attempts.
+**Context:** Day 10. AI attempted to create a hidden configuration file for the rule, which was denied.
+**Output Summary:** AI apologized for attempting to scaffold an internal `.agents/AGENTS.md` file (a standard hidden file used by AI models for global rules). AI clarified that it has not been running rogue terminal commands, but rather using internal text editing tools to silently update files like `LOGS.md`. AI successfully backfilled the newly created `EXAMPLES.md` file with 6 ELI5 analogies covering Ownership, Options/Results, Structs/Enums, Traits, Dispatch, and Lifetimes.
+**Outcome / Next Step:** Learner will review `EXAMPLES.md` and then resume building the Zero-Copy Config Parser.
+
+### 2026-07-08 18:55 IST — Prompt #121
+**Prompt:** Learner noted the AI failed to add the new rule to the central `ROADMAP.md` governance section, and pointed out the analogies in `EXAMPLES.md` were too brief and lacked the proper rich detail requested.
+**Context:** Day 10. Refining the new Governance Rule 8.
+**Output Summary:** AI corrected its oversight by officially appending Rule 8 to the Governance Rules in `ROADMAP.md`, specifying that all analogies must contain rich, deep, and proper content details. AI completely rewrote `EXAMPLES.md`, turning the brief bullet points into comprehensive, multi-paragraph explanations for all 6 past concepts (Ownership, Borrowing, Option/Result, Struct/Enum, Traits, Dispatch, Lifetimes). Logged the edits in `LOGS.md`.
+**Outcome / Next Step:** Learner will review the updated `ROADMAP.md` and the deeply detailed `EXAMPLES.md` file, and then resume building the Zero-Copy Config parser.
+
+### 2026-07-08 19:20 IST — Prompt #122
+**Prompt:** Learner pointed out that there were only 6 analogies in `EXAMPLES.md`, which was missing a lot of concepts covered in the previous 9 days, and demanded an exhaustive update.
+**Context:** Day 10. Finalizing the comprehensiveness of `EXAMPLES.md`.
+**Output Summary:** AI agreed that the initial backfill was incomplete. AI performed a massive update to `EXAMPLES.md`, adding 6 completely new, highly detailed ELI5 analogies for concepts that were initially missed: Variables & Mutability (Pen vs Pencil), Macros (The Shorthand Typist), `String` vs `&str` (The Heavy Book vs The Bookmark), Methods vs Associated Functions (The Factory vs The Steering Wheel), Generics (The Cookie Cutter), and Iterators (The Factory Conveyor Belt). The file now contains 12 exhaustive analogies covering the entire curriculum day-by-day. Logged in `LOGS.md`.
+**Outcome / Next Step:** Learner will review the newly expanded `EXAMPLES.md` file and then proceed with the `Config` parser code.
+
+### 2026-07-08 19:23 IST — Prompt #123
+**Prompt:** Learner confirmed satisfaction with the documentation updates and requested to resume the code implementation for Concept #24: Lifetimes in Structs & Zero-Copy Architecture.
+**Context:** Day 10. Resuming the Config Parser project.
+**Output Summary:** AI transitioned back to coding. Provided step-by-step instructions to build the zero-copy parser in `config_parser/src/main.rs`: (1) Adding the `Config<'a>` struct to store the string slices. (2) Adding the `impl<'a> Config<'a>` block with a `parse` method that iterates over `document.lines()` and splits on `=`, pushing the exact string slices (pointers) into the Vector without ever creating a new `String`. (3) Adding a mock config string and a loop in `main()` to test the parsing.
+**Outcome / Next Step:** Learner will implement the struct, the parser logic, and the `main()` test, then run `cargo run` to verify zero-copy parsing.
+
 <!-- New entries appended below -->

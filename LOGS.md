@@ -33,6 +33,44 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-08 19:20 IST — [EXAMPLES.md] — Backfilled all missing analogies</summary>
+
+- **Files:** EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** User correctly pointed out that 6 analogies was not exhaustive for 9 days of curriculum.
+
+```diff
+  # In EXAMPLES.md
++ Added detailed ELI5 analogies for:
++ 1. Variables and Mutability (Pen vs Pencil)
++ 2. Macros (The Shorthand Typist)
++ 3. String vs &str (The Heavy Book vs The Bookmark)
++ 7. Associated Functions vs Methods (The Factory vs The Steering Wheel)
++ 8. Generics (The Cookie Cutter)
++ 9. Iterators (The Factory Conveyor Belt)
+```
+
+</details>
+
+<details>
+<summary>2026-07-08 18:55 IST — [ROADMAP.md] & [EXAMPLES.md] — Added Rule 8 and Expanded Analogies</summary>
+
+- **Files:** ROADMAP.md, EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** User requested adding Rule 8 to the Governance Rules and providing rich, deep details for all ELI5 analogies in EXAMPLES.md.
+
+```diff
+  # In ROADMAP.md
+  7. **AI Self-Correction / Teaching Style Rule Check:** The AI must explain concepts step-by-step and provide code examples to show *how* things work, but the AI must NEVER say "just copy paste this code." The goal is to provide the code as a reference and explanation, and let the learner manually type or implement it to actually learn. The AI must mentally review this rule before generating every single response.
++ 8. **ELI5 Analogy Storage & Detail:** Whenever the AI explains any analogy in terms of ELI5 (Explain Like I'm 5), the AI MUST store that analogy with rich, deep, and proper content details in `c:\Dev\Rust\EXAMPLES.md`. The AI must not provide just a quick overview; it must thoroughly explain the concept, the analogy, and how it exactly maps to Rust mechanics so the learner can use it as a comprehensive reference.
+
+  # In EXAMPLES.md
+- [Replaced brief bullet points with comprehensive, multi-paragraph explanations for Ownership, Options, Structs/Enums, Traits, Static/Dynamic Dispatch, and Lifetimes].
+```
+
+</details>
+
+<details>
 <summary>2026-07-08 00:38 IST — [LEARNING.md] & [ROADMAP.md] — Marked Day 9 Complete</summary>
 
 - **Files:** LEARNING.md, ROADMAP.md

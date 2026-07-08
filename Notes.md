@@ -524,3 +524,8 @@ fn get_first_word(s: &'a str) -> &'a str {...}
 
 - `Explicit Lifetimes in Functions` => To use a lifetime label , we first have to declare it on the function just like we have to declare generic types <T> and then we tag the referecnes with it.
 
+
+- `Concept 2 - Lifetimes in Struct & Zero-Copy Architecture`
+- In python or Nodejs parsing a configuration file means reading the file and then creating a brand new String in memory for every single key and value we parse. There is a lot of slow heap allocations
+- In rust we can build a Zero Copy Parser intstead of making new Strings our config struct will just hold references to the original string that we read from the file.
+- If a Struct holds a reference &str , it must declare a lifetime tag. This allows the compiler to guarantee that the Config struct will be destroyed befor the original string gets deleted
