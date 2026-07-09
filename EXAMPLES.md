@@ -186,3 +186,18 @@ To break this cycle, you wrap the inner types in a Smart Pointer called a `Box` 
 `Rc<T>` stands for Reference Counted. Like a `Box`, it allocates data on the Heap. But instead of strict single-ownership, it places a tiny integer counter next to the data. 
 When you call `.clone()` on an `Rc`, it **does not copy the heavy data**. It simply increments the integer counter. Because cloning an `Rc` is just adding `1` to an integer, it is incredibly fast. When an `Rc` goes out of scope, the `Drop` trait automatically decrements the counter. When the counter reaches 0, the Heap memory is finally freed.
 *Crucial Limitation:* `Rc<T>` only allows **immutable** sharing. You can all share the remote, but nobody is allowed to change its batteries. (To mutate it, you need `RefCell<T>`).
+
+---
+
+### 18. Interior Mutability with `RefCell<T>` (Day 11)
+**Core Concept:** Bypassing the compiler's strict compile-time borrowing rules to allow data mutation through an immutable reference, by moving the rule-checking to runtime.
+
+**The Analogy: The Security Guard and the Locked Glass Case**
+* **The Problem:** Rust's strict rules say: "If you are sharing a notebook with multiple people (immutable reference), NO ONE is allowed to write in it." It is like placing the notebook in a locked glass case.
+* **The Solution (`RefCell<T>`):** You hire a Security Guard (`RefCell`) and place them next to the glass case. The compiler says, *"Okay, I trust the Security Guard. I'll compile your code."*
+* **How it works:** When the program is actually running, you walk up to the guard and ask to borrow the notebook to write in it (`.borrow_mut()`). The guard physically looks around. If no one else is currently reading or writing in it, they unlock the case and hand it to you. 
+* **The Catch:** If someone else *is* already reading or writing in it, the Security Guard panics, sounds the alarm, and immediately crashes the entire program!
+
+**Rust Context (Technical Explanation):**
+`RefCell<T>` provides what is called **Interior Mutability**. Normally, Rust enforces its borrowing rules (either 1 mutable reference, OR infinite immutable references) at *compile time*. `RefCell<T>` enforces those exact same rules at *runtime*.
+This allows you to mutate data even when you only have an immutable reference (`&self`) to the `RefCell`. You call `.borrow_mut()` to get mutable access, or `.borrow()` to get immutable access. Because the checks happen at runtime, it costs a tiny bit of performance (tracking the active borrows). If you accidentally break the rules at runtime (e.g., calling `.borrow_mut()` twice in a row before the first one finishes), your program will literally `panic!` and crash.

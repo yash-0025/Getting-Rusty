@@ -556,8 +556,18 @@ fn get_first_word(s: &'a str) -> &'a str {...}
 - `Rc<t>` - Reference Counting (letting multiple things own the exact same data without cloning it)
 - `RefCell<T>` - Interior mutability changing data even when it is supposedly immutable
 
-- `Concept - Recursive Enums and Box<t>` -> To evaluate `5 + (3 * 2)` we need to break it down into and AST Abstract Syntax Tree. An AST is an recursive tree structure where an expression can contain other expressions
+- `Concept 1- Recursive Enums and Box<t>` -> To evaluate `5 + (3 * 2)` we need to break it down into and AST Abstract Syntax Tree. An AST is an recursive tree structure where an expression can contain other expressions
 - In rust all Structs and enums must have a known size at a compile time so they can be places on the Stack. If we define an enum w here a variant contains the enum itself it is a Recursive type. 
 - its size is theoretically infinite. To break this cycle we need to wrap the inner types in Smart Pointer called a Box. 
 - A Box allocates the actual data on the heap and leaves behind a simple pointer on the Stack. Because a pointer is always exactly 8 bytes on a 64-bit system. The compiler now knows the exact size of the Enum  and the code successfully compiles
+
+- `Concept 2 - Reference Counting with Rc<t> `
+- Remember the single library book ownership if we own the book we can take it home when we leave but what if 3 people in a house need to share a TV remote we can't give strict ownership to person A, because if person A leaves the house they will take the remote with them and the others can't watch TV
+- We attach a digital sign out sheet a reference counter to the remote . Every time someone grabs the reomte they add a tally +1 . When they leave the room they erase their tally -1
+- When the tally hits 0 means the very last person has left the room that person is repsonsible for thowing the remote in the trash [freeing the memory]
+- `Rc<T>` stands for reference Counted like a box it allocates data on the Heap but instead of strict single ownership it places a tiny integer counter next to the data 
+- When we call .clone() on an RC, it does not copy the heavy data. it simple increments the integer counter . Because cloning and Rc is just adding 1 to an integer it is incredibly fast (O(1)). When an Rc goes out of scope the Drop trait automatically decrements the counter . When the counter reaches 0 the Heap memory is finally freed.
+```rust 
+use std::rc:Rc
+```
 

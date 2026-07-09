@@ -1,3 +1,6 @@
+use std::rc::Rc;
+
+
 pub enum Expr {
     // A simple number like 5.0
     Number(f64),
@@ -46,4 +49,25 @@ fn main() {
     let result = math_tree.eval();
 
     println!("5.0 + (3.0 * 2.0) = {}", result);
+
+
+    // We want to calculate (5.0+3.0) * (5.0+3.0)
+    // Instead of building (5.0+3.0) twice we build it ONCE and share it 
+    let five = Expr::Number(5.0);
+    let three = Expr::Number(3.0);
+
+    // We wrap it in an Rc so it can have multiple owners
+    let shared_addition = Rc::new(Expr::Add(Box::new(five), Box::new(three)));
+
+    println!("Right now, the counter is at: {}", Rc::strong_count(&shared_addition));
+
+    // We use .clone() on the RC
+    // This Does not copy the data it just increments the counter to 2.
+    let left_side = Rc::clone(&shared_addition);
+    let right_side = Rc::clone(&shared_addition);
+
+    println!("Now the counter is at : {}", Rc::strong_count(&shared_addition));
+
+    // Note - We can't put Rc inside our current Mul because our enum expects Box
+    // But this demonstrates exactly how Rc tracks ownership without copying data
 }

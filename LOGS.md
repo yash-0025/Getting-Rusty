@@ -33,6 +33,25 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-09 17:34 IST — [ROADMAP.md] & [EXAMPLES.md] — Added Rule 9 and RefCell Concept</summary>
+
+- **Files:** ROADMAP.md, EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** User requested that any code provided must be thoroughly explained step-by-step (what, how, why). Added Rule 9 to enforce this. Progressed to Day 11's `RefCell<T>` concept.
+
+```diff
+  # In ROADMAP.md
++ 9. **Code Explanation Requirement:** Whenever the AI provides code for the learner to write, the AI MUST explain the code step-by-step in simple terms. The AI must break down *what* the code is doing, *how* it is doing it, and *why* it is written that way. Never drop raw code blocks without walking the learner through the logic.
+
+  # In EXAMPLES.md
++ ### 18. Interior Mutability with `RefCell<T>` (Day 11)
++ **Core Concept:** Bypassing the compiler's strict compile-time borrowing rules to allow data mutation through an immutable reference, by moving the rule-checking to runtime.
++ **The Analogy: The Security Guard and the Locked Glass Case**
+```
+
+</details>
+
+<details>
 <summary>2026-07-09 16:14 IST — [EXAMPLES.md] — Added Rc<T> Shared Ownership</summary>
 
 - **Files:** EXAMPLES.md
