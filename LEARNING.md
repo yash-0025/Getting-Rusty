@@ -240,6 +240,22 @@
 
 <!-- New day entries get appended below this line. Ask the AI to draft an entry at the end of each session; approve or edit before it's saved. -->
 
+### Day 11 — Build: Expression Evaluator (Mini Calculator) — 2026-07-09
+**Status:** `[x]` done
+**What I actually understood:**
+- **Recursive Enums and `Box<T>`**: Rust needs to know exact sizes at compile time. If an enum contains itself, it is infinite. `Box<T>` breaks the cycle by putting the data on the heap and storing a fixed-size pointer (8 bytes) on the stack.
+- **Reference Counting (`Rc<T>`)**: Allows multiple variables to own the exact same data. `.clone()` doesn't copy the data, it just increments an integer counter (O(1) time). The data is freed when the counter hits 0. It only allows *immutable* sharing.
+- **Interior Mutability (`RefCell<T>`)**: Moves Rust's strict borrowing rules from compile-time to runtime. It lets you mutate data even if you only have an immutable reference. `.borrow_mut()` gives write access, but panics if someone else is already borrowing it.
+- **Deref Coercion**: The `Deref` trait lets the compiler automatically insert `*` (dereference) operators. This is why you can call `left.eval()` on a `Box<Expr>` instead of explicitly writing `(*left).eval()`.
+**What's still fuzzy / questions I had:**
+- None for now.
+**Code I wrote / project progress:**
+- Created `expression_evaluator` using an AST (Abstract Syntax Tree) to mathematically evaluate nested expressions like `5.0 + (3.0 * 2.0)`.
+- Wrote a deep pattern matching `eval` method to parse the tree recursively.
+- Explored `Rc<RefCell<T>>` to achieve Shared Mutable State.
+**Mistakes the compiler caught that taught me something:**
+- E0072 (infinite size): The compiler caught a recursive enum without indirection and correctly suggested wrapping it in a `Box`.
+
 ---
 
 ## 🧠 Concept Confidence Tracker

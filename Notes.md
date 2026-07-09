@@ -571,3 +571,18 @@ fn get_first_word(s: &'a str) -> &'a str {...}
 use std::rc:Rc
 ```
 
+- The problem with Rc is that it is strictly immutable what if we need multiple owners but we also need to change the data then we use this .
+
+- `Concept 3 - Interior Mutability with RefCell<T>`
+- Rust strict rules sya if we are sharing a notebook with multiple peope an immutable reference No one is allowed to write in it . It is like placing the notebook in a locked glass case
+- Suppose we hire a Security Guard (Refcell) and place them next to the glass case . The rust compiler says okay i trust the security guard. It will compiler our code
+- When the program is actually running we walk up to the guard and ask to borrow the notebook to write in it (.borrow_mut) . The guard physically looks around if no one else is currently reading or writing in it , they unlock the case and hand it to us
+- If someone else is already reading or writing in it and security guard panics sounds the alarm and immediately crashes the entire program
+
+- `RefCell<T>` provides what is called Interior Mutability . Normally Rust enforces its borrowing rules at compile time.
+- `RefCell<T>` enforces those exact same rules at runtime. This allows us to mutate data even when we only have an immutable reference &self to the RefCell.
+- Because the checks happen at runtime, it costs a tiny bit of performance. If we accidentally break the rules at runtime eg. calling .borrow_mut() twive in a row before the first one finishes, our program will literally panic! and crash
+
+```rust
+use std::cell::RefCell
+```

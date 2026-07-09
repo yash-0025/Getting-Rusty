@@ -33,6 +33,41 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-09 18:35 IST — [ROADMAP.md] & [LEARNING.md] — Marked Day 11 Complete</summary>
+
+- **Files:** ROADMAP.md, LEARNING.md
+- **Change type:** Modified
+- **Reason:** User completed Day 11. Marked tasks as [x] in Roadmap and appended detailed day summary to Learning.md.
+
+```diff
+  # In ROADMAP.md
+- - [ ] **You build:** An expression evaluator...
++ - [x] **You build:** An expression evaluator...
+  ... (marked all Day 11 items as [x])
+
+  # In LEARNING.md
++ Appended Day 11 entry summarizing Box, Rc, RefCell, and Deref Coercion.
+```
+
+</details>
+
+<details>
+<summary>2026-07-09 18:35 IST — [EXAMPLES.md] — Added Deref Coercion</summary>
+
+- **Files:** EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** Finishing Day 11 by adding the final concept, Deref Coercion, adhering to Rule 8 with the Invisible Butler analogy and `std::ops::Deref` technical explanation.
+
+```diff
+  # In EXAMPLES.md
++ ### 19. Deref Coercion (Day 11)
++ **Core Concept:** The compiler's ability to automatically "look through" Smart Pointers to let you call methods on the inner data directly.
++ **The Analogy: The Invisible Butler**
+```
+
+</details>
+
+<details>
 <summary>2026-07-09 17:34 IST — [ROADMAP.md] & [EXAMPLES.md] — Added Rule 9 and RefCell Concept</summary>
 
 - **Files:** ROADMAP.md, EXAMPLES.md

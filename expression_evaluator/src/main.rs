@@ -1,4 +1,6 @@
 use std::rc::Rc;
+use std::cell::RefCell;
+
 
 
 pub enum Expr {
@@ -70,4 +72,32 @@ fn main() {
 
     // Note - We can't put Rc inside our current Mul because our enum expects Box
     // But this demonstrates exactly how Rc tracks ownership without copying data
+
+
+    // Create a shared mutable number
+    let shared_number = Rc::new(RefCell::new(10));
+
+    // Create a second owner increments TC counter to 2
+    let owner_two = Rc::clone(&shared_number);
+
+    // Mutate the data through owner_two
+    {
+        // We ue .borrow_mut() to ask the Security guard for write access
+        // We add * to derefernce it so we can change the actual integer
+        let mut mutable_reference = owner_two.borrow_mut();
+        *mutable_reference += 5;
+
+        // As soon as this block ends mutable_reference is dropped and the Security guard locks the glass case again 
+
+    }
+
+    // Read the data through the original owner
+    // We use .borrow() to ask the Security guard for read access
+    println!("The shared number is now: {}", shared_number.borrow());
+
 }
+
+
+// We are creating a number 10 sharing it between two owners changing it via the second owner and reading the changes value from the first owner
+// We wrap the number in RefCell for mutability and then wrap that in Rc for shared ownership. We use .borrow_mut() to write and .borrow() to read
+// Normally Rust forbids this if we have two owners the data must be completely immutable by combining Rc and RefCell, we bypass the compile time checks and safely achieveshared mutable state at runtime

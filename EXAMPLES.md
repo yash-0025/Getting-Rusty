@@ -201,3 +201,17 @@ When you call `.clone()` on an `Rc`, it **does not copy the heavy data**. It sim
 **Rust Context (Technical Explanation):**
 `RefCell<T>` provides what is called **Interior Mutability**. Normally, Rust enforces its borrowing rules (either 1 mutable reference, OR infinite immutable references) at *compile time*. `RefCell<T>` enforces those exact same rules at *runtime*.
 This allows you to mutate data even when you only have an immutable reference (`&self`) to the `RefCell`. You call `.borrow_mut()` to get mutable access, or `.borrow()` to get immutable access. Because the checks happen at runtime, it costs a tiny bit of performance (tracking the active borrows). If you accidentally break the rules at runtime (e.g., calling `.borrow_mut()` twice in a row before the first one finishes), your program will literally `panic!` and crash.
+
+---
+
+### 19. Deref Coercion (Day 11)
+**Core Concept:** The compiler's ability to automatically "look through" Smart Pointers to let you call methods on the inner data directly.
+
+**The Analogy: The Invisible Butler**
+* **The Setup:** Imagine you have a locked safe (a `Box`) containing a calculator (the data).
+* **The Problem:** To use the calculator, you would normally have to unlock the safe, pull out the calculator (`*box`), press the buttons (`.eval()`), and then put it back.
+* **The Solution:** Deref Coercion is like having an Invisible Butler. Instead of doing the work yourself, you just shout "add 5 and 3!". The Invisible Butler automatically opens the safe, hits the buttons on the inner calculator, and hands you the result. 
+
+**Rust Context (Technical Explanation):**
+Deref Coercion happens when a Smart Pointer implements the `std::ops::Deref` trait. Both `Box<T>` and `Rc<T>` implement this trait. 
+When you have a `Box<Expr>` and you write `left.eval()`, the compiler notices that `eval()` does not exist on `Box` itself. Instead of throwing an error, the compiler uses the `Deref` trait to automatically insert the dereference operator (`*`) for you. It turns `left.eval()` into `(*left).eval()` behind the scenes at compile time. This is why Smart Pointers feel so ergonomic to use; you can treat them exactly like the data they contain.
