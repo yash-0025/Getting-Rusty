@@ -196,6 +196,57 @@ impl Lexer {
     }
 }
 
+pub struct Parser {
+    // We take the list of tokens from the lexer
+    tokens: Vec<Token>,
+    // We track which token we are currently looking at
+    position: usize,
+}
+
+impl Parser {
+    pub fn new(tokens: Vec<Token>) -> Self {
+        Parser { toekens, position: 0}
+    }
+
+    // A helper to safely look at the current token without crashing
+    fn current_token(&self) -> Option<&Token> {
+        self.tokens.get(self.position)
+    }
+
+    // Level 1 Parse a factor numbers and parantheses
+    pub fn parse_factor(&mut self) -> Expr {
+        let token = self.current_token().expect("Unexpected end of tokens");
+
+        match token {
+            // If it's a number , we return the number ASTnode and move forward
+            Token::Number(n) => {
+                let value = *n; // copy f64 out of the reference
+                self.position += 1;
+                return Expr::Number(value);
+            }
+            // If it's a left Paranthesis we must parse an entire inner expression
+            Token::LParen => {
+                self.position += 1; // Skip the (
+                // WE recursively call parse_expression 
+
+                let inner_expr = self.parse_expression();
+
+                if self.current_token() == Some(&Token::RParem) {
+                    self.position += 1;
+                } else {
+                    panic!("Missing closing paranthesis!");
+                }
+
+                return inner_expr;
+            }
+            _ => panic!("Exprected a number or '("),
+        }
+    }
+
+    pub fn parse_expression(&mut self) -> Expr {
+        todo!("We will write this next!");
+    }
+}
 
 fn main() {
     let mut lexer = Lexer::new("(5.0 + 3.0) * 2.0");
@@ -204,3 +255,10 @@ fn main() {
         println!("{:?}", token);
     }
 }
+
+
+
+// The parser struct holds our Vec<Token> amd an index. parse_factor looks at the current token. If it's a number it builds and Expr::Number and moves forward if it's a ( it recursively parses everything inside the parantheses and then make sure thre is a ) at the end
+// How it works - We use the exact same array indexing logic as the Lexer self.position we use a match statement on the enum Notice the recusion if  we hit a paranthesis we call parse_expression() to handle the math inside
+// By separating Factors numbers/parens from Expressions addition we naturally enforc the Order of Operation PEMDAS parentheses and numbers are processed first
+
