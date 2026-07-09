@@ -33,6 +33,82 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-09 23:52 IST — [PROMPT_HISTORY.md] — Fixing Lexer Syntax Errors</summary>
+
+- **Files:** PROMPT_HISTORY.md
+- **Change type:** Modified
+- **Reason:** User manually typed the Lexer logic but encountered syntax errors (misplaced brackets and a typo). Provided corrections to help them compile successfully.
+
+```diff
+  # In PROMPT_HISTORY.md
++ Logged Prompt 138 regarding syntax fixes.
+```
+
+</details>
+
+<details>
+<summary>2026-07-09 22:58 IST — [task.md] — Executing Parser Step 2</summary>
+
+- **Files:** task.md, PROMPT_HISTORY.md
+- **Change type:** Modified
+- **Reason:** Progressing through the string parser implementation plan. Proceeded to Step 2 (Lexer `next_token` method) using only basic array indexing and while loops to satisfy the user's constraints.
+
+```diff
+  # In task.md
+- - [ ] Step 2: Build the Lexer's next_token method
++ - [/] Step 2: Build the Lexer's next_token method
+```
+
+</details>
+
+<details>
+<summary>2026-07-09 22:55 IST — [PROMPT_HISTORY.md] — Restructured Lexer Architecture</summary>
+
+- **Files:** PROMPT_HISTORY.md
+- **Change type:** Modified
+- **Reason:** User was heavily frustrated that the AI introduced `Peekable` and `Chars` types which were never formally covered. AI took complete accountability, scrapped the standard library iterator adapters, and redesigned the Lexer to use ONLY explicitly covered topics: `Vec<char>` and `usize` tracking.
+
+```diff
+  # In PROMPT_HISTORY.md
++ Logged AI mistake and immediate pivot to using raw Vectors for the Lexer.
+```
+
+</details>
+
+<details>
+<summary>2026-07-09 22:53 IST — [task.md] — Started String Parser Execution</summary>
+
+- **Files:** task.md, PROMPT_HISTORY.md
+- **Change type:** Added / Modified
+- **Reason:** User approved the implementation plan with a strict rule to only use previously learned concepts (Enums, Structs, Iterators). Created `task.md` to track progress and started Step 1 (The Lexer).
+
+```diff
+  # In task.md
++ Created tasks:
++ - [/] Step 1: Build the Lexer (Tokenizer) using Iterators
++ - [ ] Step 2: Build the Lexer's next_token method
++ - [ ] Step 3: Build the Parser (Recursive Descent)
++ - [ ] Step 4: Wire it all together in main.rs and test
+```
+
+</details>
+
+<details>
+<summary>2026-07-09 19:56 IST — [ROADMAP.md] & [LEARNING.md] — Unmarked Day 11 and Created Parser Plan</summary>
+
+- **Files:** ROADMAP.md, LEARNING.md, PROMPT_HISTORY.md
+- **Change type:** Modified
+- **Reason:** User correctly identified that the actual Day 11 deliverable (building an expression parser that takes a raw string) was skipped in favor of just teaching the underlying pointer concepts. AI took accountability, reverted the "Complete" status, and drafted a formal Implementation Plan to build the string Lexer and Parser.
+
+```diff
+  # In ROADMAP.md and LEARNING.md
+- - [x] Day 11 Status
++ - [~] Day 11 Status
+```
+
+</details>
+
+<details>
 <summary>2026-07-09 18:35 IST — [ROADMAP.md] & [LEARNING.md] — Marked Day 11 Complete</summary>
 
 - **Files:** ROADMAP.md, LEARNING.md

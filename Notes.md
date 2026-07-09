@@ -586,3 +586,17 @@ use std::rc:Rc
 ```rust
 use std::cell::RefCell
 ```
+- Rc<RefCell<T>> which is the holy grail patter for Shared Mutable state in single threaded rust. It is used constantly when building GUI applications or complex data structures like trees and graphs 
+
+- `Concept 4 - Deref Coercion`
+```rust
+Expr::Add(left, right) => left.eval() + right.eval()
+```
+- left and right are both Box<Expr> . They are Pointers they are not actual Expr so how in the world were we able to call .eval() on them
+- Imagine we have a locked safe a Box containing a calculator the data
+- To use the calculator we would normally have to unlock the safe pull out the calculator *box press the buttons .eval() and then put it back
+- Deref Coercion is like having an invisible buttler. Instead of doing the work ourself we just shout add 5 and 3 . The invisible buttler will automatically opens the safe hits the buttons on the inner calculator and hands us the result
+- Deref Coercion happens when a Smart Pointer implements the std::ops::Deref trait. Both Box<T> and Rc<T> implement this trait
+- When we have a Box<Expr> and we write left.eval() the compiler notices the eval() does not exist on Box itself. Instead of throwing and error the compiler uses the Dered trait to automatically insert the dereference opereator * for us.
+- It turns left.eval() into (*left).eval() behdind the scenes at compile time.
+- This is why smart pointers in rust feel so incredible ergonomic to use the compiler automatically looks through the pointer so we can treat the pointer exactly like the data it contains

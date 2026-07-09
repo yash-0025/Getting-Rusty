@@ -241,7 +241,7 @@
 <!-- New day entries get appended below this line. Ask the AI to draft an entry at the end of each session; approve or edit before it's saved. -->
 
 ### Day 11 — Build: Expression Evaluator (Mini Calculator) — 2026-07-09
-**Status:** `[x]` done
+**Status:** `[~]` in progress
 **What I actually understood:**
 - **Recursive Enums and `Box<T>`**: Rust needs to know exact sizes at compile time. If an enum contains itself, it is infinite. `Box<T>` breaks the cycle by putting the data on the heap and storing a fixed-size pointer (8 bytes) on the stack.
 - **Reference Counting (`Rc<T>`)**: Allows multiple variables to own the exact same data. `.clone()` doesn't copy the data, it just increments an integer counter (O(1) time). The data is freed when the counter hits 0. It only allows *immutable* sharing.
