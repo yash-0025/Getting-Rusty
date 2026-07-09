@@ -156,3 +156,33 @@ This document serves as a comprehensive reference for all "Explain Like I'm 5" (
 In Rust, `From<T>` and `Into<T>` are twin traits. 
 If you implement `From<A> for B` (meaning you define how to create type B out of type A), the Rust compiler uses a "Blanket Implementation" to automatically give you `Into<B> for A` completely for free. 
 This is heavily used in function arguments. Instead of a function taking exactly a `String`, a function will take `impl Into<String>`. This allows the caller to pass either a `&str` or a `String`, and the function will magically convert it inside by calling `.into()`. It drastically reduces boilerplate code.
+
+---
+
+### 16. Recursive Enums and `Box<T>` (Day 11)
+**Core Concept:** Using a heap-allocated smart pointer (`Box<T>`) to allow an Enum to contain itself without triggering an "infinite size" compiler error.
+
+**The Analogy: The Russian Nesting Dolls and the Treasure Map**
+* **The Setup:** Imagine a set of Russian Nesting Dolls. You want to build a box to store them. 
+* **The Problem:** The Rust compiler needs to know exactly how big the box needs to be before it builds it. But a nesting doll can hold another doll, which can hold another doll... infinitely. The compiler throws its hands up and says *"This doll has an infinite size! I can't build a box for it!"*
+* **The Solution (`Box<T>`):** Instead of putting a doll physically inside another doll, you put a **Treasure Map** (`Box<T>`) inside the doll. The map points to a storage locker (the Heap memory) where the next doll actually lives.
+* **Why this works:** A treasure map is always exactly one piece of paper (a fixed 8-byte pointer). Now, the compiler knows exactly how big the doll is: it's the size of the wood + the size of one piece of paper. It is no longer infinite size!
+
+**Rust Context (Technical Explanation):**
+In Rust, all Structs and Enums must have a known size at compile time so they can be placed on the Stack. If you define an enum like `enum Expr { Add(Expr, Expr) }`, it is a "Recursive Type". `Expr` contains an `Expr`, which contains an `Expr`, meaning its size is theoretically infinite. 
+To break this cycle, you wrap the inner types in a Smart Pointer called a `Box` (`enum Expr { Add(Box<Expr>, Box<Expr>) }`). A `Box` allocates the actual data on the Heap, and leaves behind a simple pointer on the Stack. Because a pointer is always exactly 8 bytes (on a 64-bit system), the compiler now knows the exact size of the Enum, and the code successfully compiles.
+
+---
+
+### 17. Shared Ownership with `Rc<T>` (Day 11)
+**Core Concept:** Allowing multiple variables to own the exact same piece of data without cloning it, by keeping a tally of how many owners exist.
+
+**The Analogy: The Shared TV Remote**
+* **The Problem:** Remember the Single Library Book (Ownership)? If you own the book, you take it home when you leave. But what if 3 people in a house need to share the TV remote? You can't give ownership to Person A, because if Person A leaves the house, they will take the remote with them, and the others can't watch TV.
+* **The Solution (`Rc<T>`):** You attach a digital sign-out sheet (a reference counter) to the remote. Every time someone grabs the remote, they add a tally (`+1`). When they leave the room, they erase their tally (`-1`). 
+* **The Cleanup:** When the tally hits `0`, it means the very last person has left the room. *That* person is responsible for throwing the remote in the trash (freeing the memory).
+
+**Rust Context (Technical Explanation):**
+`Rc<T>` stands for Reference Counted. Like a `Box`, it allocates data on the Heap. But instead of strict single-ownership, it places a tiny integer counter next to the data. 
+When you call `.clone()` on an `Rc`, it **does not copy the heavy data**. It simply increments the integer counter. Because cloning an `Rc` is just adding `1` to an integer, it is incredibly fast. When an `Rc` goes out of scope, the `Drop` trait automatically decrements the counter. When the counter reaches 0, the Heap memory is finally freed.
+*Crucial Limitation:* `Rc<T>` only allows **immutable** sharing. You can all share the remote, but nobody is allowed to change its batteries. (To mutate it, you need `RefCell<T>`).

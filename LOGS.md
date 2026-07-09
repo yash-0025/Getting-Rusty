@@ -33,6 +33,40 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-09 16:14 IST — [EXAMPLES.md] — Added Rc<T> Shared Ownership</summary>
+
+- **Files:** EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** Progressing through Day 11 and adhering to Rule 8 by providing both the ELI5 analogy (Shared TV Remote) and technical explanation (Reference counting heap pointers) for `Rc<T>`.
+
+```diff
+  # In EXAMPLES.md
++ ### 17. Shared Ownership with `Rc<T>` (Day 11)
++ **Core Concept:** Allowing multiple variables to own the exact same piece of data without cloning it, by keeping a tally of how many owners exist.
++ **The Analogy: The Shared TV Remote**
++ **Rust Context (Technical Explanation):** ...
+```
+
+</details>
+
+<details>
+<summary>2026-07-09 14:32 IST — [EXAMPLES.md] — Added Box<T> and Recursive Enums</summary>
+
+- **Files:** EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** Started Day 11 and adhering to Rule 8 by providing both the ELI5 analogy (Russian Nesting Dolls) and technical explanation for recursive enums requiring a known size via Heap allocation.
+
+```diff
+  # In EXAMPLES.md
++ ### 16. Recursive Enums and `Box<T>` (Day 11)
++ **Core Concept:** Using a heap-allocated smart pointer (`Box<T>`) to allow an Enum to contain itself without triggering an "infinite size" compiler error.
++ **The Analogy: The Russian Nesting Dolls and the Treasure Map**
++ **Rust Context (Technical Explanation):** ...
+```
+
+</details>
+
+<details>
 <summary>2026-07-09 02:15 IST — [ROADMAP.md] & [LEARNING.md] — Marked Day 10 Complete</summary>
 
 - **Files:** ROADMAP.md, LEARNING.md

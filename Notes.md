@@ -548,3 +548,16 @@ fn get_first_word(s: &'a str) -> &'a str {...}
 - In rust standard library From<T> and Into<T> are twin traits used for value to value conversions . The magic of rust is taht we can never implement into trait ourself'
 - If we implement From<A> for B meaning define how to create to create type B out of type A . Rust compiler uses a feature called a Blanket Implementation to automatically write Into<B> for A on our behalf.
 - It is heavily used in function arguments to make API's ergonomic .Instead of forcing ther user to pass a very specific type we accept impl Into<T>
+
+
+<h1>Day 11</h1>
+
+- `Box<T>` - Storing data on the heap to create recursive structures
+- `Rc<t>` - Reference Counting (letting multiple things own the exact same data without cloning it)
+- `RefCell<T>` - Interior mutability changing data even when it is supposedly immutable
+
+- `Concept - Recursive Enums and Box<t>` -> To evaluate `5 + (3 * 2)` we need to break it down into and AST Abstract Syntax Tree. An AST is an recursive tree structure where an expression can contain other expressions
+- In rust all Structs and enums must have a known size at a compile time so they can be places on the Stack. If we define an enum w here a variant contains the enum itself it is a Recursive type. 
+- its size is theoretically infinite. To break this cycle we need to wrap the inner types in Smart Pointer called a Box. 
+- A Box allocates the actual data on the heap and leaves behind a simple pointer on the Stack. Because a pointer is always exactly 8 bytes on a 64-bit system. The compiler now knows the exact size of the Enum  and the code successfully compiles
+

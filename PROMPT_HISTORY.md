@@ -788,4 +788,22 @@
 **Output Summary:** AI officially checked off all Day 10 boxes in `ROADMAP.md` and appended the Day 10 summary log into `LEARNING.md`, confirming that Lifetimes and Zero-Copy architecture are officially mastered. Logged the administrative updates in `LOGS.md`. Transitioned the curriculum to Day 11: Expression Evaluator (Mini Calculator), which will teach Smart Pointers (`Box`, `Rc`, `RefCell`).
 **Outcome / Next Step:** Learner will create the new project using `cargo new expression_evaluator` and signal when ready to start Day 11.
 
+### 2026-07-09 14:32 IST — Prompt #128
+**Prompt:** Learner said "Let's start" and subsequently denied the AI's attempt to run `cargo new` because they had already created the project.
+**Context:** Kicking off Day 11 (Expression Evaluator).
+**Output Summary:** AI apologized for not noticing the project was already created. Introduced Concept #28: Recursive Enums and `Box<T>`. Provided the rigorous technical explanation (enums needing known size at compile time, `Box` allocating to the heap to provide a fixed 8-byte pointer) along with the ELI5 analogy (Russian Nesting Dolls and Treasure Maps). Strictly followed Rule 8 by logging this to `EXAMPLES.md` and tracking it in `LOGS.md`. Instructed the learner to write the first `Expr` enum to intentionally trigger the "infinite size" compiler error.
+**Outcome / Next Step:** Learner will write the naive `Expr` enum in `expression_evaluator/src/main.rs`, observe the compiler error, and then fix it using `Box<T>`.
+
+### 2026-07-09 14:45 IST — Prompt #129
+**Prompt:** Learner successfully wrote the recursive enum and got the `E0072: recursive type Expr has infinite size` compiler error as planned.
+**Context:** Day 11. Fixing the infinite size error using `Box<T>`.
+**Output Summary:** AI pointed out how the Rust compiler not only catches the infinite size issue, but actively suggests inserting `Box` as the fix. Instructed the learner to update the `Expr` enum to include `Sub`, `Mul`, and `Div` using `Box<Expr>`. Also provided the `eval()` method implementation that uses deep pattern matching to recursively evaluate the AST, and gave code for `main()` to manually build and calculate `5.0 + (3.0 * 2.0)`.
+**Outcome / Next Step:** Learner will implement the full AST enum with `Box`, the `eval` logic, and run `cargo run` to see the calculator work.
+
+### 2026-07-09 16:14 IST — Prompt #130
+**Prompt:** Learner implemented `Box<T>`, wrote the `eval` logic, and successfully ran the program, outputting `11.0`.
+**Context:** Day 11. Transitioning from `Box<T>` to `Rc<T>`.
+**Output Summary:** AI celebrated the successful evaluation of the Abstract Syntax Tree. Introduced Concept #29: Reference Counting with `Rc<T>`. Provided the ELI5 analogy (The Shared TV Remote) and technical explanation (Heap allocation with an integer counter, where `.clone()` only increments the counter without copying the heavy data). Explained that `Rc` gives multiple owners, but they are all strictly *immutable*. Appended Concept #17 to `EXAMPLES.md` to adhere to Rule 8, and logged it in `LOGS.md`.
+**Outcome / Next Step:** Learner will review the `Rc<T>` theory and signal when ready to move to `RefCell<T>`.
+
 <!-- New entries appended below -->
