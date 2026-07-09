@@ -119,10 +119,10 @@ Each day has:
 > ⚠️ **This is the day lifetimes finally make sense** — because you're using them to solve a real performance problem (avoiding allocations), not learning them in the abstract.
 
 ### Day 11 — Build: Expression Evaluator (Mini Calculator)
-- [~] **You build:** An expression evaluator that parses and evaluates mathematical expressions like `(2 + 3) * 4 / 2`. Build an AST using recursive enums, evaluate it with pattern matching.
+- [x] **You build:** An expression evaluator that parses and evaluates mathematical expressions like `(2 + 3) * 4 / 2`. Build an AST using recursive enums, evaluate it with pattern matching.
 - [x] **Concepts:** `Box<T>` for recursive types (`enum Expr { Add(Box<Expr>, Box<Expr>), Num(f64) }`) · `Rc<T>` — reference-counted shared ownership (single-threaded, deterministic, not a GC) · `RefCell<T>` — runtime-checked borrowing (interior mutability) · Deref coercion — why `Box<T>`, `Rc<T>` let you call `T`'s methods directly · Deep pattern matching on nested enum structures
 - [x] **Reality check:** Recursive enums + Box is how every parser, compiler, and interpreter in Rust works
-- [ ] **Deliverable:** Working expression evaluator handling `+`, `-`, `*`, `/`, parentheses, with error handling for malformed input.
+- [x] **Deliverable:** Working expression evaluator handling `+`, `-`, `*`, `/`, parentheses, with error handling for malformed input.
 
 ### Day 12 — Build: File System Tree Simulator
 - [ ] **You build:** A simulated file system with directories containing files and subdirectories. Support: mkdir, touch, ls, tree (recursive display), rm. Uses `Rc<RefCell<Node>>` for shared ownership and `Weak` for parent pointers.

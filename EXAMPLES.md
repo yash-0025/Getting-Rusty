@@ -215,3 +215,17 @@ This allows you to mutate data even when you only have an immutable reference (`
 **Rust Context (Technical Explanation):**
 Deref Coercion happens when a Smart Pointer implements the `std::ops::Deref` trait. Both `Box<T>` and `Rc<T>` implement this trait. 
 When you have a `Box<Expr>` and you write `left.eval()`, the compiler notices that `eval()` does not exist on `Box` itself. Instead of throwing an error, the compiler uses the `Deref` trait to automatically insert the dereference operator (`*`) for you. It turns `left.eval()` into `(*left).eval()` behind the scenes at compile time. This is why Smart Pointers feel so ergonomic to use; you can treat them exactly like the data they contain.
+
+---
+
+### 20. Reference Cycles and `Weak<T>` (Day 12)
+**Core Concept:** Breaking memory leaks caused by circular references in reference-counted pointers.
+
+**The Analogy: Two Friends Holding Hands**
+* **The Setup:** Imagine Alice (`Rc`) and Bob (`Rc`) are holding hands in a room. The rule of the room is: "As long as someone is holding your hand, you cannot leave."
+* **The Problem (Memory Leak):** Alice is holding Bob's hand (`Rc`), and Bob is holding Alice's hand (`Rc`). Since neither will let go first, the room thinks they are both permanently busy. They are trapped in the room forever. This is a Reference Cycle.
+* **The Solution (`Weak<T>`):** Alice holds Bob's hand firmly (`Rc`), but Bob only *looks* at Alice without physically holding her hand (`Weak`). When Alice decides she is done and leaves, she drops Bob's hand. Because Bob wasn't physically holding onto Alice, she is free to go. The cycle is broken!
+
+**Rust Context (Technical Explanation):**
+A Reference Cycle happens when two `Rc` pointers point to each other (e.g., in a Tree where a Parent points to a Child, and the Child points back to the Parent). Because `Rc` only drops memory when its `strong_count` reaches 0, two objects pointing to each other will keep each other's `strong_count` at 1 forever, resulting in a permanent Memory Leak.
+`Weak<T>` is a companion to `Rc`. It allows you to hold a reference to data *without* incrementing the `strong_count` (it increments a `weak_count` instead). Because the `strong_count` can still drop to 0, the memory can be safely freed. To actually read the data inside a `Weak` pointer, you must call `.upgrade()`, which returns an `Option<Rc<T>>` in case the data was already destroyed.

@@ -33,6 +33,50 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-10 00:41 IST — [PROMPT_HISTORY.md] & [EXAMPLES.md] — Started Day 12</summary>
+
+- **Files:** PROMPT_HISTORY.md, EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** Transitioned to Day 12 (File System Tree Simulator). AI attempted to automate project setup but was corrected by the user to maintain the manual typing rule. Logged Concept #20 (`Weak<T>` and Reference Cycles) into the master EXAMPLES.md file using the "Two friends holding hands" analogy.
+
+```diff
+  # In EXAMPLES.md
++ ### 20. Reference Cycles and Weak<T> (Day 12)
+```
+
+</details>
+
+<details>
+<summary>2026-07-10 00:37 IST — [ROADMAP.md] & [LEARNING.md] — Completed Day 11 Deliverable</summary>
+
+- **Files:** ROADMAP.md, LEARNING.md, task.md
+- **Change type:** Modified
+- **Reason:** User typed the parser code but faced errors due to commenting out the `Expr` enum earlier. AI used tools to proactively uncomment the enum and fix minor syntax typos so the user could achieve the compile victory. Marked Day 11 complete across all governance files.
+
+```diff
+  # In ROADMAP.md & LEARNING.md
+- - [~] Day 11 Status
++ - [x] Day 11 Status
+```
+
+</details>
+
+<details>
+<summary>2026-07-10 00:09 IST — [task.md] — Executing Parser Step 4</summary>
+
+- **Files:** task.md, PROMPT_HISTORY.md
+- **Change type:** Modified
+- **Reason:** Progressing through the string parser implementation plan. Transitioning to the final Step 4 by providing `parse_term` and `parse_expression`.
+
+```diff
+  # In task.md
+- - [ ] Step 4: Wire it all together in main.rs and test
++ - [/] Step 4: Wire it all together in main.rs and test
+```
+
+</details>
+
+<details>
 <summary>2026-07-09 23:55 IST — [task.md] — Executing Parser Step 3</summary>
 
 - **Files:** task.md, PROMPT_HISTORY.md

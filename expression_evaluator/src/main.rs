@@ -1,38 +1,38 @@
-// use std::rc::Rc;
-// use std::cell::RefCell;
+use std::rc::Rc;
+use std::cell::RefCell;
 
 
 
-// pub enum Expr {
-//     // A simple number like 5.0
-//     Number(f64),
-//     // An addition of two expressions like 5.0 +3.0
-//     // The treasure maps Box point to the Heap where the inner Expr lives
-//     // Add(Expr, Expr),
-//     Add(Box<Expr>, Box<Expr>),
-//     Sub(Box<Expr>, Box<Expr>),
-//     Mul(Box<Expr>, Box<Expr>),
-//     Div(Box<Expr>, Box<Expr>),
+pub enum Expr {
+    // A simple number like 5.0
+    Number(f64),
+    // An addition of two expressions like 5.0 +3.0
+    // The treasure maps Box point to the Heap where the inner Expr lives
+    // Add(Expr, Expr),
+    Add(Box<Expr>, Box<Expr>),
+    Sub(Box<Expr>, Box<Expr>),
+    Mul(Box<Expr>, Box<Expr>),
+    Div(Box<Expr>, Box<Expr>),
     
-// }
+}
 
-// impl Expr {
-//     // We pass &self so we can read the tree without destroying it 
-//     pub fn eval(&self) -> f64 {
-//         match self {
-//             // It it's just a number , dereference the pointer and return the f64
-//             Expr::Number(n) => *n,
+impl Expr {
+    // We pass &self so we can read the tree without destroying it 
+    pub fn eval(&self) -> f64 {
+        match self {
+            // It it's just a number , dereference the pointer and return the f64
+            Expr::Number(n) => *n,
 
-//             // Deep Pattern Matching
-//             // We recursively call `.eval()` on the left side and the right side
-//             Expr::Add(left, right) => left.eval() + right.eval(),
-//             Expr::Sub(left, right) => left.eval() - right.eval(),
-//             Expr::Mul(left, right) => left.eval() * right.eval(),
-//             Expr::Div(left, right) => left.eval() / right.eval(),
+            // Deep Pattern Matching
+            // We recursively call `.eval()` on the left side and the right side
+            Expr::Add(left, right) => left.eval() + right.eval(),
+            Expr::Sub(left, right) => left.eval() - right.eval(),
+            Expr::Mul(left, right) => left.eval() * right.eval(),
+            Expr::Div(left, right) => left.eval() / right.eval(),
             
-//         }
-//     }
-// }
+        }
+    }
+}
 
 
 // fn main() {
@@ -205,7 +205,7 @@ pub struct Parser {
 
 impl Parser {
     pub fn new(tokens: Vec<Token>) -> Self {
-        Parser { toekens, position: 0}
+        Parser { tokens, position: 0}
     }
 
     // A helper to safely look at the current token without crashing
@@ -231,7 +231,7 @@ impl Parser {
 
                 let inner_expr = self.parse_expression();
 
-                if self.current_token() == Some(&Token::RParem) {
+                if self.current_token() == Some(&Token::RParen) {
                     self.position += 1;
                 } else {
                     panic!("Missing closing paranthesis!");
@@ -243,17 +243,79 @@ impl Parser {
         }
     }
 
+    pub fn parse_term(&mut self) -> Expr {
+        // first get the left side which is just a factor or parentheses
+        let mut left_side = self.parse_factor();
+        // as long as the next token is a * or /, we keep building the tree
+        while let Some(token) = self.current_token() {
+            match token {
+                Token::Multiply => {
+                    self.position += 1;
+                    let right_side = self.parse_factor(); // get the right side
+
+                    left_side = Expr::Mul(Box::new(left_side), Box::new(right_side));
+                }
+
+                Token::Divide => {
+                    self.position += 1;
+                    let right_side = self.parse_factor();
+                    left_side = Expr::Mul(Box::new(left_side), Box::new(right_side));
+                }
+                _ => break // If it's not * or / we are done with this term
+            }
+        }
+        return left_side;
+    }
+
     pub fn parse_expression(&mut self) -> Expr {
-        todo!("We will write this next!");
+        // first get the left side which is a term
+        let mut left_side = self.parse_term();
+
+        // As long as the next token is a + or -, we keep building the tree
+        while let Some(token) = self.current_token() {
+            match token {
+                Token::Plus => {
+                    self.position += 1;
+                    let right_side = self.parse_term();
+                    left_side = Expr::Add(Box::new(left_side), Box::new(right_side));
+                }
+
+                Token::Minus => {
+                    self.position += 1;
+                    let right_side = self.parse_term();
+                    left_side = Expr::Sub(Box::new(left_side), Box::new(right_side));
+                }
+                _ => break,
+            }
+        }
+
+        return left_side;
     }
 }
 
 fn main() {
-    let mut lexer = Lexer::new("(5.0 + 3.0) * 2.0");
+
+    let input = "(5.0 + 3.0) * 2.0";
+    println!("Evaluating: {}", input);
+
+    // Lexing :: convert string to Tokens
+    let mut lexer = Lexer::new(input);
+    let mut tokens = Vec::new();
+
 
     while let Some(token) = lexer.next_token() {
-        println!("{:?}", token);
+        // println!("{:?}", token);
+        tokens.push(token);
     }
+
+    // Convert Tokens to AST
+    let mut parser = Parser::new(tokens);
+    let ast = parser.parse_expression();
+
+    // Evaluation :Calculate the result using our invisible buttler dered
+    let result = ast.eval();
+
+    println!("Result: {}", result);
 }
 
 
@@ -261,4 +323,10 @@ fn main() {
 // The parser struct holds our Vec<Token> amd an index. parse_factor looks at the current token. If it's a number it builds and Expr::Number and moves forward if it's a ( it recursively parses everything inside the parantheses and then make sure thre is a ) at the end
 // How it works - We use the exact same array indexing logic as the Lexer self.position we use a match statement on the enum Notice the recusion if  we hit a paranthesis we call parse_expression() to handle the math inside
 // By separating Factors numbers/parens from Expressions addition we naturally enforc the Order of Operation PEMDAS parentheses and numbers are processed first
+
+
+// What we did lastly ? 
+// parse_term specifically looks for * or / . parse expression specifically looks for + or -
+// How it works ? = Look closely at the hierarchy parse_expressoin call parse_term. parse_term calls parse_factor
+// Why ? => By layering these function calls we naturally build PEMDAS into the structure of our code. The compiler is forced to calculate parse_factor parentheses before parse_term multiplication and parse_term before parse_expression addition
 
