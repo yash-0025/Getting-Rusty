@@ -222,6 +222,22 @@
 **Mistakes the compiler caught that taught me something:**
 - N/A
 
+### Day 10 — Build: Zero-Copy Config Parser — 2026-07-08
+**Status:** `[x]` done
+**What I actually understood:**
+- **Lifetimes (`'a`)**: A descriptive label (sticky note) for the compiler to prove a reference won't outlive its original data. It does not control memory, it only describes it.
+- **Zero-Copy Architecture**: Parsing strings by pointing directly to slices of the original string in memory (`&str`), saving the slow heap allocations of `.clone()` or `String::from()`.
+- **Struct Lifetimes (`struct Config<'a>`)**: A struct holding a reference must declare a lifetime so the compiler can track the expiration date of its contents.
+- **`'static` Lifetime**: Data carved into the binary (like string literals) that lives for the entire duration of the program.
+- **Lifetime Bounds (`T: 'a`)**: Forcing a generic type to have an expiration date at least as long as `'a`.
+- **Ergonomic Conversions (`From`/`Into`)**: The blanket implementation where implementing `From` gives you `Into` for free, heavily used in function arguments (`impl Into<String>`).
+**What's still fuzzy / questions I had:**
+- None for now.
+**Code I wrote / project progress:**
+- Created the `config_parser` binary project showcasing a fast zero-copy parser.
+**Mistakes the compiler caught that taught me something:**
+- Missing lifetime specifier error: Taught me that when returning a reference from a function with multiple input references, the compiler needs explicit lifetime tags to know which input the output is tied to.
+
 <!-- New day entries get appended below this line. Ask the AI to draft an entry at the end of each session; approve or edit before it's saved. -->
 
 ---

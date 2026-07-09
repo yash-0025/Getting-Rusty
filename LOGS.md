@@ -33,6 +33,25 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-09 02:15 IST — [ROADMAP.md] & [LEARNING.md] — Marked Day 10 Complete</summary>
+
+- **Files:** ROADMAP.md, LEARNING.md
+- **Change type:** Modified
+- **Reason:** User completed all Day 10 concepts (Lifetimes, Zero-Copy Parser, From/Into traits) and requested to mark the day as complete.
+
+```diff
+  # In ROADMAP.md
+- - [ ] **You build:** A config file parser (INI-style or custom format)
++ - [x] **You build:** A config file parser (INI-style or custom format)
+  ... (marked all Day 10 items as [x])
+
+  # In LEARNING.md
++ Appended Day 10 entry summarizing Lifetimes, Zero-Copy architecture, 'static, Lifetime bounds, and From/Into traits.
+```
+
+</details>
+
+<details>
 <summary>2026-07-08 23:07 IST — [ROADMAP.md] & [EXAMPLES.md] — Updated Rule 8 to require Technical Explanations</summary>
 
 - **Files:** ROADMAP.md, EXAMPLES.md

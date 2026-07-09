@@ -109,11 +109,11 @@ Each day has:
 - [x] **Deliverable:** Both versions working, with a written note on when you'd choose each approach.
 
 ### Day 10 — Build: Zero-Copy Config Parser
-- [ ] **You build:** A config file parser (INI-style or custom format) that returns borrowed references into the original file content instead of allocating new `String`s for every value. Measure allocations saved.
-- [ ] **Concepts:** **Lifetimes**: what `'a` actually means — a description for the compiler, not a control mechanism · Lifetime elision rules — why 90% of functions need zero explicit annotations · Explicit lifetimes: `fn get_value<'a>(&'a self, key: &str) -> Option<&'a str>` · Lifetimes in structs: `struct Config<'a> { entries: Vec<(&'a str, &'a str)> }` · `'static` lifetime — what it really means · Lifetime bounds on generics: `T: 'a` · `From`/`Into`/`TryFrom`/`TryInto` for ergonomic conversions
-- [ ] **Reality check:** Lifetimes show up constantly in parsers, zero-copy deserialization (`serde` with `&'a str` fields), and any API that returns borrowed data — this is how you write genuinely fast Rust
-- [ ] **Anti-pattern → Pattern:** `.clone()` to dodge a lifetime error → reading the borrow-checker message and fixing the structural issue
-- [ ] **Deliverable:** Zero-copy parser with benchmarks showing allocation savings vs a clone-based version.
+- [x] **You build:** A config file parser (INI-style or custom format) that returns borrowed references into the original file content instead of allocating new `String`s for every value. Measure allocations saved.
+- [x] **Concepts:** **Lifetimes**: what `'a` actually means — a description for the compiler, not a control mechanism · Lifetime elision rules — why 90% of functions need zero explicit annotations · Explicit lifetimes: `fn get_value<'a>(&'a self, key: &str) -> Option<&'a str>` · Lifetimes in structs: `struct Config<'a> { entries: Vec<(&'a str, &'a str)> }` · `'static` lifetime — what it really means · Lifetime bounds on generics: `T: 'a` · `From`/`Into`/`TryFrom`/`TryInto` for ergonomic conversions
+- [x] **Reality check:** Lifetimes show up constantly in parsers, zero-copy deserialization (`serde` with `&'a str` fields), and any API that returns borrowed data — this is how you write genuinely fast Rust
+- [x] **Anti-pattern → Pattern:** `.clone()` to dodge a lifetime error → reading the borrow-checker message and fixing the structural issue
+- [x] **Deliverable:** Zero-copy parser with benchmarks showing allocation savings vs a clone-based version.
 
 > ⚠️ **This is the day lifetimes finally make sense** — because you're using them to solve a real performance problem (avoiding allocations), not learning them in the abstract.
 
