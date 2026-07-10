@@ -600,3 +600,20 @@ Expr::Add(left, right) => left.eval() + right.eval()
 - When we have a Box<Expr> and we write left.eval() the compiler notices the eval() does not exist on Box itself. Instead of throwing and error the compiler uses the Dered trait to automatically insert the dereference opereator * for us.
 - It turns left.eval() into (*left).eval() behdind the scenes at compile time.
 - This is why smart pointers in rust feel so incredible ergonomic to use the compiler automatically looks through the pointer so we can treat the pointer exactly like the data it contains
+
+
+<h1>Day 12</h1>
+
+- `Concept 1 - Reference cycles and Weak<T>` 
+- This is a tree Data structure, In a tree, a parent folder needs to point on its own child files, but a  child file also needs to point back to its parent folder eg - when we type cd.. in terminal
+- Imagaine Alice [Parent] and Bob [child] are holding hands in a room. the rule of the room is as long as someone is holding your hand you cann't leave
+- alice is holding bobs hand Rc and Bob is holding Alice hand Rc . Since neither will let go first the room things they both are permanently busy . they are trapped in the room forever. This is called as Reference cycel
+- Solution - Weak<T> Allice holdsd Bob's hand firmly Rc but Bob only looks at Alice without physically holding her hand Weak . When Alice decides she is done and leaves she drops bobs hand because Bob wasn't physically holding onto Alice she is free to go. The cycle is broken
+
+- When we learned taht Rc<T> has a strong_count counter. Memory is only freed when the counter hits 0 . if Node A points to Node B and Node B points to Node A both of their counters will permanently be stuck at 1 . The Drop trait will never trigger and the Heap memory will leak forever . 
+- rust gives us Weak<T> to fixt his companion to Rc. It allows us to hold a reference to data without incrementing the strong_count.
+```rust
+use std::rc::{Rc, Weak};
+use std::cell::RefCell;
+```
+

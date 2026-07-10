@@ -33,6 +33,21 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-10 17:31 IST — [task.md] — Executing File System Step 2</summary>
+
+- **Files:** task.md, PROMPT_HISTORY.md
+- **Change type:** Modified
+- **Reason:** User successfully created the project and typed the `Node` struct. Initialized `task.md` for Day 12 and moved to Step 2: Implementing `Node::new` and `Node::add_child`.
+
+```diff
+  # In task.md
+- - [ ] Step 2: Implement Node::new() and Node::add_child()
++ - [/] Step 2: Implement Node::new() and Node::add_child()
+```
+
+</details>
+
+<details>
 <summary>2026-07-10 00:41 IST — [PROMPT_HISTORY.md] & [EXAMPLES.md] — Started Day 12</summary>
 
 - **Files:** PROMPT_HISTORY.md, EXAMPLES.md

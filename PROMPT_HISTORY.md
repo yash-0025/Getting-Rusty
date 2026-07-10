@@ -860,4 +860,10 @@
 **Output Summary:** AI attempted to run `cargo new` on the user's behalf but was immediately stopped. AI apologized for trying to automate the setup, realizing the user wants to manually perform all setup commands to ensure maximum learning retention. Introduced Day 12's core architecture (building a Tree structure) and formally logged Concept #20 (Reference Cycles and `Weak<T>`) into `EXAMPLES.md` using the "Two friends holding hands" analogy. Instructed the user to manually create the project and type the foundational `Node` struct.
 **Outcome / Next Step:** Learner will run `cargo new file_system` and type the `Node` struct.
 
+### 2026-07-10 17:31 IST — Prompt #142
+**Prompt:** "Done"
+**Context:** User successfully ran `cargo new` manually and typed the `Node` struct.
+**Output Summary:** Acknowledged the successful setup. Replaced `task.md` with Day 12's tasks. Moved to Step 2: Implementing the `new` and `add_child` methods for the `Node` struct. Introduced Concept #21: `Rc::downgrade` (converting a strong pointer to a weak pointer) to prevent the reference cycle when connecting the child to the parent.
+**Outcome / Next Step:** Learner will implement `new` and `add_child` in `main.rs`.
+
 <!-- New entries appended below -->
