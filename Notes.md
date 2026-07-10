@@ -617,3 +617,5 @@ use std::rc::{Rc, Weak};
 use std::cell::RefCell;
 ```
 
+- `Concept 2 - Rc::downgrade` => How do we actually create a Weak pointer? We don't create it directly. Instead we take an existing strong Rc pointer and we downgrade it
+- Rc::downgrade(&strong_pointer) creates a Weak pointer. It's like Alice handing Bob a picture of herself instead of letting him hold her hand. 

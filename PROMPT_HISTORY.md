@@ -866,4 +866,10 @@
 **Output Summary:** Acknowledged the successful setup. Replaced `task.md` with Day 12's tasks. Moved to Step 2: Implementing the `new` and `add_child` methods for the `Node` struct. Introduced Concept #21: `Rc::downgrade` (converting a strong pointer to a weak pointer) to prevent the reference cycle when connecting the child to the parent.
 **Outcome / Next Step:** Learner will implement `new` and `add_child` in `main.rs`.
 
+### 2026-07-10 22:51 IST — Prompt #143
+**Prompt:** "Done" + cargo run output showing success with unused variables warnings.
+**Context:** User successfully implemented `Node::new` and `add_child`.
+**Output Summary:** Acknowledged success and the expected warnings. Checked off Step 2 in `task.md`. Introduced Step 3: `print_tree` and the concept of upgrading a `Weak` pointer via `.upgrade()` to verify the parent's existence safely. Provided the code to recursively print the tree and read the parent's name.
+**Outcome / Next Step:** Learner will add `print_tree` and `get_parent_name` to their `Node` implementation, and update `main` to print the directory tree.
+
 <!-- New entries appended below -->

@@ -33,6 +33,21 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-10 22:51 IST — [task.md] — Executing File System Step 3</summary>
+
+- **Files:** task.md, PROMPT_HISTORY.md
+- **Change type:** Modified
+- **Reason:** User successfully implemented `Node::new` and `Node::add_child`. Marked Step 2 complete and moved to Step 3: Implement `print_tree` and demonstrate `.upgrade()`.
+
+```diff
+  # In task.md
+- - [ ] Step 3: Implement a print_tree() method to visualize the file system
++ - [/] Step 3: Implement a print_tree() method to visualize the file system
+```
+
+</details>
+
+<details>
 <summary>2026-07-10 17:31 IST — [task.md] — Executing File System Step 2</summary>
 
 - **Files:** task.md, PROMPT_HISTORY.md
