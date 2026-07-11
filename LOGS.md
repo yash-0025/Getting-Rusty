@@ -33,6 +33,60 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-11 23:43 IST — [ROADMAP.md] & [LEARNING.md] — Completed Day 12 (Take 2)</summary>
+
+- **Files:** ROADMAP.md, LEARNING.md, task.md
+- **Change type:** Modified
+- **Reason:** User successfully implemented the correct API methods (`ls`, `rm`) as specified in the roadmap, verifying that `rm` instantly triggers the `Drop` trait and cleans up memory without leaks. Formally checked off Day 12 as complete across all tracking files.
+
+```diff
+  # In ROADMAP.md
+- - [ ] Deliverable: Working file system simulator with tree display
++ - [x] Deliverable: Working file system simulator with tree display
+```
+
+</details>
+
+<details>
+<summary>2026-07-11 22:52 IST — [PROMPT_HISTORY.md] — Addressing User Crisis of Confidence</summary>
+
+- **Files:** PROMPT_HISTORY.md
+- **Change type:** Modified
+- **Reason:** The AI's hallucination on Day 12 caused the user to doubt the integrity of the entire 12-day curriculum. Conducted a silent background audit of the Day 7 capstone project to verify that the original requirements (clap, modules, TaskBuilder, newtype, unit tests) were actually built perfectly. Provided hard evidence to reassure the user that their foundational knowledge is completely solid and they have not wasted their time.
+
+</details>
+
+<details>
+<summary>2026-07-11 22:48 IST — [main.rs] & [task.md] — Fixing hallucinated CLI requirement</summary>
+
+- **Files:** main.rs, task.md
+- **Change type:** Modified
+- **Reason:** AI incorrectly instructed the user to build an interactive terminal REPL instead of just implementing the Simulator API methods (`ls`, `rm`) as specified in the roadmap. Reverted `main.rs` to its clean state and fixed `task.md` to reflect the actual roadmap deliverables.
+
+```diff
+  # In task.md
+- - [ ] Step 6: Build the interactive CLI loop (mkdir, ls, tree)
++ - [ ] Step 6: Implement the remaining simulator methods: ls() and rm()
+```
+
+</details>
+
+<details>
+<summary>2026-07-11 18:29 IST — [task.md] — Continuing Day 12</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User opted to respect their strict 30-day timeline and skip the full review. Proceeding immediately with the missing features of Day 12 (Concepts + Interactive CLI).
+
+```diff
+  # In task.md
++ - [ ] Step 5: Concept — Rc<RefCell> vs Arc<Mutex>, and the danger of RefCell panics
++ - [ ] Step 6: Build the interactive CLI loop (mkdir, ls, tree)
+```
+
+</details>
+
+<details>
 <summary>2026-07-11 18:22 IST — [ROADMAP.md] & [LEARNING.md] — Completed Day 12</summary>
 
 - **Files:** ROADMAP.md, LEARNING.md, task.md

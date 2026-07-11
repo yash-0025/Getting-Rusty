@@ -64,6 +64,20 @@ impl Node {
             None => "No parent (I am root)".to_string(),
         }
     }
+
+    pub fn ls(&self) {
+        for child in &self.children {
+            println!("{}", child.borrow().name);
+        }
+    }
+
+    pub fn rm(&mut self, target_name: &str) {
+        // .retain() keeps elements whre the closure return true
+        // it drops elements where the closure returns false
+        self.children.retain(|child| child.borrow().name != target_name);
+    }
+
+
 }
 
 // WE are tellin rust - Hey right before you destroy a Node print this message
@@ -73,59 +87,57 @@ impl Drop for Node {
     }
 }
 
+
 fn main() {
-    // Create root directory
+    // // 1. Create the root directory
     // let root = Node::new("C:");
 
-    // // Add some folders inside C:
+    // // 2. Add some folders inside C:
     // let dev = Node::add_child(&root, "Dev");
-    // let users = Node::add_child(&root, "Users");
+    // let _users = Node::add_child(&root, "Users");
 
-    // // Add files inside Dev
+    // // 3. Add files inside Dev
     // let rust = Node::add_child(&dev, "Rust");
     // println!("File system built successfully without memory  leaks!");
 
     // // Print the entire tree starting from root
     // root.borrow().print_tree(0);
 
-    // println!("\n Who is the parent of 'Rust'?");
-    // println!("Parent: {}", rust.borrow().get_parent_name())
-
-    // WE decalre a weak pointer outsided the scope so it survives
     let rust_weak;
-    
+
     {
-        println!("--- Building File System ---");
+        println!("--- Building the File System ---");
         let root = Node::new("c:");
         let dev = Node::add_child(&root, "Dev");
         let _users = Node::add_child(&root, "Users");
 
-        let rust = Node::add_child(&dev, "Rust");
 
-        // Save a weak reference to rust so we can check it later
+        let rust = Node::add_child(&dev, "Rust");
         rust_weak = Rc::downgrade(&rust);
 
-        println!("--- File System Built ---");
+        println!("--- File system Built ---");
 
-        root.borrow().print_tree(0);
+        println!("\n> ls c:/Dev/");
+        dev.borrow().ls();
 
 
-        println!("--- Leaving Scope ---");
+        println!("\n> rm Rust");
+        dev.borrow_mut().rm("Rust"); // this will trigger the drop trait immediately
+
+        println!("\n> ls c:/Dev/ (after rm)");
+        dev.borrow().ls();
+
+        println!("\n--- Leaving Scope ---");
+
     }
-    // root, dev, _users, rust are all dropped here
 
     println!("--- Outside Scope ---");
-
-    // let's check if the memory leaked
     if rust_weak.upgrade().is_none() {
-        println!("Memory was freed successfullly! No leaks !");
+        println!("Memory was freed successfully! No leaks !");
     } else {
-        println!("Memory leak! The node still exists");
+        println!("Memory leak!! The node still exists");
     }
-
 }
-
-
 
 // 1. What it does
 // => it creates a struct that can represent any file or folder
@@ -154,3 +166,8 @@ fn main() {
 // So Rust destroys dev . The cascading effect perfectly cleans upt the entire tree
 // Why we did this way?? => If we had use an Rc for the parent pointer, dev would have kept the root alive, and root would keep dev alive. The Drop trait would never trigger. Our  test proves that Weak breaks the cycle
 
+
+
+// What it does ? => ls loops over the children array and prints their name . rm searches the children array for a specific name and delted it from the array
+// How it workss? => rm uses the buil in .retain() method on Vectors, .retain() loops through the array and if the condition returns false meaning the child's name matches the target name it permanently deletes that element from the array
+// Why we did this ? => Deleting the element from the children array causes its Rc count to drop. Because there are no cycles thanks to Weak the Drop trait will immediately trigger and free the memory

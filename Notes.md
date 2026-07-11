@@ -628,3 +628,9 @@ use std::cell::RefCell;
 - Memory is managed deterministically via the Drop trait . Whever a variable goes out of sope like hitting the } at the end of the function. 
 - Rust automatically calls it drop method to clean up the memory. we can look into this to see exactly  when our memory is freed
 
+- `Concept 5 - Rc<RefCell> vs Arc<Mutex>` 
+- The danger of RefCell - When we call .borrow_mut() Rust checks at runtime if someone else is currently borrowing it. If they are our program will crash instantly. It bypasses compile time safety . We must be extremely careful to never call
+- Single Threaded only - Rc and RefCell are not Thread Safe . IF we try to share an Rc pointer between two CPU threads Rust will throw a massive compiler  error
+- If we ever build a multi threaded app like a web server , we must replace Rc with Arc [Atomic Reference count] and we must replace RefCell with Mutex
+- Arc<Mutex<T>> does the exact same thing as Rc<RefCell<T>> but it safely locks data so multiple CPU threads can read / write without crashing
+
