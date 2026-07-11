@@ -33,6 +33,21 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-11 17:03 IST — [task.md] — Executing File System Step 4</summary>
+
+- **Files:** task.md, PROMPT_HISTORY.md
+- **Change type:** Modified
+- **Reason:** User successfully implemented `print_tree` and visualized the parent hierarchy. Marked Step 3 complete and moved to Step 4: Proving memory safety using the `Drop` trait.
+
+```diff
+  # In task.md
+- - [ ] Step 4: Verify the memory safety (Prove Weak prevents leaks)
++ - [/] Step 4: Verify the memory safety (Prove Weak prevents leaks)
+```
+
+</details>
+
+<details>
 <summary>2026-07-10 22:51 IST — [task.md] — Executing File System Step 3</summary>
 
 - **Files:** task.md, PROMPT_HISTORY.md

@@ -872,4 +872,10 @@
 **Output Summary:** Acknowledged success and the expected warnings. Checked off Step 2 in `task.md`. Introduced Step 3: `print_tree` and the concept of upgrading a `Weak` pointer via `.upgrade()` to verify the parent's existence safely. Provided the code to recursively print the tree and read the parent's name.
 **Outcome / Next Step:** Learner will add `print_tree` and `get_parent_name` to their `Node` implementation, and update `main` to print the directory tree.
 
+### 2026-07-11 17:03 IST — Prompt #144
+**Prompt:** "Done" + cargo run output showing the successfully printed file system tree.
+**Context:** User implemented `print_tree` and successfully visualised the recursive tree and Weak pointer parent lookup.
+**Output Summary:** Acknowledged the perfect output. Checked off Step 3 in `task.md` and introduced Step 4: Proving Memory Safety. Introduced Concept #22 (The `Drop` trait) and explained how implementing `Drop` allows us to verify when memory is being successfully deallocated. Provided an implementation of `Drop` for `Node` and an updated `main` block that forces the tree out of scope to demonstrate deterministic memory cleanup and prove the absence of leaks.
+**Outcome / Next Step:** Learner will implement the `Drop` trait, update `main.rs`, and run the code to see the cascading memory cleanup in action.
+
 <!-- New entries appended below -->

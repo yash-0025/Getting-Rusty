@@ -619,3 +619,5 @@ use std::cell::RefCell;
 
 - `Concept 2 - Rc::downgrade` => How do we actually create a Weak pointer? We don't create it directly. Instead we take an existing strong Rc pointer and we downgrade it
 - Rc::downgrade(&strong_pointer) creates a Weak pointer. It's like Alice handing Bob a picture of herself instead of letting him hold her hand. 
+
+- `Concept 3 - Weak::upgrade()` => Because a Weak pointer doesn't keep data alive , the data it points to might have been deleted. Therefore we can't just read data directly from a Weak pointer. Instead we must upgrade it to strong Rc pointer first by calling .upgrade() . Because the parent might be gone, .upgrade() returns an Option<Rc<T>>. if it returns Some , the parent is still alive. if it returns None, the parent was deleted

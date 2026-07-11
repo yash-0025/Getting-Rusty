@@ -35,6 +35,35 @@ impl Node {
 
         return child;
     }
+
+    // Print tree recursively
+    pub fn print_tree(&self, depth: usize) {
+        // Create an indent string 2 spaces per depth level
+        let indent = "  ".repeat(depth);
+        println!("{}| - {}", indent, self.name);
+
+        // Recursively print all children
+        for child in &self.children {
+            // We use .borrow() to get read-access to the child node
+            child.borrow().print_tree(depth + 1);
+        }
+    }
+
+    // A helper funcction to securely read the parents name
+    pub fn get_parent_name(&self) -> String {
+        // WE look at our Option<Weak> parent
+        match &self.parent {
+            Some(weak_parent) => {
+                // We must try to upgrade it to a strong Rc to use it
+                if let Some(strong_parent) = weak_parent.upgrade() {
+                    strong_parent.borrow().name.clone()
+                } else {
+                    "Parent was deleted!".to_string()
+                }
+            }
+            None => "No parent (I am root)".to_string(),
+        }
+    }
 }
 
 fn main() {
@@ -48,6 +77,12 @@ fn main() {
     // Add files inside Dev
     let rust = Node::add_child(&dev, "Rust");
     println!("File system built successfully without memory  leaks!");
+
+    // Print the entire tree starting from root
+    root.borrow().print_tree(0);
+
+    println!("\n Who is the parent of 'Rust'?");
+    println!("Parent: {}", rust.borrow().get_parent_name())
 }
 
 
@@ -66,3 +101,10 @@ fn main() {
 // When linking the child to parent we use Rc::downgrade(parent) to generate a Weak pointer 
 // We then push an Rc::clone(&child) into the prent's children array
 // why we did this - This perfectly matches our anlogy. The parent strongly owns the child using Rc but the chiild only weakly references the parent using Weak
+
+
+// What it does? => print_tree visually outputs the file system hierarchy. get_parent_name looks up the tree to find the name of the folder that owns it
+// How it works? => print_tree uses recursion . It prints itself, then loops through self.children and tells them to print themselves with a larger depth
+// get_parent_name uses pattern mathcing on the Option . If a weak pointer exists , it uses if let Some(..) = weak_parent.upgrade() to safely attempt to read the paren'ts memory
+// Why - Forcing us to .upgrade() a weak pointer in rust way of guaranteeing memory safety. In languages like C++ looking at a deleted parent causes a catastrophic crash. In rust it just safely returns None
+
