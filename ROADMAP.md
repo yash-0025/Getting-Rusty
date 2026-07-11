@@ -125,10 +125,10 @@ Each day has:
 - [x] **Deliverable:** Working expression evaluator handling `+`, `-`, `*`, `/`, parentheses, with error handling for malformed input.
 
 ### Day 12 — Build: File System Tree Simulator
-- [ ] **You build:** A simulated file system with directories containing files and subdirectories. Support: mkdir, touch, ls, tree (recursive display), rm. Uses `Rc<RefCell<Node>>` for shared ownership and `Weak` for parent pointers.
-- [ ] **Concepts:** `Rc<RefCell<T>>` combo — the "shared mutable state, single-threaded" pattern, and its real costs (runtime panics, not compile-time safety) · `Weak<T>` — breaking reference cycles (parent/child tree structures) · When `Rc<RefCell<T>>` vs `Arc<Mutex<T>>` (single-threaded vs multi-threaded) · Tree traversal algorithms in Rust
-- [ ] **Reality check:** `Rc<RefCell<T>>` is everywhere in GUI/tree/graph code, but in concurrent code you reach for `Arc<Mutex<T>>` instead (Week 3)
-- [ ] **Deliverable:** Working file system simulator with tree display.
+- [x] **You build:** A simulated file system with directories containing files and subdirectories. Support: mkdir, touch, ls, tree (recursive display), rm. Uses `Rc<RefCell<Node>>` for shared ownership and `Weak` for parent pointers.
+- [x] **Concepts:** `Rc<RefCell<T>>` combo — the "shared mutable state, single-threaded" pattern, and its real costs (runtime panics, not compile-time safety) · `Weak<T>` — breaking reference cycles (parent/child tree structures) · When `Rc<RefCell<T>>` vs `Arc<Mutex<T>>` (single-threaded vs multi-threaded) · Tree traversal algorithms in Rust
+- [x] **Reality check:** `Rc<RefCell<T>>` is everywhere in GUI/tree/graph code, but in concurrent code you reach for `Arc<Mutex<T>>` instead (Week 3)
+- [x] **Deliverable:** Working file system simulator with tree display.
 
 ### Day 13 — Build: Comprehensive Test Suite + Documentation
 - [ ] **You build:** Take all Week 2 libraries (Days 8-12), write comprehensive tests and documentation. Learn testing as a *practice*, not a topic.

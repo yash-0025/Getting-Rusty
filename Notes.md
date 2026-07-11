@@ -621,3 +621,10 @@ use std::cell::RefCell;
 - Rc::downgrade(&strong_pointer) creates a Weak pointer. It's like Alice handing Bob a picture of herself instead of letting him hold her hand. 
 
 - `Concept 3 - Weak::upgrade()` => Because a Weak pointer doesn't keep data alive , the data it points to might have been deleted. Therefore we can't just read data directly from a Weak pointer. Instead we must upgrade it to strong Rc pointer first by calling .upgrade() . Because the parent might be gone, .upgrade() returns an Option<Rc<T>>. if it returns Some , the parent is still alive. if it returns None, the parent was deleted
+
+- Proving memory safety - We claimed that usign Weak prevenets a memory leak. How can we prove that ? we need to prove that when a folder is deleted everything inside it gets deleted too. and that nothing is left behind permanently holding memory.
+
+- `Concept 4 - The Drop trait` - IN rust we don't manually delete memory like C/C++ and there is no garbage collector randomly pausing our program like in Java/C# . 
+- Memory is managed deterministically via the Drop trait . Whever a variable goes out of sope like hitting the } at the end of the function. 
+- Rust automatically calls it drop method to clean up the memory. we can look into this to see exactly  when our memory is freed
+

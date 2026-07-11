@@ -878,4 +878,16 @@
 **Output Summary:** Acknowledged the perfect output. Checked off Step 3 in `task.md` and introduced Step 4: Proving Memory Safety. Introduced Concept #22 (The `Drop` trait) and explained how implementing `Drop` allows us to verify when memory is being successfully deallocated. Provided an implementation of `Drop` for `Node` and an updated `main` block that forces the tree out of scope to demonstrate deterministic memory cleanup and prove the absence of leaks.
 **Outcome / Next Step:** Learner will implement the `Drop` trait, update `main.rs`, and run the code to see the cascading memory cleanup in action.
 
+### 2026-07-11 18:15 IST — Prompt #145
+**Prompt:** "It is asking for type for rust_weak?" + compile error E0282.
+**Context:** User typed the memory leak test but missed the assignment statement `rust_weak = Rc::downgrade(&rust)`.
+**Output Summary:** AI identified that the user accidentally skipped the assignment statement, causing Rust's type inference to fail because `rust_weak` was never used or assigned. Fixed the missing line via tools and explained the reason for the error so the user can re-run and see the output.
+**Outcome / Next Step:** Learner runs `cargo run` again to see the Drop cascade.
+
+### 2026-07-11 18:22 IST — Prompt #146
+**Prompt:** "Everythign worked" + cargo run output showing the successfully dropped nodes and `No leaks !` message.
+**Context:** User ran the final memory leak test.
+**Output Summary:** Acknowledged the perfect final output. Checked off Step 4 in `task.md`. Formally marked Day 12 as complete across `ROADMAP.md`, `LEARNING.md`, and `LOGS.md`. Congratulated the user on completing the File System simulator and mastering the hardest parts of Rust's shared ownership model.
+**Outcome / Next Step:** Learner will confirm readiness to move to Day 13 (Comprehensive Test Suite + Documentation).
+
 <!-- New entries appended below -->

@@ -66,23 +66,63 @@ impl Node {
     }
 }
 
+// WE are tellin rust - Hey right before you destroy a Node print this message
+impl Drop for Node {
+    fn drop(&mut self) {
+        println!("Dropping node: {}", self.name);
+    }
+}
+
 fn main() {
     // Create root directory
-    let root = Node::new("C:");
+    // let root = Node::new("C:");
 
-    // Add some folders inside C:
-    let dev = Node::add_child(&root, "Dev");
-    let users = Node::add_child(&root, "Users");
+    // // Add some folders inside C:
+    // let dev = Node::add_child(&root, "Dev");
+    // let users = Node::add_child(&root, "Users");
 
-    // Add files inside Dev
-    let rust = Node::add_child(&dev, "Rust");
-    println!("File system built successfully without memory  leaks!");
+    // // Add files inside Dev
+    // let rust = Node::add_child(&dev, "Rust");
+    // println!("File system built successfully without memory  leaks!");
 
-    // Print the entire tree starting from root
-    root.borrow().print_tree(0);
+    // // Print the entire tree starting from root
+    // root.borrow().print_tree(0);
 
-    println!("\n Who is the parent of 'Rust'?");
-    println!("Parent: {}", rust.borrow().get_parent_name())
+    // println!("\n Who is the parent of 'Rust'?");
+    // println!("Parent: {}", rust.borrow().get_parent_name())
+
+    // WE decalre a weak pointer outsided the scope so it survives
+    let rust_weak;
+    
+    {
+        println!("--- Building File System ---");
+        let root = Node::new("c:");
+        let dev = Node::add_child(&root, "Dev");
+        let _users = Node::add_child(&root, "Users");
+
+        let rust = Node::add_child(&dev, "Rust");
+
+        // Save a weak reference to rust so we can check it later
+        rust_weak = Rc::downgrade(&rust);
+
+        println!("--- File System Built ---");
+
+        root.borrow().print_tree(0);
+
+
+        println!("--- Leaving Scope ---");
+    }
+    // root, dev, _users, rust are all dropped here
+
+    println!("--- Outside Scope ---");
+
+    // let's check if the memory leaked
+    if rust_weak.upgrade().is_none() {
+        println!("Memory was freed successfullly! No leaks !");
+    } else {
+        println!("Memory leak! The node still exists");
+    }
+
 }
 
 
@@ -107,4 +147,10 @@ fn main() {
 // How it works? => print_tree uses recursion . It prints itself, then loops through self.children and tells them to print themselves with a larger depth
 // get_parent_name uses pattern mathcing on the Option . If a weak pointer exists , it uses if let Some(..) = weak_parent.upgrade() to safely attempt to read the paren'ts memory
 // Why - Forcing us to .upgrade() a weak pointer in rust way of guaranteeing memory safety. In languages like C++ looking at a deleted parent causes a catastrophic crash. In rust it just safely returns None
+
+
+// what it does ? => It builds the tree inside a constrained {...} block. When the block ends the variables go out of scope, triggering the Drop trait
+// How it works? => When root goes out of scope , its Rc count drops to 0. Rust destroys root. But root owns a children array containing dev and _users . So rust destroys the children array containing dev and _users. So Rust destroys the children array which drops the Rc count for dev to 0. 
+// So Rust destroys dev . The cascading effect perfectly cleans upt the entire tree
+// Why we did this way?? => If we had use an Rc for the parent pointer, dev would have kept the root alive, and root would keep dev alive. The Drop trait would never trigger. Our  test proves that Weak breaks the cycle
 

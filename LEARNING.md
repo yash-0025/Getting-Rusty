@@ -245,7 +245,7 @@
 **What I actually understood:**
 - **Recursive Enums and `Box<T>`**: Rust needs to know exact sizes at compile time. If an enum contains itself, it is infinite. `Box<T>` breaks the cycle by putting the data on the heap and storing a fixed-size pointer (8 bytes) on the stack.
 - **Reference Counting (`Rc<T>`)**: Allows multiple variables to own the exact same data. `.clone()` doesn't copy the data, it just increments an integer counter (O(1) time). The data is freed when the counter hits 0. It only allows *immutable* sharing.
-- **Interior Mutability (`RefCell<T>`)**: Moves Rust's strict borrowing rules from compile-time to runtime. It lets you mutate data even if you only have an immutable reference. `.borrow_mut()` gives write access, but panics if someone else is already borrowing it.
+- **Interior Mutability (`RefCell<T>`)**: Rust usually stops you from mutating data if there are multiple owners. `RefCell` bypasses compile-time checks and moves them to runtime (using `.borrow()` and `.borrow_mut()`). Useful when you absolutely need shared state.
 - **Deref Coercion**: The `Deref` trait lets the compiler automatically insert `*` (dereference) operators. This is why you can call `left.eval()` on a `Box<Expr>` instead of explicitly writing `(*left).eval()`.
 **What's still fuzzy / questions I had:**
 - None for now.
@@ -255,6 +255,21 @@
 - Explored `Rc<RefCell<T>>` to achieve Shared Mutable State.
 **Mistakes the compiler caught that taught me something:**
 - E0072 (infinite size): The compiler caught a recursive enum without indirection and correctly suggested wrapping it in a `Box`.
+
+### Day 12 — Build: File System Tree Simulator — 2026-07-11
+**Status:** `[x]` done
+**What I actually understood:**
+- **Trees in Rust**: Parent-child relationships are notoriously hard in Rust because of ownership rules. A parent owns its children (`Rc<RefCell<Node>>`), but children need to point back up to the parent for traversal. 
+- **Reference Cycles**: If the child also strongly owns the parent (`Rc`), their internal `strong_count` will never reach 0. They keep each other alive forever, causing a permanent memory leak.
+- **Weak Pointers (`Weak<T>`)**: To fix cycles, you downgrade an `Rc` into a `Weak` pointer (`Rc::downgrade(&parent)`). `Weak` doesn't stop memory from being freed. 
+- **Upgrading**: You can't read a `Weak` pointer directly because the data might be gone. You must call `.upgrade()`, which safely returns an `Option<Rc<T>>`.
+- **The `Drop` Trait**: Rust manages memory deterministically. When variables go out of scope, Rust automatically calls their `drop()` method to clean up memory. We proved our `Weak` pointer fixed the leak because we watched the `Drop` cascade destroy the entire tree successfully!
+**What's still fuzzy / questions I had:**
+- None for now.
+**Code I wrote / project progress:**
+- Built `file_system` simulator showcasing `Rc` and `Weak` pointer graphs.
+**Mistakes the compiler caught that taught me something:**
+- E0282 (type annotations needed): When I forgot to actually assign the `Rc::downgrade` result to `rust_weak`, Rust's type inference crashed because it couldn't guess the unassigned type.
 
 ---
 

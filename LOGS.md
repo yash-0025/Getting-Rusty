@@ -33,6 +33,37 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-11 18:22 IST — [ROADMAP.md] & [LEARNING.md] — Completed Day 12</summary>
+
+- **Files:** ROADMAP.md, LEARNING.md, task.md
+- **Change type:** Modified
+- **Reason:** User successfully compiled and ran the complete `file_system` project, verifying the cascading destruction of the tree via the `Drop` trait without any memory leaks. Checked off all Day 12 deliverables in the tracking files.
+
+```diff
+  # In ROADMAP.md
+- - [ ] Deliverable: Working file system simulator that doesn't leak memory
++ - [x] Deliverable: Working file system simulator that doesn't leak memory
+```
+
+</details>
+
+<details>
+<summary>2026-07-11 18:15 IST — [PROMPT_HISTORY.md] — Fixing missing assignment</summary>
+
+- **Files:** PROMPT_HISTORY.md
+- **Change type:** Modified
+- **Reason:** User skipped the assignment of `rust_weak`, causing Rust's type inference to fail (E0282). Used tools to insert the missing assignment statement so the user can compile and run.
+
+```diff
+  # In main.rs
+-         // Save a weak reference to rust so we can check it later
++         // Save a weak reference to rust so we can check it later
++         rust_weak = Rc::downgrade(&rust);
+```
+
+</details>
+
+<details>
 <summary>2026-07-11 17:03 IST — [task.md] — Executing File System Step 4</summary>
 
 - **Files:** task.md, PROMPT_HISTORY.md
