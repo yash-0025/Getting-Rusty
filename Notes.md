@@ -656,3 +656,6 @@ use super::*
 - What happends if we type bad syntax like 5.0 + * 3.0. Our parse_factor method actually panics with expected number or '('
 - WE can write test to guarantee that actually crashes when given bad input . We do this using the `should_panic` attribute
 
+- `Concept 2 - Integration Tests` 
+- A unit test lives inside the exact same file as the souce code . Because it lives inside the file it has God Mode access. It can test private functions and private variables. But when we publish a library like collections we want to make sure that other developers can actually use it from outside .
+- An integration test is placed in a completely separate folder . Rust compiles it as if it were a totally different 3rd party project downloading our code from teh internet. It can only access our pub structs and pub methods . This proves our public API actually works

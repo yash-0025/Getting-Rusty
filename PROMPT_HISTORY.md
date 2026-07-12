@@ -956,4 +956,10 @@
 **Output Summary:** Congratulated the user on completing Step 2. Checked off Step 2 in `task.md`. Introduced Step 3: Integration Tests, explaining how they differ from Unit Tests and setting up the structure for testing the `collections` crate from the outside.
 **Outcome / Next Step:** Learner will create a `tests/` directory in their `collections` project and write their first Integration Test.
 
+### 2026-07-13 03:28 IST — Prompt #158
+**Prompt:** "It gives new test logs alos" + cargo test output showing integration test passing.
+**Context:** User ran `cargo test` and saw that the new integration test in `tests/integration_test.rs` ran alongside the unit tests and passed.
+**Output Summary:** Congratulated the user on completing Step 3. Checked off Step 3 in `task.md`. Introduced Step 4: Documentation Tests (Doc Tests) and generating docs with `cargo doc`. Explained how Doc Tests guarantee that documentation code examples are actually compiled and run.
+**Outcome / Next Step:** Learner will add Doc Tests using `///` comments to their `collections` library and generate documentation.
+
 <!-- New entries appended below -->

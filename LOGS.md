@@ -33,6 +33,15 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-13 03:28 IST — [task.md] — Completed Day 13 Step 3</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User successfully created the `tests/` directory and ran their first Integration Test. Checked off Step 3 and introduced Step 4: Documentation Tests.
+
+</details>
+
+<details>
 <summary>2026-07-13 03:18 IST — [task.md] — Completed Day 13 Step 2</summary>
 
 - **Files:** task.md
