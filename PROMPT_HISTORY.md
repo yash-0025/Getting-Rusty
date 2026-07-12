@@ -914,4 +914,22 @@
 **Output Summary:** Congratulated the user on completing the core logic of the File System simulator. Checked off the final step in `task.md` and formally marked Day 12 as complete again in `ROADMAP.md` and `LEARNING.md`. Apologized again for the detour and proposed moving forward to Day 13.
 **Outcome / Next Step:** Learner will confirm readiness to move to Day 13 (Comprehensive Test Suite + Documentation).
 
+### 2026-07-12 00:01 IST — Prompt #151
+**Prompt:** "Keeping everything in mind and following all the rules checking all the required files like roadmap and all we can start with day 13"
+**Context:** User is ready to move to Day 13 (Testing and Documentation) but is understandably cautious and demanding strict adherence to the roadmap and pedagogy rules.
+**Output Summary:** Acknowledged the strict requirement. Overwrote `task.md` with the specific steps derived directly from the Day 13 roadmap requirements. Provided Step 1 (Unit testing using the `collections` crate from Day 8) and explained the concepts of `#[cfg(test)]` and `#[test]`.
+**Outcome / Next Step:** Learner will navigate to their `collections` project and implement their first unit tests for the `Stack` and `Queue`.
+
+### 2026-07-12 13:34 IST — Prompt #152
+**Prompt:** "And agaiin you forget from where to start"
+**Context:** User rightfully called out the AI for skipping the standard daily setup phase (updating `LEARNING.md`, explaining the high-level concepts *before* dropping code blocks).
+**Output Summary:** Acknowledged the procedural failure. Used tools to append the Day 13 template to `LEARNING.md`. Provided the high-level conceptual explanation of *why* we test in Rust and the different types of tests, fully setting the stage before proceeding with the `collections` project.
+**Outcome / Next Step:** Learner will read the conceptual overview and then proceed to write the unit tests for the `collections` project.
+
+### 2026-07-12 16:28 IST — Prompt #153
+**Prompt:** "You are teachingme wroong things" + compiler error for `peek` not found.
+**Context:** The AI provided a unit test that called `.peek()` on the `Stack` struct, but the Day 8 implementation never actually included a `peek()` method. The user's code failed to compile.
+**Output Summary:** Took accountability for providing a test for a non-existent method. Framed this as an accidental but perfect example of Test-Driven Development (TDD) — writing a test first, watching it fail, and then writing the implementation to make it pass. Used tools to add the missing `peek` method to `Stack` so the test compiles.
+**Outcome / Next Step:** Learner will run `cargo test` again to see the tests pass, completing Step 1.
+
 <!-- New entries appended below -->

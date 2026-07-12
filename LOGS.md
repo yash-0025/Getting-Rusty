@@ -33,6 +33,24 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-12 16:28 IST — [collections/src/lib.rs] — Fixing peek test</summary>
+
+- **Files:** collections/src/lib.rs
+- **Change type:** Modified
+- **Reason:** The AI provided a unit test that called `.peek()`, but that method was never implemented on Day 8. The code failed to compile. Added the missing `.peek()` method to `impl Stack<T>` to make the test pass, inadvertently teaching Test-Driven Development (TDD).
+
+</details>
+
+<details>
+<summary>2026-07-12 00:01 IST — [task.md] — Started Day 13</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User initialized Day 13 with strict instructions to follow the roadmap perfectly. Overwrote `task.md` with the 5 precise deliverables from the Day 13 roadmap (Unit testing, Integration testing, Doc testing, module systems).
+
+</details>
+
+<details>
 <summary>2026-07-11 23:43 IST — [ROADMAP.md] & [LEARNING.md] — Completed Day 12 (Take 2)</summary>
 
 - **Files:** ROADMAP.md, LEARNING.md, task.md

@@ -634,3 +634,21 @@ use std::cell::RefCell;
 - If we ever build a multi threaded app like a web server , we must replace Rc with Arc [Atomic Reference count] and we must replace RefCell with Mutex
 - Arc<Mutex<T>> does the exact same thing as Rc<RefCell<T>> but it safely locks data so multiple CPU threads can read / write without crashing
 
+<h1>Day 13</h1>
+
+
+- `Concept 1 - Why do we test in Rust?`
+- If the Rust compiler is so strict that it catches every memory leak and type error why do we even need to write tests . The compiler proves that our code is safe but it cannot prove that our code is correct. If we build a calculator and write 2+2=5 the rust compiler will compile it perfectly because 5 is a valid integer . Tests exists to prove business logic words
+- IN rust testing isn't third party library we have to install like Jest in JS or PyTest in python. It is built directly into language and the cargo tool
+
+- There are three types of tests in Rust
+- 1. Unit Test - Tiny tests written in the exact same file as our code. They test individual private functions
+- 2. Integration tests - Tests written in separate tests/ folder. They test our project exactly like an outside user would accessing public methods
+- 3. Doc Tests - Code example we write in our /// comments. Rust actually compiles and run our comments to ensure our documentation never lies
+```rust
+use super::*
+#[test]
+```
+- super::* imports everything from the parent module into our test module
+- #[test] tells the test runner that this specific function is a test
+- `assert_eq!()`- checks if the two values are exactly equal. if they aren't the test instantly panics and fails

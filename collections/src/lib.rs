@@ -40,6 +40,10 @@ impl<T> Stack<T> {
     pub fn pop(&mut self) -> Option<T> {
         self.items.pop()
     }
+
+    pub fn peek(&self) -> Option<&T> {
+        self.items.last()
+    }
 }
 
 impl<T> Queue<T> {
@@ -103,6 +107,7 @@ impl<T> Add for Stack<T> {
 
 #[cfg(test)]
 mod tests {
+
     use super::*;
 
     // #[test]
@@ -162,4 +167,31 @@ mod tests {
         assert_eq!(combined_stack.pop(), Some(1));
 
     }
+
+    #[test]
+    fn test_stack_push_and_pop() {
+        let mut stack = Stack::new();
+        stack.push(10);
+        stack.push(20);
+
+        assert_eq!(stack.pop(), Some(20));
+        assert_eq!(stack.pop(), Some(10));
+        assert_eq!(stack.pop(), None);
+    }
+
+    #[test]
+    fn test_stack_peek() {
+        let mut stack = Stack::new();
+
+        stack.push(99);
+
+        assert_eq!(stack.peek(), Some(&99));
+        assert_eq!(stack.pop(), Some(99));
+    }
 }
+
+
+// What it does - It creates a hidden tests module that contains two test function for our Stack
+// How it works -The #[cfg(test)] attribute acts like a gatekeeper, the code inside doesn't even exist unless we tell Cargo taht we are running test . Inside  the test functions assert_eq!(A,B) checks if A==B . If it's false the test panics and fails
+// Why we did this way - Putting unit tests in the same file as the source code allows the tests to access private helper functions if needed . The #[cfg(test)]  attribute ensures this test code never bloats our final production binary
+

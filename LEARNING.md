@@ -271,6 +271,17 @@
 **Mistakes the compiler caught that taught me something:**
 - E0282 (type annotations needed): When I forgot to actually assign the `Rc::downgrade` result to `rust_weak`, Rust's type inference crashed because it couldn't guess the unassigned type.
 
+### Day 13 — Build: Comprehensive Test Suite + Documentation — 2026-07-12
+**Status:** `[~]` in progress
+**What I actually understood:**
+- 
+**What's still fuzzy / questions I had:**
+- 
+**Code I wrote / project progress:**
+- 
+**Mistakes the compiler caught that taught me something:**
+- 
+
 ---
 
 ## 🧠 Concept Confidence Tracker
