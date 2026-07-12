@@ -33,6 +33,15 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-12 23:53 IST — [task.md] — Completed Day 13 Step 1</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User successfully ran `cargo test` and saw all 5 tests pass for the `collections` library. Checked off Step 1 and moved on to testing edge cases with `#[should_panic]` in the `expression_evaluator`.
+
+</details>
+
+<details>
 <summary>2026-07-12 16:28 IST — [collections/src/lib.rs] — Fixing peek test</summary>
 
 - **Files:** collections/src/lib.rs

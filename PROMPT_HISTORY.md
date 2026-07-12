@@ -932,4 +932,10 @@
 **Output Summary:** Took accountability for providing a test for a non-existent method. Framed this as an accidental but perfect example of Test-Driven Development (TDD) — writing a test first, watching it fail, and then writing the implementation to make it pass. Used tools to add the missing `peek` method to `Stack` so the test compiles.
 **Outcome / Next Step:** Learner will run `cargo test` again to see the tests pass, completing Step 1.
 
+### 2026-07-12 23:53 IST — Prompt #154
+**Prompt:** "Done all test is working" + cargo test output showing 5 passing tests.
+**Context:** User ran `cargo test` after the `peek` method was added, and all tests passed successfully.
+**Output Summary:** Congratulated the user on completing Step 1. Checked off Step 1 in `task.md`. Introduced Step 2: Testing edge cases using `#[should_panic]` and `Result`-returning tests, shifting focus to the Day 11 `expression_evaluator` project.
+**Outcome / Next Step:** Learner will navigate to `expression_evaluator` and write tests for edge cases like dividing by zero and bad syntax.
+
 <!-- New entries appended below -->
