@@ -652,3 +652,7 @@ use super::*
 - super::* imports everything from the parent module into our test module
 - #[test] tells the test runner that this specific function is a test
 - `assert_eq!()`- checks if the two values are exactly equal. if they aren't the test instantly panics and fails
+- `Testing Edge cases #[should_panic]` -> Testing happy paths like 10 + 20 is easy but what happens when a user types something completely invalid. Does the program crash gracefully or does it do something unpredictable
+- What happends if we type bad syntax like 5.0 + * 3.0. Our parse_factor method actually panics with expected number or '('
+- WE can write test to guarantee that actually crashes when given bad input . We do this using the `should_panic` attribute
+

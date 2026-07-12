@@ -938,4 +938,22 @@
 **Output Summary:** Congratulated the user on completing Step 1. Checked off Step 1 in `task.md`. Introduced Step 2: Testing edge cases using `#[should_panic]` and `Result`-returning tests, shifting focus to the Day 11 `expression_evaluator` project.
 **Outcome / Next Step:** Learner will navigate to `expression_evaluator` and write tests for edge cases like dividing by zero and bad syntax.
 
+### 2026-07-13 03:15 IST — Prompt #155
+**Prompt:** "The error is completely differnt" + compiler error showing `Parser::new` expected `Vec<Token>` but found `&str`.
+**Context:** AI provided a test for the `expression_evaluator` but completely forgot that the input string needs to pass through the `Lexer` before being handed to the `Parser`.
+**Output Summary:** Acknowledged the mistake. Created a `parse_string` helper function inside the test module that correctly chains the `Lexer` and `Parser` together. Updated the test code in `main.rs` using tools.
+**Outcome / Next Step:** Learner will re-run `cargo test` to see the `#[should_panic]` test succeed.
+
+### 2026-07-13 03:17 IST — Prompt #156
+**Prompt:** "It still shows failed with error" + cargo test output showing a mismatch in the expected panic string.
+**Context:** User ran the corrected test, and it successfully panicked, but it failed because the panic string `Expected number` didn't match the typo in the Day 11 codebase (`Exprected a number or '(`).
+**Output Summary:** Acknowledged the typo. Adjusted the `#[should_panic]` expected string to match the exact typo ("Exprected a number") in `main.rs` using tools. 
+**Outcome / Next Step:** Learner will run `cargo test` one last time to see it pass, completing Step 2.
+
+### 2026-07-13 03:18 IST — Prompt #157
+**Prompt:** "Done" + cargo test output showing successful tests.
+**Context:** User ran `cargo test` and saw the `#[should_panic]` test successfully pass.
+**Output Summary:** Congratulated the user on completing Step 2. Checked off Step 2 in `task.md`. Introduced Step 3: Integration Tests, explaining how they differ from Unit Tests and setting up the structure for testing the `collections` crate from the outside.
+**Outcome / Next Step:** Learner will create a `tests/` directory in their `collections` project and write their first Integration Test.
+
 <!-- New entries appended below -->

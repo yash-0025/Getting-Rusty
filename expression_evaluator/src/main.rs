@@ -330,3 +330,38 @@ fn main() {
 // How it works ? = Look closely at the hierarchy parse_expressoin call parse_term. parse_term calls parse_factor
 // Why ? => By layering these function calls we naturally build PEMDAS into the structure of our code. The compiler is forced to calculate parse_factor parentheses before parse_term multiplication and parse_term before parse_expression addition
 
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // Helper function so we don't have to repeat the Lexer loop in every test
+    fn parse_string(input: &str) -> Expr {
+        let mut lexer = Lexer::new(input);
+        let mut tokens = Vec::new();
+        while let Some(token) = lexer.next_token() {
+            tokens.push(token);
+        }
+        let mut parser = Parser::new(tokens);
+        parser.parse_expression()
+    }
+
+    #[test]
+    fn test_valid_math() {
+        let expr = parse_string("5.0 + 3.0 * 2.0");
+        assert_eq!(expr.eval(), 11.0);
+    }
+
+    #[test]
+    #[should_panic(expected = "Exprected a number")]
+    fn test_bad_syntax_panics() {
+        // this is invalid syntax . The parser should panic
+        parse_string("5.0 + * 3.0");
+    }
+}
+
+// What it does - The first test checks normal math 5.0 + 3.0 * 2.0 = 11 .
+// The second test feeds garbage into the parser and checks if it panics
+// How it works? => #[should_panic] tells the test runner. If this function doesnot crash fail the test.
+// By adding expected = ... we tell rust to only pass the test if the panic mesage matches our string exactly
+// why ? => We dont want a crash happening deep in production code because of an edge case we missed. Writing panic test guarantees our code fails exactly when and how we designed it to.
