@@ -33,6 +33,15 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-13 13:59 IST — [Concepts] — Re-explaining Modules and Closures</summary>
+
+- **Files:** N/A (Chat explanation)
+- **Change type:** N/A
+- **Reason:** The AI failed the pedagogical rule of "Show through code, not words." User did not understand the dense text explanation of `mod.rs` and function pointers. Pivot to using code examples to demonstrate the concepts clearly.
+
+</details>
+
+<details>
 <summary>2026-07-13 13:30 IST — [task.md] — Completed Day 13 Step 4</summary>
 
 - **Files:** task.md

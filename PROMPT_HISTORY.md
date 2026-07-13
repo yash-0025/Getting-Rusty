@@ -968,4 +968,10 @@
 **Output Summary:** Explained that the documentation actually compiled perfectly, but the `--open` flag failed because WSL doesn't have a default browser configured natively to open HTML files. Checked off Step 4 in `task.md`. Moved to the final Step 5: Module system deep dive.
 **Outcome / Next Step:** Learner will manually open the HTML file to view the docs, and we will begin discussing Module System visibility.
 
+### 2026-07-13 13:59 IST — Prompt #160
+**Prompt:** "I didn't get what you expalined about module system deep dive and closure vs function pointers"
+**Context:** The AI tried to explain the final two concepts using only text paragraphs, which violated the pedagogical rule of "Show through code, not words."
+**Output Summary:** Acknowledged the mistake of teaching through pure text. Provided two concrete code examples. Explained the module system using a folder structure analogy (`mod.rs` is like `index.js`). Explained Closures vs Function pointers using a code snippet demonstrating "environment capturing."
+**Outcome / Next Step:** Learner will review the code examples to solidify the concepts before closing out Day 13.
+
 <!-- New entries appended below -->

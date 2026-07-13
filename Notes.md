@@ -665,3 +665,34 @@ use super::*
 - We have used a third party library in Javascript or Python copied the code example from their documentation and it completely crashed because the docs were out of date .
 - Rust solves this brilliantly. Code examples in your documentation are automatically compiled and run as tests.
 - This means it is literally impossible to publish a rust library with broken code example.
+
+- `Concept 4 - Module system deep dive and closures vs function pointers`
+- We have actually been using the module system (pub, mod, super::*) throughout the week But there is one final rule to learn about modules in rust.
+- When we create a file like storage.rs , it automatically becomes a module names storage. But what if storage gets huge and we want to split it into a folder
+- The Modern style - If we want a module named database, we can create a folder called database and inside it put a file called mod.rs
+- database/mod.rs acts as the entry point of the database module.
+- Inside mod.rs we can declare other sub modules like pub mod mysql whihch points to database/mysql.rs
+
+- Function Pointers vs Closures(fn vs Fn) - We have been using closures like (|X| x + 1) . Closure are anonymous functions that can captures variables from the environment
+- Fn, FnMut and FnOnce are traits that representss closures.
+- fn (lowercase) is a Function Pointer. It points to a regular function defined with the fn keyword. Function pointer cannot capture environment variables meaning they use slightly less memory and have no overhead but are less flexible than closures
+
+- `Modern Module system (mod.rs)` - Imagine we are building a backend and our database.rs file becomes 2000 lines long . We want to split it into a folder
+- ```rust
+    src/
+        database.rs
+```
+- ```rust
+    src/
+        database/
+            mod.rs
+    Node!
+        mysql.rs
+        postgres.rs
+```
+- In rust a folder named database needs a file named mod.rs inside it . That mod.rs acts as the entry point for the entire folder inside database/mod.rs we would write
+```rust
+pub mod mysql;
+pub mod postgres;
+```
+- Now the rest of our app can just `use database::mysql;` exactly as if it was all still in one giant file
