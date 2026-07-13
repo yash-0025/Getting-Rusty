@@ -750,3 +750,14 @@ fn main() {
 - If the user passes None, the item just never expires
 - WE then take the Calculated time and the value wrap them in our CacheItem, and insert them into the HashMap
 
+
+<h1>Day 14 again</h1>
+
+- `Concept 1` => Project Setup and Time Concepts
+- How Rust handles time? Since our cache has a TTL, we need to know exactly when an item expires
+- => Rust provides two very important structs `std::time`:`Duration` and `Instant`. 
+- `Duration` => The Movie length - This is just a measurement of time like saying - This movie is exactly 2 hours long. It has no start or end point
+- `Instant` => The Stopwatch :Imagine we have a physical stopwatch that started running the moment our computer was turned on and it can never be paused, stopped or reversed. Calling `Instant::now()` is like looking down at the stopwatch and recording the exact millisecond we see on the screen
+- Combining them - If we want to know exactly when a 2 hour movie will finish we look down on our stopwatch right now Instant and add the length of the movie Duration and write down that exact future stopwatch time
+- If we want a cache item to expire in 5 seconds we don't just save 5 seconds . We calculate expiration_time = Instant::now() + Duration::from_secs(5);
+- Whenever someone asks for the item, we check if our current stopwatch time has passed the expiration time . IF Instant::now() >= expiration_time { //It's expired }
