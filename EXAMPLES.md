@@ -229,3 +229,18 @@ When you have a `Box<Expr>` and you write `left.eval()`, the compiler notices th
 **Rust Context (Technical Explanation):**
 A Reference Cycle happens when two `Rc` pointers point to each other (e.g., in a Tree where a Parent points to a Child, and the Child points back to the Parent). Because `Rc` only drops memory when its `strong_count` reaches 0, two objects pointing to each other will keep each other's `strong_count` at 1 forever, resulting in a permanent Memory Leak.
 `Weak<T>` is a companion to `Rc`. It allows you to hold a reference to data *without* incrementing the `strong_count` (it increments a `weak_count` instead). Because the `strong_count` can still drop to 0, the memory can be safely freed. To actually read the data inside a `Weak` pointer, you must call `.upgrade()`, which returns an `Option<Rc<T>>` in case the data was already destroyed.
+
+---
+
+### 21. Trait Bounds on Generics (Day 14)
+**Core Concept:** Restricting generic types (`<T>`) so they are mathematically guaranteed to support specific behaviors (like hashing or equality checking).
+
+**The Analogy: The Bouncer at the Exclusive Club**
+* **The Setup:** Imagine you own an exclusive nightclub (a `HashMap`). Because of how the club is organized, the bouncer at the door has two strict rules for anyone entering:
+  1. You must wear a visible ID badge (`Hash`).
+  2. You must be able to prove you are distinctly different from the person standing next to you (`Eq`).
+* **The Enforcement:** If a normal generic (`<T>`) tries to walk into the club without an ID badge, the bouncer (the compiler) immediately rejects them at the door. You have to explicitly tell the bouncer: *"Only let people in who sign the `Hash` and `Eq` contracts."*
+
+**Rust Context (Technical Explanation):**
+When you define a generic struct like `struct Cache<K, V>`, the compiler assumes `K` can literally be anything. However, a `HashMap` internally works by taking a key, running it through a hashing algorithm to get a number, and using that number to find a bucket in memory. If bucket collisions occur, it compares the keys for exact equality. 
+If `K` is something that cannot be hashed (like a floating-point number `f32` which has weird `NaN` rules), the `HashMap` would fatally break. By enforcing **Trait Bounds** on the struct definition (`struct Cache<K: std::hash::Hash + std::cmp::Eq, V>`), the compiler mathematically guarantees that any type passed in as `K` implements those specific traits, guaranteeing safety at compile time.

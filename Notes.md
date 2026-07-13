@@ -731,3 +731,11 @@ fn main() {
 - If we want an item in our cache to expire in 5 seconds we don't just store 5 seconds we don't just store 5 seconds.
 - We calculate expiration_time = Instant::now() + Duration::from_secs(5);
 - Whenever someone asks for the item, we check if Instant::now() >= expiration_time { // it's expand }
+
+- `Concept 2 - Core Structure`
+- 1. `CacheItem<V>` - This is a tiny wrapper that holds the data `value: V` and tells us exactly when it expires (epires_at: Option<Instant>). We use Option because because maybe the user wants an item to stay in the cache forever (no expiration)
+- 2. `Cache<K, V>` - This is the main structure . It contains a `HashMap` that maps the keys K to our new CachceItem<V>
+
+- `Concept 3 - Trait Bounds and Generics`
+- When we use a generic like K for a HashMap key, we can't just use any type . For a HashMap to work, it has to be able to hash the key (turn it into a number ) and compare two keys for equality.
+- So when we define our Cache we can't just say Cache<K, V>. We have to enforce rules on K using traits Cache<K, V>. We have to enforce rules on K using traits: Cache<K: std::hash::Hash + std::cmp::Eq, V>

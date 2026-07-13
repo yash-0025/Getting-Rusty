@@ -33,6 +33,42 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-13 18:18 IST — [Concepts] — Apologizing for Rule 9 violation</summary>
+
+- **Files:** N/A (Chat explanation)
+- **Change type:** N/A
+- **Reason:** The AI swung too far trying to correct the previous mistake and dropped a code block without the mandatory What/How/Why breakdown (violating Governance Rule 9). Corrected the behavior by providing the breakdown for `Cache::new()` and `Cache::set()`.
+
+</details>
+
+<details>
+<summary>2026-07-13 18:17 IST — [Concepts] — Apologizing for Concept hallucination</summary>
+
+- **Files:** N/A (Chat explanation)
+- **Change type:** N/A
+- **Reason:** The AI incorrectly presented Trait Bounds as a brand new concept for Day 14, even though Generics (Day 7) and Traits (Day 8) were already learned. Apologized and corrected the framing: Day 14 is the Capstone where we *apply* them, not learn them from scratch.
+
+</details>
+
+<details>
+<summary>2026-07-13 17:54 IST — [EXAMPLES.md] — Added Concept 21 (Rule 8 Fix)</summary>
+
+- **Files:** EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** User caught that the AI broke Governance Rule 8 (failing to use ELI5 analogies and appending them to `EXAMPLES.md`). Re-read rules and updated `EXAMPLES.md` with the "Bouncer at the Exclusive Club" analogy for Trait Bounds.
+
+</details>
+
+<details>
+<summary>2026-07-13 17:50 IST — [task.md] — Completed Day 14 Step 2</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** Acknowledged the user's feedback to slow down and explain code before providing it. Checked off Step 2 and prepared a detailed explanation for Step 3.
+
+</details>
+
+<details>
 <summary>2026-07-13 14:45 IST — [task.md] — Completed Day 14 Step 1</summary>
 
 - **Files:** task.md, in_memory_cache/src/lib.rs
