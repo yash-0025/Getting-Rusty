@@ -33,6 +33,33 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-13 14:45 IST — [task.md] — Completed Day 14 Step 1</summary>
+
+- **Files:** task.md, in_memory_cache/src/lib.rs
+- **Change type:** Modified
+- **Reason:** Cleaned up starter code and moved to Step 2 (defining core structures).
+
+</details>
+
+<details>
+<summary>2026-07-13 14:33 IST — [task.md] — Generated Day 14 Tasks</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User approved the architectural plan but reminded the AI to follow the pedagogical rule of teaching step-by-step. Overwrote `task.md` with 7 incremental steps to build the Capstone project.
+
+</details>
+
+<details>
+<summary>2026-07-13 14:25 IST — [LEARNING.md] — Started Day 14 Capstone</summary>
+
+- **Files:** LEARNING.md, implementation_plan.md
+- **Change type:** Added/Modified
+- **Reason:** User initialized Day 14 (Week 2 Capstone). Updated the tracker and created a formal implementation plan artifact to align on the architecture of the Generic In-Memory Cache before writing code.
+
+</details>
+
+<details>
 <summary>2026-07-13 14:22 IST — [task.md] — Completed Day 13</summary>
 
 - **Files:** task.md, ROADMAP.md, LEARNING.md

@@ -291,6 +291,17 @@
 
 ---
 
+### Day 14 — 🏁 Week 2 Capstone: Generic In-Memory Cache with TTL — 2026-07-13
+**Status:** `[~]` in progress
+**What I actually understood:**
+- 
+**What's still fuzzy / questions I had:**
+- 
+**Code I wrote / project progress:**
+- 
+**Mistakes the compiler caught that taught me something:**
+- 
+
 ## 🧠 Concept Confidence Tracker
 *(Self-rate honestly — this drives what the AI re-explains or drills. Update anytime, ask the AI to revise the table for you if you want.)*
 

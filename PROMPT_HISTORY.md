@@ -986,4 +986,22 @@
 **Output Summary:** Congratulated the user. Formally marked Day 13 as complete by checking off the final task in `task.md`, updating `ROADMAP.md` to `[x]`, and filling out the daily recap template in `LEARNING.md`. Teased Day 14 (Week 2 Capstone: In-Memory Cache with TTL).
 **Outcome / Next Step:** Learner will confirm if they are ready to start Day 14 (Capstone Project) or wrap up for the session.
 
+### 2026-07-13 14:25 IST — Prompt #163
+**Prompt:** "Lets start with day 14"
+**Context:** User is ready to begin the final Day 14 capstone for Week 2 (Generic In-Memory Cache with TTL).
+**Output Summary:** Initialized Day 14 by updating `LEARNING.md`. Recognized this as a major architectural project and triggered Planning Mode. Created an `implementation_plan.md` outlining the architecture, the traits, the generic structs, and the features we will build for the Cache.
+**Outcome / Next Step:** Learner will review the architectural plan in the artifacts panel and provide approval so we can begin coding the capstone.
+
+### 2026-07-13 14:33 IST — Prompt #164
+**Prompt:** "Don't forget you have to teach me . Let's start"
+**Context:** User approved the architectural implementation plan for Day 14 and reminded the AI to stick to the pedagogical workflow of teaching side-by-side rather than generating the whole project at once.
+**Output Summary:** Acknowledged the reminder. Overwrote `task.md` with 7 incremental steps for building the Capstone project. Initiated Step 1 by explaining the concept of `Instant` vs `Duration` and providing instructions to initialize the `in_memory_cache` library crate.
+**Outcome / Next Step:** Learner will run `cargo new in_memory_cache --lib`, navigate into it, and add the initial struct definitions.
+
+### 2026-07-13 14:45 IST — Prompt #165
+**Prompt:** "Done"
+**Context:** User created the `in_memory_cache` library crate and added the Time imports.
+**Output Summary:** Cleaned up the leftover starter code in `lib.rs` using tools. Checked off Step 1. Moved to Step 2: Defining the Core Structures (`CacheItem<V>` and `Cache<K, V>`). Explained the concept of trait bounds for `HashMap` keys (`Hash + Eq`).
+**Outcome / Next Step:** Learner will write the core structs into `lib.rs`.
+
 <!-- New entries appended below -->

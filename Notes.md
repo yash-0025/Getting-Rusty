@@ -721,3 +721,13 @@ fn main() {
 }
 ```
 - Why it matters - If we build a system that accepts callback(like .map(|x| x + 1)), we almost always want to use the Fn trait , not the fn pointer, because users will almost always want their callback to read local variable  from the evnrionment.
+
+<h1>Day 14 </h1>
+
+- `Concept 1 - std::time Concepts ` - we need to understand how Rust handles time. Since this is a cache with a TTL (Time to live) we need to know when an item expires
+- Rust provide two very important structs in the standard library std::time
+- `Duration` - Represents a length of time eg 5 seconds . It is just a number
+- `Instant` - Represents a specific point in time on the machines clock eg- Right now. It is monotonically increasing , meaning it never goes backwards even if the user changes their system clock or Daylight Saving Time hits
+- If we want an item in our cache to expire in 5 seconds we don't just store 5 seconds we don't just store 5 seconds.
+- We calculate expiration_time = Instant::now() + Duration::from_secs(5);
+- Whenever someone asks for the item, we check if Instant::now() >= expiration_time { // it's expand }
