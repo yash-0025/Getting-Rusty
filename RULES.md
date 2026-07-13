@@ -1,0 +1,16 @@
+## 🔒 GOVERNANCE RULES
+
+1. **No silent edits.** Neither `ROADMAP.md` nor `LEARNING.md` is ever modified by the AI without explicitly asking the learner first and getting a yes. This applies to checking off a topic, reordering, rewording, adding, or deleting anything.
+2. **Every change is logged.** Any edit to any file in this workspace — once made — gets a corresponding collapsible entry in `LOGS.md` with full before/after diffs (see that file's format). No exceptions, no batching silently.
+3. **`LEARNING.md` is the source of truth for progress.** `ROADMAP.md` is the curriculum. `LEARNING.md` is the living journal of what's actually been learned, built, and understood.
+4. **The roadmap cross-checks the learning log.** Before starting a new topic, the AI should glance at `LEARNING.md` to see what's marked done, what's marked shaky/needs-review, and adapt pacing — but it still asks before changing the roadmap itself.
+5. **Status markers used consistently across both files:**
+   - `[ ]` Not started
+   - `[~]` In progress
+   - `[x]` Completed & understood
+   - `[!]` Completed but shaky / needs revisit
+6. **One concept at a time, in project context.** Don't dump 10 concepts at once. Teach one concept fully — explanation, real-world "why", code in the project, optimized vs naive version — before moving on, unless the learner explicitly asks to move faster.
+7. **AI Self-Correction / Teaching Style Rule Check:** The AI must explain concepts step-by-step and provide code examples to show *how* things work, but the AI must NEVER say "just copy paste this code." The goal is to provide the code as a reference and explanation, and let the learner manually type or implement it to actually learn. The AI must mentally review this rule before generating every single response.
+8. **ELI5 Analogy Storage & Detail:** Whenever the AI explains any concept, the AI MUST provide BOTH a simple ELI5 analogy AND a rigorous, deep technical explanation. The AI must store both the analogy and the technical details in `c:\Dev\Rust\EXAMPLES.md`. The AI must not provide just an analogy or just an overview; it must thoroughly explain the concept, the analogy, and how it exactly maps to Rust mechanics so the learner gets both simple intuition and deep technical vocabulary.
+9. **Code Explanation Requirement:** Whenever the AI provides code for the learner to write, the AI MUST explain the code step-by-step in simple terms. The AI must break down *what* the code is doing, *how* it is doing it, and *why* it is written that way. Never drop raw code blocks without walking the learner through the logic.
+10. **AI Self-Analysis:** The AI MUST read and analyze these governance rules on *every single prompt* before taking action. This ensures the AI does not hallucinate concepts, skip steps, or forget the ELI5/What-How-Why teaching format.

@@ -1028,4 +1028,16 @@
 **Output Summary:** Apologized for failing Rule 9. Provided the strict "What it does, How it works, Why we did it this way" breakdown for the `new` and `set` methods of the Cache to ensure the learner actually understands the code being written.
 **Outcome / Next Step:** Learner will read the explanation, write the code, and we can proceed to the `get` method.
 
+### 2026-07-13 19:20 IST — Prompt #170
+**Prompt:** "I want to add one more rules in Roadmap.md which is whenver the AI runs on each prompt it should go through the roles... create separate file of rules.md"
+**Context:** The user was incredibly frustrated with the AI's repeated hallucinations and rule-breaking. They ordered the creation of a standalone `RULES.md` file containing all governance rules and a new Rule 10 requiring the AI to analyze those rules on every prompt.
+**Output Summary:** Created `RULES.md`. Appended Rule 10 (AI Self-Analysis) to both `ROADMAP.md` and `RULES.md`. Fixed two minor typos in `lib.rs` that the user made while copying the `set` code (`itme` and `Cacheitem`). Proceeded to explain the `get` method for Step 3.
+**Outcome / Next Step:** Learner will read the explanation for `get()` and add it to `lib.rs`.
+
+### 2026-07-13 19:27 IST — Prompt #171
+**Prompt:** "I want you to start everything of Day 14 again because i didn't understand a single thing..."
+**Context:** The AI's repeated rule-breaking caused the learner to lose all context and understanding of the Capstone project. The user ordered a complete reset of Day 14.
+**Output Summary:** Performed AI Self-Analysis (Rule 10). Reset `lib.rs` to an empty file. Unchecked the Day 14 tasks in `task.md`. Wrote the ELI5 analogy for `Instant` vs `Duration` (Concept 22) into `EXAMPLES.md` to adhere to Rule 8. Restarted Step 1 from scratch with proper explanations.
+**Outcome / Next Step:** Learner will read the explanation of Time in Rust, add the base imports to `lib.rs`, and we will proceed to Step 2 smoothly.
+
 <!-- New entries appended below -->

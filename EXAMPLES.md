@@ -244,3 +244,17 @@ A Reference Cycle happens when two `Rc` pointers point to each other (e.g., in a
 **Rust Context (Technical Explanation):**
 When you define a generic struct like `struct Cache<K, V>`, the compiler assumes `K` can literally be anything. However, a `HashMap` internally works by taking a key, running it through a hashing algorithm to get a number, and using that number to find a bucket in memory. If bucket collisions occur, it compares the keys for exact equality. 
 If `K` is something that cannot be hashed (like a floating-point number `f32` which has weird `NaN` rules), the `HashMap` would fatally break. By enforcing **Trait Bounds** on the struct definition (`struct Cache<K: std::hash::Hash + std::cmp::Eq, V>`), the compiler mathematically guarantees that any type passed in as `K` implements those specific traits, guaranteeing safety at compile time.
+
+---
+
+### 22. Time in Rust (`Instant` vs `Duration`) (Day 14)
+**Core Concept:** The difference between a measurement of time and an exact point in time on the system clock.
+
+**The Analogy: The Length of the Movie vs The Stopwatch**
+* **`Duration` (The Movie Length):** This is just a measurement of time, like saying "This movie is exactly 2 hours and 5 minutes long". It is a standalone number. It doesn't tell you *when* the movie starts or ends, just how big the window of time is.
+* **`Instant` (The Stopwatch):** Imagine you have a physical stopwatch that started running the moment your computer was turned on, and it can never be paused, stopped, or reversed. Calling `Instant::now()` is like looking down at that stopwatch and recording the exact millisecond you see on the screen.
+* **Combining them:** If you want to know exactly when a 2-hour movie will finish, you look down at your stopwatch right now (`Instant`), add the length of the movie (`Duration`), and write down that future stopwatch time.
+
+**Rust Context (Technical Explanation):**
+In `std::time`, a `Duration` is simply a struct containing a number of seconds and nanoseconds. It represents a span of time. An `Instant` represents an opaque, monotonically non-decreasing clock timestamp provided by the operating system. It is immune to the user manually changing their system clock or Daylight Saving Time shifts (unlike `SystemTime`). 
+To implement a Time-To-Live (TTL) cache, you calculate the expiration by doing `let expires_at = Instant::now() + Duration::from_secs(5);`. Later, you check if it is expired by doing `Instant::now() >= expires_at`.

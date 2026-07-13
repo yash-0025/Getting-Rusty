@@ -739,3 +739,14 @@ fn main() {
 - `Concept 3 - Trait Bounds and Generics`
 - When we use a generic like K for a HashMap key, we can't just use any type . For a HashMap to work, it has to be able to hash the key (turn it into a number ) and compare two keys for equality.
 - So when we define our Cache we can't just say Cache<K, V>. We have to enforce rules on K using traits Cache<K, V>. We have to enforce rules on K using traits: Cache<K: std::hash::Hash + std::cmp::Eq, V>
+
+- `Concept 4 - Implementing Methods on Trait Bounded Generics`
+- Since our Cache struct has trait bounds on K (K: std::hash::Hash + std::cmp::Eq) whenever we write the impl block for Cache , we must repeat those exact same trait bounds, if we don't Rust won't let us use the HashMap inside it
+- new() - A simple function that just returns a Cache with an empty HashMap
+- set() - A function that takes a key, a value and an optional ttl (Time to live as a Duration)
+
+- How set() workss logically
+- If the user passes Some(duration) we calculate the exact expiration time on the clock Instant::now() + duration. 
+- If the user passes None, the item just never expires
+- WE then take the Calculated time and the value wrap them in our CacheItem, and insert them into the HashMap
+
