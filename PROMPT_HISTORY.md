@@ -962,4 +962,10 @@
 **Output Summary:** Congratulated the user on completing Step 3. Checked off Step 3 in `task.md`. Introduced Step 4: Documentation Tests (Doc Tests) and generating docs with `cargo doc`. Explained how Doc Tests guarantee that documentation code examples are actually compiled and run.
 **Outcome / Next Step:** Learner will add Doc Tests using `///` comments to their `collections` library and generate documentation.
 
+### 2026-07-13 13:30 IST — Prompt #159
+**Prompt:** "thsi is what i am getting" + cargo doc and cargo test output.
+**Context:** User ran `cargo test` and saw the `Doc-tests collections` pass perfectly. However, `cargo doc --open` threw an error `No such file or directory` for `wslview`.
+**Output Summary:** Explained that the documentation actually compiled perfectly, but the `--open` flag failed because WSL doesn't have a default browser configured natively to open HTML files. Checked off Step 4 in `task.md`. Moved to the final Step 5: Module system deep dive.
+**Outcome / Next Step:** Learner will manually open the HTML file to view the docs, and we will begin discussing Module System visibility.
+
 <!-- New entries appended below -->

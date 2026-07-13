@@ -2,6 +2,24 @@ use std::collections::VecDeque;
 use std::ops::Add;
 
 
+/// A generic last-in-first-out (LIFO) stack data structure
+/// 
+/// #Examples
+/// 
+/// ```
+/// use collections::Stack;
+///
+/// let mut stack = Stack::new();
+/// stack.push(100);
+/// stack.push(200);
+///
+/// assert_eq!(stack.pop(), Some(200));
+/// assert_eq!(stack.pop(), Some(100));
+/// ```
+
+// What it does - it documents the Stack struct and provides a Markdown code block showing how to use it
+// How it works - When we run cargo test. Cargo scans our files for /// comments. If it finds a Markdown code block the triple backticks ``` it extracts that code , compiles it and runs the assert_eq! just like a normal test
+// Why we did this - Writing examples in our docs makes our library easier to use. Having the compiler verify those examples gguarantees our docs never lie
 
 #[derive(Debug, Clone)]
 pub struct Stack<T> {

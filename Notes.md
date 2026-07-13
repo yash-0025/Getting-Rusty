@@ -659,3 +659,9 @@ use super::*
 - `Concept 2 - Integration Tests` 
 - A unit test lives inside the exact same file as the souce code . Because it lives inside the file it has God Mode access. It can test private functions and private variables. But when we publish a library like collections we want to make sure that other developers can actually use it from outside .
 - An integration test is placed in a completely separate folder . Rust compiles it as if it were a totally different 3rd party project downloading our code from teh internet. It can only access our pub structs and pub methods . This proves our public API actually works
+
+
+- `Concept 3 - Doc Tests & cargo doc`
+- We have used a third party library in Javascript or Python copied the code example from their documentation and it completely crashed because the docs were out of date .
+- Rust solves this brilliantly. Code examples in your documentation are automatically compiled and run as tests.
+- This means it is literally impossible to publish a rust library with broken code example.
