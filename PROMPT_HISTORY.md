@@ -980,4 +980,10 @@
 **Output Summary:** Pivoted the explanation to an "under the hood" approach. Explained that in JavaScript, all functions are objects, but in Rust, they are very different. Revealed the "Aha!" moment: Closures in Rust are secretly just auto-generated Structs that store the captured variables inside them, whereas Function Pointers are just raw memory addresses with no place to store state.
 **Outcome / Next Step:** Learner will read the explanation of how Closures are structs in disguise. If understood, Day 13 will be completed.
 
+### 2026-07-13 14:22 IST — Prompt #162
+**Prompt:** "done" + Git commit logs.
+**Context:** User logged the final notes, committed their code, and successfully pushed to GitHub.
+**Output Summary:** Congratulated the user. Formally marked Day 13 as complete by checking off the final task in `task.md`, updating `ROADMAP.md` to `[x]`, and filling out the daily recap template in `LEARNING.md`. Teased Day 14 (Week 2 Capstone: In-Memory Cache with TTL).
+**Outcome / Next Step:** Learner will confirm if they are ready to start Day 14 (Capstone Project) or wrap up for the session.
+
 <!-- New entries appended below -->

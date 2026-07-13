@@ -33,6 +33,15 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-13 14:22 IST — [task.md] — Completed Day 13</summary>
+
+- **Files:** task.md, ROADMAP.md, LEARNING.md
+- **Change type:** Modified
+- **Reason:** User understood the Closure vs Function Pointer explanation, took notes, and committed code to GitHub. Day 13 is officially complete. Checked off Step 5, updated `ROADMAP.md` to `[x]`, and filled in the summary in `LEARNING.md`.
+
+</details>
+
+<details>
 <summary>2026-07-13 14:14 IST — [Concepts] — Under the hood of Closures</summary>
 
 - **Files:** N/A (Chat explanation)

@@ -131,10 +131,10 @@ Each day has:
 - [x] **Deliverable:** Working file system simulator with tree display.
 
 ### Day 13 — Build: Comprehensive Test Suite + Documentation
-- [ ] **You build:** Take all Week 2 libraries (Days 8-12), write comprehensive tests and documentation. Learn testing as a *practice*, not a topic.
-- [ ] **Concepts:** Unit tests (`#[cfg(test)] mod tests`), `#[test]`, `assert!`/`assert_eq!`/`assert_ne!` · Integration tests (`tests/` directory) — testing your crate's public API like an external consumer · Doc tests — code examples in `///` comments that are compiled and run as tests · `#[should_panic]`, `Result`-returning tests · Test organization, `mod` and `pub(crate)` visibility rules · Module system deep dive: `mod.rs` vs `foo.rs` + `foo/` (modern style) · Function pointers (`fn` type) vs closures (`Fn` traits)
-- [ ] **Reality check:** Doc tests are why crates.io docs show "this example actually compiles" — a real trust signal when picking a dependency
-- [ ] **Deliverable:** 90%+ test coverage across all Week 2 crates, with doc comments containing working examples.
+- [x] **You build:** Take all Week 2 libraries (Days 8-12), write comprehensive tests and documentation. Learn testing as a *practice*, not a topic.
+- [x] **Concepts:** Unit tests (`#[cfg(test)] mod tests`), `#[test]`, `assert!`/`assert_eq!`/`assert_ne!` · Integration tests (`tests/` directory) — testing your crate's public API like an external consumer · Doc tests — code examples in `///` comments that are compiled and run as tests · `#[should_panic]`, `Result`-returning tests · Test organization, `mod` and `pub(crate)` visibility rules · Module system deep dive: `mod.rs` vs `foo.rs` + `foo/` (modern style) · Function pointers (`fn` type) vs closures (`Fn` traits)
+- [x] **Reality check:** Doc tests are why crates.io docs show "this example actually compiles" — a real trust signal when picking a dependency
+- [x] **Deliverable:** 90%+ test coverage across all Week 2 crates, with doc comments containing working examples.
 
 ### Day 14 — 🏁 Week 2 Capstone: Generic In-Memory Cache with TTL
 - [ ] **You build:** A generic, thread-safe-ready cache library with TTL expiration: `Cache<K, V>` backed by `HashMap`, with `get`, `set`, `delete`, `cleanup_expired`. Trait-based API so the backing store is swappable.
