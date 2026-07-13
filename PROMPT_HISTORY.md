@@ -974,4 +974,10 @@
 **Output Summary:** Acknowledged the mistake of teaching through pure text. Provided two concrete code examples. Explained the module system using a folder structure analogy (`mod.rs` is like `index.js`). Explained Closures vs Function pointers using a code snippet demonstrating "environment capturing."
 **Outcome / Next Step:** Learner will review the code examples to solidify the concepts before closing out Day 13.
 
+### 2026-07-13 14:14 IST — Prompt #161
+**Prompt:** "I still didn't get it fn vs Fn"
+**Context:** User logged the notes but still struggled with the conceptual difference between Function Pointers (`fn`) and Closures (`Fn`).
+**Output Summary:** Pivoted the explanation to an "under the hood" approach. Explained that in JavaScript, all functions are objects, but in Rust, they are very different. Revealed the "Aha!" moment: Closures in Rust are secretly just auto-generated Structs that store the captured variables inside them, whereas Function Pointers are just raw memory addresses with no place to store state.
+**Outcome / Next Step:** Learner will read the explanation of how Closures are structs in disguise. If understood, Day 13 will be completed.
+
 <!-- New entries appended below -->

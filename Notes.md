@@ -696,3 +696,28 @@ pub mod mysql;
 pub mod postgres;
 ```
 - Now the rest of our app can just `use database::mysql;` exactly as if it was all still in one giant file
+
+- `Closures (Fn) vs Function Pointers(fn)`
+- A Function Pointer is just a variable that points to a normal function. A Closure is an anonymous function like and arrow function in js . The biggest difference is Capturing the Environment
+```rust
+// This is a normal function
+fn add_one(x: i32) -> i32 {
+    x + 1
+}
+
+fn main() {
+    // 1. Function Pointer (lowercase fn)
+    // It points to add_one . It takes very little memory
+    let my_pointer: fn(i32) -> i32 = add_one;
+    println!("{}", my_pointer(5)); // Print 6
+
+    // 2. Closure (uppercase Fn trait)
+    let external_var = 10;
+
+    // A closure can capture variables from outside its scope
+    // A function pointer cannot do this
+    let my_closure = |x| { x + external_var };
+    println!("{}", my_closure(5)); // Print 15
+}
+```
+- Why it matters - If we build a system that accepts callback(like .map(|x| x + 1)), we almost always want to use the Fn trait , not the fn pointer, because users will almost always want their callback to read local variable  from the evnrionment.

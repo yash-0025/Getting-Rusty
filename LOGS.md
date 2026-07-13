@@ -33,6 +33,15 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-13 14:14 IST — [Concepts] — Under the hood of Closures</summary>
+
+- **Files:** N/A (Chat explanation)
+- **Change type:** N/A
+- **Reason:** Pivoted to explaining Closures (`Fn`) vs Function Pointers (`fn`) by showing how the compiler converts a Closure into a hidden Struct under the hood.
+
+</details>
+
+<details>
 <summary>2026-07-13 13:59 IST — [Concepts] — Re-explaining Modules and Closures</summary>
 
 - **Files:** N/A (Chat explanation)
