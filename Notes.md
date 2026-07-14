@@ -761,3 +761,17 @@ fn main() {
 - Combining them - If we want to know exactly when a 2 hour movie will finish we look down on our stopwatch right now Instant and add the length of the movie Duration and write down that exact future stopwatch time
 - If we want a cache item to expire in 5 seconds we don't just save 5 seconds . We calculate expiration_time = Instant::now() + Duration::from_secs(5);
 - Whenever someone asks for the item, we check if our current stopwatch time has passed the expiration time . IF Instant::now() >= expiration_time { //It's expired }
+
+
+- `Concept 2 ` => Core Structures 
+- 1. `CacheItem<V>` 
+- What it does ? => This is a small wrapper struct that holds the actual data(value) and tracks exactly when that specific piece of data expires(expires_at)
+- How it works? => It is generic over type <V> (the Value). We use an Option<Instant> for the expiration time. If the user passes Some(time). It expires at that time. If the user passes None, it never expires. We also add a helper method is_expired() that checks if Instant::now() is greater than or equal to the expires_at time.
+- Why we wrote this way ? - If we didn't have this wrapper our HashMap would just map a key to a value. The HashMap wouldn't know anything about time.. BY wrapping the Value in CacheItem , We permanently glue the expiration stopwatch to the data itself.
+
+- 2. `Cache<K, V>` 
+- What it does => This is the main struct users will interact with it contains a standard HashMap that maps keys to our new CacheItem wrapper
+- How it works => We learned about Generics and traits. Now we combine them. We can't just say Cache<K,V> because a HashMap is strict: it has to be able to hash its keys into memory buckets and it has to check keys for equality. So we enforce a Trait Bound: Cache<K: std::hash::Hash + std::cmp::Eq, V>. 
+- This tells the compiler Only allow types for K that have signed the Hash and Eq contracts. 
+- Why we wrote it this way - If we didn't add the trait bounds the Rust compiler would instantly crash, screaming. I don't know how to put a generic type K into a HashMap because I don't know if K is hashable
+
