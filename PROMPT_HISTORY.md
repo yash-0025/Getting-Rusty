@@ -1046,4 +1046,10 @@
 **Output Summary:** Checked off Step 1. Transitioned to Step 2, meticulously adhering to Rule 9 (Code Explanation Requirement) by breaking down the `CacheItem` and `Cache` structs (What it does, How it works, Why we did it this way) before providing the code.
 **Outcome / Next Step:** Learner will read the structural explanation, understand the Trait Bounds applied to the `HashMap` key, and copy the struct definitions into `lib.rs`.
 
+### 2026-07-14 14:12 IST — Prompt #173
+**Prompt:** "let's move to step 3 following rules"
+**Context:** User completed Step 2 (Core Structures), wrote detailed notes, committed their code, and asked to move to Step 3 while strictly following the governance rules.
+**Output Summary:** Checked off Step 2 in `task.md`. Analyzed the rules internally. Transitioned to Step 3 by breaking it down into smaller pieces (Rule 6). Started with `new()` and `set()`, applying Rule 9 (What/How/Why) to explain the methods thoroughly before providing the code snippet.
+**Outcome / Next Step:** Learner will read the explanation, implement `new` and `set` in `lib.rs`, and then we will proceed to `get()`.
+
 <!-- New entries appended below -->

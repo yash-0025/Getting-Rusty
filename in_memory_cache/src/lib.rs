@@ -18,6 +18,28 @@ impl<V> CacheItem<V> {
     }
 }
 
+impl<K: std::hash::Hash + std::cmp::Eq, V> Cache<K, V> {
+    // Creates a fresh empty cache
+    pub fn new() -> Self {
+        Cache {
+            store: HashMap::new(),
+        }
+    }
+
+    // Inserts a new item into the cache
+    pub fn set(&mut self, key: K, value:V, ttl:Option<Duration>) {
+        // Calculate exactly what time on the stopwatch this items should expire
+        let expires_at = match ttl {
+            Some(duration) => Some(Instant::now() + duration),
+            None => None, // No TTL provided so it lives forever
+        };
+
+        // Wrap it in our struct and insert it into the HashMap
+        let item = CacheItem { value , expires_at };
+        self.store.insert(key, itemm);
+    }
+}
+
 
 // Our main Cache structure. Notice the Trait bounds on K!
 #[derive(Debug, Clone)]

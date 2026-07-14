@@ -775,3 +775,13 @@ fn main() {
 - This tells the compiler Only allow types for K that have signed the Hash and Eq contracts. 
 - Why we wrote it this way - If we didn't add the trait bounds the Rust compiler would instantly crash, screaming. I don't know how to put a generic type K into a HashMap because I don't know if K is hashable
 
+- `Concept 3` Implementing Methods
+- What it does ? - `new()` - simply creates a fresh, empty Cache ready to be used.
+- `set()` - Allows the user to insert a piece of data. It takes three arguments a key a value and an optional time to live ttl . It calculates the exact expiration time on the clock, packages the data into our CacheItem wrapper and saves it in the HashMap.
+- How it works? - Inside a set() we use a match statement to look at the ttl which is an Option<Duration>:
+- If the user provided Some(duration) eg-5seconds we add that duration to Instant::now(). This calculates the exact future stopwatch time. WE wrap the future time in Some()
+- If the user passed None , we just leave it as None it lives forever
+- Finally we packagae the value and the calculated expires_at time into a Cacheitem struct and call self.store.insert(key, item) to save it in the HashMap
+- Why we did this - We calculated the exact Instant inside the set method to the user doesn't have to do the math themselves. This make our API extremely friendly to use. A user just says keep this for 5 seconds Duration::from_secs(5) and our cache handles calculation the exact clock time behind the scenes
+
+
