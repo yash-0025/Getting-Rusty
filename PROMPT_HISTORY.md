@@ -1064,4 +1064,10 @@
 **Output Summary:** Appended Rule 11 (Extreme Syntax-Level Explanation) to `RULES.md` and `ROADMAP.md`. Then, provided a retrospective line-by-line syntax breakdown of the `get()` method the user just wrote. Transitioned to explaining the final two methods of Step 3 (`delete` and `cleanup_expired`) using this new extreme level of detail.
 **Outcome / Next Step:** Learner will read the granular syntax explanation to build confidence in what they are typing, then add `delete` and `cleanup_expired` to finish Step 3.
 
+### 2026-07-15 13:44 IST — Prompt #176
+**Prompt:** "Done let's move to next"
+**Context:** User completed Step 3 (adding `delete` and `cleanup_expired`) and committed their code, including notes that mirrored the extreme syntax explanation from the previous step.
+**Output Summary:** Checked off Step 3 in `task.md`. Proceeded to Step 4. Added the ELI5 analogy for `PhantomData` and Default Type Parameters to `EXAMPLES.md` (The VIP Wristband). Introduced the concept of the Typestate Pattern and explained exactly why we would add a generic parameter that isn't actually stored in memory.
+**Outcome / Next Step:** Learner will read the ELI5 analogy and technical explanation, and then we will update the `Cache` struct to implement the `PhantomData` marker.
+
 <!-- New entries appended below -->

@@ -57,6 +57,23 @@ impl<K: std::hash::Hash + std::cmp::Eq, V> Cache<K, V> {
 
             None
     }
+
+    // &mut self, - we need mutable access to the cache because we are deleting data
+    // key: &K - We take a reference to the key just looking at it so we know what to delete
+    // self.store.remove(key) - Calls the built in HashMap method to instatnly drop the item from memory
+    pub fn delete(&mut self, key: &K) {
+        self.store.remove(key);
+    }
+
+
+    // &mut self - We need mutable access because we are modifying the HashMap
+    // self.store.retain(...), .retain() is a powerful built in method for HashMap and Vectors. 
+    // It loops over every single item. If the closure inside it retruns true , it keeps the item . If it returns false, it deletes the item
+    // |_key, item| - this is our closure . It takes two arguments from teh HashMap :the key and teh value item. We put an underscore _key to tell the Rust compilre I know the key is here but I am purposely ignoring it don't give me an unused variable warining
+    // !item.is_expired() :The ! means NOT. So we are saying "Retain this item only if it is not expired"
+    pub fn cleanup_expired(&mut self) {
+        self.store.retain(|_key, item| !item.is_expired());
+    }
 }
 
 

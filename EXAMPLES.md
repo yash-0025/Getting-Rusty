@@ -271,3 +271,16 @@ To implement a Time-To-Live (TTL) cache, you calculate the expiration by doing `
 **Rust Context (Technical Explanation):**
 In a standard TTL cache, if you want to actively remove expired items, you have to spawn a background Thread that loops endlessly, locking the `HashMap` (using a `Mutex`), iterating over all keys, and deleting expired ones. This is extremely heavy on CPU and introduces Thread contention. 
 Instead, we implement **Lazy Expiration** in the `.get()` method. When the user asks for a key, we retrieve the `CacheItem`. Before returning the value, we check if `item.is_expired()`. If it is, we immediately `.remove()` it from the `HashMap` and return `None`. It gives the exact same result to the user (they didn't get the item because it expired), but costs zero background CPU resources.
+
+---
+
+### 24. PhantomData and Default Type Parameters (Day 14)
+**Core Concept:** Using generic marker types to enforce compile-time rules (Typestate Pattern) without actually storing data in memory, and providing a default type so the user doesn't have to specify it if they don't want to.
+
+**The Analogy: The VIP Wristband and General Admission**
+* **The Setup:** Imagine you are hosting two identical parties in two identical rooms. One is a VIP party, one is a General party. The rooms are exactly the same (`HashMap`), but you want the bouncer (the compiler) to prevent General guests from accidentally walking into the VIP room.
+* **The Wristband (`PhantomData<T>`):** You give everyone a wristband (a Marker Type, `<T>`). However, a wristband is just a piece of paper—it doesn't physically take up a chair in the room. In Rust, if you declare a generic `<T>` but don't physically store it in the struct, the compiler throws an error saying: *"You have a wristband rule, but nobody is wearing one!"* `PhantomData<T>` is how you tell the compiler: *"Pretend I am storing this wristband for rule-checking purposes, even though it physically takes up zero bytes in memory."*
+* **General Admission (Default Parameters):** Most people don't care about wristbands, so if they don't specify one, you just assume they are General admission. In Rust, `<T = ()>` means *"If the user doesn't specify the type, default it to the empty tuple `()` (General Admission)."*
+
+**Rust Context (Technical Explanation):**
+If you define `struct Cache<K, V, Context> { store: HashMap<K, V> }`, the compiler will throw an `unused type parameter` error because `Context` is not used in the struct's fields. You fix this by adding `_marker: std::marker::PhantomData<Context>`. `PhantomData` is a zero-sized type (ZST). It takes up absolutely 0 bytes of RAM when the program runs. It exists *only* so the compiler's type checker can enforce rules. By defining it as `struct Cache<K, V, Context = ()>`, you allow users to write `let c: Cache<String, i32> = Cache::new();`, and the compiler automatically fills in the third generic as `()`. If they want strict type safety (e.g., separating a Production cache from a Test cache), they can do `let c: Cache<String, i32, Production> = Cache::new();`.

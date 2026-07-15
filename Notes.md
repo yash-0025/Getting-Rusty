@@ -798,3 +798,5 @@ fn main() {
 - Why we di this - As explained in the Sniff Test analogy deleting epired items only when a user asks for them costs zero background CPU resources. We don't need a background thread looping endlessly to clean up the cache
 
 
+- `delete()` - this allows user to manually delete a specific key from the cache even if it hasn't expired yet
+- `cleanup_expired()` - While lazy expiration `get()` is great, what if a user puts 10,000 items in the cache and never calls get() on them? They will sit in memory forever . This method loops through the entire HashMap and deleted everything that is expired

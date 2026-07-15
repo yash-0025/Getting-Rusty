@@ -33,6 +33,15 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-15 13:44 IST — [EXAMPLES.md] — Added Concept 24 (PhantomData)</summary>
+
+- **Files:** EXAMPLES.md, task.md
+- **Change type:** Modified
+- **Reason:** User completed Step 3. Checked off Step 3 in `task.md`. Transitioned to Step 4. Added the ELI5 analogy (The VIP Wristband) for `PhantomData` and Default Type Parameters to `EXAMPLES.md` to adhere to Rule 8.
+
+</details>
+
+<details>
 <summary>2026-07-15 13:15 IST — [RULES.md] — Added Rule 11 (Syntax Breakdown)</summary>
 
 - **Files:** RULES.md, ROADMAP.md
