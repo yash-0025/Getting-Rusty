@@ -809,3 +809,9 @@ fn main() {
 - `General Admission [Default Parameters]` - Most people don't care about wristband. If they don't ask for a VIP band, we have to just assume they are General Admission. In rust we can say <T = ()>. The () is the empty typle. This means if the user doesn't specify the type of wristband just default it to the empty tuple General Admission
 
 - Why do we want this our Cache ? The why => Right now our Cache is just Cache<K, V>. But what if a user wants to run a Production cache and a Test CAche. They might accidentally pass the Test cache into a function that expects the Production cache. By adding a generic Context  type the wristband, we allow the user to label their caches. The Rust compiler will guarantee they never mix them up.
+
+- `Concept 6 - Const Generics for fixed capacity`
+- As of now Cache can grow infinitely . If a user puts 10 million items in their computer it might run out of RAM and crash we need to set maximum capacity
+- we could use  `max_capacity: usize` field to the struct but we are going to learn a much more powerful advanced Rust feature: Cost Generics
+- `Standard Generics <T>` - This is the Bouncer looking at our wristband type eg ONly VIPS allowed . it checks what kind of thing we are .
+- `Const Generics <const N: usize>` - This isn't a bouncer check. this is the architect drawing the exact fire code limit directly into the physical blueprint of the room. By baking the number into the blueprint Cache<String, i32, 100>, the Rust compiler knows the exact maximum size of the cache before the program ever runs.

@@ -20,7 +20,9 @@ impl<V> CacheItem<V> {
 
 // impl<...Context> Cache<K,V,Context>: Whenver we add  a generic to a struct we must add it to the impl blocks declaration so the compiler knows it exists . Notice we don't need the =() default here defauls only go on the struct defintion.
 // _marker: std::marker::PhantomData : Inside new() we actually have to instantiate the field . We just type std::marker::PhantomData . We don't even have to pass the <Context to it here because Rusts type inference is smart enough to figure it out>
-impl<K: std::hash::Hash + std::cmp::Eq, V, Context> Cache<K, V, Context> {
+// const N: usize : Again wheneer we add a generic to a struct we must declare it on the Impl block
+// Cache<K, V, N, Context> We pass N into the Cache struct so the impl block knows what size it is workign with.
+impl<K: std::hash::Hash + std::cmp::Eq, V, const N: usize, Context> Cache<K, V, N, Context> {
     // Creates a fresh empty cache
     pub fn new() -> Self {
         Cache {
@@ -30,7 +32,18 @@ impl<K: std::hash::Hash + std::cmp::Eq, V, Context> Cache<K, V, Context> {
     }
 
     // Inserts a new item into the cache
+    // Modifying to enforce the limit 
+
+    // if self.store.len() > N : We call the .len() method on our HashMap to see how many items are currently inside it If it is greater than or eqaul to N our const Generic nUmber we trigger the block
+    // return: the return keyword when used by itself with no value immediately stops the functionand exits . It prevents the code below it the insert code from ever running.
     pub fn set(&mut self, key: K, value:V, ttl:Option<Duration>) {
+        // Enforce the const generic capacity limit
+        if self.store.len() >= N {
+            // We use standard println for now . A real library would return a Result::ERr
+            println!("Cache is full! Cannot insert new item");
+
+            return; // Exit th function early without inserting.
+        }
         // Calculate exactly what time on the stopwatch this items should expire
         let expires_at = match ttl {
             Some(duration) => Some(Instant::now() + duration),
@@ -90,7 +103,9 @@ impl<K: std::hash::Hash + std::cmp::Eq, V, Context> Cache<K, V, Context> {
 // Context = () - We added a 3rd generic parameter named context . The =() syntax assigns a Default type parameter. IF a user types Cache<String, i32>. Rust automatically fills in the blank and treats it as Cache<String, i32, ()>. The () is the empty type (a unit type with no data)
 // _marker: This is a new field we are adding to the struct. The underscore_  at the beginning tells the compiler . I am not actually going to use thhis field in my code so don't give me an unused variable warning
 // std::marker::PhantomData<Context>: this is the zero byte ghost field . It tells the compiler to pretend we are storgin data of type Context inside the struct just so the compiler can enforce type safety rules.
-pub struct Cache<K: std::hash::Hash + std::cmp::Eq , V, Context = ()> {
+// const N: usize - we added the 4th generic parameter. Notice the const keyword This tells the compiler . This is not a type like string or i32. This is a raw Number usize . We use N because it is the standard naming convention for numbers in mathematics programming
+// = 1000 - Just llike our default type parameter in step 4 this is a default const parameter. If the user types CAche::new() the compiler will automatically fill in the blank and say The maximum capacity is 1000 . IF the user wants a smaller cache they can manually type Cache::<String, i32, 50, ()>::new().
+pub struct Cache<K: std::hash::Hash + std::cmp::Eq , V, const N: usize = 1000, Context = ()> {
     store: HashMap<K, CacheItem<V>>,
     _marker: std::marker::PhantomData<Context>,
 }
