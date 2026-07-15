@@ -1082,4 +1082,10 @@
 **Output Summary:** Checked off Step 5 in `task.md`. Transitioned to Step 6 (Storing Closures for Eviction Callbacks). Added Concept 26 (`Box<dyn Fn>`) to `EXAMPLES.md` using the ELI5 analogy of the Mystery Box and Walkie-Talkie (Rule 8). Explained the exact syntax changes needed to add the callback to the struct and `new` method, adhering strictly to Rule 11 (Extreme Syntax-Level Explanation).
 **Outcome / Next Step:** Learner will read the ELI5 analogy, update the Cache struct and `new` method, and then we will add the `set_eviction_callback` method.
 
+### 2026-07-15 19:17 IST — Prompt #179
+**Prompt:** "Done let's move on the next thing following the rules"
+**Context:** User completed Step 6 part 1 by adding the `on_evict` field to the struct, committing the code, and pasting the extreme syntax explanations into their notes.
+**Output Summary:** Transitioned to Step 6 part 2: Populating and Triggering the callback. Provided an extreme syntax-level explanation (Rule 11) for the `set_eviction_callback` method, introducing the `where` clause and the `'static` lifetime bound on closures. Also explained how to safely trigger the closure inside the `delete` method using nested `if let` statements.
+**Outcome / Next Step:** Learner will implement `set_eviction_callback` and update their `delete` method to trigger the callback, officially completing Step 6.
+
 <!-- New entries appended below -->

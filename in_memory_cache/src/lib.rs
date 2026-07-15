@@ -80,8 +80,17 @@ impl<K: std::hash::Hash + std::cmp::Eq, V, const N: usize, Context> Cache<K, V, 
     // &mut self, - we need mutable access to the cache because we are deleting data
     // key: &K - We take a reference to the key just looking at it so we know what to delete
     // self.store.remove(key) - Calls the built in HashMap method to instatnly drop the item from memory
+    // if let Some(item) = self.store.remove(key) - In rust remove() doesn't just quietly delete the item it actually returns the data it just deleted to us. We use pattern matching to catch that deleted data and put it in a temporary variable named item
+    // if let Some(callback) = &self.on_evict() We check our Mystery Box , Did the user give us a closure. We use & here because we just want to look at the callback and borrow it to run it. If we did't use & Rust would try to yank the callback permanently out of the struct and destroy it.
+    // callback(key, &item.value) - THis is where we execute the usres code . We pass the key and a reference to the value(&item.value) into the closure and their custom loggin database code runs perfectlyD
     pub fn delete(&mut self, key: &K) {
-        self.store.remove(key);
+        // self.store.remove(key);
+        // REmove the item but catch teh data it returns
+        if let Some(item) = self.store.remove(key) {
+            if let Some(callback) = &self.on_evict() {
+                callback(key, &item.value);
+            }
+        }
     }
 
 
@@ -92,6 +101,19 @@ impl<K: std::hash::Hash + std::cmp::Eq, V, const N: usize, Context> Cache<K, V, 
     // !item.is_expired() :The ! means NOT. So we are saying "Retain this item only if it is not expired"
     pub fn cleanup_expired(&mut self) {
         self.store.retain(|_key, item| !item.is_expired());
+    }
+
+    // pub fn set_eviction_callback<F> : We declare a public method. We add a brand new generic <F> right here on the method . We don't put <F> on the main impl block because F is only used for this specific funtion not the whole Cache
+    // &mut self - We need mutable access to the cache because we are going to change the value of the self.on_evict field.
+    // callback: F :We take an argument named callback that is of our generic type F (which represents the users closure)
+    // Where F: Fn(&K, &V) + 'static - This is a Trait Bound written using a where clause which is just a cleaner way to write trait bounds on separate line
+    // Fn(&K, &V) - tells the compiler - the generic F must be a function that takes a key reference and a Value reference 
+    // + 'static is crucial. The 'static lifetime means. This closure is not allowed to borrow any temporary vairables from the user;s computer . 
+    // why? => Because our cachce might live for days and if the closure borrowed a temporary variable that was destroyed 5 seconds later our cache would try to execute a callback with a dangling pointer and crash the program.
+    // Some(Box::new(callback)) - We take the user's closure throw it into the Heap using Box::new() wrap the pointer in Some() and save it into our struct
+
+    pub fn set_eviction_callback<F>(&mut self, callback: F) where F: Fn(&K, &V) + 'static, {
+        self.on_evict = Some(Box::new(callback));
     }
 }
 
