@@ -22,12 +22,15 @@ impl<V> CacheItem<V> {
 // _marker: std::marker::PhantomData : Inside new() we actually have to instantiate the field . We just type std::marker::PhantomData . We don't even have to pass the <Context to it here because Rusts type inference is smart enough to figure it out>
 // const N: usize : Again wheneer we add a generic to a struct we must declare it on the Impl block
 // Cache<K, V, N, Context> We pass N into the Cache struct so the impl block knows what size it is workign with.
+
 impl<K: std::hash::Hash + std::cmp::Eq, V, const N: usize, Context> Cache<K, V, N, Context> {
     // Creates a fresh empty cache
+    // on_evict: None - We just set the field to None. This means when a cache is first created it has no callback attached
     pub fn new() -> Self {
         Cache {
             store: HashMap::new(),
             _marker: std::marker::PhantomData,
+            on_evict: None, // It starts as NOne by default
         }
     }
 
@@ -105,7 +108,13 @@ impl<K: std::hash::Hash + std::cmp::Eq, V, const N: usize, Context> Cache<K, V, 
 // std::marker::PhantomData<Context>: this is the zero byte ghost field . It tells the compiler to pretend we are storgin data of type Context inside the struct just so the compiler can enforce type safety rules.
 // const N: usize - we added the 4th generic parameter. Notice the const keyword This tells the compiler . This is not a type like string or i32. This is a raw Number usize . We use N because it is the standard naming convention for numbers in mathematics programming
 // = 1000 - Just llike our default type parameter in step 4 this is a default const parameter. If the user types CAche::new() the compiler will automatically fill in the blank and say The maximum capacity is 1000 . IF the user wants a smaller cache they can manually type Cache::<String, i32, 50, ()>::new().
+// on_evict - We arre adding a brand new field to our struct
+// Option<...> - We wrap it in Option because the user might not want an eviction callback. if they don't it will just be None.
+// Box<...> - the fixed size treasure map Smart pointer that points to the Heap memory where the closure actually lives 
+// dyn Fn - The Walkie talkie .It tells the compiler Use dynamic disptach to figure out which functions to run at runtime
+// (&K, &V)- The arguments our callback function will take. When an item is evicted we will pass a reference to the Key &K and a reference to the value &V to the user's closure so they can look at what was deleted
 pub struct Cache<K: std::hash::Hash + std::cmp::Eq , V, const N: usize = 1000, Context = ()> {
     store: HashMap<K, CacheItem<V>>,
     _marker: std::marker::PhantomData<Context>,
+    on_evict: Option<Box<dyn Fn(&K, &V)>>,
 }

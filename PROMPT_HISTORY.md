@@ -1076,4 +1076,10 @@
 **Output Summary:** Checked off Step 4 in `task.md`. Transitioned to Step 5 (Const Generics). Added the ELI5 analogy (The Bouncer vs The Blueprint) to `EXAMPLES.md` to adhere to Rule 8. Wrote an extreme syntax-level explanation (Rule 11) of how we will add `<const N: usize = 1000>` to the struct and `impl` block to enforce a hardcoded maximum capacity at compile time.
 **Outcome / Next Step:** Learner will read the explanation, update the `Cache` struct and `set` method to use the Const Generic capacity limit, and then we will move to Step 6.
 
+### 2026-07-15 15:10 IST — Prompt #178
+**Prompt:** "Done we can move to next following rules"
+**Context:** User completed Step 5 (Const Generics). Added notes, committed, and requested to continue.
+**Output Summary:** Checked off Step 5 in `task.md`. Transitioned to Step 6 (Storing Closures for Eviction Callbacks). Added Concept 26 (`Box<dyn Fn>`) to `EXAMPLES.md` using the ELI5 analogy of the Mystery Box and Walkie-Talkie (Rule 8). Explained the exact syntax changes needed to add the callback to the struct and `new` method, adhering strictly to Rule 11 (Extreme Syntax-Level Explanation).
+**Outcome / Next Step:** Learner will read the ELI5 analogy, update the Cache struct and `new` method, and then we will add the `set_eviction_callback` method.
+
 <!-- New entries appended below -->

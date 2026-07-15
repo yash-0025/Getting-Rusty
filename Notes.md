@@ -815,3 +815,13 @@ fn main() {
 - we could use  `max_capacity: usize` field to the struct but we are going to learn a much more powerful advanced Rust feature: Cost Generics
 - `Standard Generics <T>` - This is the Bouncer looking at our wristband type eg ONly VIPS allowed . it checks what kind of thing we are .
 - `Const Generics <const N: usize>` - This isn't a bouncer check. this is the architect drawing the exact fire code limit directly into the physical blueprint of the room. By baking the number into the blueprint Cache<String, i32, 100>, the Rust compiler knows the exact maximum size of the cache before the program ever runs.
+
+
+- `Concept 7 - Storing Closures for Eviction Callbacks`
+- Sometimes when an item expires in our cache we don't just want it to quietly vanish. We might want to let the user run a custom function a closure to do something like loggin the deletion or updating a database . We call this Eviction Callback. To do this we have to store a user's function inside our Cache struct . This is notoriously difficult in Rust.
+
+- `The mystery box with a walkie-talkie`
+- The problem - In rust , a struct is like a perfectly measured shippping container. The compiler needs to know exactly how many cubic inches bytes every field takes up . 
+- A closure a custom function can be tiny or huge depending on how many variables it captures . We cannot put an unknown sized blob into a perfectly measured shipping container. The compiler will panic
+- The solution `Box<dyn Fn>` - Instead of putting the blob in the shipping container , we put the blob out in the Heap (the massive warehouse of memory). Then we put a Box inside our shipping container. A Box is just a tiny fixed size treasure map a pointer that tells you exactly where in the warehourse the blob is located. The shipping container stays perfectly measured
+- `dyn Fn (Dynamic Dispatch)` - This stands for Dynamic Function . It is the walkie talkie . It means 'I don't know the exact size or name of the function sitting in the warehouse but i promise if you talk into this walkie talkie it will act like a funciont that takes X arguments and returns Y'

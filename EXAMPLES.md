@@ -297,3 +297,16 @@ If you define `struct Cache<K, V, Context> { store: HashMap<K, V> }`, the compil
 **Rust Context (Technical Explanation):**
 Normally, if you want a cache to have a max capacity, you add a field to the struct: `max_size: usize`. But this requires the program to store that number in memory and check it at runtime. 
 With **Const Generics**, you put the number directly in the type signature: `struct Cache<K, V, const N: usize>`. This makes `N` a compile-time constant. It enables massive performance optimizations because the compiler can use that fixed number to allocate data on the incredibly fast Stack memory (using Arrays `[T; N]`) instead of the slow Heap memory (using `Vec` or `HashMap`), though for our specific `HashMap` implementation, we will just use `N` as a highly optimized, hardcoded upper limit.
+
+---
+
+### 26. Storing Closures with `Box<dyn Fn>` (Day 14)
+**Core Concept:** How to store an unknown-sized function (Closure) inside a Struct using Dynamic Dispatch.
+
+**The Analogy: The Mystery Box with a Walkie-Talkie**
+* **The Problem:** In Rust, a Struct is like a shipping container. The compiler needs to know exactly how many cubic inches (bytes) everything inside it takes up so it can build it perfectly on the Stack. A Closure (a custom function a user passes in) can be tiny or huge, depending on what variables it captures from its surrounding environment. You can't put an unknown-sized blob into a perfectly measured shipping container. The compiler will panic!
+* **The Solution (`Box<dyn Fn>`):** Instead of putting the blob in the shipping container, you put the blob in the Heap (the massive, unorganized warehouse of memory). Then, you put a `Box` inside your shipping container. A `Box` is just a tiny, fixed-size treasure map (a pointer) that tells you exactly where in the warehouse the blob is located. The shipping container stays perfectly measured.
+* **`dyn Fn` (Dynamic Dispatch):** This stands for "Dynamic Function". It is the walkie-talkie. It means: *"I don't know the exact size or name of the function sitting in the warehouse, but I promise if you talk into this walkie-talkie, it will act like a Function that takes X arguments and returns Y."*
+
+**Rust Context (Technical Explanation):**
+If we want our `Cache` to execute a user's custom function every time an item expires (an "Eviction Callback"), we need to store their closure inside our `Cache` struct. We cannot just write `on_evict: Fn(&K, &V)` because `Fn` is a Trait, and Traits don't have a known size at compile time (they are `?Sized`). By wrapping it in a `Box<dyn Fn(&K, &V)>`, we allocate the closure on the Heap and store a fixed-size smart pointer in the struct. The `dyn` keyword explicitly tells the compiler that we are using Dynamic Dispatch (determining which function to run at runtime via a vtable), which comes with a very slight performance penalty but offers massive flexibility.

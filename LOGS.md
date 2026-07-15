@@ -33,6 +33,15 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-15 15:10 IST — [EXAMPLES.md] — Added Concept 26 (Box dyn Fn)</summary>
+
+- **Files:** EXAMPLES.md, task.md
+- **Change type:** Modified
+- **Reason:** User completed Step 5. Checked off Step 5 in `task.md`. Transitioned to Step 6. Added the ELI5 analogy (The Mystery Box with a Walkie-Talkie) for Dynamic Dispatch and Storing Closures to `EXAMPLES.md` to adhere to Rule 8.
+
+</details>
+
+<details>
 <summary>2026-07-15 14:08 IST — [EXAMPLES.md] — Added Concept 25 (Const Generics)</summary>
 
 - **Files:** EXAMPLES.md, task.md
