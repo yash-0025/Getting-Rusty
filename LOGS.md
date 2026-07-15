@@ -33,6 +33,15 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-15 14:08 IST — [EXAMPLES.md] — Added Concept 25 (Const Generics)</summary>
+
+- **Files:** EXAMPLES.md, task.md
+- **Change type:** Modified
+- **Reason:** User completed Step 4. Checked off Step 4 in `task.md`. Transitioned to Step 5. Added the ELI5 analogy (The Bouncer vs The Blueprint) for Const Generics to `EXAMPLES.md` to adhere to Rule 8.
+
+</details>
+
+<details>
 <summary>2026-07-15 13:44 IST — [EXAMPLES.md] — Added Concept 24 (PhantomData)</summary>
 
 - **Files:** EXAMPLES.md, task.md

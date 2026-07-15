@@ -18,11 +18,14 @@ impl<V> CacheItem<V> {
     }
 }
 
-impl<K: std::hash::Hash + std::cmp::Eq, V> Cache<K, V> {
+// impl<...Context> Cache<K,V,Context>: Whenver we add  a generic to a struct we must add it to the impl blocks declaration so the compiler knows it exists . Notice we don't need the =() default here defauls only go on the struct defintion.
+// _marker: std::marker::PhantomData : Inside new() we actually have to instantiate the field . We just type std::marker::PhantomData . We don't even have to pass the <Context to it here because Rusts type inference is smart enough to figure it out>
+impl<K: std::hash::Hash + std::cmp::Eq, V, Context> Cache<K, V, Context> {
     // Creates a fresh empty cache
     pub fn new() -> Self {
         Cache {
             store: HashMap::new(),
+            _marker: std::marker::PhantomData,
         }
     }
 
@@ -78,7 +81,16 @@ impl<K: std::hash::Hash + std::cmp::Eq, V> Cache<K, V> {
 
 
 // Our main Cache structure. Notice the Trait bounds on K!
-#[derive(Debug, Clone)]
-pub struct Cache<K: std::hash::Hash + std::cmp::Eq, V> {
-    store: HashMap<K, CacheItem<V>>, 
+// #[derive(Debug, Clone)]
+// pub struct Cache<K: std::hash::Hash + std::cmp::Eq, V> {
+//     store: HashMap<K, CacheItem<V>>, 
+// }
+
+// updated cache struct
+// Context = () - We added a 3rd generic parameter named context . The =() syntax assigns a Default type parameter. IF a user types Cache<String, i32>. Rust automatically fills in the blank and treats it as Cache<String, i32, ()>. The () is the empty type (a unit type with no data)
+// _marker: This is a new field we are adding to the struct. The underscore_  at the beginning tells the compiler . I am not actually going to use thhis field in my code so don't give me an unused variable warning
+// std::marker::PhantomData<Context>: this is the zero byte ghost field . It tells the compiler to pretend we are storgin data of type Context inside the struct just so the compiler can enforce type safety rules.
+pub struct Cache<K: std::hash::Hash + std::cmp::Eq , V, Context = ()> {
+    store: HashMap<K, CacheItem<V>>,
+    _marker: std::marker::PhantomData<Context>,
 }

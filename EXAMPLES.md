@@ -284,3 +284,16 @@ Instead, we implement **Lazy Expiration** in the `.get()` method. When the user 
 
 **Rust Context (Technical Explanation):**
 If you define `struct Cache<K, V, Context> { store: HashMap<K, V> }`, the compiler will throw an `unused type parameter` error because `Context` is not used in the struct's fields. You fix this by adding `_marker: std::marker::PhantomData<Context>`. `PhantomData` is a zero-sized type (ZST). It takes up absolutely 0 bytes of RAM when the program runs. It exists *only* so the compiler's type checker can enforce rules. By defining it as `struct Cache<K, V, Context = ()>`, you allow users to write `let c: Cache<String, i32> = Cache::new();`, and the compiler automatically fills in the third generic as `()`. If they want strict type safety (e.g., separating a Production cache from a Test cache), they can do `let c: Cache<String, i32, Production> = Cache::new();`.
+
+---
+
+### 25. Const Generics (Day 14)
+**Core Concept:** Passing a raw value (like a number) into a Generic, rather than a Type.
+
+**The Analogy: The Bouncer with a Counter vs The Room Blueprint**
+* **Standard Generics (`<T>`):** The Bouncer looking at your wristband type (e.g., "Only VIPs allowed"). It checks what *kind* of thing you are.
+* **Const Generics (`<const N: usize>`):** This isn't a bouncer check; this is the architect drawing the fire-code limit directly into the physical blueprint of the room. By baking the number into the blueprint (`Cache<String, i32, 100>`), the Rust compiler knows the exact maximum size of the cache *before the program ever runs*. 
+
+**Rust Context (Technical Explanation):**
+Normally, if you want a cache to have a max capacity, you add a field to the struct: `max_size: usize`. But this requires the program to store that number in memory and check it at runtime. 
+With **Const Generics**, you put the number directly in the type signature: `struct Cache<K, V, const N: usize>`. This makes `N` a compile-time constant. It enables massive performance optimizations because the compiler can use that fixed number to allocate data on the incredibly fast Stack memory (using Arrays `[T; N]`) instead of the slow Heap memory (using `Vec` or `HashMap`), though for our specific `HashMap` implementation, we will just use `N` as a highly optimized, hardcoded upper limit.

@@ -1070,4 +1070,10 @@
 **Output Summary:** Checked off Step 3 in `task.md`. Proceeded to Step 4. Added the ELI5 analogy for `PhantomData` and Default Type Parameters to `EXAMPLES.md` (The VIP Wristband). Introduced the concept of the Typestate Pattern and explained exactly why we would add a generic parameter that isn't actually stored in memory.
 **Outcome / Next Step:** Learner will read the ELI5 analogy and technical explanation, and then we will update the `Cache` struct to implement the `PhantomData` marker.
 
+### 2026-07-15 14:08 IST — Prompt #177
+**Prompt:** "Done - we can go ahead follwoing the rules"
+**Context:** User completed Step 4 (PhantomData), updated `lib.rs`, committed code, and requested to continue.
+**Output Summary:** Checked off Step 4 in `task.md`. Transitioned to Step 5 (Const Generics). Added the ELI5 analogy (The Bouncer vs The Blueprint) to `EXAMPLES.md` to adhere to Rule 8. Wrote an extreme syntax-level explanation (Rule 11) of how we will add `<const N: usize = 1000>` to the struct and `impl` block to enforce a hardcoded maximum capacity at compile time.
+**Outcome / Next Step:** Learner will read the explanation, update the `Cache` struct and `set` method to use the Const Generic capacity limit, and then we will move to Step 6.
+
 <!-- New entries appended below -->

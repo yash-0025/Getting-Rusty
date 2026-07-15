@@ -800,3 +800,12 @@ fn main() {
 
 - `delete()` - this allows user to manually delete a specific key from the cache even if it hasn't expired yet
 - `cleanup_expired()` - While lazy expiration `get()` is great, what if a user puts 10,000 items in the cache and never calls get() on them? They will sit in memory forever . This method loops through the entire HashMap and deleted everything that is expired
+
+- `Concept 5` - `PhantomData<T> and Default Type Parameters`
+- Imagine we are hosting two identical parties in two identical rooms. One is VIP party and one is general party.
+- The rooms are exactly the same size and shape like our HashMap but we want the bouncer the rust compiler to prevent general guests from accidentally walking into the VIP room
+- The Wristband(PhantomData<T>) - We give everyone a wristband (a marker type <T>) . However a wristband is just a piece of paper it doesn't physically take up a chair in the room . In rust if we declare a generic <T> on our struct but don't physically store it in fields the compiler throws a fatabl error saying. We have a wristband rule but nobody is wearing one in the Room
+- `std::marker::PhantomDatat<T>` is a zero sized type . It takes up 0 bytes of RAM. it is how we tell the compiler. Pretend I am storing this wristband for the rule checking purpose even though it physically takes up zero bytes.
+- `General Admission [Default Parameters]` - Most people don't care about wristband. If they don't ask for a VIP band, we have to just assume they are General Admission. In rust we can say <T = ()>. The () is the empty typle. This means if the user doesn't specify the type of wristband just default it to the empty tuple General Admission
+
+- Why do we want this our Cache ? The why => Right now our Cache is just Cache<K, V>. But what if a user wants to run a Production cache and a Test CAche. They might accidentally pass the Test cache into a function that expects the Production cache. By adding a generic Context  type the wristband, we allow the user to label their caches. The Rust compiler will guarantee they never mix them up.
