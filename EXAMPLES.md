@@ -258,3 +258,16 @@ If `K` is something that cannot be hashed (like a floating-point number `f32` wh
 **Rust Context (Technical Explanation):**
 In `std::time`, a `Duration` is simply a struct containing a number of seconds and nanoseconds. It represents a span of time. An `Instant` represents an opaque, monotonically non-decreasing clock timestamp provided by the operating system. It is immune to the user manually changing their system clock or Daylight Saving Time shifts (unlike `SystemTime`). 
 To implement a Time-To-Live (TTL) cache, you calculate the expiration by doing `let expires_at = Instant::now() + Duration::from_secs(5);`. Later, you check if it is expired by doing `Instant::now() >= expires_at`.
+
+---
+
+### 23. Lazy Expiration (Day 14)
+**Core Concept:** Delaying the cleanup of expired data until the exact moment a user attempts to access it, rather than constantly scanning for expired data in the background.
+
+**The Analogy: The Refrigerator Clean-out vs The Sniff Test**
+* **Active Expiration (The Refrigerator Clean-out):** Imagine hiring a butler whose *only* job is to stand in front of the fridge 24/7, constantly checking the expiration date on every single item. If something expires, they throw it out immediately. This keeps the fridge perfectly clean at all times, but it wastes a massive amount of the butler's time and energy (CPU resources).
+* **Lazy Expiration (The Sniff Test):** You don't actively check the fridge. Instead, you only check an item's expiration date *at the exact moment* you want to eat it. If you grab the milk and see it's expired, you throw it away right then and there, and grab something else. It saves tons of time (CPU) because you only perform the check exactly when necessary.
+
+**Rust Context (Technical Explanation):**
+In a standard TTL cache, if you want to actively remove expired items, you have to spawn a background Thread that loops endlessly, locking the `HashMap` (using a `Mutex`), iterating over all keys, and deleting expired ones. This is extremely heavy on CPU and introduces Thread contention. 
+Instead, we implement **Lazy Expiration** in the `.get()` method. When the user asks for a key, we retrieve the `CacheItem`. Before returning the value, we check if `item.is_expired()`. If it is, we immediately `.remove()` it from the `HashMap` and return `None`. It gives the exact same result to the user (they didn't get the item because it expired), but costs zero background CPU resources.

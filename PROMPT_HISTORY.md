@@ -1052,4 +1052,16 @@
 **Output Summary:** Checked off Step 2 in `task.md`. Analyzed the rules internally. Transitioned to Step 3 by breaking it down into smaller pieces (Rule 6). Started with `new()` and `set()`, applying Rule 9 (What/How/Why) to explain the methods thoroughly before providing the code snippet.
 **Outcome / Next Step:** Learner will read the explanation, implement `new` and `set` in `lib.rs`, and then we will proceed to `get()`.
 
+### 2026-07-14 14:55 IST — Prompt #174
+**Prompt:** "done"
+**Context:** User completed Step 3 Part 1 by adding `new()` and `set()` to `lib.rs` and committing their notes.
+**Output Summary:** Fixed a minor typo in `lib.rs` (`itemm` -> `item`). Added the Concept of "Lazy Expiration" to `EXAMPLES.md` adhering to Rule 8 (The Refrigerator Clean-out vs The Sniff Test analogy). Transitioned to Step 3 Part 2 by explaining the `get()` method using the What/How/Why format before providing the code.
+**Outcome / Next Step:** Learner will read the explanation of Lazy Expiration, add the `get()` method, and we will finish Step 3 with `delete()` and `cleanup_expired()`.
+
+### 2026-07-15 13:15 IST — Prompt #175
+**Prompt:** "Completed the current step before mvoing to next step I want you to add a rule that while we write code... I want a complete explanation with each and every syntax..."
+**Context:** The user was unhappy that despite the What/How/Why breakdown, the specific Rust syntax (`&`, `mut`, `Option`, `.map`, etc.) was not explained in detail. They demanded a new rule to enforce exhaustive syntax-level explanations.
+**Output Summary:** Appended Rule 11 (Extreme Syntax-Level Explanation) to `RULES.md` and `ROADMAP.md`. Then, provided a retrospective line-by-line syntax breakdown of the `get()` method the user just wrote. Transitioned to explaining the final two methods of Step 3 (`delete` and `cleanup_expired`) using this new extreme level of detail.
+**Outcome / Next Step:** Learner will read the granular syntax explanation to build confidence in what they are typing, then add `delete` and `cleanup_expired` to finish Step 3.
+
 <!-- New entries appended below -->

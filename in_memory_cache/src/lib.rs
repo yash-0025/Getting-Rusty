@@ -36,7 +36,26 @@ impl<K: std::hash::Hash + std::cmp::Eq, V> Cache<K, V> {
 
         // Wrap it in our struct and insert it into the HashMap
         let item = CacheItem { value , expires_at };
-        self.store.insert(key, itemm);
+        self.store.insert(key, item);
+    }
+
+    // Retrieves an item from the cache. Returns None if it doesn't exist Or if it expired
+    pub fn get(&mut self, key: &K) -> Option<&V> {
+        // 1. Check if it exists in the HashMap at all
+            if let Some(item) = self.store.get(key) {
+                // Check if it has epxired
+                if item.is_expired() {
+                    // It expired Delte it right now so it stops taking up memory
+                    self.store.remove(key);
+                    return None;
+                }
+                // It exists and is valid. Return the value
+            // We have to use .get() again because we can't return a referenc3
+            // to something while simultaneously holding a mutable reference to remove it
+            return self.store.get(key).map(|i| &i.value);
+            }
+
+            None
     }
 }
 

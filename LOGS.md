@@ -33,6 +33,24 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-15 13:15 IST — [RULES.md] — Added Rule 11 (Syntax Breakdown)</summary>
+
+- **Files:** RULES.md, ROADMAP.md
+- **Change type:** Modified
+- **Reason:** User requested a new rule to enforce exhaustive, line-by-line syntax explanations for all code written. Added Rule 11 and applied it immediately to explain the `get` method.
+
+</details>
+
+<details>
+<summary>2026-07-14 14:55 IST — [EXAMPLES.md] — Added Concept 23</summary>
+
+- **Files:** EXAMPLES.md, in_memory_cache/src/lib.rs
+- **Change type:** Modified
+- **Reason:** Fixed a minor typo in `lib.rs` (`itemm` -> `item`). Added the ELI5 analogy for Lazy Expiration to `EXAMPLES.md` to adhere to Rule 8 before explaining the `get()` method.
+
+</details>
+
+<details>
 <summary>2026-07-14 14:12 IST — [task.md] — Completed Day 14 Step 2</summary>
 
 - **Files:** task.md

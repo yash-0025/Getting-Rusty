@@ -785,3 +785,16 @@ fn main() {
 - Why we did this - We calculated the exact Instant inside the set method to the user doesn't have to do the math themselves. This make our API extremely friendly to use. A user just says keep this for 5 seconds Duration::from_secs(5) and our cache handles calculation the exact clock time behind the scenes
 
 
+- `Concept 4` Lazy Expiration (The Refrigerator vs The Sniff Test)
+- `Active Expiration (The refrigerator)` - Imaging hiring a buttler whose only job is to stand in front of the fridger 24/7 , constantly checking the expiration date on every single item. If something expires they throw it out immediately. This is highly accurate but it wastes a massive amount of the buttlers time (CPU resources).
+- `Lazy Expiration (The Sniff Test)` - We don't actively check the fridge. Instead we only check an items expiration date at the exact moment we want to eat it . If we grab the milk and see it's expired we throw it away right then and there. It saves tons of time CPU because we only check when necessary
+- `Cache::get()` 
+- What it does ? - The get method allows the user to ask for an item by its key. If the item exist and it has not expired it returns the value Some(&V) .  If the item doesn't exist or if it has expired it returns None.
+- How it works? - We use the .get() method on our internal HashMap
+- If we get None(it doesn't exist in the HashMap) we just return None.
+- If we get Some(item) we immediatelly check our item.is_expired() helper method
+- If it is expired we actually delete it from the HashMap right then and there using .remove() and return None.
+- if it is not expired we return Some(&itme.value)
+- Why we di this - As explained in the Sniff Test analogy deleting epired items only when a user asks for them costs zero background CPU resources. We don't need a background thread looping endlessly to clean up the cache
+
+
