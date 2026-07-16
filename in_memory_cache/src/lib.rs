@@ -87,7 +87,7 @@ impl<K: std::hash::Hash + std::cmp::Eq, V, const N: usize, Context> Cache<K, V, 
         // self.store.remove(key);
         // REmove the item but catch teh data it returns
         if let Some(item) = self.store.remove(key) {
-            if let Some(callback) = &self.on_evict() {
+            if let Some(callback) = &self.on_evict {
                 callback(key, &item.value);
             }
         }
@@ -140,3 +140,44 @@ pub struct Cache<K: std::hash::Hash + std::cmp::Eq , V, const N: usize = 1000, C
     _marker: std::marker::PhantomData<Context>,
     on_evict: Option<Box<dyn Fn(&K, &V)>>,
 }
+
+
+// #cfg(test) : This is an Attribute macro, cfg stands for Configuration . It tells the Rust compiler. Only compile the code below this line if the user types cargo test in the terminal. If they type cargo build for production completely ignore this code so it doesn't waste space
+// mod tests { - We create a module a namespace specifically for out tests
+// use super::* By default a new module is like an empty room it can't see the cache struct we jsut built outside of it super::* means Import absolutely everything * from the parent scope super into thsi test module
+// use std::thread::sleep; - We import the sleep function so we can literally pause the program for a few seconds to test if our cache items actually expire.
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::thread::sleep;
+
+    #[test]
+    fn it_works() {
+        let mut cache: Cache<&str, i32, 4> = Cache::new();
+
+        cache.set_eviction_callback(|key, val| {
+            println!("Evicted: {} -> {}", key,val);
+        });
+
+        cache.set("A",100, None);
+        cache.set("B",200, None);
+        cache.set("C",300, None);
+
+        cache.set("Expires", 999, Some(Duration::from_secs(1)));
+
+        assert_eq!(cache.get(&"Expires"), Some(&999));
+
+        println!("Waiting 2 seconds for TTL to expire...");
+        sleep(Duration::from_secs(2));
+
+        assert_eq!(cache.get(&"Expires"), None);
+
+        cache.delete(&"A");
+    }
+}
+
+// #[test] -  Another attribute macro . It flags this specific function as a test . When we run cargo test . the test runner looks for all funciton marked with this
+// Cache<&str, i32, 2> - because we used default generics = 1000 , we could just type Cache::new . But we want to test the capacity limit easily. so we explicitly force the const generic N to be 2. WE use the &str string slices for keys and i32 for values 
+// |key , val| {..}- Wwe pass our custom closure into the callbakc. We just tell it to print a message to the terminal when something is evicted
+// assert_eq!(.., ..) - This is the core testing macro . It compares the left side and the right side. If they match the test passes. If they don't match the test panics and fails

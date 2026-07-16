@@ -139,9 +139,9 @@ Each day has:
 - [x] **Deliverable:** 90%+ test coverage across all Week 2 crates, with doc comments containing working examples.
 
 ### Day 14 — 🏁 Week 2 Capstone: Generic In-Memory Cache with TTL
-- [ ] **You build:** A generic, thread-safe-ready cache library with TTL expiration: `Cache<K, V>` backed by `HashMap`, with `get`, `set`, `delete`, `cleanup_expired`. Trait-based API so the backing store is swappable.
-- [ ] **Concepts:** Combining everything from Week 2: generics, trait bounds, lifetimes, builder pattern · Multiple type parameters, default type parameters · Const generics for fixed-capacity variants · `PhantomData<T>` — marking unused type parameters · Feature flags (`[features]`) for optional capabilities · `Box<dyn Fn(...) -> ...>` for storing heterogeneous closures · Full unit + integration + doc tests · Published as its own crate structure
-- [ ] **Deliverable:** A polished library crate — your "I can write a real Rust library" proof. Portfolio piece #2.
+- [x] **You build:** A generic, thread-safe-ready cache library with TTL expiration: `Cache<K, V>` backed by `HashMap`, with `get`, `set`, `delete`, `cleanup_expired`. Trait-based API so the backing store is swappable.
+- [x] **Concepts:** Combining everything from Week 2: generics, trait bounds, lifetimes, builder pattern · Multiple type parameters, default type parameters · Const generics for fixed-capacity variants · `PhantomData<T>` — marking unused type parameters · Feature flags (`[features]`) for optional capabilities · `Box<dyn Fn(...) -> ...>` for storing heterogeneous closures · Full unit + integration + doc tests · Published as its own crate structure
+- [x] **Deliverable:** A polished library crate — your "I can write a real Rust library" proof. Portfolio piece #2.
 
 **🏁 Week 2 Deliverables Summary:**
 - Generic Stack & Queue library

@@ -33,6 +33,33 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-16 14:08 IST — [LEARNING.md/ROADMAP.md] — Completed Week 2 / Day 14</summary>
+
+- **Files:** LEARNING.md, ROADMAP.md
+- **Change type:** Modified
+- **Reason:** User explicitly approved checking off Day 14 and Week 2. Marked Day 14 as complete in both files, filled out the learning entry with the concepts mastered (`PhantomData`, Const Generics, closures, testing), and marked Week 3 as in progress.
+
+</details>
+
+<details>
+<summary>2026-07-16 13:59 IST — [Tests] — Debugging the failing test</summary>
+
+- **Files:** in_memory_cache/src/lib.rs
+- **Change type:** None (Explanation)
+- **Reason:** The user ran the test, which failed because the Const Generic capacity limit worked perfectly and blocked the test items from being inserted. Explained the failure and instructed the user to increase the capacity.
+
+</details>
+
+<details>
+<summary>2026-07-15 20:57 IST — [task.md] — Completed Step 6</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User implemented `set_eviction_callback` and updated `delete` successfully. Checked off Step 6 and transitioned to Step 7 (Testing the Cache).
+
+</details>
+
+<details>
 <summary>2026-07-15 15:10 IST — [EXAMPLES.md] — Added Concept 26 (Box dyn Fn)</summary>
 
 - **Files:** EXAMPLES.md, task.md

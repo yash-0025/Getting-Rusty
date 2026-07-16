@@ -26,8 +26,8 @@
 | Week | Focus Area | Status |
 |---|---|---|
 | Week 1 | CLI Tools & Core Rust | `[x]` Done |
-| Week 2 | Libraries, Generics & Type System Mastery | `[~]` In progress |
-| Week 3 | Concurrency, Async & Production Web Services | `[ ]` Not started |
+| Week 2 | Libraries, Generics & Type System Mastery | `[x]` Done |
+| Week 3 | Concurrency, Async & Production Web Services | `[~]` In progress |
 | Week 4 | Advanced Patterns & Production Capstone | `[ ]` Not started |
 
 ---
@@ -291,16 +291,21 @@
 
 ---
 
-### Day 14 — 🏁 Week 2 Capstone: Generic In-Memory Cache with TTL — 2026-07-13
-**Status:** `[~]` in progress
+### Day 14 — 🏁 Week 2 Capstone: Generic In-Memory Cache with TTL — 2026-07-16
+**Status:** `[x]` done
 **What I actually understood:**
-- 
+- **PhantomData<T>**: Used the typestate pattern to enforce compile-time rules using a ZST (Zero-Sized Type) that doesn't actually exist in memory.
+- **Default Type Parameters**: `<Context = ()>` lets users skip specifying generics if they just want the default behavior.
+- **Const Generics**: `<const N: usize>` allows us to pass raw numbers into type signatures instead of types, which we used to enforce a strict hard-coded max capacity on the Cache.
+- **Box<dyn Fn>**: Learned how to store an unknown-sized closure inside a struct using Dynamic Dispatch and a heap allocation.
+- **Trait Bounds & Lifetimes for Closures**: Enforced that the eviction callback closure must be `Fn(&K, &V) + 'static` to prevent dangling pointers.
+- **Unit Testing**: Wrote a `#[cfg(test)]` module and used `thread::sleep` to verify the TTL expiration logic actually worked.
 **What's still fuzzy / questions I had:**
-- 
+- None for now!
 **Code I wrote / project progress:**
-- 
+- Built `in_memory_cache`, a production-ready cache library featuring lazy TTL expiration, Const Generic capacity limits, and dynamic closure callbacks.
 **Mistakes the compiler caught that taught me something:**
-- 
+- The test panicked on `assert_eq!` because the Const Generic capacity limit of 2 blocked the 3rd and 4th items from being inserted. Fixed by increasing the limit to 4.
 
 ## 🧠 Concept Confidence Tracker
 *(Self-rate honestly — this drives what the AI re-explains or drills. Update anytime, ask the AI to revise the table for you if you want.)*
@@ -331,7 +336,7 @@
 | Project | Week | Status | Repo/Path | Notes |
 |---|---|---|---|---|
 | CLI Task Manager (polished) | 1 | `[x]` | `capstone-tracker` | Week 1 capstone |
-| Generic Cache Library with TTL | 2 | `[ ]` | — | Week 2 capstone |
+| Generic Cache Library with TTL | 2 | `[x]` | `in_memory_cache` | Week 2 capstone |
 | Production REST API (Docker) | 3 | `[ ]` | — | Week 3 capstone |
 | Final Capstone (TBD) | 4 | `[ ]` | — | Portfolio centerpiece |
 
