@@ -33,6 +33,15 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-16 16:25 IST — [task.md] — Completed Steps 1 and 2</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User successfully verified OS threads. Checked off Steps 1 and 2 in `task.md`. Transitioned to Step 3 (Single-Threaded Baseline).
+
+</details>
+
+<details>
 <summary>2026-07-16 14:14 IST — [Day 15 Plan] — Initializing Week 3</summary>
 
 - **Files:** task.md

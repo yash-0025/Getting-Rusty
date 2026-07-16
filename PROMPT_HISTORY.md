@@ -1118,4 +1118,10 @@
 **Output Summary:** Created `task.md` for Day 15. Transitioned to Step 1 (Project Setup) and Step 2 (Concept: OS Threads). Provided instructions to run `cargo new parallel_word_counter`. Explained the `std::thread::spawn` and `.join()` mechanics, comparing them to JavaScript's concurrency model to fit the user's background. Introduced Concept 27 to `EXAMPLES.md` (The Main Kitchen vs Line Cooks).
 **Outcome / Next Step:** Learner will create the project, paste the thread code into `main.rs`, and run it to see OS threads in action before we move to counting words.
 
+### 2026-07-16 16:25 IST — Prompt #185
+**Prompt:** "Done Wokring perfectly... Lets move to next step following all the rules properly"
+**Context:** User ran the thread spawn code, verified the threads ran concurrently, updated their notes with Concept 27, and committed their code.
+**Output Summary:** Checked off Steps 1 and 2 in `task.md`. Transitioned to Step 3 (Single-Threaded Baseline). Provided the code and Extreme Syntax Breakdown (Rule 11) for a `generate_dummy_files` function (creating ~22MB of text across 5 files) and a standard single-threaded loop to count the words using a `HashMap`. Included `std::time::Instant` to measure exactly how long the single-threaded baseline takes so we can compare it to the parallel version later.
+**Outcome / Next Step:** Learner will replace `main.rs` with the baseline word counter, run it, record the time it takes, and then we will introduce `Arc` and `Mutex` to parallelize it.
+
 <!-- New entries appended below -->

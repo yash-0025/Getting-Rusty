@@ -834,3 +834,5 @@ fn main() {
 - `Multi threaded` - We hire a line cook (a new OS thread). We hand them a recipe (a closure) and say 'Go do this' . Now we can boil the water while they chop the onions
 - `move` Closures - Imagine we want the line cook to chop our onions. If we just let them look at our onions &onions, what happens if we shift ends and we take the onions home? The line cook will chop empty air (a dangling pointer). Rust prevents this . We must physically hand them over (move). The Line cook now owns the onions. We can never touch them again
 - `.join()` Joining - We can;t serve the meal until the line cook is done. Calling .join() means we stand by the pass and wait for the line cook to finish their recipe and hand us the result
+
+- `Concept 2 - Single threaded baseline word counter`
