@@ -33,6 +33,15 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-16 14:14 IST — [Day 15 Plan] — Initializing Week 3</summary>
+
+- **Files:** task.md
+- **Change type:** Added
+- **Reason:** User approved the Day 15 plan. Generated `task.md` for Day 15. Transitioned to Project Setup and OS Threads introduction.
+
+</details>
+
+<details>
 <summary>2026-07-16 14:08 IST — [LEARNING.md/ROADMAP.md] — Completed Week 2 / Day 14</summary>
 
 - **Files:** LEARNING.md, ROADMAP.md

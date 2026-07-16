@@ -310,3 +310,17 @@ With **Const Generics**, you put the number directly in the type signature: `str
 
 **Rust Context (Technical Explanation):**
 If we want our `Cache` to execute a user's custom function every time an item expires (an "Eviction Callback"), we need to store their closure inside our `Cache` struct. We cannot just write `on_evict: Fn(&K, &V)` because `Fn` is a Trait, and Traits don't have a known size at compile time (they are `?Sized`). By wrapping it in a `Box<dyn Fn(&K, &V)>`, we allocate the closure on the Heap and store a fixed-size smart pointer in the struct. The `dyn` keyword explicitly tells the compiler that we are using Dynamic Dispatch (determining which function to run at runtime via a vtable), which comes with a very slight performance penalty but offers massive flexibility.
+
+---
+
+### 27. OS Threads and `move` Closures (Day 15)
+**Core Concept:** Executing code in parallel on multiple CPU cores at the exact same time, and dealing with the ownership rules required to cross thread boundaries safely.
+
+**The Analogy: The Main Kitchen and the Line Cooks**
+* **Single-Threaded:** You are the only chef in the kitchen. You have to chop the onions, *then* boil the water, *then* cook the pasta. One line of code executes at a time.
+* **Multi-Threaded (`std::thread::spawn`):** You hire a Line Cook (a new OS Thread). You hand them a recipe (a Closure) and say "Go do this on the other side of the kitchen!" Now, you can boil the water *while* they chop the onions simultaneously.
+* **`move` Closures:** Imagine you want the Line Cook to chop *your* onions. If you just let them look at your onions (`&onions`), what happens if your shift ends, you leave the kitchen, and take the onions with you? The Line Cook will chop empty air (a dangling pointer)! Rust prevents this. If you want the Line Cook to use your onions, you must physically hand them over (`move`). The Line Cook now *owns* the onions. You can never touch them again.
+* **Joining (`.join()`):** You can't serve the meal until the Line Cook is done. Calling `.join()` means you stand by the pass and wait for the Line Cook to finish their recipe and hand you the result.
+
+**Rust Context (Technical Explanation):**
+In JavaScript, concurrency is handled via an Event Loop (single-threaded asynchronous execution). In Rust, `std::thread::spawn` asks the Operating System to create an actual hardware thread on a different CPU core. You pass a closure `|| { ... }` into `spawn`. Because the new thread might outlive the main thread, the closure must have a `'static` lifetime. It cannot borrow local variables from the main thread; it must take ownership of them using the `move` keyword (`move || { ... }`). The `spawn` function returns a `JoinHandle`. If the main thread calls `.join()` on that handle, the main thread will block (pause execution) until the spawned thread finishes and returns its value.

@@ -825,3 +825,12 @@ fn main() {
 - A closure a custom function can be tiny or huge depending on how many variables it captures . We cannot put an unknown sized blob into a perfectly measured shipping container. The compiler will panic
 - The solution `Box<dyn Fn>` - Instead of putting the blob in the shipping container , we put the blob out in the Heap (the massive warehouse of memory). Then we put a Box inside our shipping container. A Box is just a tiny fixed size treasure map a pointer that tells you exactly where in the warehourse the blob is located. The shipping container stays perfectly measured
 - `dyn Fn (Dynamic Dispatch)` - This stands for Dynamic Function . It is the walkie talkie . It means 'I don't know the exact size or name of the function sitting in the warehouse but i promise if you talk into this walkie talkie it will act like a funciont that takes X arguments and returns Y'
+
+
+<h1>Day 15 </h1>
+
+- `Concept 1 - The main Kitches nad the Line of Cooks`
+- `Single threaded` - we are the only chef in the kitchen. we chop the onions, boil the water . ONe line of code executes at a time
+- `Multi threaded` - We hire a line cook (a new OS thread). We hand them a recipe (a closure) and say 'Go do this' . Now we can boil the water while they chop the onions
+- `move` Closures - Imagine we want the line cook to chop our onions. If we just let them look at our onions &onions, what happens if we shift ends and we take the onions home? The line cook will chop empty air (a dangling pointer). Rust prevents this . We must physically hand them over (move). The Line cook now owns the onions. We can never touch them again
+- `.join()` Joining - We can;t serve the meal until the line cook is done. Calling .join() means we stand by the pass and wait for the line cook to finish their recipe and hand us the result

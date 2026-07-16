@@ -1112,4 +1112,10 @@
 **Output Summary:** Updated `ROADMAP.md` and `LEARNING.md` to formally mark Day 14 as complete, completing Week 2! Transitioned to Week 3 (Concurrency). Drafted the Day 15 Implementation Plan (`implementation_plan.md`) for the Parallel File Word Counter and requested user review before executing.
 **Outcome / Next Step:** Waiting for user to click "Proceed" on the Implementation Plan or answer the open question regarding dummy files vs real-world text files.
 
+### 2026-07-16 14:14 IST — Prompt #184
+**Prompt:** User clicked "Proceed" on the Day 15 Implementation Plan.
+**Context:** User approved the plan to build the Parallel File Word Counter for Day 15 (Week 3 start).
+**Output Summary:** Created `task.md` for Day 15. Transitioned to Step 1 (Project Setup) and Step 2 (Concept: OS Threads). Provided instructions to run `cargo new parallel_word_counter`. Explained the `std::thread::spawn` and `.join()` mechanics, comparing them to JavaScript's concurrency model to fit the user's background. Introduced Concept 27 to `EXAMPLES.md` (The Main Kitchen vs Line Cooks).
+**Outcome / Next Step:** Learner will create the project, paste the thread code into `main.rs`, and run it to see OS threads in action before we move to counting words.
+
 <!-- New entries appended below -->
