@@ -33,6 +33,15 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-16 16:59 IST — [README.md/task.md] — Workspace documentation and Step 3 completion</summary>
+
+- **Files:** README.md (new), task.md
+- **Change type:** Added / Modified
+- **Reason:** User explicitly requested a `README.md` detailing the workspace's rules, approach, and purpose. Created the file at the root. Also checked off Step 3 in `task.md` (Single-Threaded Baseline) as the user successfully ran it and logged the 1.57s duration.
+
+</details>
+
+<details>
 <summary>2026-07-16 16:25 IST — [task.md] — Completed Steps 1 and 2</summary>
 
 - **Files:** task.md

@@ -836,3 +836,20 @@ fn main() {
 - `.join()` Joining - We can;t serve the meal until the line cook is done. Calling .join() means we stand by the pass and wait for the line cook to finish their recipe and hand us the result
 
 - `Concept 2 - Single threaded baseline word counter`
+- `Concept 3 - Shared Mutable state`
+- The problem with concurrency - In our basefile one thread loop reads file 1 then file 2 etc and tallys words into a HashMap. if we spawn 5 threads to read all 5 files at the same time, they all need to tally their words into the exact same HashMap
+- If thread 1 and thread 2 try to add +1 to the word rust at the exact same millisecond the CPU overwrite one of the operations the count is corrupted and the program crashes . This  is called a Data Race
+- `The shared Whiteboard and the Bathroom key`
+- The problem - We have 5 line cooks [threads] and only one whiteboard [HashMap] where they all tally words. If cook 1 and cook 2 write on the same spot at the exact same time, their markers collide and the whiteboard is ruined
+- `Arc`- `[Atomic Reference Counting] - The Invincible Whiteboard` 
+- In week 2 we used Rc to share data, But Rc is fragile; if two threads clone an Rc simultaneously the counter breaks,
+- Arc is an Rc wrapped in titanium. It uses CPU level atomic hardware instructions so multiple threads can share it safely. However Arc only lets the 5 cooks look at the whiteboard. it does not let them write
+- `Mutex - [Mutual Exclusion]` - The Bathroom Key 
+- To stop cooks from writing at the same time, we put a physical lock on the whiteboard. To write a cook must hold the key (.lock()). If cook 1 has the key , cook 2 must wait in the line. When cook 1 is done they drop the key and cook 2 can take it . This guarantees only one cook is writing at a time
+
+- What it is - `Arc<Mutex<T>>` - This is the standard Rust pattern for sharing data across threads that needs to be mutated.
+- How it workds - We wrap our `HashMap` in a `Mutex` and then wrap that `Mutex` in an `Arc`. 
+```rust
+let word_counts = Arc::new(Mutex::new(HashMap::new()));
+```
+- why we use it  - `Arc` allows us to .clone() the pointer so we can hand a copy to all 5 threads [spawn(move || ...)]. Inside the thread when we actually want to update the hashmap, we call .lock().unwrap(). This forces the thread to pause if another thread is currently writing . Once it has the lock it can update the HashMap safely.

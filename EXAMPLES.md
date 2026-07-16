@@ -324,3 +324,16 @@ If we want our `Cache` to execute a user's custom function every time an item ex
 
 **Rust Context (Technical Explanation):**
 In JavaScript, concurrency is handled via an Event Loop (single-threaded asynchronous execution). In Rust, `std::thread::spawn` asks the Operating System to create an actual hardware thread on a different CPU core. You pass a closure `|| { ... }` into `spawn`. Because the new thread might outlive the main thread, the closure must have a `'static` lifetime. It cannot borrow local variables from the main thread; it must take ownership of them using the `move` keyword (`move || { ... }`). The `spawn` function returns a `JoinHandle`. If the main thread calls `.join()` on that handle, the main thread will block (pause execution) until the spawned thread finishes and returns its value.
+
+---
+
+### 28. Shared Mutable State across Threads: `Arc` and `Mutex` (Day 15)
+**Core Concept:** How to allow multiple threads to safely read and write to the exact same piece of data (like a `HashMap`) without causing data races or memory corruption.
+
+**The Analogy: The Shared Whiteboard and the Bathroom Key**
+* **The Problem:** You have 5 Line Cooks (Threads) and only one Whiteboard (`HashMap`) where they all need to tally the words they found. If Cook 1 and Cook 2 try to write on the exact same spot on the whiteboard at the exact same millisecond, their markers collide, ink smears, and the count gets corrupted (a Data Race). 
+* **`Arc` (Atomic Reference Counting) - The Invincible Whiteboard:** In Week 2, we used `Rc` to share data. But `Rc` is fragile. If two threads try to clone an `Rc` at the same time, the reference counter corrupts. `Arc` is an `Rc` wrapped in titanium. It uses CPU-level atomic instructions to safely increment the reference count across multiple threads. `Arc` lets 5 cooks *look* at the whiteboard. But it doesn't let them write.
+* **`Mutex` (Mutual Exclusion) - The Bathroom Key:** To stop cooks from writing at the same time, we put a lock on the whiteboard. To write, a cook must hold the Key (`.lock()`). If Cook 1 has the Key, Cook 2 must wait in line. When Cook 1 is done, they drop the Key, and Cook 2 can take it. This guarantees only *one* cook is writing at a time.
+
+**Rust Context (Technical Explanation):**
+You cannot share `Rc` or `RefCell` across threads because they do not implement the `Send` or `Sync` traits. Rust forces you to use `Arc<T>` (Atomic Reference Counting) to share ownership across threads safely. However, `Arc` only provides shared *immutable* access. If you need to mutate the data, you must wrap the inner data in a `Mutex<T>` (Mutual Exclusion lock). The resulting type is `Arc<Mutex<HashMap>>`. When a thread wants to mutate the HashMap, it calls `.lock().unwrap()`. This returns a `MutexGuard`. Thanks to Deref coercion, you can treat this guard exactly like the underlying HashMap (e.g., calling `.entry()`). When the `MutexGuard` goes out of scope (at the end of the block), the `Drop` trait automatically unlocks the Mutex, preventing deadlocks.

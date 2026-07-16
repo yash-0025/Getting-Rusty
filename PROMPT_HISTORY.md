@@ -1124,4 +1124,10 @@
 **Output Summary:** Checked off Steps 1 and 2 in `task.md`. Transitioned to Step 3 (Single-Threaded Baseline). Provided the code and Extreme Syntax Breakdown (Rule 11) for a `generate_dummy_files` function (creating ~22MB of text across 5 files) and a standard single-threaded loop to count the words using a `HashMap`. Included `std::time::Instant` to measure exactly how long the single-threaded baseline takes so we can compare it to the parallel version later.
 **Outcome / Next Step:** Learner will replace `main.rs` with the baseline word counter, run it, record the time it takes, and then we will introduce `Arc` and `Mutex` to parallelize it.
 
+### 2026-07-16 16:59 IST — Prompt #186
+**Prompt:** "Done - cargo run --release... I want you to look at rules in rules.md to not miss out on rules while teaching i guess you are missing on things so please take care of it from next steps. Also create me a README.md file whihc tells everything about the Rust whole folder..."
+**Context:** User ran the single-threaded baseline (took ~1.57s) and reminded the AI to stick closely to `RULES.md` (specifically wanting more thorough explanations and not skipping rule checks). They also requested a root `README.md`.
+**Output Summary:** Created `README.md` in the workspace root to document the structure and rules of the project. Updated `task.md` to check off Step 3. Added Concept 28 (`Arc` and `Mutex`) to `EXAMPLES.md`. Apologized for drifting from the strict ELI5/Syntax breakdown format and reaffirmed adherence to `RULES.md` (Rule 10 & 11). Transitioned to Step 4 (Concept: Shared Mutable State) with a detailed breakdown of how to use `Arc` and `Mutex` in preparation for parallelizing the word counter.
+**Outcome / Next Step:** Learner will review the `Arc`/`Mutex` concept and then we will write the code for Step 5 (Approach 1: Multi-threaded with Shared State).
+
 <!-- New entries appended below -->
