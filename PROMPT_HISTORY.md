@@ -1142,4 +1142,22 @@
 **Output Summary:** Checked off Step 5. Explained *why* 5 threads were barely faster than 1 thread (Lock Contention). Transitioned into Step 6 (`Send` and `Sync` marker traits) and Step 7 (Map/Reduce Approach 2) with a deep breakdown and full implementation of Map/Reduce without a `Mutex`.
 **Outcome / Next Step:** Learner will run the Map/Reduce version, experience the actual speedup of true parallelism, and complete Day 15!
 
+### 2026-07-17 17:32 IST — Prompt #189
+**Prompt:** "Done . But i feel like you are not following rules peroperly you are missing out on things so be careful from the next time read rules.md everytime before giving any response... The word 'rust' appears 0 times."
+**Context:** User ran the Map/Reduce implementation and got an impressive speedup (`300ms`, down from `1.16s`), but the final count was 0 because they accidentally missed copying the `*count += 1;` line. The compiler warned them about `unused variable: count`. They also admonished the AI for hallucinating/missing rules.
+**Output Summary:** Deeply apologized and explicitly invoked Rule 10 (AI Self-Analysis) to assure the user I am actively reading `RULES.md` and logging every change. Used this opportunity to teach the user how to read the Rust compiler's warnings. Pointed out the specific missing line `*count += 1;` using the exact compiler warning `unused variable: count`. Explained how to remove the unused `Arc`/`Mutex` imports and `generate_dummy_files` function to get a perfectly clean compilation. Checked off Step 6 in `task.md`.
+**Outcome / Next Step:** Learner will fix the missing line, remove the unused code, run it again to see the final `1000005` count, and then we will officially complete Day 15.
+
+### 2026-07-17 17:45 IST — Prompt #190
+**Prompt:** "done - cargo run --release... The word 'rust' appears 1000005 times."
+**Context:** User successfully ran the corrected Map/Reduce implementation with zero warnings and got the expected 1,000,005 count in ~250ms.
+**Output Summary:** Checked off Step 7 in `task.md`. Congratulated the user on completing the Day 15 project and witnessing true hardware parallelism. Explained how the time dropped from 1.57s (baseline) to 1.16s (Mutex contention) to 250ms (Map/Reduce). Requested explicit permission (per Rule 1) to mark Day 15 as completed in `ROADMAP.md` and `LEARNING.md` before proceeding to Day 16.
+**Outcome / Next Step:** Await user permission to update the roadmap and log, then move on to Day 16 (Channels and Message Passing).
+
+### 2026-07-17 17:47 IST — Prompt #191
+**Prompt:** "Yes upsate the files"
+**Context:** User granted explicit permission to mark Day 15 as complete.
+**Output Summary:** Updated `ROADMAP.md` (checked off all Day 15 items) and `LEARNING.md` (added the Day-by-Day log for Day 15). Wrote over `task.md` to establish the steps for Day 16 (Multi-Stage Data Pipeline with Channels). Transitioned the conversation to kicking off Day 16.
+**Outcome / Next Step:** Learner will set up the new `data_pipeline` project and we will dive into `mpsc` channels.
+
 <!-- New entries appended below -->

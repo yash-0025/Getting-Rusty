@@ -856,3 +856,13 @@ let word_counts = Arc::new(Mutex::new(HashMap::new()));
 
 `Concept 4 - Multi threaded with shared state`
 - We are going to spawn 5 threads Each thread will read one of the 5 files we generated. Because they are all going to tally their words into the exact same HashMap , We will wrap that Hashmap in an Arc<Mutex<T>>
+
+- `Concept 5 - Fearless Concurrency (Send and Sync)`
+- Rust compiler has two special Marker traits built in
+- 1. `Send` - Tells the compiler it is safe to pack this type in a box and mail it to the another thread
+- 2. `Sync` - Tells the compiler it is safe to let multiple threads look at this type at the exact same time.
+- Rc the Smart Pointer from last week is explicitly marked !Send (Not Send) by the compiler because its internal counter is fragile . If we try to pass an Rc into thread::spawn, the Rust compiler literally stops us in C++  , this would compile fine and cause a production crash. In Rust data races are a compile time error/
+
+- `Concept 6 - The Map/Reduce Pattern`
+- To fix our lock contention we are going to use Map/Reduce. Instead of giving the 5 Cooks one whiteboard we are going to give them each their personal notepad. 
+- They will tally their own file (Map), and then hand their notepad to the Head Chef when they are done. The Head Chef will add all 5 notepads together `Reduce`. No Mutex locks required.

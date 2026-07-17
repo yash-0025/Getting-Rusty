@@ -33,6 +33,33 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-17 17:47 IST — [ROADMAP.md/LEARNING.md] — Completed Day 15</summary>
+
+- **Files:** ROADMAP.md, LEARNING.md
+- **Change type:** Modified
+- **Reason:** User gave explicit permission to check off Day 15 (Parallel File Word Counter) in `ROADMAP.md` and added the Day 15 progress entry into `LEARNING.md`.
+
+</details>
+
+<details>
+<summary>2026-07-17 17:45 IST — [task.md] — Completed Step 7</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User fixed the missing `*count += 1` line, cleaned up compiler warnings, and successfully ran the Map/Reduce parallel word counter in 250ms. Checked off Step 7.
+
+</details>
+
+<details>
+<summary>2026-07-17 17:32 IST — [task.md] — Completed Step 6</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User read and logged Concepts 29 and 30 into their notes. Checked off Step 6.
+
+</details>
+
+<details>
 <summary>2026-07-17 13:16 IST — [task.md] — Completed Step 5</summary>
 
 - **Files:** task.md

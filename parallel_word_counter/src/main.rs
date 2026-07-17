@@ -38,28 +38,28 @@
 
 use std::collections::HashMap;
 use std::fs;
-use std::sync::{Arc, Mutex};
+// use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::Instant;
 
-fn generate_dummy_files() {
-    // Craate a data directory ignore the error if it already exists
-    // let _ = fs::create_dir(data) - the underscore _ tells the ocmpiler I know this returns a result but i don't care if it failes like if the folder already exists just ignore it
-    let _ = fs::create_dir("data");
+// fn generate_dummy_files() {
+//     // Craate a data directory ignore the error if it already exists
+//     // let _ = fs::create_dir(data) - the underscore _ tells the ocmpiler I know this returns a result but i don't care if it failes like if the folder already exists just ignore it
+//     let _ = fs::create_dir("data");
 
-    let text = "rust is fast and rust is safe and rust is fun";
+//     let text = "rust is fast and rust is safe and rust is fun";
 
-    // Loop 5 times to create 5 files
-    for i in 1..=5 {
-        let filename = format!("data/file{}.txt", i);
-        // .repeat(100_000) takes our small string and copies it 100,000 times
-        let content = text.repeat(100_000);
-        // Write the massive string to the file
-        let _ = fs::write(filename, content);
-    }
+//     // Loop 5 times to create 5 files
+//     for i in 1..=5 {
+//         let filename = format!("data/file{}.txt", i);
+//         // .repeat(100_000) takes our small string and copies it 100,000 times
+//         let content = text.repeat(100_000);
+//         // Write the massive string to the file
+//         let _ = fs::write(filename, content);
+//     }
 
-    println!("Generate 5 massive dummy files!");
-}
+//     println!("Generate 5 massive dummy files!");
+// }
 
 // fn main() {
 //     // Generate the files
@@ -101,59 +101,114 @@ fn generate_dummy_files() {
 
 // }
 
+// fn main() {
+//     let start = Instant::now();
+
+//     // create the shared whiteboard with a lock
+//     // Arc::new(Mutex::new(HashMap::<String, u32>::new())) - We are building an onion .
+//     // The inner layer is the raw HashMap .
+//     // We wrap it in Mutex::new() which attaches a lock to the map.
+//     // We wrap the Mutex in Arc::new() which moves the whole thing to the Heap and gives us a thread-safe reference counting pointer . We must explicitly tell the compiler the types <String, u32> here because it can't guess them yet.
+//     let word_counts = Arc::new(Mutex::new(HashMap::<String, u32>::new()));
+
+//     // A vector to hold the pagers JoinHandles for our line cooks
+//     let mut handles = vec![];
+
+//     // Spawn 5 threads One for each file
+//     for i in 1..=5 {
+//         // Clone the Arc pointer for this specific thread
+//         // Arc::clone(&word_counts) - This is the magic of Arc. This does not clone the massive HashMap. It simply takes the atomic counter inside the Arc and adds +1 from 1 to 2 . We create a brand new pointer called thread_counts taht points to the exact same Heap memory
+//         let thread_counts = Arc::clone(&word_counts);
+
+//         // thread::spawn(move || {...}) - We must use move so that the thread takes ownership of the newly cloned thread_counts pointer. If we didnt use move the thread would try to borrow thread_counts from the for loop which is illegal
+//         let handle = thread::spawn(move || {
+//             let filename = format!("data/file{}.txt", i);
+//             let content = fs::read_to_string(filename).unwrap();
+
+//             for word in content.split_whitespace() {
+//                 // Grab the Bathroom key
+//                 // This blocks this thread if another thread is currently writing
+//                 // let mut map_guard = thread_counts.lock().unwrap()
+//                 // lock() - attempts to grab the Mutex key. if another thread has it , this thread goes to sleep until it's available
+//                 // .unwrap() = is used because if a thread panics while holding the lock, the Mutex becomes poisoned broken forever . If its poisoned we want this thread to crash too.
+//                 // map_guard is a MutexGuard . Because it implements the DerefMut trait we can call .entry() on it as a if it were the HashMap itself.
+//                 let mut map_guard = thread_counts.lock().unwrap();
+
+//                 let count = map_guard.entry(word.to_string()).or_insert(0);
+//                 // *count += 1 - We derefernce the mutable pointer we got from the .entry() and add 1
+//                 *count += 1;
+
+//             }
+//         });
+
+//         handles.push(handle);
+//     }
+
+//     for handle in handles {
+//         handle.join().unwrap();
+//     }
+
+//     let duration = start.elapsed();
+//     println!("Multi threaded Shared state time : {:?}", duration);
+// // let final_counts = word_counts.lock().unwrap() - Back in the main thread, to read the final answer we must acquire the lock one last time . We can't even look at mutex without unlockcing it
+//     let final_counts = word_counts.lock().unwrap();
+//     println!("The word 'rust' appears {} times. ", final_counts.get("rust").unwrap_or(&0));
+
+// }
+
+// The invisible Drop - Notice we never called .unlock(). In rust the moment we hit the bottom of the for word in content.split_whitespace() loop the map_guard variable goes out of scopr . Rusts compiler automatically injects a .drop() call which releases the Mutex lock for the next thread
+
+
 fn main() {
+
     let start = Instant::now();
-
-    // create the shared whiteboard with a lock
-    // Arc::new(Mutex::new(HashMap::<String, u32>::new())) - We are building an onion .
-    // The inner layer is the raw HashMap .
-    // We wrap it in Mutex::new() which attaches a lock to the map.
-    // We wrap the Mutex in Arc::new() which moves the whole thing to the Heap and gives us a thread-safe reference counting pointer . We must explicitly tell the compiler the types <String, u32> here because it can't guess them yet.
-    let word_counts = Arc::new(Mutex::new(HashMap::<String, u32>::new()));
-
-    // A vector to hold the pagers JoinHandles for our line cooks
     let mut handles = vec![];
 
-    // Spawn 5 threads One for each file
+    // Map [Each threads words independently]
     for i in 1..=5 {
-        // Clone the Arc pointer for this specific thread
-        // Arc::clone(&word_counts) - This is the magic of Arc. This does not clone the massive HashMap. It simply takes the atomic counter inside the Arc and adds +1 from 1 to 2 . We create a brand new pointer called thread_counts taht points to the exact same Heap memory
-        let thread_counts = Arc::clone(&word_counts);
-
-        // thread::spawn(move || {...}) - We must use move so that the thread takes ownership of the newly cloned thread_counts pointer. If we didnt use move the thread would try to borrow thread_counts from the for loop which is illegal
         let handle = thread::spawn(move || {
-            let filename = format!("data/file{}.txt", i);
+            // We create a brand new HashMap inside the thread
+            // NO Arc, No Mutex. This thread has exclusive ownership of it
+
+            // let mut local_counts = ... - By moving this inside the closure every thread makes its own memory allocation. There is zero sharing
+            
+            let mut local_counts: HashMap<String, u32> = HashMap::new();
+
+            let filename = format!("data/file{}.txt",  i);
             let content = fs::read_to_string(filename).unwrap();
 
             for word in content.split_whitespace() {
-                // Grab the Bathroom key
-                // This blocks this thread if another thread is currently writing
-                // let mut map_guard = thread_counts.lock().unwrap()
-                // lock() - attempts to grab the Mutex key. if another thread has it , this thread goes to sleep until it's available
-                // .unwrap() = is used because if a thread panics while holding the lock, the Mutex becomes poisoned broken forever . If its poisoned we want this thread to crash too.
-                // map_guard is a MutexGuard . Because it implements the DerefMut trait we can call .entry() on it as a if it were the HashMap itself.
-                let mut map_guard = thread_counts.lock().unwrap();
-
-                let count = map_guard.entry(word.to_string()).or_insert(0);
-                // *count += 1 - We derefernce the mutable pointer we got from the .entry() and add 1
+                // No .lock() needed we update at maximum CPU speed
+                let count = local_counts.entry(word.to_string()).or_insert(0);
                 *count += 1;
-
             }
+
+            // return local_counts - We are sending ownership of the HashMap from the line cook back to the main chef. Because HashMap implements Send, Rust allows this safely
+
+            return local_counts;
         });
 
         handles.push(handle);
     }
 
+    let mut total_counts: HashMap<String, u32> = HashMap::new();
+
     for handle in handles {
-        handle.join().unwrap();
+        // .join() waits for th thread and unwrap() extracts the returned local Hashmap
+
+        // let local_counts = handle.join().unwrap(); .join doesn't just wait it actually passes the return value of the closure across the thread boundary
+        let local_counts = handle.join().unwrap();
+
+        // WE loop over the Key,value pairs in the local hashMap
+        // for (word, count) in local_counts - This loop destructures the tuple from the local map. Since we own it we drain it and merge count into our final total_counts map
+        for (word, count) in local_counts {
+            // We add the threads count to our main total_counts Hashmpa
+            let total = total_counts.entry(word).or_insert(0);
+            *total += count;
+        }
     }
 
     let duration = start.elapsed();
-    println!("Multi threaded Shared state time : {:?}", duration);
-// let final_counts = word_counts.lock().unwrap() - Back in the main thread, to read the final answer we must acquire the lock one last time . We can't even look at mutex without unlockcing it
-    let final_counts = word_counts.lock().unwrap();
-    println!("The word 'rust' appears {} times. ", final_counts.get("rust").unwrap_or(&0));
-
+    println!("Multi-threaded (map/reduce) time: {:?}",duration);
+    println!("The word 'rust' appears {} times.", total_counts.get("rust").unwrap_or(&0));
 }
-
-// The invisible Drop - Notice we never called .unlock(). In rust the moment we hit the bottom of the for word in content.split_whitespace() loop the map_guard variable goes out of scopr . Rusts compiler automatically injects a .drop() call which releases the Mutex lock for the next thread

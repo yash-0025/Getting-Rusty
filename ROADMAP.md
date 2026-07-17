@@ -159,10 +159,10 @@ Each day has:
 > Goal: Go from "I understand ownership" to "I can build and deploy a production async service."
 
 ### Day 15 — Build: Parallel File Word Counter
-- [ ] **You build:** A CLI that counts word frequencies across many files in parallel using OS threads. Compare: (1) shared state with `Arc<Mutex<HashMap>>`, (2) thread-per-file with results joined.
-- [ ] **Concepts:** `std::thread::spawn`, `JoinHandle`, `.join()` · `move` closures for thread ownership transfer · `Arc<T>` — the multi-threaded `Rc` (atomic refcounting) · `Mutex<T>` and `RwLock<T>` — exclusive vs read-heavy shared access; poisoning on panic · `Arc<Mutex<T>>` as the standard "shared mutable state across threads" pattern · Why Rust's type system makes data races a **compile-time error** (`Send`/`Sync` marker traits)
-- [ ] **Reality check:** This `Send`/`Sync` guarantee is why companies trust Rust for systems where a C++ data race would cause a silent, unreproducible production bug
-- [ ] **Deliverable:** Parallel word counter with timing comparison: single-threaded vs multi-threaded.
+- [x] **You build:** A CLI that counts word frequencies across many files in parallel using OS threads. Compare: (1) shared state with `Arc<Mutex<HashMap>>`, (2) thread-per-file with results joined.
+- [x] **Concepts:** `std::thread::spawn`, `JoinHandle`, `.join()` · `move` closures for thread ownership transfer · `Arc<T>` — the multi-threaded `Rc` (atomic refcounting) · `Mutex<T>` and `RwLock<T>` — exclusive vs read-heavy shared access; poisoning on panic · `Arc<Mutex<T>>` as the standard "shared mutable state across threads" pattern · Why Rust's type system makes data races a **compile-time error** (`Send`/`Sync` marker traits)
+- [x] **Reality check:** This `Send`/`Sync` guarantee is why companies trust Rust for systems where a C++ data race would cause a silent, unreproducible production bug
+- [x] **Deliverable:** Parallel word counter with timing comparison: single-threaded vs multi-threaded.
 
 ### Day 16 — Build: Multi-Stage Data Pipeline with Channels
 - [ ] **You build:** A pipeline: Reader → Parser → Aggregator, connected by channels. Reader reads log files, Parser extracts structured data, Aggregator computes statistics. Compare channel-based vs mutex-based architectures.

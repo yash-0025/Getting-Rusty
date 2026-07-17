@@ -307,6 +307,21 @@
 **Mistakes the compiler caught that taught me something:**
 - The test panicked on `assert_eq!` because the Const Generic capacity limit of 2 blocked the 3rd and 4th items from being inserted. Fixed by increasing the limit to 4.
 
+### Day 15 — Build: Parallel File Word Counter — 2026-07-17
+**Status:** `[x]` done
+**What I actually understood:**
+- **Concurrency vs Parallelism**: `std::thread::spawn` creates real OS hardware threads to run tasks simultaneously.
+- **`move` Closures**: Passing variables into threads requires giving up ownership (`move`) so the thread doesn't create dangling pointers to the main thread's memory.
+- **Lock Contention**: Wrapping a `HashMap` in an `Arc<Mutex>` safely prevents Data Races, but if threads constantly lock and unlock for every small operation, performance plummets and it becomes almost as slow as single-threaded.
+- **`Send` and `Sync`**: The compiler's marker traits that make Data Races a compile-time error. `Rc` is `!Send`, `Arc` is `Send`.
+- **Map/Reduce Pattern**: The best way to use threads is to let them work completely independently (Map) on their own local memory, and then combine their results at the very end (Reduce). No Mutex needed!
+**What's still fuzzy / questions I had:**
+- None for now.
+**Code I wrote / project progress:**
+- Built `parallel_word_counter` and compared single-threaded (`1.57s`), Mutex-locking (`1.16s`), and Map/Reduce (`250ms`) architectures over 22MB of text.
+**Mistakes the compiler caught that taught me something:**
+- `unused variable: count`: Learned that if you forget to increment a variable (e.g., missing `*count += 1;`), the compiler warns you that the variable is never used, saving us from a logic bug where the final count was 0!
+
 ## 🧠 Concept Confidence Tracker
 *(Self-rate honestly — this drives what the AI re-explains or drills. Update anytime, ask the AI to revise the table for you if you want.)*
 
