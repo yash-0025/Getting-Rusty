@@ -1130,4 +1130,16 @@
 **Output Summary:** Created `README.md` in the workspace root to document the structure and rules of the project. Updated `task.md` to check off Step 3. Added Concept 28 (`Arc` and `Mutex`) to `EXAMPLES.md`. Apologized for drifting from the strict ELI5/Syntax breakdown format and reaffirmed adherence to `RULES.md` (Rule 10 & 11). Transitioned to Step 4 (Concept: Shared Mutable State) with a detailed breakdown of how to use `Arc` and `Mutex` in preparation for parallelizing the word counter.
 **Outcome / Next Step:** Learner will review the `Arc`/`Mutex` concept and then we will write the code for Step 5 (Approach 1: Multi-threaded with Shared State).
 
+### 2026-07-16 17:32 IST — Prompt #187
+**Prompt:** "let;s move on to the next step followign the rules properly"
+**Context:** User saved the new concepts on Arc and Mutex to their `Notes.md` and requested the next step.
+**Output Summary:** Checked off Step 4 in `task.md`. Transitioned to Step 5 (Multi-threaded with Shared State). Provided the implementation using `Arc<Mutex<HashMap>>` with an Extreme Syntax Breakdown of `Arc::new`, `Arc::clone`, and `.lock().unwrap()`. Specifically set up the code so that the Mutex lock happens *inside* the word loop to demonstrate "lock contention", setting up a trap where the multi-threaded code is actually slower than the single-threaded baseline.
+**Outcome / Next Step:** Learner will run this "parallel" version, see that it takes much longer than the 1.57s baseline, and we will use that A-ha moment to introduce the Map/Reduce pattern (Step 7).
+
+### 2026-07-17 13:16 IST — Prompt #188
+**Prompt:** "Done - cargo run --release... let;s move to next following rules"
+**Context:** User ran the `Arc<Mutex>` word counter and it finished in 1.16s (compared to 1.57s baseline).
+**Output Summary:** Checked off Step 5. Explained *why* 5 threads were barely faster than 1 thread (Lock Contention). Transitioned into Step 6 (`Send` and `Sync` marker traits) and Step 7 (Map/Reduce Approach 2) with a deep breakdown and full implementation of Map/Reduce without a `Mutex`.
+**Outcome / Next Step:** Learner will run the Map/Reduce version, experience the actual speedup of true parallelism, and complete Day 15!
+
 <!-- New entries appended below -->

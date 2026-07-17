@@ -853,3 +853,6 @@ fn main() {
 let word_counts = Arc::new(Mutex::new(HashMap::new()));
 ```
 - why we use it  - `Arc` allows us to .clone() the pointer so we can hand a copy to all 5 threads [spawn(move || ...)]. Inside the thread when we actually want to update the hashmap, we call .lock().unwrap(). This forces the thread to pause if another thread is currently writing . Once it has the lock it can update the HashMap safely.
+
+`Concept 4 - Multi threaded with shared state`
+- We are going to spawn 5 threads Each thread will read one of the 5 files we generated. Because they are all going to tally their words into the exact same HashMap , We will wrap that Hashmap in an Arc<Mutex<T>>

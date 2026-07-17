@@ -33,6 +33,24 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-17 13:16 IST — [task.md] — Completed Step 5</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User successfully implemented and ran Approach 1 (Arc+Mutex). Checked off Step 5 in `task.md`.
+
+</details>
+
+<details>
+<summary>2026-07-16 17:32 IST — [task.md] — Completed Step 4</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User read and took notes on Concept 28 (Arc/Mutex) and requested the next step. Checked off Step 4.
+
+</details>
+
+<details>
 <summary>2026-07-16 16:59 IST — [README.md/task.md] — Workspace documentation and Step 3 completion</summary>
 
 - **Files:** README.md (new), task.md

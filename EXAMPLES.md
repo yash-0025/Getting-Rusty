@@ -337,3 +337,30 @@ In JavaScript, concurrency is handled via an Event Loop (single-threaded asynchr
 
 **Rust Context (Technical Explanation):**
 You cannot share `Rc` or `RefCell` across threads because they do not implement the `Send` or `Sync` traits. Rust forces you to use `Arc<T>` (Atomic Reference Counting) to share ownership across threads safely. However, `Arc` only provides shared *immutable* access. If you need to mutate the data, you must wrap the inner data in a `Mutex<T>` (Mutual Exclusion lock). The resulting type is `Arc<Mutex<HashMap>>`. When a thread wants to mutate the HashMap, it calls `.lock().unwrap()`. This returns a `MutexGuard`. Thanks to Deref coercion, you can treat this guard exactly like the underlying HashMap (e.g., calling `.entry()`). When the `MutexGuard` goes out of scope (at the end of the block), the `Drop` trait automatically unlocks the Mutex, preventing deadlocks.
+
+---
+
+### 29. Fearless Concurrency: `Send` and `Sync` Traits (Day 15)
+**Core Concept:** How the Rust compiler mathematically guarantees you cannot write a Data Race.
+
+**The Analogy: The Fragile Glass and the Titanium Safe**
+* `Send`: Can I pack this item in a box and mail it to a different city (another thread)? A sturdy book is `Send`. A fragile, balancing house of cards (`Rc`) is `!Send` (Not Send) because the mail carrier will destroy it.
+* `Sync`: Can multiple people look at this item at the exact same time through a window without it breaking? A painting is `Sync`. A diary that bursts into flames if two people read it at once (`RefCell`) is `!Sync`.
+
+**Rust Context (Technical Explanation):**
+`Send` and `Sync` are "Marker Traits". They have no methods. They just tell the compiler a fact about a type.
+* `Send`: It is safe to transfer ownership of this type to another thread.
+* `Sync`: It is safe to share references (`&T`) of this type between threads. (A type is `Sync` if and only if `&T` is `Send`).
+Most primitive types (`i32`, `bool`) are automatically `Send` and `Sync`. Rust automatically implements these traits for structs if all their fields are `Send/Sync`. Because `Rc` is `!Send`, if you try to pass it to `thread::spawn`, the compiler will literally refuse to compile the program. Data races are a compile-time error.
+
+---
+
+### 30. The Map/Reduce Concurrency Pattern (Day 15)
+**Core Concept:** Avoiding "Lock Contention" (Mutex traffic jams) by letting threads work completely independently, and combining their results at the very end.
+
+**The Analogy: The Tally Counters**
+* **Mutex (Approach 1):** 5 cooks share 1 whiteboard. Even though there are 5 of them, only 1 can write at a time. They spend 90% of their time standing in line waiting for the marker. This is called Lock Contention.
+* **Map/Reduce (Approach 2):** You give all 5 cooks their *own personal notepad*. They read their recipe (Map) and tally their own ingredients instantly without waiting for anyone else. At the end of the shift, they hand their 5 notepads to the Head Chef, who adds all the numbers together (Reduce).
+
+**Rust Context (Technical Explanation):**
+Instead of wrapping a single `HashMap` in an `Arc<Mutex>`, we spawn threads that create their *own* local `HashMap`. Because the local HashMap is fully owned by the thread, it doesn't need `Arc` or `Mutex`. The thread returns its local HashMap when it finishes. In the main thread, we `.join()` all the handles, collect the 5 resulting HashMaps, and iterate over them to sum up the final totals. This eliminates lock contention and allows for true parallel CPU utilization.
