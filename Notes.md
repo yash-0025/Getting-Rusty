@@ -866,3 +866,14 @@ let word_counts = Arc::new(Mutex::new(HashMap::new()));
 - `Concept 6 - The Map/Reduce Pattern`
 - To fix our lock contention we are going to use Map/Reduce. Instead of giving the 5 Cooks one whiteboard we are going to give them each their personal notepad. 
 - They will tally their own file (Map), and then hand their notepad to the Head Chef when they are done. The Head Chef will add all 5 notepads together `Reduce`. No Mutex locks required.
+
+
+<h1>Day 16</h1>
+
+- We learned the two ways threads can share data
+- 1. `Shared Mutable state ` [Arc + Mutex] - Multiple threads fighting over the same whiteboard (lock contention)
+- 2. `Map/Reduce` - Threads working completely isolated and returning their values at the very end.
+
+- But what if we are building something like a streaming data processor, where data is flowing continuously? We can't wait until the very end to return a value , and locking a Mutex every milisecond is too slow. This is third way :: `Message Passing`
+- do not communicate by sharing memory, instead share memory by communication - go proverb also heavily used in Rust
+- We are going  to build a pipeline : Reader Stage (Read logs lines) -> Parser Stage (Extract data) -> Aggregator Stage (Calculates stats). Instead of sharing a Mutex they will pass data to each other on a conveyour belt a channel

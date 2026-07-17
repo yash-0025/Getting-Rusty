@@ -164,7 +164,7 @@ fn main() {
     let start = Instant::now();
     let mut handles = vec![];
 
-    // Map [Each threads words independently]
+    // Map [Each threads works independently]
     for i in 1..=5 {
         let handle = thread::spawn(move || {
             // We create a brand new HashMap inside the thread
