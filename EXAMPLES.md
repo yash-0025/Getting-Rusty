@@ -364,3 +364,16 @@ Most primitive types (`i32`, `bool`) are automatically `Send` and `Sync`. Rust a
 
 **Rust Context (Technical Explanation):**
 Instead of wrapping a single `HashMap` in an `Arc<Mutex>`, we spawn threads that create their *own* local `HashMap`. Because the local HashMap is fully owned by the thread, it doesn't need `Arc` or `Mutex`. The thread returns its local HashMap when it finishes. In the main thread, we `.join()` all the handles, collect the 5 resulting HashMaps, and iterate over them to sum up the final totals. This eliminates lock contention and allows for true parallel CPU utilization.
+
+---
+
+### Concept 31: Message Passing and `mpsc` Channels
+
+**The Analogy: The Kitchen Conveyor Belt**
+In our Mutex example, 5 cooks were fighting over 1 whiteboard to write down orders (Lock Contention). With **Channels**, we build a **Conveyor Belt**. The Line Cook (Thread 1) chops vegetables and puts them on the conveyor belt. The Head Chef (Thread 2) stands at the end of the belt and takes the vegetables off to cook them. The Cook and the Chef never have to talk to each other or fight over a whiteboard. The conveyor belt safely moves the food from one person to the other.
+
+**Rust Context (Technical Explanation):**
+In Rust, a channel is called `mpsc`, which stands for **Multi-Producer, Single-Consumer**.
+* **Producer (`tx` for Transmitter):** The end of the channel that *sends* data. We can clone the transmitter, allowing multiple threads to send data into the same channel.
+* **Consumer (`rx` for Receiver):** The end of the channel that *receives* data. There can only be **one** receiver.
+When you send data into a channel (`tx.send(data)`), you **move ownership** of that data into the channel. The Rust compiler guarantees that the sending thread can no longer touch it, completely preventing Data Races without needing a slow `Mutex`.

@@ -877,3 +877,12 @@ let word_counts = Arc::new(Mutex::new(HashMap::new()));
 - But what if we are building something like a streaming data processor, where data is flowing continuously? We can't wait until the very end to return a value , and locking a Mutex every milisecond is too slow. This is third way :: `Message Passing`
 - do not communicate by sharing memory, instead share memory by communication - go proverb also heavily used in Rust
 - We are going  to build a pipeline : Reader Stage (Read logs lines) -> Parser Stage (Extract data) -> Aggregator Stage (Calculates stats). Instead of sharing a Mutex they will pass data to each other on a conveyour belt a channel
+
+- `Concept 1 - Message Passing and mpsc channels`
+- Imagine  a restaurant kitches . In our mutex ecample 5 cooks were fighting over 1 whiteboard to write down orders. With channels we build a conveyor belt. The line cook [thread 1] chops vegetabls and puts them on the conveyor belt.
+- The head chef [thread 2] stands at the end of the belt and takes the vegetables off to cook them. The cook and the chef never have to talk to each other or fight over a whiteboard. 
+- The conveyour belt safely moves the food from one peron to the other .
+- In rust , a channel is called mpsc which stands for Multi Producer , Single Consumer.
+- `Producer`- `tx for Transmitter` - The end of the channel that sends data . We can clone the transmitter, allowing multiple threads to send data into the same channel
+- `Consumer` - `rx for Receiver` - The end of the channel that receives data. There can only be one receiver. When we send data into a channel, we move ownership of that data into the channel.
+- The Rust compiler guarantees that the sending thread can no longer touch it, completely preventing Data Races without needing a slow Mutex

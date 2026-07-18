@@ -33,6 +33,24 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-17 18:31 IST — [EXAMPLES.md] — Added Concept 31 (Message Passing)</summary>
+
+- **Files:** EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** AI failed to follow Rule 8 which requires the AI to store the ELI5/technical analogy in `EXAMPLES.md`. User corrected the AI, and the AI appended Concept 31 (Message Passing and mpsc Channels).
+
+</details>
+
+<details>
+<summary>2026-07-17 18:26 IST — [task.md] — Completed Step 1</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User documented the log generator function code with inline comments, generated the dummy logs successfully, and committed the changes via git. Checked off Step 1.
+
+</details>
+
+<details>
 <summary>2026-07-17 17:47 IST — [ROADMAP.md/LEARNING.md] — Completed Day 15</summary>
 
 - **Files:** ROADMAP.md, LEARNING.md
