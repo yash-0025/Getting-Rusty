@@ -97,8 +97,13 @@ use std::thread;
 fn main() {
     // Create two conveyor belts channels
     // We simply call mpsc::channel() twice to create two completely separate conveyor belts
-    let (tx1, rx1) = mpsc::channel();
-    let (tx2, rx2) = mpsc::channel();
+
+    // mpsc::channel(100) - The sync_channel function requires a usize argument in this case 100. This is the maximum capacity of the channel
+    // If tx1 ties to send the 101st item, The Reader thread will instantly go to sleep
+    // As soon as the Parser thread reads 1 item off rx1 bringing the count down to 99 the Reader thread will instantly wake up and send the next item
+    // The send() method behaves identically but now it has backpressure
+    let (tx1, rx1) = mpsc::sync_channel(100);
+    let (tx2, rx2) = mpsc::sync_channel(100);
 
     // Spawn the Reader Thread (Producer 1)
     

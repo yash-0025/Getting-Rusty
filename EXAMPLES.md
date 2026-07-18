@@ -389,3 +389,13 @@ When you send data into a channel (`tx.send(data)`), you **move ownership** of t
 **Rust Context (Technical Explanation):**
 * Use `Arc<Mutex<T>>` when you have global state that many threads need to read and update randomly (e.g., an in-memory cache, or a web server tracking active user sessions).
 * Use `mpsc` Channels when you have a directional flow of data (e.g., a data pipeline, log processing, or a worker pool). Channels move ownership of the data across thread boundaries, completely bypassing the need for expensive lock acquisition (`.lock().unwrap()`).
+
+---
+
+### Concept 33: Bounded Channels and Backpressure
+
+**The Analogy: The Factory Conveyor Belt**
+Imagine a real factory conveyor belt. If the guy putting boxes on the belt works 10x faster than the guy taking them off, the boxes will pile up and fall all over the floor (Out of Memory Crash). To fix this, you tell the fast guy: *"If there are 100 boxes on the belt, stop working until the slow guy catches up."* This forced pausing is called **Backpressure**.
+
+**Rust Context (Technical Explanation):**
+In Rust, an unbounded channel is created with `mpsc::channel()`. A bounded channel is created with `mpsc::sync_channel(capacity)`. It creates a channel with a fixed memory buffer. If a producer thread calls `tx.send()` when the buffer is full, the producer thread will block (go to sleep) until the consumer calls `rx.recv()` to free up space. This ensures predictable `O(1)` memory usage regardless of how large the input data stream is.

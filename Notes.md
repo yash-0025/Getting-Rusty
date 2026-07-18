@@ -894,5 +894,13 @@ let word_counts = Arc::new(Mutex::new(HashMap::new()));
 - Use `Arc<Mutex<T>>` when we have global state that many threads need to read and update randomly (eg- an in memory cache)
 - Use `mpsc` Channels when we have a direction flow of data eg- adata pipeline or log processing . Channels move ownership of the data across thread boundaries , completely bypassing the need for expensive lock acquisition
 
-- Right now the mpsc::channel() we are using is unbounded. 
+- Right now the mpsc::channel() we are using is unbounded. That means it has inifinite size . Reading a file from a hard drive is much faster than processing and aggregating data.
+- If our log file was 50 Gigabytes instead of 5 Megabytes , the Reader thread would instantly dump 50 GB of strings onto the conveyor belt in RAM. The Outcomes - Our computer would run out of memory OOM and the program would crash
+- We are going to change our code to use Bounded Channels. We will put strict limit on the conveyor belt eg maximum 100 items. If the belt gets full the Reader thread will automatically be forced to pause and wait. This guarantees our program will use almost zero RAM , even if the file is 100 Terabytes
+
+
 - `Concept 3 - Bounded channels and Backpressure`
+- Imagine a factory conveyor belt. If the guy putting boxes on the belt works 10x faster than the guy taking them off the boxes will pile up and fall all over the floor Out of Memory Crash.
+- To fix this we tell the fast guy - If there are 100 boxes on the belt, stop working until the slow guy catches up. This forced pausing is called `Backpressure`
+- In Rust an unbounded channel is created with `mpsc::channel()`. A bounded channel with a fixed memory buffer. If a producer thread calls tx.send() when the buffer is full , the producer thread will block (go to sleep) until the consumer calls rx.recv() to free up space. 
+- This ensures predictable 0(1) memory usage regardless of how large the input data stream is.

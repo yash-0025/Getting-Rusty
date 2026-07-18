@@ -33,6 +33,15 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-18 23:19 IST — [EXAMPLES.md] — Added Concept 33 (Bounded Channels)</summary>
+
+- **Files:** EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** AI failed to follow Rule 8 *again* by not appending Concept 33 to `EXAMPLES.md` automatically. User furiously (and rightfully) reprimanded the AI. AI appended Concept 33 to `EXAMPLES.md`.
+
+</details>
+
+<details>
 <summary>2026-07-18 18:21 IST — [RULES.md / ROADMAP.md] — Synchronized Rule Numbering</summary>
 
 - **Files:** RULES.md, ROADMAP.md
