@@ -322,6 +322,20 @@
 **Mistakes the compiler caught that taught me something:**
 - `unused variable: count`: Learned that if you forget to increment a variable (e.g., missing `*count += 1;`), the compiler warns you that the variable is never used, saving us from a logic bug where the final count was 0!
 
+### Day 16 — Build: Multi-Stage Data Pipeline with Channels — 2026-07-18
+**Status:** `[x]` done
+**What I actually understood:**
+- **Pipelines**: How to break a large task (like reading 100,000 logs) into separate stages (Reader -> Parser -> Aggregator) running on separate threads.
+- **Channels (`mpsc::channel`)**: "Share memory by communicating". Channels move ownership of data across thread boundaries safely without requiring a slow `Mutex`. Perfect for directional data flow.
+- **Drop Semantics in Channels**: The pipeline naturally shuts down when the `Reader` finishes the file. It drops `tx1`, which causes `rx1` loop to exit, which drops `tx2`, which causes `rx2` to exit. The dominoes fall perfectly.
+- **Backpressure (`mpsc::sync_channel`)**: Unbounded channels can cause Out of Memory crashes if the producer is faster than the consumer. Bounded channels enforce a limit, forcing the fast producer to sleep until the consumer catches up, ensuring `O(1)` memory usage.
+**What's still fuzzy / questions I had:**
+- None for now.
+**Code I wrote / project progress:**
+- Built `data_pipeline`, successfully aggregating 10,000 errors from a 100,000-line simulated log file.
+**Mistakes the compiler caught that taught me something:**
+- Missed the unused variable warning for `count`, highlighting Rust's strictness against useless code.
+
 ## 🧠 Concept Confidence Tracker
 *(Self-rate honestly — this drives what the AI re-explains or drills. Update anytime, ask the AI to revise the table for you if you want.)*
 

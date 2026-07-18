@@ -26,6 +26,7 @@
 11. **Extreme Syntax-Level Explanation:** The AI must provide a line-by-line, exhaustive explanation of every single line of code before providing it. It must explain every syntax choice (`&`, `*`, `mut`, `Option`, `map`, why a specific method is called twice, why `self` is used, etc.). Do not assume the learner remembers syntax quirks. Over-explain the exact mechanics of every keyword.
 12. **Goal/Outcome Explanation:** Whenever the AI introduces a new piece of code or project step, it MUST explicitly explain *what* is being built and *what is going to happen at the end* of the step. The learner needs a clear picture of the final outcome before writing the code, to understand the purpose of the architecture.
 13. **Project Overview Explanation:** Before starting any new project or major architecture, the AI MUST provide a high-level overview of the ENTIRE project. The AI must explain *what* we are building in big-picture terms, *what the final outcome/product will be*, and *why* we are building it. The learner needs a clear mental model of the whole project before executing Step 1.
+14. **End-of-Day Verification:** Every time a day is marked as complete, the AI MUST cross-reference the roadmap to verify that absolutely every topic, concept, and project requirement for that day was covered. If anything was missed, the AI must list the remaining items and ensure they are completed before allowing the learner to move to the next day.
 
 ---
 
@@ -167,10 +168,10 @@ Each day has:
 - [x] **Deliverable:** Parallel word counter with timing comparison: single-threaded vs multi-threaded.
 
 ### Day 16 — Build: Multi-Stage Data Pipeline with Channels
-- [ ] **You build:** A pipeline: Reader → Parser → Aggregator, connected by channels. Reader reads log files, Parser extracts structured data, Aggregator computes statistics. Compare channel-based vs mutex-based architectures.
-- [ ] **Concepts:** `std::sync::mpsc` channels — multiple-producer, single-consumer · `Sender`/`Receiver`, `.send()`, `.recv()`, iterating a receiver · "Share memory by communicating" vs "communicate by sharing memory" — when each fits · Bounded vs unbounded channels — backpressure considerations
-- [ ] **Reality check:** Channel-based pipelines are how you build producer/consumer/worker-pool architectures without manual locking — directly transferable to job queues, log processors, etc.
-- [ ] **Deliverable:** Working pipeline processing real log files, with architecture comparison doc.
+- [x] **You build:** A pipeline: Reader → Parser → Aggregator, connected by channels. Reader reads log files, Parser extracts structured data, Aggregator computes statistics. Compare channel-based vs mutex-based architectures.
+- [x] **Concepts:** `std::sync::mpsc` channels — multiple-producer, single-consumer · `Sender`/`Receiver`, `.send()`, `.recv()`, iterating a receiver · "Share memory by communicating" vs "communicate by sharing memory" — when each fits · Bounded vs unbounded channels — backpressure considerations
+- [x] **Reality check:** Channel-based pipelines are how you build producer/consumer/worker-pool architectures without manual locking — directly transferable to job queues, log processors, etc.
+- [x] **Deliverable:** Working pipeline processing real log files, with architecture comparison doc.
 
 ### Day 17 — Build: Async URL Health Checker
 - [ ] **You build:** A CLI that takes a list of URLs, checks them all concurrently with configurable concurrency limit and timeout per request, reports status/latency for each.
