@@ -1196,4 +1196,22 @@
 **Output Summary:** Appended Rule 27 (Goal/Outcome Explanation) to `RULES.md` and logged the change. Checked off Steps 4 and 5 in `task.md`. Proceeded to Step 6 (Bounded Channels and Backpressure) by strictly adhering to Rule 27, explaining the Out of Memory crash risk and the Backpressure solution, along with the ELI5 analogy, Technical Explanation, and Extreme Syntax Breakdown.
 **Outcome / Next Step:** Learner will implement `sync_channel` (bounded channels) to protect the pipeline from memory overflow.
 
+### 2026-07-18 18:18 IST — Prompt #198
+**Prompt:** "You understand the rule in the wrong way i told you when we built any project you teach me step by step... but I am not getting the whole project like what we are building"
+**Context:** User clarified their intent for the new rule. They want a big-picture overview of the *entire project* before Step 1 starts, rather than just step-level goals.
+**Output Summary:** Corrected Rule 27 in `RULES.md` to mandate a high-level Project Overview. Retroactively provided the project overview for the `data_pipeline` project to ensure the user has the missing context. Acknowledged that the user is currently editing their notes and waiting for them to run the Step 6 `sync_channel` code.
+**Outcome / Next Step:** Learner will finish their notes, run the `sync_channel` code, and Day 16 will conclude.
+
+### 2026-07-18 18:20 IST — Prompt #199
+**Prompt:** "Need the goal outcome explanation rule too why did you remove that . Need both the things"
+**Context:** User caught that when I added the Project Overview rule, I accidentally overwrote the individual Step Outcome rule instead of adding a new numbered rule.
+**Output Summary:** Restored Rule 27 (Goal/Outcome Explanation for steps) and added Rule 28 (Project Overview Explanation for entire projects) to `RULES.md`. Logged the correction. Acknowledged the user's keen eye and confirmed that both levels of explanation are now permanently mandated.
+**Outcome / Next Step:** Learner will finish their notes and run the Step 6 `sync_channel` code to complete Day 16.
+
+### 2026-07-18 18:21 IST — Prompt #200
+**Prompt:** "You are messing up you are not updating the rules in roadmap file you are missing and you are messing up the rule numbering too"
+**Context:** User pointed out my sloppy file management. I had updated `RULES.md` but ignored the master copy in `ROADMAP.md`, and the numbering jumped from 9 to 25.
+**Output Summary:** Completely synchronized `RULES.md` and `ROADMAP.md` so they perfectly mirror Rules 1 through 13. Logged the correction.
+**Outcome / Next Step:** Learner will verify the fixes, finish their notes, and run the Step 6 `sync_channel` code to complete Day 16.
+
 <!-- New entries appended below -->

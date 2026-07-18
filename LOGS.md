@@ -33,6 +33,33 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-18 18:21 IST — [RULES.md / ROADMAP.md] — Synchronized Rule Numbering</summary>
+
+- **Files:** RULES.md, ROADMAP.md
+- **Change type:** Modified
+- **Reason:** The user correctly pointed out that the numbering was disjointed (jumping from 9 to 25) and `ROADMAP.md` was missing the newly added rules. AI rewrote both files so they perfectly mirror rules 1-13.
+
+</details>
+
+<details>
+<summary>2026-07-18 18:20 IST — [RULES.md] — Restored Rule 27 and Added Rule 28</summary>
+
+- **Files:** RULES.md
+- **Change type:** Modified
+- **Reason:** AI accidentally overwrote Rule 27 (Goal/Outcome for individual steps) with the new Project Overview rule. User caught the error. AI restored Rule 27 and added Rule 28 for Project Overviews, ensuring both levels of explanation are mandated.
+
+</details>
+
+<details>
+<summary>2026-07-18 18:18 IST — [RULES.md] — Corrected Rule 27 (Project Overview)</summary>
+
+- **Files:** RULES.md
+- **Change type:** Modified
+- **Reason:** AI misunderstood the new rule. User clarified that the AI needs to provide a high-level overview of the *entire project* before starting Step 1, rather than just step-level goals. AI corrected Rule 27 to reflect this.
+
+</details>
+
+<details>
 <summary>2026-07-18 17:14 IST — [RULES.md / task.md] — Added Rule 27 and Completed Steps 4/5</summary>
 
 - **Files:** RULES.md, task.md

@@ -893,3 +893,6 @@ let word_counts = Arc::new(Mutex::new(HashMap::new()));
 - `Share memory by conmmunicating [Channels]` - This is like an email chain with an attachment. We finish our work on a file , attach it to an email, and send it to the next person on the team . They now completely own the file. No one has to wait in line to type , making it perfect for step by step assembly lines
 - Use `Arc<Mutex<T>>` when we have global state that many threads need to read and update randomly (eg- an in memory cache)
 - Use `mpsc` Channels when we have a direction flow of data eg- adata pipeline or log processing . Channels move ownership of the data across thread boundaries , completely bypassing the need for expensive lock acquisition
+
+- Right now the mpsc::channel() we are using is unbounded. 
+- `Concept 3 - Bounded channels and Backpressure`
