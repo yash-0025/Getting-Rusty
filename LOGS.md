@@ -33,6 +33,33 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-18 17:14 IST — [RULES.md / task.md] — Added Rule 27 and Completed Steps 4/5</summary>
+
+- **Files:** RULES.md, task.md
+- **Change type:** Modified
+- **Reason:** User requested a new rule to explicitly state the goal/outcome of the code before writing it (Rule 27). User successfully ran the 3-stage pipeline and got 10,000 errors. Checked off Steps 4 and 5 in `task.md`.
+
+</details>
+
+<details>
+<summary>2026-07-18 13:19 IST — [EXAMPLES.md] — Added Concept 32 (Mutex vs Channels)</summary>
+
+- **Files:** EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** AI failed to establish and log the Concept for the architectural tradeoff between Mutexes and Channels before giving the code for Steps 4 and 5. User caught the error. AI appended Concept 32 to `EXAMPLES.md`.
+
+</details>
+
+<details>
+<summary>2026-07-18 13:13 IST — [task.md] — Completed Steps 2 and 3</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User successfully implemented the first `mpsc` channel, transferring 100,000 log lines from a background OS thread to the main thread seamlessly. Checked off Steps 2 and 3.
+
+</details>
+
+<details>
 <summary>2026-07-17 18:31 IST — [EXAMPLES.md] — Added Concept 31 (Message Passing)</summary>
 
 - **Files:** EXAMPLES.md

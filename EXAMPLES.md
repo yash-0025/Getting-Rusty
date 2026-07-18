@@ -377,3 +377,15 @@ In Rust, a channel is called `mpsc`, which stands for **Multi-Producer, Single-C
 * **Producer (`tx` for Transmitter):** The end of the channel that *sends* data. We can clone the transmitter, allowing multiple threads to send data into the same channel.
 * **Consumer (`rx` for Receiver):** The end of the channel that *receives* data. There can only be **one** receiver.
 When you send data into a channel (`tx.send(data)`), you **move ownership** of that data into the channel. The Rust compiler guarantees that the sending thread can no longer touch it, completely preventing Data Races without needing a slow `Mutex`.
+
+---
+
+### Concept 32: Mutexes vs Channels (When to use each)
+
+**The Analogy: Google Docs vs Email Attachments**
+* **Communicate by sharing memory (Mutex):** This is like a shared Google Doc. Multiple people are editing the exact same document. It is great when everyone needs to see the exact current state at all times, but to prevent chaos, people have to take turns typing (locking). 
+* **Share memory by communicating (Channels):** This is like an email chain with an attachment. You finish your work on a file, attach it to an email, and send it to the next person on the team. They now completely own the file. No one has to wait in line to type, making it perfect for step-by-step assembly lines.
+
+**Rust Context (Technical Explanation):**
+* Use `Arc<Mutex<T>>` when you have global state that many threads need to read and update randomly (e.g., an in-memory cache, or a web server tracking active user sessions).
+* Use `mpsc` Channels when you have a directional flow of data (e.g., a data pipeline, log processing, or a worker pool). Channels move ownership of the data across thread boundaries, completely bypassing the need for expensive lock acquisition (`.lock().unwrap()`).

@@ -886,3 +886,10 @@ let word_counts = Arc::new(Mutex::new(HashMap::new()));
 - `Producer`- `tx for Transmitter` - The end of the channel that sends data . We can clone the transmitter, allowing multiple threads to send data into the same channel
 - `Consumer` - `rx for Receiver` - The end of the channel that receives data. There can only be one receiver. When we send data into a channel, we move ownership of that data into the channel.
 - The Rust compiler guarantees that the sending thread can no longer touch it, completely preventing Data Races without needing a slow Mutex
+
+- `Concept 2 - Mutexes vs Channels [When to use each]`
+- Analogy - Google Docs vs Email attachments
+- `Communicate by sharing memory (Mutex)` - This is like a shared Google Doc. Multiple people are editing the exact same document. It is great when everyone needs to see the exact current sate at all times, but to prevent chaos , people have to take turns typing locking
+- `Share memory by conmmunicating [Channels]` - This is like an email chain with an attachment. We finish our work on a file , attach it to an email, and send it to the next person on the team . They now completely own the file. No one has to wait in line to type , making it perfect for step by step assembly lines
+- Use `Arc<Mutex<T>>` when we have global state that many threads need to read and update randomly (eg- an in memory cache)
+- Use `mpsc` Channels when we have a direction flow of data eg- adata pipeline or log processing . Channels move ownership of the data across thread boundaries , completely bypassing the need for expensive lock acquisition

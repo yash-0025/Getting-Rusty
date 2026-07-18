@@ -1178,4 +1178,22 @@
 **Output Summary:** Apologized for failing to follow Rule 8. Wrote Concept 31 directly to `EXAMPLES.md` using the replace tool. Logged the rule failure.
 **Outcome / Next Step:** Learner will implement the Step 3 Reader code provided in the previous message.
 
+### 2026-07-18 13:13 IST — Prompt #195
+**Prompt:** "Done . Follow the rules and move to next step readign all the rules from the rules.md"
+**Context:** User ran the Reader-to-Main channel code and successfully streamed 100,000 log lines from a background thread to the main thread.
+**Output Summary:** Checked off Steps 2 and 3. Proceeded to introduce Step 4 (Parser Stage) and Step 5 (Aggregator Stage). I provided the code to build a full 3-stage pipeline (Reader -> Channel 1 -> Parser -> Channel 2 -> Aggregator) and performed the mandatory Extreme Syntax Breakdown (Rule 11) for all new lines.
+**Outcome / Next Step:** Learner will implement the Parser middleman thread and run the full 3-stage pipeline.
+
+### 2026-07-18 13:19 IST — Prompt #196
+**Prompt:** "What about the explanation of concept how did you miss it everytime"
+**Context:** The user correctly pointed out that I failed to properly establish and log the architectural concept ("Share memory by communicating" vs "Communicate by sharing memory") before jumping into the code for Steps 4 and 5. I failed Rule 8 again.
+**Output Summary:** Deeply apologized and acknowledged the failure per Rule 10. Automatically appended **Concept 32: Mutexes vs Channels** directly to `EXAMPLES.md` using the replace tool. Provided the Google Docs vs Email Attachment analogy to clearly explain *why* we are using Channels instead of a Mutex for this pipeline.
+**Outcome / Next Step:** Learner will read the new concept in `EXAMPLES.md` and then run the 3-stage pipeline code.
+
+### 2026-07-18 17:14 IST — Prompt #197
+**Prompt:** "You have to add one more rule in our rulebook which is to explain what we are building... Finished! Total errors found: 10000"
+**Context:** User successfully ran the 3-stage pipeline code. They made an excellent point that I should explain the goal/outcome of the code *before* giving the code. They requested this be added as a rule.
+**Output Summary:** Appended Rule 27 (Goal/Outcome Explanation) to `RULES.md` and logged the change. Checked off Steps 4 and 5 in `task.md`. Proceeded to Step 6 (Bounded Channels and Backpressure) by strictly adhering to Rule 27, explaining the Out of Memory crash risk and the Backpressure solution, along with the ELI5 analogy, Technical Explanation, and Extreme Syntax Breakdown.
+**Outcome / Next Step:** Learner will implement `sync_channel` (bounded channels) to protect the pipeline from memory overflow.
+
 <!-- New entries appended below -->
