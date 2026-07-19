@@ -917,3 +917,13 @@ let word_counts = Arc::new(Mutex::new(HashMap::new()));
 - Because wiating for website to respond is I/O Bound we are just sitting around waiting for the internet not using the CPU . Rust has a completely different system called `async/await` and `Tokio`
 - It allows us to check 10,000 websites concurrently using only a single OS thread. This is how modern high performance web servers like Discord and AWS are built in Rust
 
+
+- Adding dependencies - In `Cargo.toml` file Add the following 
+```toml
+[dependencies]
+tokio = { version = "1.37.0" , features = ["full"] }
+reqwest = { version = "0.12.4" }
+```
+- `tokio` - This is the standard Async Runtime in Rust . By default Tokio is  very lightweight so we have to manually opt-in to features
+- `features = ["full"]` - This tells cargo to download every single piece of the Tokio library [ timers, networking, file I/O etc]. For a learning project "full" is easiest so we don't get missing feature errors
+- `reqwest` - This is the standard HTTP client in Rust (the equivalent of fetch or axios in Js). we just specify the version "0.12.4"
