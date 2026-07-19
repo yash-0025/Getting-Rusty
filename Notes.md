@@ -904,3 +904,16 @@ let word_counts = Arc::new(Mutex::new(HashMap::new()));
 - To fix this we tell the fast guy - If there are 100 boxes on the belt, stop working until the slow guy catches up. This forced pausing is called `Backpressure`
 - In Rust an unbounded channel is created with `mpsc::channel()`. A bounded channel with a fixed memory buffer. If a producer thread calls tx.send() when the buffer is full , the producer thread will block (go to sleep) until the consumer calls rx.recv() to free up space. 
 - This ensures predictable 0(1) memory usage regardless of how large the input data stream is.
+
+
+<h1>DAy 17</h1>
+
+- What we are building ?
+=> A new CLI tool called health_checker. We will give it a list of 100 website URLs and it will check if they are online HTTP(200 Ok) or offline
+- Outcome 
+=> A blazing fast program that pings all 100 websites concurrently , printing a nice formatted table to our terminal showing the URL . The HTTP status code and how many milliseconds it took to respond 
+- Why we are building
+- Up until today we have been using OS threads `std::thread::spawn`. OS threads are heavy . If we try to spawn 10,000 OS threads to check 10,000 websited our computer will literally crash because the operatingsystem cannot handle that much context switching. 
+- Because wiating for website to respond is I/O Bound we are just sitting around waiting for the internet not using the CPU . Rust has a completely different system called `async/await` and `Tokio`
+- It allows us to check 10,000 websites concurrently using only a single OS thread. This is how modern high performance web servers like Discord and AWS are built in Rust
+
