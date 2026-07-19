@@ -33,6 +33,15 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-19 15:15 IST — [task.md / EXAMPLES.md] — Completed Step 1 and Added Concept 34</summary>
+
+- **Files:** task.md, EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** User completed Step 1 (Project Scaffold). Checked off Step 1 in `task.md`. Proceeding to Step 2 (Concept: Why Async?). Strictly adhered to Rule 8 by preemptively adding the ELI5 analogy and technical details of Concept 34 (OS Threads vs Green Threads) to `EXAMPLES.md`.
+
+</details>
+
+<details>
 <summary>2026-07-19 14:56 IST — [task.md] — Created Day 17 Checklist</summary>
 
 - **Files:** task.md

@@ -399,3 +399,15 @@ Imagine a real factory conveyor belt. If the guy putting boxes on the belt works
 
 **Rust Context (Technical Explanation):**
 In Rust, an unbounded channel is created with `mpsc::channel()`. A bounded channel is created with `mpsc::sync_channel(capacity)`. It creates a channel with a fixed memory buffer. If a producer thread calls `tx.send()` when the buffer is full, the producer thread will block (go to sleep) until the consumer calls `rx.recv()` to free up space. This ensures predictable `O(1)` memory usage regardless of how large the input data stream is.
+
+---
+
+### Concept 34: OS Threads vs Green Threads (Why Async?)
+
+**The Analogy: The Waiter at a Restaurant**
+* **OS Threads (Synchronous):** A waiter takes your order, walks to the kitchen, and literally stands there doing absolutely nothing, staring at the chef for 20 minutes until the food is ready. If you have 100 tables, you must hire 100 waiters. This is incredibly expensive because hiring waiters costs money (RAM).
+* **Green Threads (Async):** A single waiter takes your order, hands it to the kitchen, and while the food is cooking, they immediately walk to the next table to take *their* order. One waiter can easily handle 100 tables because taking an order (CPU) is fast, but waiting for the food to cook (I/O, like a Network Request) is slow. The waiter is never blocked.
+
+**Rust Context (Technical Explanation):**
+In Rust, `std::thread::spawn` creates a real OS Thread managed by the kernel. Each thread allocates roughly 2MB of memory for its stack. If you spawn 10,000 OS threads to make 10,000 HTTP requests, you consume 20GB of RAM just for idle threads waiting on the network.
+Tokio (the async runtime) uses **Green Threads** (Tasks) via `tokio::spawn`. Tasks run on a tiny pool of OS threads (usually one per CPU core). When a Task makes an I/O request (like fetching a website), Tokio parks that task and instantly switches to another Task on the exact same OS thread. The context switch happens in user-space (nanoseconds) rather than kernel-space (microseconds). This allows you to handle tens of thousands of concurrent I/O operations with virtually zero memory overhead.

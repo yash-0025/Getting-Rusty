@@ -927,3 +927,14 @@ reqwest = { version = "0.12.4" }
 - `tokio` - This is the standard Async Runtime in Rust . By default Tokio is  very lightweight so we have to manually opt-in to features
 - `features = ["full"]` - This tells cargo to download every single piece of the Tokio library [ timers, networking, file I/O etc]. For a learning project "full" is easiest so we don't get missing feature errors
 - `reqwest` - This is the standard HTTP client in Rust (the equivalent of fetch or axios in Js). we just specify the version "0.12.4"
+
+- `Concept 1 - Why Async ?  OS Threads vs Green Threads`
+- The waiter at a Restaurant
+- `OS threads` [Synchronous] - A waiter takes our order, walks to the kitchen and literally stands there doing absolutely nothing, staring at the chef for 20 minutes until the food is ready. If we have 100 table we must hire 100 waiters . This is incredibly expensive because hiring waiters costs more money [RAM]
+- `Green threads` [Async] - A single waiter takes our order, hands it to the kitchen and while the food is cooking , they immediately walk to the next table to take their order. One waiter can easily handle 100 tables because an order[CPU] is fast but waiting for the food to cook [I/O, like a Network Request] is slow. The watier is never blocked
+
+- `std::thread::spawn` creates a real OS thread managed by the kernel. Each thread allocates roughly 2MB of memory for its stack. If we spawn 10,000 OS threads to make 10,000 HTTP requests, we consume 20GB of RAM just for idle threads waiting on the network
+- Tokio [the async runtime] uses Green threads (tasks) via `tokio::spawn`. TAsks run on tiny pool of OS threads [usually one per CPU core]. When a Task makes an I/O request like fetching a website, Tokio parks that task and instantly switches to another Task on the exact same OS thread.
+- The context switch happens in user space(nanoseconds) rather than kernel-space (microseconds). this allows us to handle tens of thousands of concurrent I/O operations with virtually zero memory overhead.
+
+
