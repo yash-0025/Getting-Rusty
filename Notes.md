@@ -938,3 +938,12 @@ reqwest = { version = "0.12.4" }
 - The context switch happens in user space(nanoseconds) rather than kernel-space (microseconds). this allows us to handle tens of thousands of concurrent I/O operations with virtually zero memory overhead.
 
 
+- The Goal : We need to undersatnd the fundamenatl difference between how Javascript handles async [Promises] vs how Rus handles async [Futures] and then we will write the code to start our Tokio runtime. 
+- The Outcome : Our src/main.rs file will be converted into a Tokio-powered async entrypoint
+
+- `Concept 2 - Futures and The Tokio Runtime [Lazy State Machines]`
+- Javascript Promises [eager] - In JS, a promise is like ordering a pizza. The second you call fetch() the delivery guy starts driving to your house . It executes immediatedly even before we write .then()
+- Rust Futures [Lazy] - In Rust an `async fn` returns a `Future`. A Future is just a pizza recipe. WE can write it down, hand it to a friend or put it in drawer . Absolutely no cooking happens until we explicitly hand it to a chef and say - Cook this now (by calling `.await`)
+
+- Because Rust has no built in runtime (unlike Node.js or the browser) calling an async fn does nothing on its own, it just compiles into a state machine describing the work.
+- TO actually execute the future , it must be polled by an executor. We use the `tokio` runtime for this. When we decorate our main function wit the `[#tokio::main]` macro it secretly rewrites our main function into a synchronomous function that builds the tokio runtime, blocks the main thread and execute our async code inside it. when we call .await inside that runtime we are yielding control back to Tokio saying I can't make progress until this I/O finishes go run another task while i wait

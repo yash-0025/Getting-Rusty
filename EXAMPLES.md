@@ -411,3 +411,15 @@ In Rust, an unbounded channel is created with `mpsc::channel()`. A bounded chann
 **Rust Context (Technical Explanation):**
 In Rust, `std::thread::spawn` creates a real OS Thread managed by the kernel. Each thread allocates roughly 2MB of memory for its stack. If you spawn 10,000 OS threads to make 10,000 HTTP requests, you consume 20GB of RAM just for idle threads waiting on the network.
 Tokio (the async runtime) uses **Green Threads** (Tasks) via `tokio::spawn`. Tasks run on a tiny pool of OS threads (usually one per CPU core). When a Task makes an I/O request (like fetching a website), Tokio parks that task and instantly switches to another Task on the exact same OS thread. The context switch happens in user-space (nanoseconds) rather than kernel-space (microseconds). This allows you to handle tens of thousands of concurrent I/O operations with virtually zero memory overhead.
+
+---
+
+### Concept 35: Futures and the Tokio Runtime (Lazy State Machines)
+
+**The Analogy: The Pizza Recipe**
+* **JavaScript Promises (Eager):** In JS, a Promise is like ordering a pizza. The second you call `fetch()`, the delivery guy starts driving to your house. It executes immediately, even before you write `.then()`.
+* **Rust Futures (Lazy):** In Rust, an `async fn` returns a `Future`. A Future is just a *pizza recipe*. You can write it down, hand it to a friend, or put it in a drawer. Absolutely no cooking happens until you explicitly hand it to a chef and say, "Cook this now!" (by calling `.await`).
+
+**Rust Context (Technical Explanation):**
+Because Rust has no built-in runtime (unlike Node.js or the browser), calling an `async fn` does nothing on its own; it just compiles into a state machine describing the work. 
+To actually execute the Future, it must be polled by an executor. We use the `tokio` runtime for this. When you decorate your main function with the `#[tokio::main]` macro, it secretly rewrites your `main` function into a synchronous function that builds the Tokio runtime, blocks the main thread, and executes your async code inside it. When you call `.await` inside that runtime, you are yielding control back to Tokio, saying "I can't make progress until this I/O finishes, go run another task while I wait."
