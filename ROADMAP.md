@@ -174,10 +174,10 @@ Each day has:
 - [x] **Deliverable:** Working pipeline processing real log files, with architecture comparison doc.
 
 ### Day 17 — Build: Async URL Health Checker
-- [ ] **You build:** A CLI that takes a list of URLs, checks them all concurrently with configurable concurrency limit and timeout per request, reports status/latency for each.
-- [ ] **Concepts:** **Why async exists**: I/O-bound concurrency without OS-thread-per-connection cost · `async fn`, `.await`, `Future` trait — futures are **lazy state machines**, not promises that start running immediately (critical difference from JS!) · Why you need a runtime (Tokio) — Rust's std lib ships no executor, by design · `#[tokio::main]`, `tokio::spawn`, tasks vs OS threads (green threads / cooperative scheduling) · `.await` points as the only place a task can be preempted · `reqwest` for HTTP requests · `tokio::sync::Semaphore` for concurrency limiting
-- [ ] **Reality check:** "Futures don't run until polled" — in JS, once you call an async function, it starts executing synchronously up to the first await. In Rust, nothing happens until something polls the future.
-- [ ] **Deliverable:** Async health checker with configurable concurrency and timeout. Table output with status codes + latency.
+- [x] **You build:** A CLI that takes a list of URLs, checks them all concurrently with configurable concurrency limit and timeout per request, reports status/latency for each.
+- [x] **Concepts:** **Why async exists**: I/O-bound concurrency without OS-thread-per-connection cost · `async fn`, `.await`, `Future` trait — futures are **lazy state machines**, not promises that start running immediately (critical difference from JS!) · Why you need a runtime (Tokio) — Rust's std lib ships no executor, by design · `#[tokio::main]`, `tokio::spawn`, tasks vs OS threads (green threads / cooperative scheduling) · `.await` points as the only place a task can be preempted · `reqwest` for HTTP requests · `tokio::sync::Semaphore` for concurrency limiting
+- [x] **Reality check:** "Futures don't run until polled" — in JS, once you call an async function, it starts executing synchronously up to the first await. In Rust, nothing happens until something polls the future.
+- [x] **Deliverable:** Async health checker with configurable concurrency and timeout. Table output with status codes + latency.
 
 ### Day 18 — Build: Rate-Limited Web Scraper
 - [ ] **You build:** A web scraper that crawls a site (or set of sites), extracts data, respects rate limits, handles errors gracefully, outputs structured results. Handles timeouts, retries, cancellation.

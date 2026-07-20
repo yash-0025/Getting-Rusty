@@ -33,6 +33,69 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-21 02:49 IST — [task.md] — Reset for Day 18</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User requested to move to Day 18. Scaffolded the new task checklist for the Rate-Limited Web Scraper project.
+
+```diff
+- # Day 17: Async URL Health Checker
+- - `[x]` Step 1: Scaffold the project and add Tokio/Reqwest dependencies
+- ...
++ # Day 18: Rate-Limited Web Scraper
++ - `[ ]` Step 1: Scaffold `web_scraper` project and add dependencies...
++ ...
+```
+
+</details>
+
+<details>
+<summary>2026-07-21 02:49 IST — [ROADMAP.md / LEARNING.md] — Marked Day 17 Complete</summary>
+
+- **Files:** ROADMAP.md, LEARNING.md
+- **Change type:** Modified
+- **Reason:** User granted permission per Rule 1 to mark Day 17 as complete.
+
+```diff
+- - [ ] **You build:** A CLI that takes a list of URLs...
+- - [ ] **Concepts:** **Why async exists**: I/O-bound concurrency...
+- - [ ] **Reality check:** "Futures don't run until polled"...
+- - [ ] **Deliverable:** Async health checker...
++ - [x] **You build:** A CLI that takes a list of URLs...
++ - [x] **Concepts:** **Why async exists**: I/O-bound concurrency...
++ - [x] **Reality check:** "Futures don't run until polled"...
++ - [x] **Deliverable:** Async health checker...
+```
+
+```diff
++ ### Day 17 — Build: Async URL Health Checker — 2026-07-21
++ **Status:** `[x]` done
++ **What I actually understood:**
++ - **OS Threads vs Green Threads**: OS Threads...
++ - **Futures & Tokio**: Rust `Future`s are "lazy state machines"...
++ ...
+```
+
+</details>
+
+<details>
+<summary>2026-07-21 02:46 IST — [task.md] — Completed Day 17 (Steps 8 & 9)</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User successfully implemented tokio timeout and `Instant` latency measurements. Checked off the final two steps in `task.md`. Day 17 coding is completely finished.
+
+```diff
+- - `[ ]` Step 8: Add per-request timeouts (Rule 14 Verification Catch)
+- - `[ ]` Step 9: Measure and print request latency (Rule 14 Verification Catch)
++ - `[x]` Step 8: Add per-request timeouts (Rule 14 Verification Catch)
++ - `[x]` Step 9: Measure and print request latency (Rule 14 Verification Catch)
+```
+
+</details>
+
+<details>
 <summary>2026-07-20 18:21 IST — [task.md] — Rule 14 Verification Failed (Added missing tasks)</summary>
 
 - **Files:** task.md

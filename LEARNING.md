@@ -336,6 +336,21 @@
 **Mistakes the compiler caught that taught me something:**
 - Missed the unused variable warning for `count`, highlighting Rust's strictness against useless code.
 
+### Day 17 — Build: Async URL Health Checker — 2026-07-21
+**Status:** `[x]` done
+**What I actually understood:**
+- **OS Threads vs Green Threads**: OS Threads (waiters standing by the oven) take 2MB memory each. Async Green Threads (one waiter taking 100 orders) have almost 0 memory overhead, making massive I/O concurrency possible.
+- **Futures & Tokio**: Rust `Future`s are "lazy state machines" (pizza recipes). They do nothing until we explicitly hand them to a chef by calling `.await` inside the Tokio executor.
+- **Concurrency & `tokio::spawn`**: We can launch background tasks concurrently like handing off 100 letters to FedEx. We collect the returned `JoinHandle` "tickets" and `.await` them in a loop.
+- **Rate Limiting (`Semaphore`)**: To prevent crashing our OS or getting IP banned by spawning 10,000 requests, we use a `Semaphore` (Nightclub Bouncer) to limit concurrency to a fixed number of permits.
+- **Timeouts & Latency**: We can wrap a network future in `tokio::time::timeout` to race it against a clock, and measure the speed using `std::time::Instant`.
+**What's still fuzzy / questions I had:**
+- None for now.
+**Code I wrote / project progress:**
+- Built `health_checker`, fetching 6 URLs concurrently with a strict concurrency limit of 2, measuring latency and enforcing 2-second timeouts per request, printing the result to a beautiful CLI table.
+**Mistakes the compiler caught that taught me something:**
+- N/A
+
 ## 🧠 Concept Confidence Tracker
 *(Self-rate honestly — this drives what the AI re-explains or drills. Update anytime, ask the AI to revise the table for you if you want.)*
 

@@ -1280,4 +1280,16 @@
 **Output Summary:** Triggered Rule 14 (End-of-Day Verification). Cross-referenced the `ROADMAP.md` requirements for Day 17 and realized I had failed to implement "configurable timeout per request" and "latency reporting". Stopped the user from moving to Day 18. Updated `task.md` with Steps 8 and 9 to fix this oversight. Logged the catch in `LOGS.md` with explicit diffs. Explained the catch to the user and provided the code for Steps 8 and 9.
 **Outcome / Next Step:** Learner will appreciate the strict adherence to Rule 14, implement the timeout/latency code, and then we will finally close Day 17.
 
+### 2026-07-21 02:46 IST — Prompt #212
+**Prompt:** "Done let's move to next step but please follow all the rules mention in the @[RULES.md]... cargo run..."
+**Context:** User successfully ran the timeout and latency logic, getting the exact expected output (including the simulated timeout on `httpbin.org/delays/5`).
+**Output Summary:** Checked off Steps 8 and 9. Logged the final `task.md` updates with diffs in `LOGS.md` (Rule 2). Mentally verified Rule 14 again (all Day 17 requirements are now met!). Requested explicit permission (Rule 1) to mark Day 17 as complete in `ROADMAP.md` and `LEARNING.md`. Provided the high-level Project Overview for Day 18 (Rule 13) so the user has context while they approve.
+**Outcome / Next Step:** Learner will grant permission to close Day 17, and then we will begin scaffolding the Day 18 Rate-Limited Web Scraper.
+
+### 2026-07-21 02:49 IST — Prompt #213
+**Prompt:** "Yes please mark day 17 as complete with proper rules and checks so that we can move on to day 18"
+**Context:** User granted permission to close out Day 17 and move to Day 18.
+**Output Summary:** Checked off Day 17 in `ROADMAP.md` and added a thorough summary of the learned concepts (Tokio, Semaphores, Green Threads) to `LEARNING.md`. Reset `task.md` with the 7 steps for Day 18 (Rate-Limited Web Scraper). Logged all of this in `LOGS.md` with explicit diff blocks (Rule 2). Explained Step 1 (Scaffolding the new project) to the user per Rules 12 and 11.
+**Outcome / Next Step:** Learner will run `cargo new web_scraper` and update `Cargo.toml`, checking off Step 1.
+
 <!-- New entries appended below -->
