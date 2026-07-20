@@ -1,5 +1,8 @@
 use std::sync::Arc;
+use std::time::{Duration, Instant}; //  Added for measuring latency and defining the timeout
 use tokio::sync::Semaphore;
+use tokio::time::timeout; // For the timeout 
+
 
 
 // #[tokio::main] - This is a procedural macro [an attribute macro] It intercepts the main function before it compiles and injects all the boilerplate code needed to start a multithreaded Green Thread Pool [The tokio runtime]
@@ -72,7 +75,8 @@ async fn main() {
         "https://patelyash.in",
         "https://github.com",
         "https://httpbin.org/status/200",
-        "https://httpbin.org/status/404",
+        "https://httpbin.org/status/404", // This url artificially delays for 5 seconds to test our timeout 
+        "https://httpbin.org/delays/5", // this url artificially delays for 5 seconds to test our timeout 
     ];
 
     // Creates a bouncer with exactly 2 VIP wristbands
@@ -84,8 +88,8 @@ async fn main() {
     let mut handles = vec![];
 
 
-    println!("{:<35} | {}", "URL", "STATUS");
-    println!("{:-<35}-+-{:-<10}","", ""); // Prints a dividing line
+    println!("{:<35} | {:<20} | {}", "URL", "STATUS",  "LATENCY (ms)");
+    println!("{:-<35}-+-{:-<20}-+-{:-<10}","", "", ""); // Prints a dividing line
 
     for url in urls {
         // let sem_clone = Arc::clone(&semaphore) - we creates a new pointer to the exact same Semaphore . We do this inside the loop so that the async move closure takes ownership of the clone not the original .
@@ -98,11 +102,41 @@ async fn main() {
             // ASk the bouncer for a wristband. If none are available sleep here
             let _permit = sem_clone.acquire().await.unwrap();
 
-            let response = reqwest::get(url).await.unwrap();
+            // Start a Stopwatch
+            // Grabs the current CPU clock time
+            let start_time = Instant::now();
+
+            // We wrap our network request in tokio::time::timeout
+            // It takes a Duration (2 seconds) and a Future (the request get)
+
+            // We literally put the reqwest Future inside the timeout Future. The timeout Future races a 2 second timer against the network request. whichever finishes first wins
+            let result = timeout(Duration::from_secs(2), reqwest::get(url)).await;
+
+            // STop the stopwatch
+            // Calculates the difference between now and start_time , formatting it as milliseconds
+            let latency = start_time.elapsed().as_millis();
+
+            // Match on the outer Result (the Timeour)
+            // Because we have a Future inside a Future we have nested Result The outer REsult tells us if the timeout fired. 
+            // The inner Result tells us if the network request failed eg DNS error
+            match result {
+                Ok(network_result) => {
+                    // The request finished before 2 seconds . Now check if the network request itself succeded
+                    match network_result {
+                        Ok(response) => println!("{:<35} | {:<20} | {}ms", url, response.status(), latency),
+                        Err(e) => println!("{:<35} | {:<20} | {}ms", url, "NETWORK ERROR", latency),
+                    }
+                },
+                Err(_) => {
+                    println!("{:<35} | {:<20} | {}ms", url , "TIMEOUT", latency);
+                }
+            }
+
+            // let response = reqwest::get(url).await.unwrap();
 
 
             // The {:<35} syntac tells Rust to left-align the string and pad it with spaces until it is exactly 35 characters wide. This creates a perfect vertical table column
-            println!("{:<35} | {}", url, response.status());
+            // println!("{:<35} | {}", url, response.status());
 
 
             // When the task ends here , _permit goes out of scope and is dropped

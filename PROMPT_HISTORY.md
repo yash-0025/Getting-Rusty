@@ -1274,4 +1274,10 @@
 **Output Summary:** Checked off Step 5. Combined Step 6 (Concept) and Step 7 (Code) for the finale of Day 17. Adhered to Rule 8 by preemptively adding the ELI5 analogy and technical details of Concept 37 (Semaphore) to `EXAMPLES.md`. Logged all changes in `LOGS.md` with explicit `diff` blocks per Rule 2. Explained the concept and provided the final code for `main.rs` per Rules 9/11/12.
 **Outcome / Next Step:** Learner will run the final rate-limited version, completing Day 17!
 
+### 2026-07-20 18:21 IST — Prompt #211
+**Prompt:** "Done let's move to next thing follow all the rules from @[RULES.md] file... "
+**Context:** User successfully ran the Rate Limited (Semaphore) code with table formatting. They asked to move to the next thing (Day 18).
+**Output Summary:** Triggered Rule 14 (End-of-Day Verification). Cross-referenced the `ROADMAP.md` requirements for Day 17 and realized I had failed to implement "configurable timeout per request" and "latency reporting". Stopped the user from moving to Day 18. Updated `task.md` with Steps 8 and 9 to fix this oversight. Logged the catch in `LOGS.md` with explicit diffs. Explained the catch to the user and provided the code for Steps 8 and 9.
+**Outcome / Next Step:** Learner will appreciate the strict adherence to Rule 14, implement the timeout/latency code, and then we will finally close Day 17.
+
 <!-- New entries appended below -->

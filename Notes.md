@@ -973,3 +973,6 @@ reqwest = { version = "0.12.4" }
 - The 901st must wait in line outside until someone leaves and hands back a wristband. A `Semaphore` is the bouncer. The wristband is a permit
 
 - `tokio::sync::Semaphore` is a concurrency primitive. We create it with a fixed number of permits eg - 2 . Before a spawned task is allowed to make its HTTP request , it must call `semaphore.acquire().await` . If all permits are taken, the task gracefully suspends (goes to sleep) without blocking the OS thread . When the request finishes the permit is dropped, waking up the next task in line
+
+- The Goal - We need to wrap our network request in a tokio Timeout so it gives up ifa webstie takes too long . WE also need to measure exactly how long the request took using `std::thread::Instant`.
+- The Outcome - The table will have a new column showing "Latency(ms)" and any request that takes longer than 2 seconds will print a `Timeout` error instead of hanging

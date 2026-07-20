@@ -33,6 +33,24 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-20 18:21 IST — [task.md] — Rule 14 Verification Failed (Added missing tasks)</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User requested to move to the next day. Per Rule 14, AI checked `ROADMAP.md` Day 17 requirements and found that "timeout per request" and "latency" were missing from the implementation. Added Step 8 and Step 9 to `task.md` to ensure completion before closing Day 17.
+
+```diff
+- - `[ ]` Step 6: Concept: Rate Limiting with `Semaphore`
+- - `[ ]` Step 7: Format output into a table
++ - `[x]` Step 6: Concept: Rate Limiting with `Semaphore`
++ - `[x]` Step 7: Format output into a table
++ - `[ ]` Step 8: Add per-request timeouts (Rule 14 Verification Catch)
++ - `[ ]` Step 9: Measure and print request latency (Rule 14 Verification Catch)
+```
+
+</details>
+
+<details>
 <summary>2026-07-20 17:19 IST — [task.md / EXAMPLES.md] — Completed Step 5 and Added Concept 37</summary>
 
 - **Files:** task.md, EXAMPLES.md
