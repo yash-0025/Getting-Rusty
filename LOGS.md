@@ -33,6 +33,31 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-20 17:19 IST — [task.md / EXAMPLES.md] — Completed Step 5 and Added Concept 37</summary>
+
+- **Files:** task.md, EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** User successfully fetched 5 URLs concurrently, finishing Step 5. Checked off Step 5 in `task.md`. Proceeding to Steps 6/7 (Rate Limiting). Added Concept 37 (Semaphore) to `EXAMPLES.md` per Rule 8.
+
+```diff
+- - `[ ]` Step 5: Implement concurrent checking for multiple URLs
++ - `[x]` Step 5: Implement concurrent checking for multiple URLs
+```
+
+```diff
++ ### Concept 37: Rate Limiting with `Semaphore`
++ 
++ **The Analogy: The Nightclub Bouncer**
++ Imagine a nightclub with a strict bouncer. The club only has a capacity of 100 people...
++ 
++ **Rust Context (Technical Explanation):**
++ If you spawn 10,000 concurrent network requests using `tokio::spawn`, you might crash your home router...
++ `tokio::sync::Semaphore` is a concurrency primitive...
+```
+
+</details>
+
+<details>
 <summary>2026-07-20 15:15 IST — [task.md / EXAMPLES.md] — Completed Step 4 and Added Concept 36</summary>
 
 - **Files:** task.md, EXAMPLES.md

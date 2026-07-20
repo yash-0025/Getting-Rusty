@@ -434,3 +434,15 @@ To actually execute the Future, it must be polled by an executor. We use the `to
 
 **Rust Context (Technical Explanation):**
 When you call `tokio::spawn(async { ... })`, you are giving a Future to the Tokio runtime and saying "start running this in the background immediately." It returns a `JoinHandle`. A `JoinHandle` is just a ticket that you can `.await` later to get the final result. If you spawn 100 tasks using a `for` loop, they all start executing concurrently across Tokio's thread pool. You can then collect all 100 tickets into a `Vec<JoinHandle>`, and loop through them to `.await` their results. This is how you achieve massive parallelism in Rust without OS thread overhead.
+
+---
+
+### Concept 37: Rate Limiting with `Semaphore`
+
+**The Analogy: The Nightclub Bouncer**
+Imagine a nightclub with a strict bouncer. The club only has a capacity of 100 people. If you want to go in, the bouncer gives you a VIP wristband. When you leave, you give the wristband back. If 1,000 people show up at once, the first 100 get wristbands and go inside immediately. The 901st person must wait in line outside until someone leaves and hands back a wristband. 
+A `Semaphore` is the bouncer. The wristband is a "permit".
+
+**Rust Context (Technical Explanation):**
+If you spawn 10,000 concurrent network requests using `tokio::spawn`, you might crash your home router, get your IP banned by the target server, or exhaust your OS's file descriptors. We need to rate limit our concurrency. 
+`tokio::sync::Semaphore` is a concurrency primitive. You create it with a fixed number of permits (e.g., 100) wrapped in an `Arc`. Before a spawned task is allowed to make its HTTP request, it must call `semaphore.acquire().await`. If all 100 permits are taken, the task gracefully suspends (goes to sleep) without blocking the thread. When the request finishes, the permit is automatically dropped and returned to the Semaphore, waking up the next task in line.

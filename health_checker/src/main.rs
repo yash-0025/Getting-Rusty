@@ -1,7 +1,10 @@
+use std::sync::Arc;
+use tokio::sync::Semaphore;
+
 
 // #[tokio::main] - This is a procedural macro [an attribute macro] It intercepts the main function before it compiles and injects all the boilerplate code needed to start a multithreaded Green Thread Pool [The tokio runtime]
 // Without this we cannot use the .await keyword
-#[tokio::main]
+// #[tokio::main]
 // async fn main() - We added the async keyword to main function. This allows us to use .await inside the function body. The macro above makes this valid
 /* async fn main() {
     println!("Tokio runtime has started~");
@@ -22,7 +25,7 @@
 }
  */
 
-
+/* 
  async fn main() {
     
 
@@ -60,3 +63,57 @@
         handle.await.unwrap();
     }
  }
+  */
+
+#[tokio::main]
+async fn main() {
+    let urls = vec![
+        "https://google.com",
+        "https://patelyash.in",
+        "https://github.com",
+        "https://httpbin.org/status/200",
+        "https://httpbin.org/status/404",
+    ];
+
+    // Creates a bouncer with exactly 2 VIP wristbands
+    // We wrap it in ARc so multiple tasks can share ownership of the bouncer
+
+    // Arc::new(Semaphore::new(2)) - We use Arc Atomic Reference Counted pointer because the Semaphore needs to be shared across many concurrent background tasks
+    let semaphore = Arc::new(Semaphore::new(2));
+
+    let mut handles = vec![];
+
+
+    println!("{:<35} | {}", "URL", "STATUS");
+    println!("{:-<35}-+-{:-<10}","", ""); // Prints a dividing line
+
+    for url in urls {
+        // let sem_clone = Arc::clone(&semaphore) - we creates a new pointer to the exact same Semaphore . We do this inside the loop so that the async move closure takes ownership of the clone not the original .
+        let sem_clone = Arc::clone(&semaphore);
+
+        let handle = tokio::spawn(async move {
+
+            // let _permit = sem_clone.acquire().await.unwrap() - This is where the task stops and waits in line. The _permit variable holds the wristband . We use the _ prefix because we never actually use the permit variable in our code its mere existence in memory is what keeps the slot reserved
+
+            // ASk the bouncer for a wristband. If none are available sleep here
+            let _permit = sem_clone.acquire().await.unwrap();
+
+            let response = reqwest::get(url).await.unwrap();
+
+
+            // The {:<35} syntac tells Rust to left-align the string and pad it with spaces until it is exactly 35 characters wide. This creates a perfect vertical table column
+            println!("{:<35} | {}", url, response.status());
+
+
+            // When the task ends here , _permit goes out of scope and is dropped
+            // this automatically returns the wristband to the bouncer
+        });
+
+        handles.push(handle);
+
+    }
+
+    for handle in handles {
+        handle.await.unwrap();
+    }
+}

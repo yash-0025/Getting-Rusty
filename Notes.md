@@ -954,7 +954,7 @@ reqwest = { version = "0.12.4" }
 - The Goal : Checking one website is nice but we need to check 100 concurrently . WE are going to create a list of URLs and launch an async network request for every single one of them at the exact same time.
 - The Outcome : When we run the code, it will fetch 5 different website concurrently. Instead of taking 5 seconds (1 second per site sequentially) it will finish all of them in ~1 second total
 
-- `Concept 5 - Implement concurrent checking for multiple URLs`
+- `Concept 3 - Implement concurrent checking for multiple URLs`
 - Mailing 100 letters 
 - 1. Synchronous - When we write one letter, walk to the post office, drop it off walk home and start the next letter. This takes weeks.
 - 2. Async(Tokio Tasks) - We write all 100 letters, put them in a big pile on our desk and call FedEx to pick them all up at once. They are all delivered at the exact same time. Calling `tokio::spawn` is like handing one letter to the Fedx guy.
@@ -962,3 +962,14 @@ reqwest = { version = "0.12.4" }
 - When we call `tokio::spawn(async { ... } )` we are giving a Future to the Tokio runtime and saying start running this in background immediately. It returns a `JoinHandle` .
 - A `JoinHandle` is just a ticket that we can .await later to get the final result. If we spawn 100 tasks in loop they all start executing concurrently across Tokios thread pool. 
 - WE can collect all 100 tickets into a Vec<JoinHandle> and loop through them to .await their results
+
+- What if we had 10,000 URLs instead of 5?
+- The Goal - If we run 10000 concurrent network request using tokio::spawn, we might crash our home router , get our IP banned by the target server or exhaust our OS file descriptors.
+- We need to add Rate Limiting to our loop. At the same time we will format our output into a clean, professional CLI table
+- The Outcome - We will use a Semaphore to limit concurrency to exactly 2 active connections at a time. The program will fetch the URLs in small batches of 2 and print the results cleanly
+
+- `Concept 4 - Rate Limiting with `**Semaphore**` and Table Formating`
+- The NightClub Bouncer - Imagine a night club with a strict bouncer. The club only has a capacity of 100 people . If we want to go in, the bouncer gives us a VIP wristband. When we leave , we give the wristband back. If 1000 people show up at once the first 100 get wristband and go inside immediately.
+- The 901st must wait in line outside until someone leaves and hands back a wristband. A `Semaphore` is the bouncer. The wristband is a permit
+
+- `tokio::sync::Semaphore` is a concurrency primitive. We create it with a fixed number of permits eg - 2 . Before a spawned task is allowed to make its HTTP request , it must call `semaphore.acquire().await` . If all permits are taken, the task gracefully suspends (goes to sleep) without blocking the OS thread . When the request finishes the permit is dropped, waking up the next task in line

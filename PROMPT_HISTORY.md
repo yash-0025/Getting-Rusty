@@ -1268,4 +1268,10 @@
 **Output Summary:** Checked off Step 4 in `task.md`. Proceeded to Step 5 (Concurrent Tasks). Adhered to Rule 8 by preemptively adding the ELI5 analogy and technical details of Concept 36 (`tokio::spawn`) to `EXAMPLES.md` using the file replacement tool. Logged all changes in `LOGS.md` with explicit `diff` blocks per Rule 2. Explained the concept to the user and provided the code for `main.rs` per Rules 9/11/12.
 **Outcome / Next Step:** Learner will digest Concept 36, update `main.rs` with `tokio::spawn`, and run the code to see 5 URLs fetched concurrently.
 
+### 2026-07-20 17:19 IST — Prompt #210
+**Prompt:** "done. Move to next step and follow all the rules from @[Notes.md] . cargo run..."
+**Context:** User successfully ran the concurrent fetch logic in Step 5.
+**Output Summary:** Checked off Step 5. Combined Step 6 (Concept) and Step 7 (Code) for the finale of Day 17. Adhered to Rule 8 by preemptively adding the ELI5 analogy and technical details of Concept 37 (Semaphore) to `EXAMPLES.md`. Logged all changes in `LOGS.md` with explicit `diff` blocks per Rule 2. Explained the concept and provided the final code for `main.rs` per Rules 9/11/12.
+**Outcome / Next Step:** Learner will run the final rate-limited version, completing Day 17!
+
 <!-- New entries appended below -->
