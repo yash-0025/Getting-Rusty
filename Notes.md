@@ -951,3 +951,14 @@ reqwest = { version = "0.12.4" }
 - The Goal : We are going to use the   `reqwest` library to make a single HTTP GET request to test website (https://httpbin.org/status/200). 
 - The Outcome : When we run the code , our program will reach out to the internet , pause execution while it waits for a response and then print status: 200 OK to our terminal to prove it worked
 
+- The Goal : Checking one website is nice but we need to check 100 concurrently . WE are going to create a list of URLs and launch an async network request for every single one of them at the exact same time.
+- The Outcome : When we run the code, it will fetch 5 different website concurrently. Instead of taking 5 seconds (1 second per site sequentially) it will finish all of them in ~1 second total
+
+- `Concept 5 - Implement concurrent checking for multiple URLs`
+- Mailing 100 letters 
+- 1. Synchronous - When we write one letter, walk to the post office, drop it off walk home and start the next letter. This takes weeks.
+- 2. Async(Tokio Tasks) - We write all 100 letters, put them in a big pile on our desk and call FedEx to pick them all up at once. They are all delivered at the exact same time. Calling `tokio::spawn` is like handing one letter to the Fedx guy.
+
+- When we call `tokio::spawn(async { ... } )` we are giving a Future to the Tokio runtime and saying start running this in background immediately. It returns a `JoinHandle` .
+- A `JoinHandle` is just a ticket that we can .await later to get the final result. If we spawn 100 tasks in loop they all start executing concurrently across Tokios thread pool. 
+- WE can collect all 100 tickets into a Vec<JoinHandle> and loop through them to .await their results
