@@ -423,3 +423,14 @@ Tokio (the async runtime) uses **Green Threads** (Tasks) via `tokio::spawn`. Tas
 **Rust Context (Technical Explanation):**
 Because Rust has no built-in runtime (unlike Node.js or the browser), calling an `async fn` does nothing on its own; it just compiles into a state machine describing the work. 
 To actually execute the Future, it must be polled by an executor. We use the `tokio` runtime for this. When you decorate your main function with the `#[tokio::main]` macro, it secretly rewrites your `main` function into a synchronous function that builds the Tokio runtime, blocks the main thread, and executes your async code inside it. When you call `.await` inside that runtime, you are yielding control back to Tokio, saying "I can't make progress until this I/O finishes, go run another task while I wait."
+
+---
+
+### Concept 36: Concurrent Tasks in Tokio (`tokio::spawn`)
+
+**The Analogy: Mailing 100 Letters**
+* **Synchronous:** You write one letter, walk to the post office, drop it off, walk home, and start the next letter. This takes weeks.
+* **Async (Tokio Tasks):** You write all 100 letters, put them in a big pile on your desk, and call FedEx to pick them all up at once. They are all delivered at the exact same time. Calling `tokio::spawn` is like handing one letter to the FedEx guy.
+
+**Rust Context (Technical Explanation):**
+When you call `tokio::spawn(async { ... })`, you are giving a Future to the Tokio runtime and saying "start running this in the background immediately." It returns a `JoinHandle`. A `JoinHandle` is just a ticket that you can `.await` later to get the final result. If you spawn 100 tasks using a `for` loop, they all start executing concurrently across Tokio's thread pool. You can then collect all 100 tickets into a `Vec<JoinHandle>`, and loop through them to `.await` their results. This is how you achieve massive parallelism in Rust without OS thread overhead.

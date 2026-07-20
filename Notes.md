@@ -947,3 +947,7 @@ reqwest = { version = "0.12.4" }
 
 - Because Rust has no built in runtime (unlike Node.js or the browser) calling an async fn does nothing on its own, it just compiles into a state machine describing the work.
 - TO actually execute the future , it must be polled by an executor. We use the `tokio` runtime for this. When we decorate our main function wit the `[#tokio::main]` macro it secretly rewrites our main function into a synchronomous function that builds the tokio runtime, blocks the main thread and execute our async code inside it. when we call .await inside that runtime we are yielding control back to Tokio saying I can't make progress until this I/O finishes go run another task while i wait
+
+- The Goal : We are going to use the   `reqwest` library to make a single HTTP GET request to test website (https://httpbin.org/status/200). 
+- The Outcome : When we run the code , our program will reach out to the internet , pause execution while it waits for a response and then print status: 200 OK to our terminal to prove it worked
+

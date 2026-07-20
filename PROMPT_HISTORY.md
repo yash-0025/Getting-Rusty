@@ -1256,4 +1256,16 @@
 **Output Summary:** Apologized for silently abandoning the diff format in `LOGS.md` and violating Rule 2. Committed to providing explicit `diff` blocks inside the collapsible logs for all future file edits.
 **Outcome / Next Step:** Learner will finish Step 3 (Concept 35 and `main.rs` update) and we will move to Step 4.
 
+### 2026-07-20 02:25 IST — Prompt #208
+**Prompt:** "Done . Followin all the rules from @[RULES.md] let's move to next step..."
+**Context:** User successfully ran the Tokio runtime with `cargo run`.
+**Output Summary:** Checked off Step 3 in `task.md`. Logged the change with a proper `diff` block in `LOGS.md` to adhere to Rule 2. Introduced Step 4 (Single Async Request). Broke down the `.await` and `.unwrap()` syntax in detail per Rules 9/11. Explained the goal and outcome per Rule 12.
+**Outcome / Next Step:** Learner will write the `reqwest::get` code in `main.rs`, run it, and see their first async network request complete.
+
+### 2026-07-20 15:15 IST — Prompt #209
+**Prompt:** "Done . Let's move to nextstep but follow all the rules from @[RULES.md] . Compiling reqwest..."
+**Context:** User successfully ran the async request and got a 503 from `httpbin.org`.
+**Output Summary:** Checked off Step 4 in `task.md`. Proceeded to Step 5 (Concurrent Tasks). Adhered to Rule 8 by preemptively adding the ELI5 analogy and technical details of Concept 36 (`tokio::spawn`) to `EXAMPLES.md` using the file replacement tool. Logged all changes in `LOGS.md` with explicit `diff` blocks per Rule 2. Explained the concept to the user and provided the code for `main.rs` per Rules 9/11/12.
+**Outcome / Next Step:** Learner will digest Concept 36, update `main.rs` with `tokio::spawn`, and run the code to see 5 URLs fetched concurrently.
+
 <!-- New entries appended below -->

@@ -33,6 +33,45 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-20 15:15 IST — [task.md / EXAMPLES.md] — Completed Step 4 and Added Concept 36</summary>
+
+- **Files:** task.md, EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** User completed Step 4 (Single Async Request). Checked off Step 4 in `task.md`. Proceeding to Step 5 (Concurrent Tasks). Added Concept 36 (`tokio::spawn`) to `EXAMPLES.md` per Rule 8.
+
+```diff
+- - `[ ]` Step 4: Implement a single async HTTP request with `reqwest`
++ - `[x]` Step 4: Implement a single async HTTP request with `reqwest`
+```
+
+```diff
++ ### Concept 36: Concurrent Tasks in Tokio (`tokio::spawn`)
++ 
++ **The Analogy: Mailing 100 Letters**
++ * **Synchronous:** You write one letter, walk to the post office...
++ * **Async (Tokio Tasks):** You write all 100 letters, put them in a big pile...
++ 
++ **Rust Context (Technical Explanation):**
++ When you call `tokio::spawn(async { ... })`, you are giving a Future to the Tokio runtime...
+```
+
+</details>
+
+<details>
+<summary>2026-07-20 02:25 IST — [task.md] — Completed Step 3</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User completed Step 3 (Concept: Futures and Tokio Runtime) and successfully ran `cargo run` with the Tokio macro. Checked off Step 3 in `task.md`.
+
+```diff
+- - `[ ]` Step 3: Concept: Futures and the Tokio Runtime
++ - `[x]` Step 3: Concept: Futures and the Tokio Runtime
+```
+
+</details>
+
+<details>
 <summary>2026-07-19 22:35 IST — [PROMPT_HISTORY.md] — Logged Rule 2 Violation</summary>
 
 - **Files:** PROMPT_HISTORY.md
