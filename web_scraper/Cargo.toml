@@ -1,0 +1,14 @@
+[package]
+name = "web_scraper"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+# The async runtime
+tokio = { version = "1.37.0", features = ["full"] }
+
+# The async HTTP client (to fetch HTML)
+reqwest = "0.12"
+
+# A library that lets us use CSS selectors to parse HTML scraper
+scraper = "0.19"

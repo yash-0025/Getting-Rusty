@@ -976,3 +976,11 @@ reqwest = { version = "0.12.4" }
 
 - The Goal - We need to wrap our network request in a tokio Timeout so it gives up ifa webstie takes too long . WE also need to measure exactly how long the request took using `std::thread::Instant`.
 - The Outcome - The table will have a new column showing "Latency(ms)" and any request that takes longer than 2 seconds will print a `Timeout` error instead of hanging
+
+
+<h1>Day 18</h1>
+
+- **Rate Limited Web Scraper**
+- What we are building : A new CLI tool called web_scraper. We are going to take the async networking foundation we just learned and weaponize them to scrape data from website. It will handle retries [if a site drops a connection], respect rate limits and output(the scraped data into structured JSON or CSV)
+- The Final Outdome : A program that gracefully crawls multiple websites pulls specific HTML data out of them, recovers from network failures automatically using  retry logic and dumps the results into a file.
+- Why we are building it (The Architectural Shift) : Right now , our network requests are fire and forget . If `reqwest::get()` fails, we just print `NETWORK_ERROR` and give up. IN a production environment, network requetfail constantly for random reasons. On Day 18 we learn to use `tokio::select!` and `tokio::time::sleep` to built Resilient Systems that automatically retry failed operations and we will learn how to parse HTML in Rust
