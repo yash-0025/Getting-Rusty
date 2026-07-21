@@ -984,3 +984,15 @@ reqwest = { version = "0.12.4" }
 - What we are building : A new CLI tool called web_scraper. We are going to take the async networking foundation we just learned and weaponize them to scrape data from website. It will handle retries [if a site drops a connection], respect rate limits and output(the scraped data into structured JSON or CSV)
 - The Final Outdome : A program that gracefully crawls multiple websites pulls specific HTML data out of them, recovers from network failures automatically using  retry logic and dumps the results into a file.
 - Why we are building it (The Architectural Shift) : Right now , our network requests are fire and forget . If `reqwest::get()` fails, we just print `NETWORK_ERROR` and give up. IN a production environment, network requetfail constantly for random reasons. On Day 18 we learn to use `tokio::select!` and `tokio::time::sleep` to built Resilient Systems that automatically retry failed operations and we will learn how to parse HTML in Rust
+
+- The Goal : We are going to build an async function that tries to fetch a website. IF the website is donw instead fo crashing it will wait exactly 3 seconds , and then try agian. 
+- It will do this upto 3 times before finally giving up
+- The OUtCOME : We will test this by intentionally providing a broken URL. We will see the program fail wait 3 seconds fail again wait 3 second fail a final time and then gracefully exit
+
+- `Concept 1 - The Retry Loop and The sleep anti-pattern`
+- WAiting for the Oven - WE want to bake a cake but we need to wait 30 minutes for the oven to preheat
+- `Anit-pattern [std::thread::sleep]` - We literally stand perfectly still in fron of the oven for 30 minutes . We block anyone else in the kitches from using the sink or the fridge
+- `Pattern [tokio::time::sleep]` - We set a kitchen timer for 30 minutes , leave the kitchen and go fold laundry. When the timer goes off we come back.
+
+- When scraping websites , we often need to implement a retry loop (if the connection fails wait 3 seconds and try again ) . If we use the standard `std::thread::sleep()` inside an `async fn` , we are committing a cardinal sin:Starving the Runtime. 
+- Because Tokio multiplexes hundreds of tasks onto a single OS thread , blocking that OS thread with a synchronous sleep means none of the other tasks on that thread can make progress for 3 seconds . We must always use `tokio::time::sleep(...).await`. This tells Tokio to park the current task for 3 seconds and immediately run other tasks on that thread in the meantime

@@ -446,3 +446,17 @@ A `Semaphore` is the bouncer. The wristband is a "permit".
 **Rust Context (Technical Explanation):**
 If you spawn 10,000 concurrent network requests using `tokio::spawn`, you might crash your home router, get your IP banned by the target server, or exhaust your OS's file descriptors. We need to rate limit our concurrency. 
 `tokio::sync::Semaphore` is a concurrency primitive. You create it with a fixed number of permits (e.g., 100) wrapped in an `Arc`. Before a spawned task is allowed to make its HTTP request, it must call `semaphore.acquire().await`. If all 100 permits are taken, the task gracefully suspends (goes to sleep) without blocking the thread. When the request finishes, the permit is automatically dropped and returned to the Semaphore, waking up the next task in line.
+
+---
+
+### Concept 38: Resilient Loops & `tokio::time::sleep` (Anti-Pattern)
+
+**The Analogy: Waiting for the Oven**
+You want to bake a cake, but you need to wait 30 minutes for the oven to preheat.
+* **Anti-pattern (`std::thread::sleep`):** You literally stand perfectly still in front of the oven for 30 minutes. You block anyone else in the kitchen from using the sink or the fridge.
+* **Pattern (`tokio::time::sleep`):** You set a kitchen timer for 30 minutes, leave the kitchen, and go fold laundry. When the timer goes off, you come back.
+
+**Rust Context (Technical Explanation):**
+When scraping websites, you often need to implement a "retry loop" (if the connection fails, wait 3 seconds and try again). 
+If you use the standard `std::thread::sleep(Duration::from_secs(3))` inside an `async fn`, you are committing a cardinal sin: **Starving the Runtime**. Because Tokio multiplexes hundreds of tasks onto a single OS thread, blocking that OS thread with a synchronous sleep means *none* of the other tasks on that thread can make progress for 3 seconds. 
+You must always use `tokio::time::sleep(Duration::from_secs(3)).await`. This tells Tokio to park the current task for 3 seconds and immediately run other tasks on that thread in the meantime.

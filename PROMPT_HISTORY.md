@@ -1292,4 +1292,10 @@
 **Output Summary:** Checked off Day 17 in `ROADMAP.md` and added a thorough summary of the learned concepts (Tokio, Semaphores, Green Threads) to `LEARNING.md`. Reset `task.md` with the 7 steps for Day 18 (Rate-Limited Web Scraper). Logged all of this in `LOGS.md` with explicit diff blocks (Rule 2). Explained Step 1 (Scaffolding the new project) to the user per Rules 12 and 11.
 **Outcome / Next Step:** Learner will run `cargo new web_scraper` and update `Cargo.toml`, checking off Step 1.
 
+### 2026-07-21 13:38 IST — Prompt #214
+**Prompt:** "Done , Lets move to next step follow all the rules from @[RULES.md]"
+**Context:** User successfully scaffolded the `web_scraper` project and committed to git.
+**Output Summary:** Checked off Step 1 in `task.md`. Proceeded to combine Step 2 (Concept) and Step 3 (Retry Loop Code). Adhered to Rule 8 by preemptively adding the ELI5 analogy and technical details of Concept 38 (`tokio::time::sleep` Anti-Pattern) to `EXAMPLES.md` using the file replacement tool. Logged all changes in `LOGS.md` with explicit `diff` blocks per Rule 2. Explained the concept to the user and provided the code for `main.rs` per Rules 9/11/12.
+**Outcome / Next Step:** Learner will digest Concept 38, update `web_scraper/src/main.rs` with the retry loop, and run the code to see it gracefully recover from network errors.
+
 <!-- New entries appended below -->

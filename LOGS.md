@@ -33,6 +33,31 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-21 13:38 IST — [task.md / EXAMPLES.md] — Completed Step 1 and Added Concept 38</summary>
+
+- **Files:** task.md, EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** User completed Step 1 (Project Scaffolding). Checked off Step 1 in `task.md`. Proceeding to Steps 2/3 (Retry Loops). Added Concept 38 (`tokio::time::sleep` Anti-Pattern) to `EXAMPLES.md` per Rule 8.
+
+```diff
+- - `[ ]` Step 1: Scaffold `web_scraper` project and add dependencies (`tokio`, `reqwest`, `scraper`)
++ - `[x]` Step 1: Scaffold `web_scraper` project and add dependencies (`tokio`, `reqwest`, `scraper`)
+```
+
+```diff
++ ### Concept 38: Resilient Loops & `tokio::time::sleep` (Anti-Pattern)
++ 
++ **The Analogy: Waiting for the Oven**
++ You want to bake a cake, but you need to wait 30 minutes for the oven to preheat...
++ 
++ **Rust Context (Technical Explanation):**
++ When scraping websites, you often need to implement a "retry loop"...
++ If you use the standard `std::thread::sleep`... you are committing a cardinal sin: **Starving the Runtime**.
+```
+
+</details>
+
+<details>
 <summary>2026-07-21 02:49 IST — [task.md] — Reset for Day 18</summary>
 
 - **Files:** task.md
