@@ -1298,4 +1298,10 @@
 **Output Summary:** Checked off Step 1 in `task.md`. Proceeded to combine Step 2 (Concept) and Step 3 (Retry Loop Code). Adhered to Rule 8 by preemptively adding the ELI5 analogy and technical details of Concept 38 (`tokio::time::sleep` Anti-Pattern) to `EXAMPLES.md` using the file replacement tool. Logged all changes in `LOGS.md` with explicit `diff` blocks per Rule 2. Explained the concept to the user and provided the code for `main.rs` per Rules 9/11/12.
 **Outcome / Next Step:** Learner will digest Concept 38, update `web_scraper/src/main.rs` with the retry loop, and run the code to see it gracefully recover from network errors.
 
+### 2026-07-21 20:56 IST — Prompt #215
+**Prompt:** "Done . Let;s move to next step don't forget to follow all the rules from @[RULES.md]"
+**Context:** User successfully ran the retry loop logic and watched it fail 3 times on a bad URL before gracefully exiting.
+**Output Summary:** Checked off Steps 2 and 3 in `task.md`. Proceeded to combine Step 4 (Concept) and Step 5 (HTML Parsing Code). Adhered to Rule 8 by preemptively adding the ELI5 analogy and technical details of Concept 39 (`scraper` library) to `EXAMPLES.md` using the file replacement tool. Logged all changes in `LOGS.md` with explicit `diff` blocks per Rule 2. Explained the concept to the user and provided the code for `main.rs` per Rules 9/11/12.
+**Outcome / Next Step:** Learner will digest Concept 39, update `web_scraper/src/main.rs` with the `scraper` logic, and run the code to extract the `<title>` from `rust-lang.org`.
+
 <!-- New entries appended below -->

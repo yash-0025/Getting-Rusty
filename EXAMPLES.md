@@ -460,3 +460,15 @@ You want to bake a cake, but you need to wait 30 minutes for the oven to preheat
 When scraping websites, you often need to implement a "retry loop" (if the connection fails, wait 3 seconds and try again). 
 If you use the standard `std::thread::sleep(Duration::from_secs(3))` inside an `async fn`, you are committing a cardinal sin: **Starving the Runtime**. Because Tokio multiplexes hundreds of tasks onto a single OS thread, blocking that OS thread with a synchronous sleep means *none* of the other tasks on that thread can make progress for 3 seconds. 
 You must always use `tokio::time::sleep(Duration::from_secs(3)).await`. This tells Tokio to park the current task for 3 seconds and immediately run other tasks on that thread in the meantime.
+
+---
+
+### Concept 39: Parsing HTML with `scraper`
+
+**The Analogy: The Index and the Librarian**
+Imagine you have a 1,000-page encyclopedia (Raw HTML) and you only want to read about "Lions". 
+Parsing is like looking at the Index at the back of the book to find exactly which page "Lions" is on.
+A CSS Selector is like handing a librarian a sticky note that says "Give me all the bold text on page 42." The librarian (the `scraper` crate) does all the hard work of reading the pages and handing you back exactly the sentences you asked for.
+
+**Rust Context (Technical Explanation):**
+When you download HTML via `reqwest`, it is just a giant `String`. Rust doesn't know what a `<div>` or a `<title>` is. The `scraper` crate takes that `String` and builds a "Document Tree" (DOM) in memory using `Html::parse_document(&html)`. You then compile a CSS `Selector` (like `h1` or `.title`), and ask the Document Tree to hand you an Iterator of all the HTML elements that match that selector.

@@ -33,6 +33,32 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-21 20:56 IST — [task.md / EXAMPLES.md] — Completed Steps 2 & 3 and Added Concept 39</summary>
+
+- **Files:** task.md, EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** User completed the retry loop. Checked off Steps 2 & 3 in `task.md`. Proceeding to Steps 4 & 5 (HTML Parsing). Added Concept 39 (`scraper`) to `EXAMPLES.md` per Rule 8.
+
+```diff
+- - `[ ]` Step 2: Concept: Racing Futures with `tokio::select!` and retries
+- - `[ ]` Step 3: Implement the basic network retry loop
++ - `[x]` Step 2: Concept: Racing Futures with `tokio::select!` and retries
++ - `[x]` Step 3: Implement the basic network retry loop
+```
+
+```diff
++ ### Concept 39: Parsing HTML with `scraper`
++ 
++ **The Analogy: The Index and the Librarian**
++ Imagine you have a 1,000-page encyclopedia (Raw HTML) and you only want to read about "Lions"...
++ 
++ **Rust Context (Technical Explanation):**
++ When you download HTML via `reqwest`, it is just a giant `String`...
+```
+
+</details>
+
+<details>
 <summary>2026-07-21 13:38 IST — [task.md / EXAMPLES.md] — Completed Step 1 and Added Concept 38</summary>
 
 - **Files:** task.md, EXAMPLES.md

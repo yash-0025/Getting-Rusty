@@ -996,3 +996,12 @@ reqwest = { version = "0.12.4" }
 
 - When scraping websites , we often need to implement a retry loop (if the connection fails wait 3 seconds and try again ) . If we use the standard `std::thread::sleep()` inside an `async fn` , we are committing a cardinal sin:Starving the Runtime. 
 - Because Tokio multiplexes hundreds of tasks onto a single OS thread , blocking that OS thread with a synchronous sleep means none of the other tasks on that thread can make progress for 3 seconds . We must always use `tokio::time::sleep(...).await`. This tells Tokio to park the current task for 3 seconds and immediately run other tasks on that thread in the meantime
+
+- Our network request are now virtually bulletproof. They will keep trying until the website comes back online , but they won't block the Rest of our app from doing other things
+- The Goal :Right now when a request succeeds we just print Downloaded 54321 bytes. That's useless data. We want to actually read the HTML, find the <title> tag and extract the text inside of it .
+- The Outcome : We will write a function that takes the raw HMTL string, builds, DOM tree and uses a CSS selector to find the <title> tag. When we run it, it will print exactly Title: Rust Programming Language instead of the whole page
+
+- `Concept 2 - Parsing HTML in Rust`
+- `The Index and the Librarian` : Imagine we have a 1000 page encyclopedia RAW HTML and we only want to read about "Lions". Parsing is like looking at the index at the back of the book to find exactly which page "Lions" is on. A CSS Selector is like handling a librarian a sticky note that says "Give me all the bold text on page 42". The librarian (the `scrapper`)crate does all the hard work of reading the pages and handing us back exactly the sentences we asked for 
+- When we download HTML via reqwest, it is just a giant String, Rust doesn't know what a <div> or a <title> is. The scrapper crate takes that String and builds a Document Tree DOM in memory using `Html::parse_document(&html)`. WE then compile a CSS Selector like h1 or .title and ask the Document Tree to hand us an iterator of all the HTML elements that match that selector
+
