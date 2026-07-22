@@ -1334,4 +1334,16 @@
 **Output Summary:** Checked off Day 18 in `ROADMAP.md` and added a thorough summary of the learned concepts (HTML parsing, Structured Output, Instant Cancellation via drop) to `LEARNING.md`. Reset `task.md` with the 6 steps for Day 19 (Dependency Injection). Logged all of this in `LOGS.md` with explicit diff blocks (Rule 2). Explained Step 1 (Scaffolding the new project) to the user per Rules 12 and 11.
 **Outcome / Next Step:** Learner will run `cargo new payment_processor`, checking off Step 1.
 
+### 2026-07-22 17:17 IST — Prompt #221
+**Prompt:** "Need to add one more rules to respected files as we are now moving t o better projects i want you to add a rule that whever we start a project we should understand the architecture, flow and about the system design of the project like how , why, what and all that things it make us comfortable while building project from now on right"
+**Context:** User explicitly requested a new governance rule to enforce deep architectural breakdowns before starting projects.
+**Output Summary:** Created and appended Rule 15 (System Design & Architecture Deep Dive) to `RULES.md`. Logged the change in `LOGS.md` with diff blocks (Rule 2). Immediately enforced Rule 15 by providing a thorough architectural breakdown (The "Why, What, and How") of the Day 19 Mockable Payment Pipeline project. Reiterated Step 1 (Scaffolding).
+**Outcome / Next Step:** Learner will digest the architectural overview, scaffold the `payment_processor` project, and then we will write the code for Traits.
+
+### 2026-07-22 17:19 IST — Prompt #222
+**Prompt:** "You forget to add the rules in the @[ROADMAP.md] first just do that"
+**Context:** User pointed out that Governance Rule 15 was added to `RULES.md` but not to the mirror list at the top of `ROADMAP.md`.
+**Output Summary:** Immediately corrected the oversight by appending Rule 15 to the Governance block in `ROADMAP.md`. Logged the change in `LOGS.md` with diff blocks (Rule 2). Thanked the user for their sharp eye and reiterated that we are ready for them to scaffold the project for Day 19.
+**Outcome / Next Step:** Learner will run `cargo new payment_processor`.
+
 <!-- New entries appended below -->

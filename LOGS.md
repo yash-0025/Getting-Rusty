@@ -33,6 +33,36 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-22 17:19 IST — [ROADMAP.md] — Added Rule 15</summary>
+
+- **Files:** ROADMAP.md
+- **Change type:** Modified
+- **Reason:** User rightly pointed out that the new Governance Rule 15 (System Design & Architecture Deep Dive) also needed to be appended to the rules block at the top of the `ROADMAP.md` syllabus, to match `RULES.md`.
+
+```diff
+- 14. **End-of-Day Verification:** Every time a day is marked as complete...
++ 14. **End-of-Day Verification:** Every time a day is marked as complete...
++ 15. **System Design & Architecture Deep Dive:** Whenever starting a new project, the AI MUST explain the underlying system design, the architecture flow, and the "how, why, and what" of the system as a whole...
+```
+
+</details>
+
+<details>
+<summary>2026-07-22 17:17 IST — [RULES.md] — Added Rule 15</summary>
+
+- **Files:** RULES.md
+- **Change type:** Modified
+- **Reason:** User explicitly requested a new rule to ensure deep architectural and system design breakdowns are provided at the start of every project.
+
+```diff
+- 14. **End-of-Day Verification:** Every time a day is marked as complete...
++ 14. **End-of-Day Verification:** Every time a day is marked as complete...
++ 15. **System Design & Architecture Deep Dive:** Whenever starting a new project, the AI MUST explain the underlying system design, the architecture flow, and the "how, why, and what" of the system as a whole...
+```
+
+</details>
+
+<details>
 <summary>2026-07-22 17:12 IST — [task.md] — Reset for Day 19</summary>
 
 - **Files:** task.md
