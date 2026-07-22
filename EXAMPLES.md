@@ -472,3 +472,13 @@ A CSS Selector is like handing a librarian a sticky note that says "Give me all 
 
 **Rust Context (Technical Explanation):**
 When you download HTML via `reqwest`, it is just a giant `String`. Rust doesn't know what a `<div>` or a `<title>` is. The `scraper` crate takes that `String` and builds a "Document Tree" (DOM) in memory using `Html::parse_document(&html)`. You then compile a CSS `Selector` (like `h1` or `.title`), and ask the Document Tree to hand you an Iterator of all the HTML elements that match that selector.
+
+---
+
+### Concept 40: Bringing it all together (Structured Output)
+
+**The Analogy: FedEx Drivers with Clipboards**
+You've hired 3 FedEx drivers (Semaphore). Each one is given a timer (Timeout) and told that if a house doesn't answer, they should wait and knock again (Retry Loop). When they finally get a package (HTML Title), they don't just shout it into the void. They write it down on a clipboard in a nice grid (CSV File).
+
+**Rust Context (Technical Explanation):**
+In a production web scraper, you never just `println!` your data. You write it to a file or database. We will use `std::fs::File` and `std::io::Write` to append lines to a `.csv` file. We will use `tokio::spawn` to run our `fetch_with_retry` function concurrently, guarded by an `Arc<Semaphore>` to prevent rate limits, and wrapped in a `timeout` to prevent hanging requests.

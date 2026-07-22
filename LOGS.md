@@ -33,6 +33,30 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-22 02:15 IST — [task.md / EXAMPLES.md] — Completed Steps 4 & 5 and Added Concept 40</summary>
+
+- **Files:** task.md, EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** User completed HTML parsing step. Checked off Steps 4 & 5 in `task.md`. Proceeding to the finale: Steps 6 & 7 (Bringing it all together with CSV output). Added Concept 40 (Structured Output) to `EXAMPLES.md` per Rule 8.
+
+```diff
+- - `[ ]` Step 4: Concept: Parsing HTML in Rust using `scraper`
+- - `[ ]` Step 5: Implement HTML title extraction
++ - `[x]` Step 4: Concept: Parsing HTML in Rust using `scraper`
++ - `[x]` Step 5: Implement HTML title extraction
+```
+
+```diff
++ ### Concept 40: Bringing it all together (Structured Output)
++ 
++ **The Analogy: FedEx Drivers with Clipboards**
++ You've hired 3 FedEx drivers (Semaphore)... They write it down on a clipboard in a nice grid (CSV File).
++ ...
+```
+
+</details>
+
+<details>
 <summary>2026-07-21 20:56 IST — [task.md / EXAMPLES.md] — Completed Steps 2 & 3 and Added Concept 39</summary>
 
 - **Files:** task.md, EXAMPLES.md

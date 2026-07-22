@@ -1,0 +1,7 @@
+URL,Title,Status
+https://www.rust-lang.org/,"
+            Rust Programming Language
+        ",SUCCESS
+https://github.com,"GitHub · Change is constant. GitHub keeps you ahead. · GitHub",SUCCESS
+https://google.com,"Google",SUCCESS
+https://this-website-definitely-does-not-exist-12345.com,"Failed after max retries", FAILED

@@ -1005,3 +1005,12 @@ reqwest = { version = "0.12.4" }
 - `The Index and the Librarian` : Imagine we have a 1000 page encyclopedia RAW HTML and we only want to read about "Lions". Parsing is like looking at the index at the back of the book to find exactly which page "Lions" is on. A CSS Selector is like handling a librarian a sticky note that says "Give me all the bold text on page 42". The librarian (the `scrapper`)crate does all the hard work of reading the pages and handing us back exactly the sentences we asked for 
 - When we download HTML via reqwest, it is just a giant String, Rust doesn't know what a <div> or a <title> is. The scrapper crate takes that String and builds a Document Tree DOM in memory using `Html::parse_document(&html)`. WE then compile a CSS Selector like h1 or .title and ask the Document Tree to hand us an iterator of all the HTML elements that match that selector
 
+- The Goal : WE are going to bring back the concept of tokio::spawn, Semaphore and tokio::time::timeout and combine them with our Retry loop and HTMLparser. Finally instead of printing to the terminal we will append our results to a CSV file. 
+- The Outcome : We will provide a list of URL's , The program will scrape them concurrently (rate limited to 3 at a time) . When finished we will have to results.csv file our hard drive with the data
+
+
+- `Concept 3 - The Final Production Scraper [Structured Output]`
+- FedEx Drivers with Clipboards - We have hired 3 FedEx drivers [Semaphore] . Each one is given a timer [TImeout] and told that if a house doesn't answer they should wait and knock again [Retry loop]
+- When they finally get a package (HTML title), they don't just shout it into the void(Terminal) . They write it down on a clipboard in a nice grid [CSV file]
+- In a production web scrapper we never just `println!` our data . WE write to a database or file . We will use `std::fs::File` and `std::io::Write` to append lines to a .csv file. We will use `tokio::spawn` to run our `fetch_with_retry()` function concurrently, guarded by an `Arc<Semaphore>`to prevent rate limits and wrapped in a timeout to prevent hanging requests
+
