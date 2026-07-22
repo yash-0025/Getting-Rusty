@@ -33,6 +33,53 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-22 17:12 IST — [task.md] — Reset for Day 19</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User requested to move to Day 19. Scaffolded the new task checklist for the Payment Processor (Dependency Injection) project.
+
+```diff
+- # Day 18: Rate-Limited Web Scraper
+- - `[x]` Step 1: Scaffold `web_scraper` project...
+- ...
++ # Day 19: Architecture: Traits as Interfaces & Dependency Injection
++ - `[ ]` Step 1: Scaffold `payment_processor` project
++ ...
+```
+
+</details>
+
+<details>
+<summary>2026-07-22 17:12 IST — [ROADMAP.md / LEARNING.md] — Marked Day 18 Complete</summary>
+
+- **Files:** ROADMAP.md, LEARNING.md
+- **Change type:** Modified
+- **Reason:** User granted permission per Rule 1 to mark Day 18 as complete. Checked it off in `ROADMAP.md` and added the conceptual summary to `LEARNING.md`.
+
+```diff
+- - [ ] **You build:** A web scraper that crawls a site...
+- - [ ] **Concepts:** `tokio::select!` — racing multiple futures...
+- - [ ] **Reality check:** In Rust, you can't just `Ctrl+C`...
+- - [ ] **Deliverable:** Scraper CLI that outputs CSV/JSON.
++ - [x] **You build:** A web scraper that crawls a site...
++ - [x] **Concepts:** `tokio::select!` — racing multiple futures...
++ - [x] **Reality check:** In Rust, you can't just `Ctrl+C`...
++ - [x] **Deliverable:** Scraper CLI that outputs CSV/JSON.
+```
+
+```diff
++ ### Day 18 — Build: Rate-Limited Web Scraper — 2026-07-22
++ **Status:** `[x]` done
++ **What I actually understood:**
++ - **The `sleep` Anti-Pattern**: Blocking the thread with `std::thread::sleep` inside an `async fn` is a massive bug...
++ - **Instant Cancellation**: The real magic of `select!` is that the "losing" Futures are instantly dropped...
++ ...
+```
+
+</details>
+
+<details>
 <summary>2026-07-22 16:20 IST — [task.md] — Completed Step 8 (select! in project)</summary>
 
 - **Files:** task.md

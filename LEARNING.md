@@ -351,6 +351,21 @@
 **Mistakes the compiler caught that taught me something:**
 - N/A
 
+### Day 18 — Build: Rate-Limited Web Scraper — 2026-07-22
+**Status:** `[x]` done
+**What I actually understood:**
+- **The `sleep` Anti-Pattern**: Blocking the thread with `std::thread::sleep` inside an `async fn` is a massive bug. It starves the Tokio runtime by preventing the executor from polling any other Futures on that thread. Always use `tokio::time::sleep(...).await`.
+- **Parsing HTML (`scraper`)**: HTML is just a giant string. `scraper` turns it into a DOM tree, allowing us to query it with CSS Selectors, returning an Iterator of matching elements.
+- **Structured Output**: Learned how to dump formatted data into a `.csv` file using `std::fs::File` and `writeln!`, replacing simple `println!` outputs.
+- **Racing Futures (`tokio::select!`)**: We can run multiple Futures simultaneously on the same thread using `tokio::select!`. Whichever finishes first wins the race, and its code block executes.
+- **Instant Cancellation**: The real magic of `select!` is that the "losing" Futures are instantly dropped. Because Rust Futures are lazy state machines, dropping them safely and immediately cancels any pending work (e.g. closing an open network socket).
+**What's still fuzzy / questions I had:**
+- N/A.
+**Code I wrote / project progress:**
+- Built `web_scraper`. It uses a Semaphore to limit concurrency to 2, runs a custom retry loop with `tokio::select!` for 5-second timeouts, extracts the `<title>` from the HTML, and dumps the output to `results.csv`.
+**Mistakes the compiler caught that taught me something:**
+- Unused import warning for `timeout`: Reminded me that `tokio::time::timeout` is no longer needed since we built our own manual `select!` block!
+
 ## 🧠 Concept Confidence Tracker
 *(Self-rate honestly — this drives what the AI re-explains or drills. Update anytime, ask the AI to revise the table for you if you want.)*
 

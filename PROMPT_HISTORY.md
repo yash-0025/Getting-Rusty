@@ -1322,4 +1322,16 @@
 **Output Summary:** Praised the user for catching the shortcut! Explained that `tokio::time::timeout` is literally just a `select!` block under the hood. Refactored the `fetch_and_parse_title` function in the web scraper to rip out `timeout` and explicitly use `tokio::select!` instead, satisfying the learner's excellent intuition. Checked off Step 8 and logged everything in `LOGS.md` with diffs (Rule 2). Provided the updated code block with extreme syntax breakdown (Rule 11/12/9).
 **Outcome / Next Step:** Learner will implement the explicit `tokio::select!` block directly in the web scraper project. Once they verify it works, we can finally mark Day 18 complete.
 
+### 2026-07-22 17:11 IST — Prompt #219
+**Prompt:** "Done . Let's move to next step but don't forget to follow rules from @[RULES.md] ."
+**Context:** User successfully ran the scraper with the explicit `tokio::select!` timeout logic and committed to Git.
+**Output Summary:** Day 18 is fully complete. Verified that all 8 steps were checked off and no concepts were missed from the roadmap (Rule 14 check). Requested explicit permission (Rule 1) to mark Day 18 as complete in `ROADMAP.md` and add the concepts to `LEARNING.md`. Provided the high-level Project Overview for Day 19 (Traits & Dependency Injection) per Rule 13.
+**Outcome / Next Step:** Learner will grant permission to close Day 18, and we will begin scaffolding the Day 19 Mockable Payment Pipeline.
+
+### 2026-07-22 17:12 IST — Prompt #220
+**Prompt:** "Let's mark day 18 as complete first let's just do it first and then move to day 19 . Follow rules properly from @[RULES.md]"
+**Context:** User granted permission to close out Day 18 and move to Day 19.
+**Output Summary:** Checked off Day 18 in `ROADMAP.md` and added a thorough summary of the learned concepts (HTML parsing, Structured Output, Instant Cancellation via drop) to `LEARNING.md`. Reset `task.md` with the 6 steps for Day 19 (Dependency Injection). Logged all of this in `LOGS.md` with explicit diff blocks (Rule 2). Explained Step 1 (Scaffolding the new project) to the user per Rules 12 and 11.
+**Outcome / Next Step:** Learner will run `cargo new payment_processor`, checking off Step 1.
+
 <!-- New entries appended below -->

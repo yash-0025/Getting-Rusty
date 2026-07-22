@@ -180,10 +180,9 @@ Each day has:
 - [x] **Deliverable:** Async health checker with configurable concurrency and timeout. Table output with status codes + latency.
 
 ### Day 18 — Build: Rate-Limited Web Scraper
-- [ ] **You build:** A web scraper that crawls a site (or set of sites), extracts data, respects rate limits, handles errors gracefully, outputs structured results. Handles timeouts, retries, cancellation.
-- [ ] **Concepts:** `tokio::select!` — racing multiple futures, cancellation patterns · Timeouts (`tokio::time::timeout`), intervals, sleep · Native async fn in traits (check current 1.96 status) · Structured concurrency: ensuring spawned tasks don't outlive their scope · `tokio::task::spawn_blocking` for CPU-bound or blocking I/O work · **Anti-pattern → Pattern:** `std::thread::sleep` inside async (starves the runtime) → `tokio::time::sleep`
-- [ ] **Anti-pattern → Pattern:** Heavy synchronous computation inside `async fn` (starves the runtime) → `spawn_blocking` or dedicated thread pool
-- [ ] **Deliverable:** Working scraper with rate limiting, retry logic, and structured JSON/CSV output.
+- [x] **You build:** A web scraper that crawls a site (or set of sites), extracts data, respects rate limits, handles errors gracefully, outputs structured results. Handles timeouts, retries, cancellation.
+- [x] **Concepts:** `tokio::select!` — racing multiple futures, cancellation patterns · Timeouts (`tokio::time::timeout`), intervals, sleep · Native async fn in traits (check current 1.96 status) · Structured concurrency: ensuring spawned tasks don't outlive their scope · `tokio::task::spawn_blocking` for CPU-bound or blocking I/O work · **Anti-pattern → Pattern:** `std::thread::sleep` inside async (starves the runtime) → `tokio::time::sleep` · **Anti-pattern → Pattern:** Heavy synchronous computation inside `async fn` (starves the runtime) → `spawn_blocking` or dedicated thread pool
+- [x] **Deliverable:** Working scraper with rate limiting, retry logic, and structured JSON/CSV output.
 
 ### Day 19–20 — Build: REST API with Database (2-day build)
 - [ ] **You build:** A full CRUD REST API for a "bookmarks" service — save, tag, search, delete URLs with metadata. Axum + SQLite/Postgres via sqlx. Proper error-to-HTTP-status mapping, JSON request/response.
