@@ -5,6 +5,7 @@ use std::time::Duration;
 use scraper::{Html, Selector}; // Import our HTML parser
 use tokio::sync::Semaphore;
 use tokio::time::{sleep, timeout};
+use tokio::select;
 
 
 
@@ -19,12 +20,29 @@ async fn fetch_and_parse_title(url: &str, max_retries: u32) -> Result<String, St
     while attempts < max_retries {
 
         // We wrapt the entire requesst in a 5-second timeout
-        let fetch_result = timeout(Duration::from_secs(5), reqwest::get(url)).await;
+        // let fetch_result = timeout(Duration::from_secs(5), reqwest::get(url)).await;
 
         // println!("Attempt {}/{} for {}", attempts + 1, max_retries, url);
+
+        // we ARE explicitly racing the network request against a 5 second timer
+
+        // select!{} immediately returns NOne . Becase the reqwest::get(url) . Future never finished, it goes out of scope and is dropped. Droppign a Future in Rust instantly cancles the network socket connection. No mess , no lingering background threads 
+        let fetch_result = select! {
+// Racer :1 - The network request . If it finishes first we bind its Result to res 
+
+// this racer is racer 1. We start the HTTP request . If it crosses the finish line first we wrap ifs value res in an Option::Some
+            res = reqwest::get(url) => Some(res),
+
+// Racer : 2 - The Sleep timer . If it finishes first it returns None
+// We use _= to say we don't care about the sleeps return value
+
+//  this is Racer 2 . WE start a 5 second time. If it crosses the finish line first we return Option::None
+            _ = sleep(Duration::from_secs(5)) => None,
+        };
     
         match fetch_result {
-            Ok(Ok(response)) => {
+            // Racer 1 won ! We got reponse from the network
+            Some(Ok(response)) => {
                 if response.status().is_success() {
                     let html = response.text().await.map_err(|e| e.to_string())?;
 
@@ -38,8 +56,12 @@ async fn fetch_and_parse_title(url: &str, max_retries: u32) -> Result<String, St
                     }
                 }
             },
-            Ok(Err(e)) => println!("Network error for {}: {}", url, e),
-            Err(_) => println!("Timeout waiting for {} (took > 5s)", url),
+            // Racer 1 won but it was a network failure eg - DNS server
+            Some(Err(e)) => println!("Network error for {}: {}", url, e),
+
+            // Racer 2 won The 5 seconds passed before the network finished
+            // The pending reqwest::get() is instantly dropped and cancelled
+            None => println!("Timeout waiting for {} (took > 5s)", url),
         }
 
 

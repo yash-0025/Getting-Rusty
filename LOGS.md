@@ -33,6 +33,47 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-22 16:20 IST — [task.md] — Completed Step 8 (select! in project)</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User rightly called out that `tokio::select!` was taught in a toy example rather than the main project. Refactored the scraper code to use `select!` directly, removing the `tokio::time::timeout` wrapper. Checked off Step 8. Day 18 is completely finished!
+
+```diff
+- - `[ ]` Step 8: (Rule 14 Catch) Explicit `tokio::select!` and Future Cancellation
++ - `[x]` Step 8: (Rule 14 Catch) Explicit `tokio::select!` and Future Cancellation
+```
+
+</details>
+
+<details>
+<summary>2026-07-22 15:39 IST — [task.md / EXAMPLES.md] — Completed Steps 6 & 7, Flagged Rule 14 Catch</summary>
+
+- **Files:** task.md, EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** User completed the production scraper and generated `results.csv`. Checked off Steps 6 & 7. Executed Rule 14 Verification Check and realized we did not explicitly cover `tokio::select!` and cancellation patterns. Added Step 8 to `task.md` to cover this. Added Concept 41 (`tokio::select!`) to `EXAMPLES.md` per Rule 8.
+
+```diff
+- - `[ ]` Step 6: Format output into structured JSON or CSV
+- - `[ ]` Step 7: (Rule 14 Verification Check) Verify rate limiting, timeouts, and cancellation are all handled.
++ - `[x]` Step 6: Format output into structured JSON or CSV
++ - `[x]` Step 7: (Rule 14 Verification Check) Verify rate limiting, timeouts, and cancellation are all handled.
++ - `[ ]` Step 8: (Rule 14 Catch) Explicit `tokio::select!` and Future Cancellation
+```
+
+```diff
++ ### Concept 41: Racing Futures (`tokio::select!`) and Cancellation
++ 
++ **The Analogy: Racing Pizza Delivery**
++ You order pizza from Domino's and Papa John's at exactly the same time...
++ 
++ **Rust Context (Technical Explanation):**
++ `tokio::select!` lets you `.await` multiple Futures at once... dropping them instantly cancels any further work...
+```
+
+</details>
+
+<details>
 <summary>2026-07-22 02:15 IST — [task.md / EXAMPLES.md] — Completed Steps 4 & 5 and Added Concept 40</summary>
 
 - **Files:** task.md, EXAMPLES.md

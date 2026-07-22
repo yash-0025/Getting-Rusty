@@ -1014,3 +1014,11 @@ reqwest = { version = "0.12.4" }
 - When they finally get a package (HTML title), they don't just shout it into the void(Terminal) . They write it down on a clipboard in a nice grid [CSV file]
 - In a production web scrapper we never just `println!` our data . WE write to a database or file . We will use `std::fs::File` and `std::io::Write` to append lines to a .csv file. We will use `tokio::spawn` to run our `fetch_with_retry()` function concurrently, guarded by an `Arc<Semaphore>`to prevent rate limits and wrapped in a timeout to prevent hanging requests
 
+
+- The Goal : We need to understand how Tokio is actually able to time out a network request. In python or Node.js cancelling a rnning network request is notoriously difficult. In Rust it is hilariously easy.
+- The Outcome : WE are going to replace our massive scraper code with a tiny 15 line Pizza-Race simulation to see `tokio::select!` instantly cancel a running task
+
+- `Concept 4 - Racing Futures and Cancellation`
+- Racing Pizza Delivery - We order pizza from dominos and Papa Johns exactly the same time. We wait at the door . Whichever delivery driver arrives fist we pay them and take the pizza. We immediately call the other driver and tell them to throw their pizza away [Cancel]
+- `tokio::select!` - Lets us `.await` multiple futures at once on a single thread . Whichever Future finishes first wins the race and its code block is executed. The magic of Rust is what happends to loser. it is immediately dropper. Because Futures in Rust are lazy state machines dropping them instatnly cancels any further work they were going to do .
+- WE don't need complex cancellation tokens or signals. This is exactly how `tokio::time::timeout` is built under the hood it races our network request against a `tokio::time::sleep()` timer . whichever finishes first cancels the other

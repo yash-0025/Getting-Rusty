@@ -482,3 +482,14 @@ You've hired 3 FedEx drivers (Semaphore). Each one is given a timer (Timeout) an
 
 **Rust Context (Technical Explanation):**
 In a production web scraper, you never just `println!` your data. You write it to a file or database. We will use `std::fs::File` and `std::io::Write` to append lines to a `.csv` file. We will use `tokio::spawn` to run our `fetch_with_retry` function concurrently, guarded by an `Arc<Semaphore>` to prevent rate limits, and wrapped in a `timeout` to prevent hanging requests.
+
+---
+
+### Concept 41: Racing Futures (`tokio::select!`) and Cancellation
+
+**The Analogy: Racing Pizza Delivery**
+You order pizza from Domino's and Papa John's at exactly the same time. You wait at the door. Whichever delivery driver arrives *first*, you pay them and take the pizza. You immediately call the other driver and tell them to throw their pizza away (Cancel).
+
+**Rust Context (Technical Explanation):**
+`tokio::select!` lets you `.await` multiple Futures at once on a single thread. Whichever Future finishes first "wins" the race, and its code block is executed. 
+The magic of Rust is what happens to the "loser": it is immediately **dropped**. Because Futures in Rust are lazy state machines, dropping them instantly cancels any further work they were going to do. You don't need complex cancellation tokens or signals. This is exactly how `tokio::time::timeout` is built under the hood: it races your network request against a `tokio::time::sleep()` timer. Whichever finishes first cancels the other!

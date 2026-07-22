@@ -1310,4 +1310,16 @@
 **Output Summary:** Checked off Steps 4 and 5 in `task.md`. Combined Step 6 (Output to CSV) and Step 7 (Verification of Rate Limiting/Timeouts) for the grand finale of Day 18. Adhered to Rule 8 by preemptively adding the ELI5 analogy and technical details of Concept 40 (Structured Output) to `EXAMPLES.md` using the file replacement tool. Logged all changes in `LOGS.md` with explicit `diff` blocks per Rule 2. Explained the concept to the user and provided the final production-ready code for `main.rs` per Rules 9/11/12.
 **Outcome / Next Step:** Learner will digest Concept 40, update `web_scraper/src/main.rs` with the final code, run it, and see a real `results.csv` file generated on their hard drive.
 
+### 2026-07-22 15:39 IST — Prompt #217
+**Prompt:** "Done . Let's move to next step don't foget to follow all the rules from @[RULES.md]"
+**Context:** User successfully ran the final production scraper and generated `results.csv`.
+**Output Summary:** Checked off Steps 6 and 7 in `task.md`. Executed the Rule 14 Verification Check and realized that while we used `tokio::time::timeout` (which uses `select!` internally), we never explicitly taught `tokio::select!` or the Future Cancellation pattern as mandated by the `ROADMAP.md` for Day 18. Added Step 8 to `task.md` to cover this gap. Adhered to Rule 8 by preemptively adding Concept 41 (Racing Futures & Cancellation) to `EXAMPLES.md`. Logged changes in `LOGS.md` with diff blocks (Rule 2). Provided a small `select!` playground code block for the user to run per Rules 12/11/9.
+**Outcome / Next Step:** Learner will digest Concept 41, run the pizza race code, and understand how dropping a Future safely cancels it in Rust. Then we can truly close Day 18.
+
+### 2026-07-22 16:20 IST — Prompt #218
+**Prompt:** "If the topic is with project then why it is not used inside the project"
+**Context:** User rightfully challenged why `tokio::select!` was being taught in a separate toy example instead of inside the `web_scraper` project we just built.
+**Output Summary:** Praised the user for catching the shortcut! Explained that `tokio::time::timeout` is literally just a `select!` block under the hood. Refactored the `fetch_and_parse_title` function in the web scraper to rip out `timeout` and explicitly use `tokio::select!` instead, satisfying the learner's excellent intuition. Checked off Step 8 and logged everything in `LOGS.md` with diffs (Rule 2). Provided the updated code block with extreme syntax breakdown (Rule 11/12/9).
+**Outcome / Next Step:** Learner will implement the explicit `tokio::select!` block directly in the web scraper project. Once they verify it works, we can finally mark Day 18 complete.
+
 <!-- New entries appended below -->
