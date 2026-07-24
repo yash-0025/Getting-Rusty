@@ -1022,3 +1022,8 @@ reqwest = { version = "0.12.4" }
 - Racing Pizza Delivery - We order pizza from dominos and Papa Johns exactly the same time. We wait at the door . Whichever delivery driver arrives fist we pay them and take the pizza. We immediately call the other driver and tell them to throw their pizza away [Cancel]
 - `tokio::select!` - Lets us `.await` multiple futures at once on a single thread . Whichever Future finishes first wins the race and its code block is executed. The magic of Rust is what happends to loser. it is immediately dropper. Because Futures in Rust are lazy state machines dropping them instatnly cancels any further work they were going to do .
 - WE don't need complex cancellation tokens or signals. This is exactly how `tokio::time::timeout` is built under the hood it races our network request against a `tokio::time::sleep()` timer . whichever finishes first cancels the other
+
+
+<h1>Day 19 </h1>
+
+- Imagine building an Amazon clone. When a user clicks Checkout our server must charge their credit card. . To do this we write a PaymentProcessor struct that uses the Stripe API to move real money. However we also want to write automated tests for our checkout systems
