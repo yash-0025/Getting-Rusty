@@ -1026,4 +1026,15 @@ reqwest = { version = "0.12.4" }
 
 <h1>Day 19 </h1>
 
-- Imagine building an Amazon clone. When a user clicks Checkout our server must charge their credit card. . To do this we write a PaymentProcessor struct that uses the Stripe API to move real money. However we also want to write automated tests for our checkout systems
+- Imagine building an Amazon clone. When a user clicks Checkout our server must charge their credit card. . To do this we write a PaymentProcessor struct that uses the Stripe API to move real money. However we also want to write automated tests for our checkout systems. If our test runs the PaymentProcessor it will actualy charge a real credit card every time we run cargo test . That is a massive bug. WE need a way to swap out the real Stripe backedn for a fake Mock backend during testing .
+
+- The Solution - We will use a design pattern called Dependency injection. Instead of our PaymentProcessor being  hardcoded to use Stripe, we will tell it to use any struct that promises to act like a payment backend. we will enforce this promise using a Rust `trait`
+
+- The Flow - We will define a trait called PaymentBackend with a Single method: charge_card()
+- We will create two completely different structs: Stripe and MockBackend
+- We will implement the PaymentBackend trait for both structs
+- We will build our core PaymentProcessor struct. Instead of giving it a specific type, we will give it a pointer to dynamic memory (Box<dyn PaymnetBackend>)
+- At runtime we can inject whichever backend we want into the processor and it wont care It just knows it can call `.charge_card()` on it 
+- This pattern is the backbone of all major enterprise software . By separating the behavior (the trait) from the data (the struct ) we decouple our system
+
+- 
