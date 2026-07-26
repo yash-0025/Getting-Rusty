@@ -1037,4 +1037,13 @@ reqwest = { version = "0.12.4" }
 - At runtime we can inject whichever backend we want into the processor and it wont care It just knows it can call `.charge_card()` on it 
 - This pattern is the backbone of all major enterprise software . By separating the behavior (the trait) from the data (the struct ) we decouple our system
 
-- 
+- `Concept 1 - Traits and Interfaces [Behavior, not Data]`
+- The Goal - We need to define the Contract the Trait that any payment backend must follow. Then we need to create two dummy structs (Stripe and Mockbackend) and force them to sign that contract. 
+- The Outcome - We will have two different structs that both implement the exact same charge_card method meaning they can eventually be swapped interchangeably
+
+- The Cashier - The trait is a piece of paper taped to the wall that says JOB Description Cashier. Must be able to take an amount of money
+- The structs are the applicants . Stripe is a real human (Alice) with a real API key. MockBackend is a crash-test dummy used for fire drills
+- The Implementation - impl is the act of handling the cashier nametag to both Alice and Dummy. They sign a contract promising they know how to do the job
+
+- Technical - Up until now , we used traits to add methods to a specific struct. But the true power of trait is acting as an Interface. A trait defines a contract of behavior . By implementing PaymentBackend for both Stripe and MockBackend, we decouple our system. Our future PaymentProcessor won't ask for a Stripe struct(data) it will ask for anything that implements PaymentBackend behavior
+
