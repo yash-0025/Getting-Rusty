@@ -1047,3 +1047,15 @@ reqwest = { version = "0.12.4" }
 
 - Technical - Up until now , we used traits to add methods to a specific struct. But the true power of trait is acting as an Interface. A trait defines a contract of behavior . By implementing PaymentBackend for both Stripe and MockBackend, we decouple our system. Our future PaymentProcessor won't ask for a Stripe struct(data) it will ask for anything that implements PaymentBackend behavior 
 
+
+
+- `Concept 2 - Dependency injection and Dynamic Dispatch`
+- The Goal: We need to build the acutal PaymentProcessor struct, this struct needs to hold some backend either Stripe or Mockbackend inside of it so it can call .charge_card() on it.
+- The OUtcome : We will create a PaymentProcessor struct that doesn't know what backend it is holding . We will then update our main() function to inject a Stripe backend into it and run it 
+
+- The Universal USB PORT - Imagine we build a giant stereo system. We don't handwire an iphone directly into the motherboard of the stereo. If we did , we could never plug in an Android phone.
+- Instead we build a Universal USB Port on the front of the stereo. We tell the stereo - I don't care what device is plugged in , as along as it can send an audio signal. When we plug a phone in , we are injecting the dependency.
+
+
+- When a struct needs to hold a trait, the Rust compiler panics. Rust must know exactly how many bytes of memory a struct takes up at compile time. But Stripe might be 24 bytes and MockBackend might be 1 byte. To fix this we put the backend inside a Box. A Box stores the actual struct on the heap and keeps a fixed size pointer 8-bytes on the stack. 
+- The dyn keyword means Dynamic dispatch - we are telling the compiler we will figure out exactly which struct this is at runtime.

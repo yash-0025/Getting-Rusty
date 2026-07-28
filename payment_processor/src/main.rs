@@ -64,7 +64,51 @@ impl PaymentBackend for MockBackend {
 }
 
 
+// Box - A smart pointer. It allocated memory on the Heap. The struct tself only holds an 8 byte memory address pointing to that heap data
+// dyn - Short for dynamic . It tells the compiler I don't know the exact struct type right now . I will resolve the function calls at runtime
+// The trait Bound . it means Whatever is in this Box, it must implement the PaymentBackend trait
+struct PaymentProcessor {
+    // We donot use a concrete ttype like backend: Stripe,
+    // We use a Box pointing to a dynamic trait
+    backend: Box<dyn PaymentBackend>,
+}
+
+
+// We attach a process method to the processor. it takes &self so it can access its own backend field.
+// match.self.backend.charge_card(amount) - This is the magic. the processro reaches into the box and blindly calls the charge_card method on whatever struct happens to be inside it 
+impl PaymentProcessor {
+    fn process(&self, amount:f64) {
+        println!("Processor is starting a transaction...");
+
+        // Dynamic Dispactch in action. It calls whatever is inside the Box
+        match self.backend.charge_card(amount) {
+            Ok(_) => println!("Transaction successful \n"),
+            Err(e) => println!("Transaction failed: {}\n",e),
+        }
+    }
+}
+
+
+// The main Function - Dependency Injection 
+// 
+
 fn main() {
-    // We will build the PaymentProcessor in the next step
-    println!("Backends are ready!");
+
+    // Dependency injection in Action
+    // First we create the concrete Stripe struct 
+    // We instantiate our Stripe struct
+    let real_stripe = Stripe {
+        api_key: "sk_live_12345".to_string(),
+    };
+
+    // We built the processor and inject stripe into the box 
+    // This is Dependency Injection. We instantiate the processor . For the backend field we call Box::new() pass our real_stripe variable into it and hand it to the processor.
+    let processor = PaymentProcessor {
+        backend: Box::new(real_stripe),
+    };
+
+    // The processor runs, completely unaware that it is using Stripe
+    processor.process(99.99);
+
+
 }
