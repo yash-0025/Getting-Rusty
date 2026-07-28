@@ -510,3 +510,16 @@ When building a system like a `PaymentProcessor`, you don't want to hardcode the
 *   **The Trait (`trait PaymentBackend`):** A piece of paper taped to the wall that says "JOB DESCRIPTION: Cashier. Must be able to take an amount of money." It doesn't do any work, it just defines the job.
 *   **The Structs (`Stripe`, `MockBackend`):** The applicants. Alice (`Stripe`) is a real human with an API key. The Dummy (`MockBackend`) is a robot used for testing.
 *   **The Implementation (`impl PaymentBackend for Stripe`):** Handing the "Cashier" nametag to the applicant. They are officially signing a contract swearing they know how to perform the job described on the piece of paper.
+
+---
+
+### Concept 43: Dependency Injection & Dynamic Dispatch (`Box<dyn Trait>`)
+
+**The Analogy: The Universal USB Port**
+Imagine you build a giant stereo system. You don't hardwire an iPhone directly into the motherboard of the stereo. If you did, you could never plug in an Android phone. Instead, you build a "Universal USB Port" on the front of the stereo. You tell the stereo, "I don't care *what* device is plugged in, as long as it sends audio signals." 
+When you plug the phone in, you are **"injecting"** the device into the stereo. The stereo uses **"dynamic dispatch"** to talk to the device: it literally asks the port at runtime, "Hey, what device is plugged in right now? Oh, an iPhone? Okay, use the iPhone's audio logic."
+
+**Rust Context (Technical Explanation):**
+When a struct needs to hold a Trait (like our `PaymentProcessor` holding a `PaymentBackend`), the Rust compiler panics. Rust MUST know exactly how many bytes of memory a struct takes up at compile time. But `Stripe` might be 24 bytes, and `MockBackend` might be 1 byte! 
+To fix this, we put the backend inside a `Box`. A `Box` is a smart pointer. It stores the actual struct on the heap, and keeps a fixed-size pointer (8 bytes) on the stack. The `dyn` keyword stands for "Dynamic". It means "We don't know exactly what struct this is at compile time, we will figure it out dynamically at runtime." 
+So, `Box<dyn PaymentBackend>` means "A fixed-size pointer to *some* unknown struct on the heap that implements the `PaymentBackend` trait." This is how Rust achieves polymorphism and dependency injection.

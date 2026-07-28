@@ -33,6 +33,30 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-28 14:21 IST — [task.md / EXAMPLES.md] — Completed Step 4</summary>
+
+- **Files:** task.md, EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** User requested to move to the next step. Checked off Step 4 in `task.md`. Added Concept 43 (Dependency Injection & Dynamic Dispatch) to `EXAMPLES.md` per Rule 8, including the "Universal USB Port" ELI5 analogy and technical breakdown.
+
+```diff
+- - `[ ]` Step 4: Concept: Dependency Injection & Dynamic Dispatch (`Box<dyn Trait>`)
++ - `[x]` Step 4: Concept: Dependency Injection & Dynamic Dispatch (`Box<dyn Trait>`)
+```
+
+```diff
++ ### Concept 43: Dependency Injection & Dynamic Dispatch (`Box<dyn Trait>`)
++ 
++ **The Analogy: The Universal USB Port**
++ Imagine you build a giant stereo system...
++ 
++ **Rust Context (Technical Explanation):**
++ When a struct needs to hold a Trait (like our `PaymentProcessor` holding a `PaymentBackend`)...
+```
+
+</details>
+
+<details>
 <summary>2026-07-26 14:36 IST — [EXAMPLES.md] — Added Cashier Analogy</summary>
 
 - **Files:** EXAMPLES.md

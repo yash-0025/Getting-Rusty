@@ -32,7 +32,7 @@ impl PaymentBackend for Stripe {
 
         // Imagine this makes a real HTTP request to Stripes servers
         // Because we took &self as the first argument, we can access the data inside the Stripe struct using dot-notation
-        // This proves to the compiler that Stripe fulfills the PaymentBackend contract. We wrote teh exact same logic for Mock Backend
+        // This proves to the compiler that Stripe fulfills the PaymentBackend contract. We wrote teh exact same logic for Mock Backendss
         println!("[STRIPE] charging ${:.2} using API key : {}", amount, self.api_key);
 
         Ok(())
@@ -45,6 +45,11 @@ struct MockBackend {
 }
 
 // We force MockBackend to sign the exact same contract
+
+// the impl for syntax is Rust way of attaching an interface to a type .
+// self.api_key - Because we took &self as the first argument, we can access the data inside the Stripe struct using dot-notation
+
+// This proves to the compiler that Stripe fulfills the PaymentBackend contract. We wrote the exact same logic for Mockbackend
 impl PaymentBackend for MockBackend {
     fn charge_card(&self, amount: f64) -> Result<(), String> {
         // No HTTP request here . Just fake logic for automated tests

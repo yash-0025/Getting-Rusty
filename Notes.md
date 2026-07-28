@@ -1045,5 +1045,5 @@ reqwest = { version = "0.12.4" }
 - The structs are the applicants . Stripe is a real human (Alice) with a real API key. MockBackend is a crash-test dummy used for fire drills
 - The Implementation - impl is the act of handling the cashier nametag to both Alice and Dummy. They sign a contract promising they know how to do the job
 
-- Technical - Up until now , we used traits to add methods to a specific struct. But the true power of trait is acting as an Interface. A trait defines a contract of behavior . By implementing PaymentBackend for both Stripe and MockBackend, we decouple our system. Our future PaymentProcessor won't ask for a Stripe struct(data) it will ask for anything that implements PaymentBackend behavior
+- Technical - Up until now , we used traits to add methods to a specific struct. But the true power of trait is acting as an Interface. A trait defines a contract of behavior . By implementing PaymentBackend for both Stripe and MockBackend, we decouple our system. Our future PaymentProcessor won't ask for a Stripe struct(data) it will ask for anything that implements PaymentBackend behavior 
 
