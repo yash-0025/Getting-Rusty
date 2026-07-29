@@ -998,14 +998,16 @@ reqwest = { version = "0.12.4" }
 - Because Tokio multiplexes hundreds of tasks onto a single OS thread , blocking that OS thread with a synchronous sleep means none of the other tasks on that thread can make progress for 3 seconds . We must always use `tokio::time::sleep(...).await`. This tells Tokio to park the current task for 3 seconds and immediately run other tasks on that thread in the meantime
 
 - Our network request are now virtually bulletproof. They will keep trying until the website comes back online , but they won't block the Rest of our app from doing other things
-- The Goal :Right now when a request succeeds we just print Downloaded 54321 bytes. That's useless data. We want to actually read the HTML, find the <title> tag and extract the text inside of it .
-- The Outcome : We will write a function that takes the raw HMTL string, builds, DOM tree and uses a CSS selector to find the <title> tag. When we run it, it will print exactly Title: Rust Programming Language instead of the whole page
+- The Goal :Right now when a request succeeds we just print Downloaded 54321 bytes. That's useless data. We want to actually read the HTML, find the `<title>` tag and extract the text inside of it .
+- The Outcome : We will write a function that takes the raw HMTL string, builds, DOM tree and uses a CSS selector to find the `<title>` tag. When we run it, it will print exactly Title: Rust Programming Language instead of the whole page
+
 
 - `Concept 2 - Parsing HTML in Rust`
 - `The Index and the Librarian` : Imagine we have a 1000 page encyclopedia RAW HTML and we only want to read about "Lions". Parsing is like looking at the index at the back of the book to find exactly which page "Lions" is on. A CSS Selector is like handling a librarian a sticky note that says "Give me all the bold text on page 42". The librarian (the `scrapper`)crate does all the hard work of reading the pages and handing us back exactly the sentences we asked for 
-- When we download HTML via reqwest, it is just a giant String, Rust doesn't know what a <div> or a <title> is. The scrapper crate takes that String and builds a Document Tree DOM in memory using `Html::parse_document(&html)`. WE then compile a CSS Selector like h1 or .title and ask the Document Tree to hand us an iterator of all the HTML elements that match that selector
+- When we download HTML via reqwest, it is just a giant String, Rust doesn't know what a `<div> or a <title>` is. The scrapper crate takes that String and builds a Document Tree DOM in memory using `Html::parse_document(&html)`. WE then compile a CSS Selector like h1 or .title and ask the Document Tree to hand us an iterator of all the HTML elements that match that selector.
 
 - The Goal : WE are going to bring back the concept of tokio::spawn, Semaphore and tokio::time::timeout and combine them with our Retry loop and HTMLparser. Finally instead of printing to the terminal we will append our results to a CSV file. 
+
 - The Outcome : We will provide a list of URL's , The program will scrape them concurrently (rate limited to 3 at a time) . When finished we will have to results.csv file our hard drive with the data
 
 
@@ -1068,3 +1070,48 @@ reqwest = { version = "0.12.4" }
 - Code overview at runtime : When prod_processor.process(99.99) runs, Rust looks at the pointer inside backend and calls Stripe::charge_card.
 - When test_processor_1.process(49.50) runs, Rust looks at the pointer inside backend and calls MockBackend::charge_card (which enters the if self.should_succeed branch and returns Ok(()) ).
 - When test_processor_2.process(12.00) runs Rust looks at the pointer inside backend and calls MockBackend::charge_card (which enters the else branch and returns Err("Card declined by mock"))
+
+
+<h1>Day 20</h1>
+
+- `REST API with DATABASE (Axum + sqlx + SQLite)` - Production grade async web microservices
+
+- The PRoblem - When building Web API's in Node.js Express/Fastify or python FastAPI , request routing and database calls are easy to write but they suffer from hidden runtime bugs. A typo in an SQL qery string or a missing field in a JSON payload won't be caught until a user hits our API endpoint in production
+- IN Rust we want compile-time type safety for our entire web server and database layer.
+
+- If a client sends invalid JSON , the web framework(Axum) automatically rejects it before our handler function even runs .
+- If we write an invalid SQL Query, the database driver (sqlx) will fail the build (cargo build) at compile time by checking our SQL queries against our database schema
+
+- The Architecture - We are going to build a full CRUD (Create, Read, Update , Delete) REST API for a Bookmark Manager Service(bookmark_api). 
+- Users will be able to 
+> POST /bookmarks - Save a new URL with a title and tags
+> GET /bookmarks - List all saved bookmarks
+> GET /bookmarks/search?q=rust - Search bookmarks by keyword or tag
+> DELETE /bookmarks/:id - Delete a bookmark by ID
+
+- Our architecture consists of 4 decoupled layers
+1. **The Web Framework(Axum)** - Powered by `tokio`, `hyper` and `tower`. Handles HTTP routing TCP sockets and middleware.
+2. **Extractors & Serds** - Automatically parses incoming HTTP JSON payloads (`Json<CreateBookmarkReq>`) and query parameters (`Query<SearchParams>`) into strongly typed Rust structs
+3. **Shared Application State (Arc<AppState>)** - Shares our database connection pool thread safely across all incoming async HTTP request tasks.
+4. **Compile-Time Persistence Layer(sqlx + SQLite)** - Manages connection pooling and executes type-checked SQL queries against an embedded SQLite Database
+
+```
+[ Incoming HTTP Request ] 
+          │
+          ▼
+    [ Axum Router ] ──(Path / Method matching)
+          │
+          ▼
+   [ Serde Extractor ] ──(Parses JSON body into Struct; 400 Bad Request if invalid)
+          │
+          ▼
+ [ Async Handler Fn ] ──(Accesses shared Arc<AppState>)
+          │
+          ▼
+ [ sqlx Pool Query ] ──(Executes type-checked SQL against SQLite DB)
+          │
+          ▼
+ [ HTTP JSON Response ] ◄──(Converts return struct to JSON; 200 OK or 500 Error)
+
+```
+
