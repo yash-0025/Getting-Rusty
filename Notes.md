@@ -1059,3 +1059,12 @@ reqwest = { version = "0.12.4" }
 
 - When a struct needs to hold a trait, the Rust compiler panics. Rust must know exactly how many bytes of memory a struct takes up at compile time. But Stripe might be 24 bytes and MockBackend might be 1 byte. To fix this we put the backend inside a Box. A Box stores the actual struct on the heap and keeps a fixed size pointer 8-bytes on the stack. 
 - The dyn keyword means Dynamic dispatch - we are telling the compiler we will figure out exactly which struct this is at runtime.
+
+- The Goal: We need to prove that our PaymentProcessor is truly decoupled. We will instantiate three different processor: one with Stripe , one with a successful MockBackend and one with a failing MockBackend
+
+- The Outcome: When we run cargo run, we will see all three transactions process through the exact same process() method. The PaymentProcessor code does not change at all, yet it executes three completely different behaviors depending on what was injected into the Box
+
+
+- Code overview at runtime : When prod_processor.process(99.99) runs, Rust looks at the pointer inside backend and calls Stripe::charge_card.
+- When test_processor_1.process(49.50) runs, Rust looks at the pointer inside backend and calls MockBackend::charge_card (which enters the if self.should_succeed branch and returns Ok(()) ).
+- When test_processor_2.process(12.00) runs Rust looks at the pointer inside backend and calls MockBackend::charge_card (which enters the else branch and returns Err("Card declined by mock"))

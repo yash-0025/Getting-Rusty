@@ -33,6 +33,20 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-29 00:34 IST — [task.md] — Completed Step 5</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User completed implementing `PaymentProcessor` with `Box<dyn PaymentBackend>` and tested it with `Stripe`. Checked off Step 5.
+
+```diff
+- - `[ ]` Step 5: Build the `PaymentProcessor` struct that accepts injected backends
++ - `[x]` Step 5: Build the `PaymentProcessor` struct that accepts injected backends
+```
+
+</details>
+
+<details>
 <summary>2026-07-28 14:21 IST — [task.md / EXAMPLES.md] — Completed Step 4</summary>
 
 - **Files:** task.md, EXAMPLES.md

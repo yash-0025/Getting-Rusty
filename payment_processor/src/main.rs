@@ -91,7 +91,7 @@ impl PaymentProcessor {
 
 // The main Function - Dependency Injection 
 // 
-
+/* 
 fn main() {
 
     // Dependency injection in Action
@@ -110,5 +110,57 @@ fn main() {
     // The processor runs, completely unaware that it is using Stripe
     processor.process(99.99);
 
+
+} */
+
+
+fn main() {
+    println!("--- 1. Production Mode Real Stripe ----");
+
+    // Instantiate real Stripe backend
+    // Creating Stripe PRocessor
+    let stripe_backend = Stripe {
+        api_key: "sk_live_12345".to_string(),
+    };
+
+    // Inject Stripe into PaymentProcessor
+    let prod_processor = PaymentProcessor {
+        // This moves stripe_backend from the stack to heap memory
+        // The compiler sees that PaymentProcessor expects Box<dyn PaymentBackend> . Since Stripe implements PaymentBackend, Rus automatically coerces Box<Stripe> into Box<dyn PaymentBackend>
+        
+        backend: Box::new(stripe_backend),
+    };
+
+// Calls the .process() method passing, floating point literal 99.99 f64
+    prod_processor.process(99.99);
+
+    println!("--- 2. Test Mode (Mock Success) ----");
+
+    //Create MockBackend struct instance with field should_succeed set to boolean true
+
+    let mock_success_backend = MockBackend {
+        should_succeed: true,
+    };
+
+// Puts mock_success_backend inside a Box and injects it into test_processor_1
+    let test_processor_1 = PaymentProcessor {
+        backend: Box::new(mock_success_backend),
+    };
+
+    test_processor_1.process(49.50);
+
+    println!("--- 3. Test Mode (Mock Failure) ---");
+    // Creates a second MockBackend struct instance with should_succedd set to false 
+    let mock_fail_backend = MockBackend {
+        should_succeed: false,
+    };
+
+// Injects the failing mock into test_processor_2
+    let test_processor_2 = PaymentProcessor {
+        backend: Box::new(mock_fail_backend),
+    };
+
+    // Execute transaction to test error handling logic
+    test_processor_2.process(12.00);
 
 }
