@@ -33,6 +33,47 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-29 14:07 IST — [task.md] — Reset for Day 20</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** Day 19 complete. Scaffolded task checklist for Day 20 REST API project (`bookmark_api`).
+
+```diff
+- # Day 19: Architecture: Traits as Interfaces & Dependency Injection
+- ...
++ # Day 20: REST API with Database (Axum + sqlx + SQLite)
++ - `[ ]` Step 1: Scaffold `bookmark_api` project...
++ ...
+```
+
+</details>
+
+<details>
+<summary>2026-07-29 14:07 IST — [ROADMAP.md / LEARNING.md] — Marked Day 19 Complete</summary>
+
+- **Files:** ROADMAP.md, LEARNING.md
+- **Change type:** Modified
+- **Reason:** User granted explicit permission to mark Day 19 complete. Marked Day 19 as `[x]` in `ROADMAP.md` and added conceptual summary to `LEARNING.md`.
+
+```diff
++ ### Day 19 — Architecture: Traits as Interfaces & Dependency Injection
++ - [x] **You build:** A mockable payment processing pipeline (`PaymentProcessor`).
++ - [x] **Concepts:** `trait` as an interface (behavior, not data) · `dyn Trait` vs `impl Trait`...
++ - [x] **Deliverable:** A `PaymentProcessor` struct that takes a `Stripe` backend or a `MockBackend`...
+```
+
+```diff
++ ### Day 19 — Architecture: Traits as Interfaces & Dependency Injection — 2026-07-29
++ **Status:** `[x]` done
++ **What I actually understood:**
++ - **Traits as Interfaces**: Decoupled behavior from data by defining `trait PaymentBackend`...
++ - **Dynamic Dispatch (`Box<dyn Trait>`)**: Rust requires fixed sizes for structs on the stack...
+```
+
+</details>
+
+<details>
 <summary>2026-07-29 00:34 IST — [task.md] — Completed Step 5</summary>
 
 - **Files:** task.md

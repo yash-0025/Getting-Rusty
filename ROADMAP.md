@@ -185,7 +185,12 @@ Each day has:
 - [x] **Concepts:** `tokio::select!` — racing multiple futures, cancellation patterns · Timeouts (`tokio::time::timeout`), intervals, sleep · Native async fn in traits (check current 1.96 status) · Structured concurrency: ensuring spawned tasks don't outlive their scope · `tokio::task::spawn_blocking` for CPU-bound or blocking I/O work · **Anti-pattern → Pattern:** `std::thread::sleep` inside async (starves the runtime) → `tokio::time::sleep` · **Anti-pattern → Pattern:** Heavy synchronous computation inside `async fn` (starves the runtime) → `spawn_blocking` or dedicated thread pool
 - [x] **Deliverable:** Working scraper with rate limiting, retry logic, and structured JSON/CSV output.
 
-### Day 19–20 — Build: REST API with Database (2-day build)
+### Day 19 — Architecture: Traits as Interfaces & Dependency Injection
+- [x] **You build:** A mockable payment processing pipeline (`PaymentProcessor`).
+- [x] **Concepts:** `trait` as an interface (behavior, not data) · `dyn Trait` vs `impl Trait` (Dynamic vs Static Dispatch) · `Box<dyn Trait>` for dynamic trait objects on heap · Dependency Injection pattern in Rust (injecting backends into structs) · Runtime swapping of backends (`Stripe` vs `MockBackend`).
+- [x] **Deliverable:** A `PaymentProcessor` struct that takes a `Stripe` backend or a `MockBackend` via dependency injection and executes transactions seamlessly.
+
+### Day 20–21 — Build: REST API with Database (2-day build)
 - [ ] **You build:** A full CRUD REST API for a "bookmarks" service — save, tag, search, delete URLs with metadata. Axum + SQLite/Postgres via sqlx. Proper error-to-HTTP-status mapping, JSON request/response.
 
 **Day 19 concepts:**

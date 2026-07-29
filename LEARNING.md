@@ -366,6 +366,20 @@
 **Mistakes the compiler caught that taught me something:**
 - Unused import warning for `timeout`: Reminded me that `tokio::time::timeout` is no longer needed since we built our own manual `select!` block!
 
+### Day 19 — Architecture: Traits as Interfaces & Dependency Injection — 2026-07-29
+**Status:** `[x]` done
+**What I actually understood:**
+- **Traits as Interfaces**: Decoupled behavior from data by defining `trait PaymentBackend`. Traits act as contracts of behavior.
+- **Dynamic Dispatch (`Box<dyn Trait>`)**: Rust requires fixed sizes for structs on the stack. `Box<dyn Trait>` stores struct instances on the heap behind an 8-byte pointer, enabling runtime dynamic dispatch (vtable method resolution).
+- **Dependency Injection**: Structs like `PaymentProcessor` do not depend on concrete implementations like `Stripe`. They accept any `Box<dyn PaymentBackend>`, making the system completely decoupled and mockable for testing.
+- **Runtime Backend Swapping**: Demonstrated swapping live `Stripe` backend for `MockBackend` (success & error branches) without changing a single line of `PaymentProcessor` execution logic.
+**What's still fuzzy / questions I had:**
+- None for now.
+**Code I wrote / project progress:**
+- Built `payment_processor`, implementing `PaymentBackend` trait for `Stripe` and `MockBackend`, injecting them into `PaymentProcessor`, and verifying seamless runtime execution across all 3 scenarios.
+**Mistakes the compiler caught that taught me something:**
+- Typo `Result<(), Stripe>` instead of `Result<(), String>` caught compiler type mismatch, reinforcing strict Rust trait method signature matching.
+
 ## 🧠 Concept Confidence Tracker
 *(Self-rate honestly — this drives what the AI re-explains or drills. Update anytime, ask the AI to revise the table for you if you want.)*
 
