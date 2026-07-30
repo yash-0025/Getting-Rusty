@@ -523,3 +523,20 @@ When you plug the phone in, you are **"injecting"** the device into the stereo. 
 When a struct needs to hold a Trait (like our `PaymentProcessor` holding a `PaymentBackend`), the Rust compiler panics. Rust MUST know exactly how many bytes of memory a struct takes up at compile time. But `Stripe` might be 24 bytes, and `MockBackend` might be 1 byte! 
 To fix this, we put the backend inside a `Box`. A `Box` is a smart pointer. It stores the actual struct on the heap, and keeps a fixed-size pointer (8 bytes) on the stack. The `dyn` keyword stands for "Dynamic". It means "We don't know exactly what struct this is at compile time, we will figure it out dynamically at runtime." 
 So, `Box<dyn PaymentBackend>` means "A fixed-size pointer to *some* unknown struct on the heap that implements the `PaymentBackend` trait." This is how Rust achieves polymorphism and dependency injection.
+
+---
+
+### Concept 45: Axum Routing & Extractors (`Path`, `Query`, `Json`, `State`)
+
+**The Analogy: The Airport Security Checkpoint**
+Imagine an international airport. Before you board a plane, passengers line up at different gates (`Router`). At each gate, security guards (`Extractors`) inspect incoming passengers:
+*   `Path`: Checks your passport to extract your Destination Gate ID (e.g. `/bookmarks/:id`).
+*   `Query`: Checks your baggage ticket for special requests (e.g. `?search=rust`).
+*   `Json`: Scans your luggage contents and unpacks it into a standard bin (`CreateBookmarkPayload`).
+*   `State`: Hands you a badge to access shared airport facilities (Database Connection Pool).
+
+If your passport is invalid or your luggage contents are corrupt, the extractor security guard turns you around at the gate immediately with a `400 Bad Request` before you ever reach the flight attendant (your handler function)!
+
+**Rust Context (Technical Explanation):**
+In Axum, a handler is just an `async fn`. But unlike Express or FastAPI where you manually parse `req.body` or `req.params`, Axum uses **Type-Based Extractors**. An extractor is any type that implements Axum's `FromRequest` or `FromRequestParts` trait.
+By simply declaring parameters in your handler function signature (e.g. `async fn create_bookmark(State(state): State<AppState>, Json(payload): Json<CreateBookmarkReq>)`), Axum automatically inspects the incoming HTTP request, deserializes the JSON body using `serde`, grabs the shared `AppState`, and injects them directly into your function arguments. If deserialization fails, Axum returns a type-safe `400 Bad Request` or `422 Unprocessable Entity` response automatically.

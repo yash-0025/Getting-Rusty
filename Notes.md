@@ -1115,3 +1115,61 @@ reqwest = { version = "0.12.4" }
 
 ```
 
+- `Concept 1 - Axum Routing & Extractors [Path, Query, Json, State]`
+- The Goal : Build a production grade async web microservice bookmark_api capable of performing full CRUD operations on bookmarks stored in an embedded SQLite database
+- The Outcome : A web server running on localhost:3000 where all HTTP requests , JSON payloads, and SQL queries are verified for type safety at compile time.
+
+- The Problem - When building Web APIs is Node.js (Express/Fastify) or Python (FastAPI) request routing and database queries are easy to write but they suffer from hidden runtime bugs
+- A typo in an SQL query string (`SELECT * FRM bookmarks`) won't be caught until a user hits our endpoint in production.
+- A missing field or wrong data type in JSON payload requires manual validation logic inside every route handler.
+
+- In Rust we want compile time type safety for our entire web server and database layer
+1. If a client sends invalid JSON, the web framework(Axum) automatically rejects it with a 400 Bad Request before our handler function even runs
+2. If we write an invalid SQL query, the database driver(sqlx) will fail the build (cargo buil) at compile time by checking our SQL queries against our database schema.
+
+- The Airport Security Checkpoint : Imagine an international airport. Before we board a plane passengers line up at different gates (Router). At each gate , security guards (Extractors) inspect incoming passengers:
+- `Path` Extractor - Checks our passport to extract our Destination Gate ID (eg: /bookmarks/:id)
+- `Query` Extractor - Checks our baggage ticket for special requests (eg: ?.search=rust&limit=10)
+- `Json` Extractor - Scans our luggaage contents and unpacks it into a standard luggage bin(CreateBookmarkReq struct).
+- `State` Extractor - Hands us an airport badge to access shared facilities(database connection pool)
+
+- If our passport is invalid or our luggage contents are corrupt the Extractor security guard turn us around at the gate immediately with a 400 Bad Request before we ever reach the flight attendent (our handler function)
+
+- `The Technical Explanation - Type Based Extraction (FromRequest)`
+- In traditional web frameworks, we manually parse request bodies and parameters . In Axum a handler is just an `async fn`. Axum uses **Type-Based Extractors**.
+- An extractor is any Rust type that impement Axum's `FromRequest` or `FromRequestParts` trait.
+- When an HTTP request hits an Axum route, Axum inspects the type signature of our functoin arguments. It automatically invokes the `FromRequest` trait implementation for each argument in order , deserializing JSON, parsing URL parameters and injecting shared state
+
+```rust
+async fn update_bookmark(
+- Extracts the database connection pool shared across the entire web server
+- Pattern matches State(pool) from the argument type State<SqlitePool>
+- Allows multi threaded async request tasks to access the SQLite connection pool thread safely
+    
+    State(pool): State<SqlitePool>,
+
+- Extract route variables like :id from URL routes eg: /bookmarks/42
+- Pattern matches Path(id) from the argument type Path<i64> Parses the URL path segment into a 64 bit signed integer i64
+- If a client request /bookmarks/abc passing text instead of a number , Axum's Path extractor automatically fails an returns 400 Bad Request without executing our function
+    
+    Path(id): Path<i64>,
+
+- Extracts URL query string parameters eg- q=rust&sort=desc
+- Pattern matches Query(params) from the argument type Query<SearchParams>
+- Deserializes key-value query parameters directly into our strongly typed SearchParams struct using serde
+
+    Query(params): Query<SearchParams>,
+
+- Extracts and deserializes the HTTP request body application/jsob
+- Pattern matches Json(payload) from the argument type Json<UpdateBookmarkReq>
+- Enforces that the incoming JSON body matches our struct fields and data types exactly. If fields are missing or mistyped , Axum returns 400 Bad Request
+
+    Json(payload): Json<UpdateBookmarkReq>,
+
+) -> Result<Json<Bookmark>, StatusCode> {
+
+- Defines the HTTP response type returned by the function
+- Returns Result. On Success (ok) returns Json(Bookmark) which Axum serializes to JSON with HTTP 2000 Ok . ON failure Err returns an HTTP StatusCode enum (eg StatusCode::NOT_FOUND or StatusCode::INTERNAL_SERVER_ERROR)
+- Axum uses the IntoResponse trait to convert any return type into a valid HTTP response sent back over TCP.
+}
+```

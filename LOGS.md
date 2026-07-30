@@ -33,6 +33,39 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-29 15:15 IST — [EXAMPLES.md] — Added Concept 45</summary>
+
+- **Files:** EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** Added Concept 45 (Axum Routing & Extractors) to `EXAMPLES.md` per Rule 8, including the "Airport Security Checkpoint" ELI5 analogy and technical explanation.
+
+```diff
++ ### Concept 45: Axum Routing & Extractors (`Path`, `Query`, `Json`, `State`)
++ 
++ **The Analogy: The Airport Security Checkpoint**
++ Imagine an international airport...
++ 
++ **Rust Context (Technical Explanation):**
++ In Axum, a handler is just an `async fn`...
+```
+
+</details>
+
+<details>
+<summary>2026-07-29 15:15 IST — [task.md] — Completed Step 1</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User completed scaffolding the `bookmark_api` project and updating their notes with the Day 20 System Design. Checked off Step 1.
+
+```diff
+- - `[ ]` Step 1: Scaffold `bookmark_api` project...
++ - `[x]` Step 1: Scaffold `bookmark_api` project...
+```
+
+</details>
+
+<details>
 <summary>2026-07-29 14:07 IST — [task.md] — Reset for Day 20</summary>
 
 - **Files:** task.md
