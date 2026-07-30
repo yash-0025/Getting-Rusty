@@ -1173,3 +1173,30 @@ async fn update_bookmark(
 - Axum uses the IntoResponse trait to convert any return type into a valid HTTP response sent back over TCP.
 }
 ```
+- **Setup and Feature Flag Breakdown**
+1. axum - The modern web framework created by the official Tokio team
+- Unlike Express.js or FastAPI which rely on string paths and manual object parsing , Axum uses strongly typed Rust extractors (Json, State, Path, Query)
+- It converts TCP streams into HTTP requests and maps routes to async fn handlers
+
+2. tokio = The industry standard asynchronous runtime for Rust 
+- features = ["full"] enables all underlying Tokio subsystems:
+    - Multi-threaded work-stealing task schedule
+    - TCP/UDP network socket listeners
+    - Async timer utilises (sleep, timeout, interval)
+    - OS signal handlers (Ctrl+C graceful shutdown)
+
+3. serde = SERialization or DEserialization framework
+    - features = ["derive"] Enables the proc-macro attribute #[derive(Serialize, Deserialize)]
+    - Allows Rust to automatically turn incoming JSON strings into strogly typed Rust struct instances and viceversa without writing manual JSON parsing code
+
+4. serde_json = The JSON data format backend for serde
+    - Handles low-level parsing of raw HTTP JSON bytes into serde data structure
+
+5. sqlx = An async, pure-Rust database driver featuring compile-time type-checked SQL queries
+    - `runtime-tokio-native-tls` : Configure sqlx to execute non blocking database queries inside Tokios async runtime
+    - `sqlite` : Compiles the embedded SQLite C/Rust driver (so our database lives in a single .db file on disk without installing Postgres or MySQL)
+    - `macros` : Enables the sqlx::query! and sqlx::query_as! procedural macros. These macros connect to our SQLite schema at cargo build time and verify our SQL query strings for syntax errors before the binary is compiled
+
+6. tower-http = A suite of HTTP middleware components built on Tokios tower::Service architecture
+    - `cors` : Enables Cross-Origin Resource Sharing CORS headers so frontend application React, Next.js can safely call our API
+    - `trace` : Enables automatic HTTP request/response logging(status codes, latency ,request paths)
