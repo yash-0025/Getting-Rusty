@@ -33,6 +33,58 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-07-31 16:20 IST — [task.md / src/models.rs] — Completed Step 3 & Fixed Semicolon</summary>
+
+- **Files:** task.md, bookmark_api/src/models.rs
+- **Change type:** Modified
+- **Reason:** User completed defining `Bookmark` data models and SQL migrations. Fixed missing semicolon on `use serde...;`. Checked off Step 3.
+
+```diff
+- - `[ ]` Step 3: Define `Bookmark` data model & SQLite database schema...
++ - `[x]` Step 3: Define `Bookmark` data model & SQLite database schema...
+```
+
+```diff
+- use serde::{Deserialize, Serialize}
++ use serde::{Deserialize, Serialize};
+```
+
+</details>
+
+<details>
+<summary>2026-07-30 13:07 IST — [EXAMPLES.md] — Added Concept 46</summary>
+
+- **Files:** EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** Added Concept 46 (Compile-Time Checked SQL & Migrations) to `EXAMPLES.md` per Rule 8, including the "Blueprint Inspector at the Brick Factory" ELI5 analogy and technical explanation.
+
+```diff
++ ### Concept 46: Compile-Time Checked SQL (`sqlx` & Migrations)
++ 
++ **The Analogy: The Blueprint Inspector at the Brick Factory**
++ Imagine building a skyscraper...
++ 
++ **Rust Context (Technical Explanation):**
++ In `sqlx`, database queries can be executed using procedural macros (`sqlx::query!` and `sqlx::query_as!`)...
+```
+
+</details>
+
+<details>
+<summary>2026-07-30 13:07 IST — [task.md] — Completed Step 2</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User completed configuring `Cargo.toml` dependencies and recorded System Design + Axum Extractors concept in `Notes.md`. Checked off Step 2.
+
+```diff
+- - `[ ]` Step 2: System Design & Architecture Deep Dive...
++ - `[x]` Step 2: System Design & Architecture Deep Dive...
+```
+
+</details>
+
+<details>
 <summary>2026-07-29 15:15 IST — [EXAMPLES.md] — Added Concept 45</summary>
 
 - **Files:** EXAMPLES.md

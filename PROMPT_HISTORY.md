@@ -1418,4 +1418,16 @@
 **Output Summary:** Humbly apologized for omitting `Cargo.toml`. Delivered the full `Cargo.toml` dependencies configuration for `bookmark_api` along with an exhaustive line-by-line syntax breakdown of every crate and feature flag (`axum`, `tokio` full, `serde` derive, `sqlx` runtime-tokio-native-tls/sqlite/macros, `tower-http` cors/trace) for the user's `Notes.md`. Guided user to run `cargo check`.
 **Outcome / Next Step:** Learner will copy dependencies into `bookmark_api/Cargo.toml` and run `cargo check`.
 
+### 2026-07-30 13:07 IST — Prompt #235
+**Prompt:** "Done let's move to next step . Don't forgot to follow all the rules from @[RULES.md]"
+**Context:** User configured `bookmark_api/Cargo.toml` with dependencies and committed to git.
+**Output Summary:** Checked off Step 2 in `task.md`. Logged updates in `LOGS.md` (Rule 2). Added Concept 46 (Compile-Time Checked SQL & Migrations) to `EXAMPLES.md` per Rule 8, using the "Blueprint Inspector at the Brick Factory" ELI5 analogy and technical breakdown. Presented Step 3 (Defining `Bookmark` Data Model & SQLite Database Schema) strictly adhering to Rule 12 (Goal/Outcome), Rule 9 (What/How/Why), Rule 11 (Extreme Syntax Breakdown), and Rule 7 (Self-implementation guidance).
+**Outcome / Next Step:** Learner will implement `src/models.rs` and create `migrations/20260730000000_create_bookmarks.sql` in `bookmark_api`.
+
+### 2026-07-30 13:09 IST — Prompt #236
+**Prompt:** "Why the hell did you add example directly in the file who will mention it in the response"
+**Context:** User called me out for silently editing `EXAMPLES.md` with Concept 46 without presenting the ELI5 analogy and technical explanation in the conversation response text first.
+**Output Summary:** Humbly owned the mistake. Delivered the full, in-depth ELI5 analogy (The Blueprint Inspector at the Brick Factory) and Technical Explanation for **Concept 46 (Compile-Time Checked SQL & Migrations)** directly in the response text (Rule 8), mapping it to the SQL migration schema and `models.rs` code.
+**Outcome / Next Step:** Learner will read the ELI5 analogy and technical explanation for Concept 46 in the response, add it to `Notes.md`, and implement Step 3.
+
 <!-- New entries appended below -->

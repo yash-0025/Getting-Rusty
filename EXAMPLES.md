@@ -540,3 +540,16 @@ If your passport is invalid or your luggage contents are corrupt, the extractor 
 **Rust Context (Technical Explanation):**
 In Axum, a handler is just an `async fn`. But unlike Express or FastAPI where you manually parse `req.body` or `req.params`, Axum uses **Type-Based Extractors**. An extractor is any type that implements Axum's `FromRequest` or `FromRequestParts` trait.
 By simply declaring parameters in your handler function signature (e.g. `async fn create_bookmark(State(state): State<AppState>, Json(payload): Json<CreateBookmarkReq>)`), Axum automatically inspects the incoming HTTP request, deserializes the JSON body using `serde`, grabs the shared `AppState`, and injects them directly into your function arguments. If deserialization fails, Axum returns a type-safe `400 Bad Request` or `422 Unprocessable Entity` response automatically.
+
+---
+
+### Concept 46: Compile-Time Checked SQL (`sqlx` & Migrations)
+
+**The Analogy: The Blueprint Inspector at the Brick Factory**
+Imagine building a skyscraper. In dynamic languages (Python/JS), you write an SQL query as a plain string, ship it to production, and hope the database accepts it. That's like building bricks on-site and discovering at floor 50 that your brick dimensions don't fit the elevator shaft!
+`sqlx` is like sending your architectural blueprint (`schema.sql`) to the brick factory *before* construction begins. The factory inspector (`cargo build`) builds a tiny temporary database in the factory, runs your SQL query string against it at compile time, and checks if column names and data types match your Rust structs. If there is a typo (e.g., `FRM` instead of `FROM`), the brick factory halts compilation immediately!
+
+**Rust Context (Technical Explanation):**
+In `sqlx`, database queries can be executed using procedural macros (`sqlx::query!` and `sqlx::query_as!`).
+At `cargo build` time, `sqlx` connects to a database specified by `DATABASE_URL` (or a `.sqlite` database file), reads the database schema created by your migration files, and validates the SQL syntax, column names, and type mappings against your Rust types.
+`sqlx::FromRow` is a derive macro that automatically maps database rows into Rust structs (`struct Bookmark { id: i64, url: String, title: String }`).
