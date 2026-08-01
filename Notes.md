@@ -1217,3 +1217,24 @@ With sqlx:
 2. Compile Time Verification - During cargo build , the sqlx macro connects to the SQLite schema defined in our migration file, checks that the query is valid SQL and veriifes that the return column types match our Rust struct types 
 3. Automatic row mapping (sqlx::FromRow) - The #[derive(sqlx::FromRow)] macro automatically generates code to convert SQLite database rows directly into our Bookmark struct without writing manual column parsing functions
 
+
+- `Concept 3 - Shared State & Connection Pooling (Arc<AppState> & SqlitePool)`
+- `Build Axum Server and Appstate with connection pool`
+
+(38208 - 21279) + 16929 + 14180 = 31109 
+52388 - 31109 = 21279
+- `Arc<AppState>` & `SqlitePool` 
+- Imagine a city taxi company with 50 drivers (async request handler tasks). Opening a brand new database connection for every single incoming customer is like buying a brand new taxi every time a customer calls, driving them 2 blocks , and then crushing the taxi in a junkyard
+
+- `A Database Connection Pool (SqlitePool)` is a fleet of 5 pre-purchased taxis parked at headquarters. When a customer calls (a POST/bookmarks request), the dipatcher (AppState) lends out taxi #2. when the trip finishes, taxi #2 drives back to headquarters and waits for the next customer
+
+- `Arc`Atomic Reference Counted pointer is the central radio system that lets all 50 drivers safely share access to the same dispatcher across multi-threaded tasks without crashing
+
+
+2. `Async connection Polling and Axum state`
+- Opening a SQL database connection involves file system operations, file locks and memory allocation. In a web server handling 10000 concurrent requests, creating a new connection per request causes extreme latency and resource exhaustion. `sqlx::SqlitePool` maintains a fixed set of open database connections eg- 5 connections. In Axum we package SqlitePoll inside an AppState struct wrap it in Arc<AppState> and attach it to the router using .with_state(app_state).
+- When a HTTP handler requests State(state), Axum cheaply clones the Arc pointer bumping an atomic refcount so every thread can execute non-blocking SQL queried simultaneously.
+
+- Initialize an embedded SQLite database (sqliite://bookmarks.db) run pending SQL migrations on startup, wrap the connection pool inside an AppState struct, configure an Axum router with a health check route (GET/health) and bind the server to 127.0.0.1:3000.
+- A running web server that listens on port 3000 and responds with 200 OK "Api is healthy" when hit with an HTTP GETrequest to /health
+

@@ -33,6 +33,20 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-08-01 14:49 IST — [task.md] — Completed Step 4</summary>
+
+- **Files:** task.md
+- **Change type:** Modified
+- **Reason:** User built the Axum web server and `AppState` database connection pool, fixed nested function error, and verified `/health` endpoint with curl. Checked off Step 4.
+
+```diff
+- - `[ ]` Step 4: Build Axum Web Server & `AppState` with connection pool
++ - `[x]` Step 4: Build Axum Web Server & `AppState` with connection pool
+```
+
+</details>
+
+<details>
 <summary>2026-07-31 16:20 IST — [task.md / src/models.rs] — Completed Step 3 & Fixed Semicolon</summary>
 
 - **Files:** task.md, bookmark_api/src/models.rs

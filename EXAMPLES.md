@@ -553,3 +553,15 @@ Imagine building a skyscraper. In dynamic languages (Python/JS), you write an SQ
 In `sqlx`, database queries can be executed using procedural macros (`sqlx::query!` and `sqlx::query_as!`).
 At `cargo build` time, `sqlx` connects to a database specified by `DATABASE_URL` (or a `.sqlite` database file), reads the database schema created by your migration files, and validates the SQL syntax, column names, and type mappings against your Rust types.
 `sqlx::FromRow` is a derive macro that automatically maps database rows into Rust structs (`struct Bookmark { id: i64, url: String, title: String }`).
+
+---
+
+### Concept 47: Shared State & Connection Pooling (`Arc<AppState>` & `SqlitePool`)
+
+**The Analogy: The Taxi Fleet Dispatcher**
+Imagine a city taxi company with 50 drivers (async request handler tasks). Opening a brand-new database connection for every single incoming customer is like buying a brand-new taxi every time a customer calls, driving them 2 blocks, and then crushing the taxi in a junkyard!
+A Database Connection Pool (`SqlitePool`) is a fleet of 5 pre-purchased taxis parked at headquarters. When a customer calls (a `POST /bookmarks` request), the dispatcher (`AppState`) lends out taxi #2. When the trip finishes, taxi #2 drives back to headquarters and waits for the next customer. `Arc` (Atomic Reference Counted pointer) is the radio system that lets all 50 drivers safely share access to the same central dispatcher across multi-threaded tasks.
+
+**Rust Context (Technical Explanation):**
+Opening an SQL database connection involves file system operations, TCP handshakes, and memory allocations. In a web server handling 10,000 concurrent requests, creating a new connection per request causes extreme latency and resource exhaustion.
+`sqlx::SqlitePool` maintains a fixed set of open database connections. In Axum, we package `SqlitePool` inside an `AppState` struct, wrap it in `Arc<AppState>` (or rely on Axum's built-in `Extension`/`State` cloning mechanism which internally uses `Arc`), and pass it to `.with_state(app_state)`. When an HTTP handler requests `State(state)`, Axum cheaply clones the `Arc` pointer (bumping an atomic refcount) so every thread can execute non-blocking SQL queries simultaneously.

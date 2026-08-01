@@ -1430,4 +1430,16 @@
 **Output Summary:** Humbly owned the mistake. Delivered the full, in-depth ELI5 analogy (The Blueprint Inspector at the Brick Factory) and Technical Explanation for **Concept 46 (Compile-Time Checked SQL & Migrations)** directly in the response text (Rule 8), mapping it to the SQL migration schema and `models.rs` code.
 **Outcome / Next Step:** Learner will read the ELI5 analogy and technical explanation for Concept 46 in the response, add it to `Notes.md`, and implement Step 3.
 
+### 2026-07-31 16:20 IST — Prompt #237
+**Prompt:** "Done . Let's move to next step . Don't missout on any rules listed in the @[RULES.md] file"
+**Context:** User completed Step 3 (SQL migration schema & `models.rs`) and committed changes.
+**Output Summary:** Fixed missing semicolon on line 1 of `models.rs`. Checked off Step 3 in `task.md`. Logged updates in `LOGS.md` (Rule 2). Added Concept 47 (Shared State & Connection Pooling) to `EXAMPLES.md` per Rule 8, including the "Taxi Fleet Dispatcher" ELI5 analogy and technical breakdown. Presented Step 4 (Building Axum Web Server & `AppState` with connection pool) strictly adhering to Rule 12 (Goal/Outcome), Rule 8 (ELI5 + Tech in response text), Rule 9 (What/How/Why), Rule 11 (Extreme Syntax Breakdown), and Rule 7 (Self-implementation guidance).
+**Outcome / Next Step:** Learner will implement `src/main.rs` to set up the SQLite database pool and launch the Axum web server on port 3000.
+
+### 2026-08-01 14:44 IST — Prompt #238
+**Prompt:** "We end up having errors in the code yu provided"
+**Context:** User ran `cargo run` and encountered compilation errors because `health_check` was accidentally placed inside the `async fn main()` block in `src/main.rs`.
+**Output Summary:** Analyzed the compiler diagnostic logs. Located the root cause: nested function definition inside `main()` causing `main()`'s return type evaluation to collapse from `Result<(), Box<dyn Error>>` into `()`, triggering `?` operator errors. Fixed `src/main.rs` by moving `health_check` to the top-level scope outside `main()` and removing a stray backtick typo. Explained the root cause and compiler errors clearly.
+**Outcome / Next Step:** Learner will run `cargo run` in `bookmark_api` and test `curl http://127.0.0.1:3000/health`.
+
 <!-- New entries appended below -->
