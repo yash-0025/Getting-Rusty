@@ -565,3 +565,24 @@ A Database Connection Pool (`SqlitePool`) is a fleet of 5 pre-purchased taxis pa
 **Rust Context (Technical Explanation):**
 Opening an SQL database connection involves file system operations, TCP handshakes, and memory allocations. In a web server handling 10,000 concurrent requests, creating a new connection per request causes extreme latency and resource exhaustion.
 `sqlx::SqlitePool` maintains a fixed set of open database connections. In Axum, we package `SqlitePool` inside an `AppState` struct, wrap it in `Arc<AppState>` (or rely on Axum's built-in `Extension`/`State` cloning mechanism which internally uses `Arc`), and pass it to `.with_state(app_state)`. When an HTTP handler requests `State(state)`, Axum cheaply clones the `Arc` pointer (bumping an atomic refcount) so every thread can execute non-blocking SQL queries simultaneously.
+
+---
+
+### Concept 48: CRUD API Handlers & Response Mapping (`IntoResponse`)
+
+**The Analogy: The Restaurant Kitchen Waiter**
+Imagine a restaurant kitchen. The customer sits in the dining room (HTTP Client) and orders a dish (`POST /bookmarks`). 
+The waiter (Axum Route Handler) takes the order, walks into the kitchen, and asks the chef (`sqlx` + SQLite DB) to cook the meal.
+*   If the chef successfully cooks the steak (`sqlx::query_as!` succeeds), the waiter plates it nicely (`(StatusCode::CREATED, Json(bookmark))`) and delivers it to the customer with a green receipt (`201 Created`).
+*   If the kitchen ran out of steak (`sqlx` returns `RowNotFound`), the waiter politely informs the customer (`StatusCode::NOT_FOUND`) with a red receipt (`404 Not Found`).
+*   If the kitchen oven exploded (`sqlx` DB error), the waiter apologizes (`(StatusCode::INTERNAL_SERVER_ERROR, "Database error")`) with a yellow receipt (`500 Internal Server Error`).
+
+The waiter doesn't throw raw kitchen pots at the customer. Every outcome is converted into a polite, standard HTTP response tuple (`(StatusCode, Body)`).
+
+**Rust Context (Technical Explanation):**
+In Axum, any type that implements the `IntoResponse` trait can be returned by an `async fn` handler.
+Common return types include:
+1. `(StatusCode, Json<T>)`: e.g. `(StatusCode::CREATED, Json(new_bookmark))` for `201 Created` responses.
+2. `Json<Vec<T>>`: Automatically sets `Content-Type: application/json` and returns HTTP `200 OK`.
+3. `Result<Impl IntoResponse, StatusCode>`: Allows returning `Ok(...)` on success or `Err(StatusCode)` on database failures.
+4. `sqlx::query_as!(Bookmark, ...).fetch_all(&pool).await`: Executes a type-checked SQL query and maps the returned rows directly into a `Vec<Bookmark>`.

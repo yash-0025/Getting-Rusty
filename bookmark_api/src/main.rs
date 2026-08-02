@@ -1,17 +1,44 @@
-use axum::{extract::State, routing::get, Router};
+use axum::{
+    extract::{State, Query, Path},
+    https::StatusCode,
+    routing::{delete, get, post},
+    Json, Router,
+};
 use sqlx::sqlite::SqlitePoolOptions;
 use sqlx::SqlitePool;
 use std::sync::Arc;
 
 
 mod models;
+use models::{Bookmark, CreateBookmark, SearchParams};
 
 
 pub struct AppState {
     pub db: SqlitePool,
 }
 
+#[tokio(main)]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    println!("Starting Bookmark API Server...");
 
+    let db_url = "sqlite://bookmarks.db?mode=rwc";
+    let pool = SqlitePoolOptions::new()
+        .max_connections(5)
+        .connect(db_url)
+        .await?;
+
+    sqlx::migrate!("./migrations").run(&pool).await?;
+    println!("Database migrations applied successfully");
+
+
+    let app_state = Arc::new(AppState { db: pool });
+
+    // Build Axum Router with all CRUD routes
+    let app = Router::new()
+        .route("/health", get(health))
+}
+
+/* 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("Starting Bookmark API server...");
@@ -72,4 +99,6 @@ async fn health_check(State(state): State<Arc<AppState>>) -> &'static str {
     // Simple verification that we can acquire a connection from the pool
     let _conn = state.db.acquire().await;
     "OK - Bookmark API is healthy!"
-}
+} */
+
+

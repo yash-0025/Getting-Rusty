@@ -33,6 +33,25 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-08-01 14:49 IST — [EXAMPLES.md] — Added Concept 48</summary>
+
+- **Files:** EXAMPLES.md
+- **Change type:** Modified
+- **Reason:** Added Concept 48 (CRUD API Handlers & `IntoResponse` Response Mapping) to `EXAMPLES.md` per Rule 8, including the "Restaurant Kitchen Waiter" ELI5 analogy and technical explanation.
+
+```diff
++ ### Concept 48: CRUD API Handlers & Response Mapping (`IntoResponse`)
++ 
++ **The Analogy: The Restaurant Kitchen Waiter**
++ Imagine a restaurant kitchen...
++ 
++ **Rust Context (Technical Explanation):**
++ In Axum, any type that implements the `IntoResponse` trait can be returned by an `async fn` handler...
+```
+
+</details>
+
+<details>
 <summary>2026-08-01 14:49 IST — [task.md] — Completed Step 4</summary>
 
 - **Files:** task.md
