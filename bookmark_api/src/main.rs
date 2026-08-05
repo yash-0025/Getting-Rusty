@@ -35,8 +35,74 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Build Axum Router with all CRUD routes
     let app = Router::new()
-        .route("/health", get(health))
+        .route("/health", get(health_check))
+        .route("/bookmarks", 
+    post(create_bookmark).get(list_bookmarks))
+        .route("/bookmarks/search", get(search_bookmarks))
+        .route("/bookmarks/:id", delete(delete_bookmark))
+        .with_state(app_state);
+
+    
+    let listener = tokio::net::TcpListener::bind("127.0.0.1:3000").await?;
+    println!("Server listening on http://127.0.0.1:3000");
+
+    axum::serve(listener, app).await?;
+    Ok(())
+
 }
+
+// 1. Health Check
+async fn health_check(State(state): State<Arc<AppState>>) -> &'static str {
+    let _come = state.db.acquire().await;
+    "OK - Bookmark API is healthy!"
+}
+
+
+async fn create_bookmark(
+    State(state): State<Arc<AppState>>,
+    Json(payload): Json<CreateBookmark>,
+) -> Result<(StatusCode, Json<Bookmark>), (StatusCode, String)> {
+    let description = payload.description.unwrap_or_default();
+    let tags = payload.tags.unwrap_or_default();
+
+    let bookmark = sqlx::query_as!(
+        Bookmark,
+        r#",
+        INSERT INTO bookmarks (url, title, description, tags)
+        VALUES (?1, ?2, ?3, ?4)
+        RETURNING id, url, title, description, tags, created_at
+        "#,
+        payload.url,
+        payload.title,
+        tags
+    )
+    .fetch_one(&state.db)
+    .await
+    .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
+
+    OK((StatusCode::CREATED, Json(bookmark)))
+}
+
+
+async fn list_bookmarks(
+    State(state): State<Arc<AppState>,
+) -> Result<Json<Vec<Bookmark>>, (StatusCode, String)> {
+    let bookmarks = sqlx::query_as!(
+        Bookmark,
+        "SELECT id, url, title, description, tags, created_at FROM bookmarks ORDER BY id DESC"
+    )
+    .fetch_all(&state.db)
+    .await
+    .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
+
+    Ok(Json(bookmarks))
+}
+
+
+async fn search_bookmarks(
+    State(state): State<Arc<AppState>>,
+    Query(params): Query<SearchParams>,
+) -> Result<Json<Vec<Bookmark>>, (StatusCode)>
 
 /* 
 #[tokio::main]
