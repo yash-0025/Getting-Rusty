@@ -33,6 +33,99 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-10-06 15:08 IST — [hinglish-docs.md] — Created comprehensive Hinglish documentation covering Day 1 to Day 21</summary>
+
+- **File:** hinglish-docs.md
+- **Change type:** Created
+- **Reason:** Comprehensive retroactive documentation of all completed curriculum modules (Day 1 through Day 21 / all 20 projects) with deep technical mechanics and fun-to-read, engaging Hinglish blend per Rule 17.
+
+```diff
++ # 🇮🇳 Hinglish Docs — Rust Systems Mastery
++ 
++ > **Kyun hai ye file? (Knowledgeable + Fun to Read!)**  
++ > Technical English books aur compiler error messages padhte-padhte jab dimaag garam hone lage aur cheezein boring lagne lagein, tab ye file kholo! Yahan humne Day 1 se lekar Day 21 (REST API with SQLite & Axum) tak jo bhi core systems concepts, memory layouts, borrow checker ke jhatke, concurrency rules aur design trade-offs seekhe hain, unhe ekdum mast **Knowledgeable + Fun** blend me likha hai.  
++ > *Rule 17 ke mutabiq*: Na sirf boring technical dictionary translation, aur na hi hawa-hawaai baatein — yahan **solid low-level engineering** ko real-world analogies aur conversational Hinglish ke sath blend kiya gaya hai taaki tum aur aane wali generations isse padhkar systems programming me maza bhi le sakein aur bare-metal performance master kar sakein! 🚀
++ 
++ ---
++ 
++ ## 🧭 Table of Contents
++ 1. [Big Picture: Rust Kyun Seekh Rahe Hain? (The Systems Revolution)](#1-big-picture-rust-kyun-seekh-rahe-hain-the-systems-revolution)
++ 2. [Day 1 — "Hello Cargo" & Project Scaffold (`hello-rust`)](#2-day-1--hello-cargo--project-scaffold-hello-rust)
++ 3. [Day 2 — Multi-Unit Converter CLI (`unit-converter`)](#3-day-2--multi-unit-converter-cli-unit-converter)
++ 4. [Day 3 — File Duplicate Finder & Memory Core (`duplicate-finder`)](#4-day-3--file-duplicate-finder--memory-core-duplicate-finder)
++ 5. [Day 4 — In-Memory Task Tracker (`task-tracker`)](#5-day-4--in-memory-task-tracker-task-tracker)
++ 6. [Day 5 — Persistent Task Tracker & Error Handling (`persistent-tracker`)](#6-day-5--persistent-task-tracker--error-handling-persistent-tracker)
++ 7. [Day 6 — Text Analytics Engine & UTF-8 Strings (`text-analyzer`)](#7-day-6--text-analytics-engine--utf-8-strings-text-analyzer)
++ 8. [Day 7 — Week 1 Capstone: Polished CLI Task Manager (`capstone-tracker`)](#8-day-7--week-1-capstone-polished-cli-task-manager-capstone-tracker)
++ 9. [Day 8 — Generic Stack & Queue Collection Library (`collections`)](#9-day-8--generic-stack--queue-collection-library-collections)
++ 10. [Day 9 — Plugin-Based Shape Calculator & Dynamic Dispatch (`shapes`)](#10-day-9--plugin-based-shape-calculator--dynamic-dispatch-shapes)
++ 11. [Day 10 — Zero-Copy Config Parser & Lifetimes (`config_parser`)](#11-day-10--zero-copy-config-parser--lifetimes-config_parser)
++ 12. [Day 11 — Expression Evaluator & Smart Pointers (`expression_evaluator`)](#12-day-11--expression-evaluator--smart-pointers-expression_evaluator)
++ 13. [Day 12 — File System Tree Simulator & Weak References (`file_system`)](#13-day-12--file-system-tree-simulator--weak-references-file_system)
++ 14. [Day 13 — Comprehensive Test Suite & Documentation](#14-day-13--comprehensive-test-suite--documentation)
++ 15. [Day 14 — Week 2 Capstone: Generic In-Memory Cache with TTL (`in_memory_cache`)](#15-day-14--week-2-capstone-generic-in-memory-cache-with-ttl-in_memory_cache)
++ 16. [Day 15 — Parallel File Word Counter & Fearless Concurrency (`parallel_word_counter`)](#16-day-15--parallel-file-word-counter--fearless-concurrency-parallel_word_counter)
++ 17. [Day 16 — Multi-Stage Data Pipeline with Channels (`data_pipeline`)](#17-day-16--multi-stage-data-pipeline-with-channels-data_pipeline)
++ 18. [Day 17 — Async URL Health Checker & Tokio Runtime (`health_checker`)](#18-day-17--async-url-health-checker--tokio-runtime-health_checker)
++ 19. [Day 18 — Rate-Limited Web Scraper & Racing Futures (`web_scraper`)](#19-day-18--rate-limited-web-scraper--racing-futures-web_scraper)
++ 20. [Day 19 — Architecture: Traits as Interfaces & Dependency Injection (`payment_processor`)](#20-day-19--architecture-traits-as-interfaces--dependency-injection-payment_processor)
++ 21. [Day 20–21 — Production REST API with Database: Axum + sqlx + SQLite (`bookmark_api`)](#21-day-2021--production-rest-api-with-database-axum--sqlx--sqlite-bookmark_api)
++ 22. [Rust Systems Cheatsheet: "Ye Kyun Use Kiya, Wo Kyun Nahi?"](#22-rust-systems-cheatsheet-ye-kyun-use-kiya-wo-kyun-nahi)
++ (Full 620+ lines of detailed explanations, systems architecture diagrams, code walkthroughs, and analogies)
+```
+
+</details>
+
+<details>
+<summary>2026-10-06 15:05 IST — [.agents/rules/hinglish-docs.md] — Created workspace rule for Hinglish docs</summary>
+
+- **File:** .agents/rules/hinglish-docs.md
+- **Change type:** Created
+- **Reason:** Configured Antigravity workspace rule ensuring dual English + Hinglish explanations and permanent knowledge archiving.
+
+```diff
++ # Dual English + Hinglish Explanations & Reference Documentation
++ 
++ ## Context & Purpose
++ Technical systems programming concepts in Rust (ownership, borrow checker, lifetimes, fearless concurrency, smart pointers, async runtimes, compile-time SQL verification) can easily become dry, tedious, and cognitively exhausting when presented purely in academic jargon. To make learning engaging, intuitive, and fun, the learner prefers explanations in everyday **Hinglish** (Hindi written in Roman/English script, combined naturally with technical English terms).
++ 
++ ## Core Directives
++ 
++ 1. **Dual Explanation in Chat Responses**:
++    - Whenever explaining concepts, system architecture, data flows, code walkthroughs, design trade-offs, exercises, or Rust decisions, ALWAYS provide BOTH:
++      - Clear, professional technical English (including domain ELI5 analogies per Rule 8).
++      - An engaging, punchy, fun, and crystal-clear **Hinglish technical breakdown** explaining what is actually happening "under the hood" from an engineering perspective.
++ 
++ 2. **Knowledgeable + Fun to Read Blend in `hinglish-docs.md`**:
++    - Do NOT write dry, academic translations of technical English, and do NOT isolate stories from technical facts.
++    - Deliver a seamless blend of **deep technical knowledge + engaging, fun, conversational delivery**:
++      - Explain real engineering problems, memory models (stack vs heap), borrow checker rules, zero-cost abstractions, monomorphization, async runtimes (Tokio task scheduling), and Rust typing decisions.
++      - Frame them with funny, memorable, relatable intuition (e.g. "Stack sticky note hai, Heap library book hai", "Ownership matlab single library book rule", "Arc taxi company ka central radio system hai", "sqlx brick factory ka inspector hai jo compile time pe hi pakad leta hai").
++    - Every Hinglish blended explanation provided must be stored verbatim in `hinglish-docs.md` (no omitting, no paraphrasing, per Rule 16).
++ 
++ 3. **Retroactive Coverage**:
++    - Maintain a running chronicle in `hinglish-docs.md` starting from Day 1 through all future days without gaps.
+```
+
+</details>
+
+<details>
+<summary>2026-10-06 15:05 IST — [RULES.md] — Added Rule 16 (Zero Paraphrasing) and Rule 17 (Dual Hinglish Explanations & hinglish-docs.md)</summary>
+
+- **File:** RULES.md
+- **Change type:** Modified
+- **Reason:** Codified Rule 16 (strict verbatim recording without silent shortening) and Rule 17 (dual English + Hinglish explanations blending deep systems knowledge with fun, relatable delivery stored in `hinglish-docs.md`).
+
+```diff
+  15. **System Design & Architecture Deep Dive:** Whenever starting a new project, the AI MUST explain the underlying system design, the architecture flow, and the "how, why, and what" of the system as a whole. The learner must understand the grand architectural vision and system flow before writing a single line of code, ensuring they are comfortable with the "big picture" of how components communicate.
++ 
++ 16. **Zero independent paraphrasing during file writes.** The AI writes the exact text shown in chat into the file, and vice versa - no silent shortening or summarizing when persisting to EXAMPLES.md, hinglish-docs.md, LOGS.md, etc.
++ 17. **Dual English + Hinglish Explanations (Knowledgeable + Fun to Read Blend), stored verbatim in hinglish-docs.md.** Whenever explaining concepts, architecture, system flows, code walkthroughs, exercises, or decisions, the AI must provide BOTH clean English AND an engaging, crystal-clear explanation in **Hinglish** (Hindi written in Roman/Latin script, mixed naturally with English terms). Technical jargon alone feels dry and boring, while pure analogies without depth feel incomplete; the AI must deliver a seamless blend of **deep technical knowledge + fun, relatable, lively delivery**. In hinglish-docs.md, weave the core technical mechanics, memory models, borrow checker rules, runtime internals, and Rust systems trade-offs directly together with punchy, entertaining intuition so it is both rich in engineering depth and fun to read. Crucially, the AI must store the exact same Hinglish blended explanations directly into hinglish-docs.md (no omitting, no paraphrasing, per Rule 16) so the learner can revisit and reference them anytime.
+```
+
+</details>
+
+<details>
 <summary>2026-08-01 14:49 IST — [EXAMPLES.md] — Added Concept 48</summary>
 
 - **Files:** EXAMPLES.md

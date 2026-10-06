@@ -102,7 +102,17 @@ async fn list_bookmarks(
 async fn search_bookmarks(
     State(state): State<Arc<AppState>>,
     Query(params): Query<SearchParams>,
-) -> Result<Json<Vec<Bookmark>>, (StatusCode)>
+) -> Result<Json<Vec<Bookmark>>, (StatusCode, String)> {
+    let query_str = params.q.unwrap_or_default();
+    let pattern = format!("%{}%", query_str);
+
+
+    let bookmarks = sqlx::query_as!(
+        Bookmark,
+        r#"SELECT id, url, title, description, tags, created_at FROM bookmarks WHERE title LIKE ?1 OR tags LIKE ?1 OR url LIKE ?1 ORDER BY id DESC"#,
+        pattern
+    )
+}
 
 /* 
 #[tokio::main]
