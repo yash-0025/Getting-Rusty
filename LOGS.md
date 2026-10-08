@@ -33,6 +33,33 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-10-08 19:03 IST — [rust_book/01_core_syntax_types_control_flow.md] — Updated Volume 1 with all atomic syllabus additions</summary>
+
+- **File:** rust_book/01_core_syntax_types_control_flow.md
+- **Change type:** Modified
+- **Reason:** Upgraded Volume 1 to align with the expanded 13-volume master blueprint. Added all 13 reserved future keywords, the 4 integer overflow defense families (`checked_`, `saturating_`, `wrapping_`, `overflowing_`), IEEE-754 NaN traps & `total_cmp`, Unit type `()` ZST zero-byte mechanics, nested loop labels (`'outer`), function pointers (`fn`), expanded 10-point systems matrix, and line-by-line walkthrough per Rule 11.
+
+```diff
+- ## 2. Har Ek Keyword & Syntax Token Ka Post-Mortem
+- Rust me total ~39 reserved keywords hain. Yahan har ek ka precise meaning aur systems impact diya gaya hai:
+- ### 🔑 Core Keywords Catalog
++ ## 2. Exhaustive Keyword Catalog: All 39 Active + 13 Reserved Future Keywords
++ Rust me language design itna strict hai ki keywords ko do categories me divide kiya gaya hai: **Active Keywords** aur **Reserved Keywords**...
++ [Added detailed explanations for abstract, become, box, do, final, macro, override, priv, typeof, unsized, virtual, yield, try]
+...
++ ## 5. Integer Overflow Defense: The 4 Protective Method Families
++ [Added checked_add, saturating_add, wrapping_add, overflowing_add]
++ ## 6. Floating-Point Traps: IEEE-754, NaN & `total_cmp`
++ [Added NaN != NaN mechanics and f64::total_cmp]
++ ## 13. "Why, When, Where, How & Why This Not That" 10-Point Systems Matrix
++ [Expanded to 10 comprehensive systems architectural decisions]
++ [Updated master demo code and line-by-line breakdown covering all newly introduced concepts]
+```
+
+</details>
+
+
+<details>
 <summary>2026-10-08 18:50 IST — [rust_book/00_master_index_and_roadmap.md] — Massive expansion into exhaustive 13-volume atomic syllabus</summary>
 
 - **File:** rust_book/00_master_index_and_roadmap.md
