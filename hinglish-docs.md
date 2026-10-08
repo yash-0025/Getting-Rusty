@@ -29,6 +29,7 @@
 20. [Day 19 — Architecture: Traits as Interfaces & Dependency Injection (`payment_processor`)](#20-day-19--architecture-traits-as-interfaces--dependency-injection-payment_processor)
 21. [Day 20–21 — Production REST API with Database: Axum + sqlx + SQLite (`bookmark_api`)](#21-day-2021--production-rest-api-with-database-axum--sqlx--sqlite-bookmark_api)
 22. [Rust Systems Cheatsheet: "Ye Kyun Use Kiya, Wo Kyun Nahi?"](#22-rust-systems-cheatsheet-ye-kyun-use-kiya-wo-kyun-nahi)
+23. [📚 Sampoorna Rust Grantha: The Modular Hinglish Rust Book (`rust_book/`)](#23--sampoorna-rust-grantha-the-modular-hinglish-rust-book-rust_book)
 
 ---
 
@@ -477,5 +478,31 @@ Week 3 ka grand build: Ek production-grade async REST API jo embedded SQLite dat
 | **Thread Communication** | `mpsc` Channels | Shared Mutex State | Shared state deadlocks aur lock contention create karta hai; channels pipeline isolation dete hain. |
 | **High Concurrency I/O (10k+ req)** | Async Tokio Tasks (`tokio::spawn`) | OS Threads (`std::thread::spawn`) | OS threads 2-8MB stack space lete hain aur context switch heavy hota hai; Tokio tasks few hundred bytes lete hain. |
 | **Database Queries** | `sqlx` Macro Verification | Dynamic ORMs / Raw String SQL | Runtime pe SQL syntax errors nahi aate; compiler schema verify kar leta hai. |
+---
+
+## 23. 📚 Sampoorna Rust Grantha: The Modular Hinglish Rust Book (`rust_book/`)
+
+> **Kyun Banayi Gayi Ye Modular Series? (Mastering Every Single Element of Rust)**  
+> Tumne request kiya tha ki koi bhi cheez piche na chhoote — har ek keyword, har ek primitive type, memory layout, stack/heap dynamics, borrow checker rules, zero-cost abstractions, unsafe mechanics, aur production crates (`tokio`, `axum`, `serde`, `sqlx`, etc.) ke har function aur trade-off ka atomic post-mortem ho.  
+> Isliye humne ek dedicated modular directory banayi hai: [`rust_book/`](file:///c:/Dev/Rust/rust_book/) jo 13 Comprehensive Engineering Volumes me structured hai!
+
+### 🗺️ Modular Book Volumes & Navigation:
+
+| Volume | Chapter File Link | Coverage & Highlights |
+|---|---|---|
+| **Volume 00** | [Blueprint & Ecosystem Catalog](file:///c:/Dev/Rust/rust_book/00_master_index_and_roadmap.md) | Complete curriculum architecture, 5-Pillar Matrix (Why, When, Where, How, Why Not), Crate master list |
+| **Volume 01** | [Core Syntax, Types & Control Flow](file:///c:/Dev/Rust/rust_book/01_core_syntax_types_control_flow.md) | 39 Keywords, 16 Primitive Types, Byte alignment, Mutability, Expressions, `loop { break val; }`, Match guards, `let...else` |
+| **Volume 02** | [Ownership, Borrowing & Lifetimes](file:///c:/Dev/Rust/rust_book/02_ownership_borrowing_lifetimes.md) | Stack vs Heap, Move semantics, Copy vs Clone, Aliasing XOR Mutability, Non-Lexical Lifetimes (NLL), Explicit Lifetimes (`'a`), Subtyping |
+| **Volume 03** | [Structs, Enums & Pattern Matching](file:///c:/Dev/Rust/rust_book/03_structs_enums_pattern_matching.md) | Algebraic Data Types, Zero-Sized Types (ZST), Tuple Structs, Exhaustive Pattern Matching, Destructuring, `Option<T>` null-killer |
+| **Volume 04** | [Collections & UTF-8 Strings](file:///c:/Dev/Rust/rust_book/04_collections_and_data_structures.md) | `Vec<T>`, Slices, `String` vs `&str` UTF-8 internals, `HashMap` Entry API, `BTreeMap`, Iterators, Functional adapters |
+| **Volume 05** | [Error Handling & Robustness](file:///c:/Dev/Rust/rust_book/05_error_handling_and_robustness.md) | `Result<T, E>`, `?` Operator desugaring, Panic vs Result, `unwrap` smell, `thiserror` (Libraries) vs `anyhow` (Applications) |
+| **Volume 06** | [Traits, Generics & Dynamic Dispatch](file:///c:/Dev/Rust/rust_book/06_traits_generics_advanced_types.md) | Static Dispatch (Monomorphization) vs Dynamic Dispatch (`dyn Trait` / Vtable), Associated Types, Object Safety, Const Generics |
+| **Volume 07** | [Smart Pointers & Memory Internals](file:///c:/Dev/Rust/rust_book/07_smart_pointers_interior_mutability_memory_internals.md) | `Box<T>`, `Rc<T>`, `Arc<T>`, `RefCell<T>`, Interior Mutability, Deref coercion, Drop RAII mechanics, Cycle Breaking with `Weak` |
+| **Volume 08** | [Fearless Concurrency & Atomics](file:///c:/Dev/Rust/rust_book/08_concurrency_threads_channels_atomics.md) | OS Threads, `Send` & `Sync` mathematical guarantees, Mutex poisoning, `RwLock`, `mpsc` Channels, Lock-free Atomics (`AtomicUsize`) |
+| **Volume 09** | [Async Rust & Tokio Runtime Internals](file:///c:/Dev/Rust/rust_book/09_async_await_tokio_event_loop.md) | Lazy Futures, Epoll/IOCP event loops, Tokio green tasks vs OS threads, `tokio::select!`, Cooperative scheduling, Semaphores |
+| **Volume 10** | [Production Crate Ecosystem Bible](file:///c:/Dev/Rust/rust_book/10_production_crate_ecosystem_bible.md) | Axum, SQLx, Serde, Reqwest, Clap, Rayon, Tracing, Criterion — Functions, Trade-offs & Production Architectures |
+| **Volume 11** | [Unsafe Rust & Systems Internals](file:///c:/Dev/Rust/rust_book/11_unsafe_rust_ffi_bare_metal.md) | The Rustonomicon: Raw Pointers (`*const`, `*mut`), Undefined Behavior (UB), FFI (`extern "C"`), Memory Alignment, Transmute |
+| **Volume 12** | [Macro Metaprogramming](file:///c:/Dev/Rust/rust_book/12_macro_system_declarative_procedural.md) | Declarative `macro_rules!`, Procedural Derive Macros (`syn`, `quote`), Custom Attributes, `cargo expand` code inspection |
+| **Volume 13** | [Architecture, Tooling & CI/CD](file:///c:/Dev/Rust/rust_book/13_architecture_tooling_and_cicd.md) | Multi-crate workspaces, compiler flags, feature flags, testing mastery, cargo clippy/audit, Docker/musl deployments |
 
 ---

@@ -33,6 +33,112 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-10-08 18:50 IST — [rust_book/00_master_index_and_roadmap.md] — Massive expansion into exhaustive 13-volume atomic syllabus</summary>
+
+- **File:** rust_book/00_master_index_and_roadmap.md
+- **Change type:** Modified
+- **Reason:** User requested that the Master Index cover "the hell of things" without skipping anything. Expanded the file from 45 lines to 360+ lines, dissecting all 13 volumes into 150+ granular topics, subtopics, memory layouts, standard library internals, concurrency models, async event loops, unsafe powers, macros, and 20+ production crates.
+
+```diff
+- ## 🧭 Master Table of Contents & Modular Book Structure
+- Ye book 12 Comprehensive Volumes (Chapters) me structured hai. Har volume apne aap me ek deep engineering book hai:
+- | Chapter / Volume | File Path | Scope & Deep Topics | Status |
+- ... [45 lines total]
++ ## 🧭 Master Architecture: 13 Comprehensive Volumes
++ ... [360+ lines detailing exhaustive subtopic breakdowns for Volumes 01 through 13, including all 39 keywords, 16 primitives, overflow defense, NLL, variance, HRTB, ADTs, ZST, NPO, Vec capacity growth, UTF-8 indexing traps, SipHash vs AHash, BTreeMap, 20+ iterator adapters, thiserror vs anyhow, monomorphization vs vtables, Box/Rc/Arc/Cell/RefCell/Weak/Cow/Pin, Send/Sync math proof, Mutex poisoning, atomics & memory orderings, Tokio work-stealing scheduler, Future polling & wakers, async cancellation, Axum, SQLx, Serde, Reqwest, Clap, Rayon, Tracing, Criterion, Rustls, 5 unsafe superpowers, UB catalog, FFI & transmute, declarative & procedural macros, syn/quote, multi-crate workspaces, compiler flags, and CI/CD testing]
+```
+
+</details>
+
+<details>
+<summary>2026-10-08 18:49 IST — [hinglish-docs.md] — Added Volume 13 (Architecture & CI/CD) to Section 23 table</summary>
+
+- **File:** hinglish-docs.md
+- **Change type:** Modified
+- **Reason:** Synced Section 23 modular book table with the updated 13-volume master architecture.
+
+```diff
+-> Isliye humne ek dedicated modular directory banayi hai: [`rust_book/`](file:///c:/Dev/Rust/rust_book/) jo 12 Comprehensive Engineering Volumes me structured hai!
++> Isliye humne ek dedicated modular directory banayi hai: [`rust_book/`](file:///c:/Dev/Rust/rust_book/) jo 13 Comprehensive Engineering Volumes me structured hai!
+ ...
+  | **Volume 12** | [Macro Metaprogramming](file:///c:/Dev/Rust/rust_book/12_macro_system_declarative_procedural.md) | Declarative `macro_rules!`, Procedural Derive Macros (`syn`, `quote`), Custom Attributes, `cargo expand` code inspection |
++ | **Volume 13** | [Architecture, Tooling & CI/CD](file:///c:/Dev/Rust/rust_book/13_architecture_tooling_and_cicd.md) | Multi-crate workspaces, compiler flags, feature flags, testing mastery, cargo clippy/audit, Docker/musl deployments |
+```
+
+</details>
+
+
+<details>
+<summary>2026-10-08 18:28 IST — [hinglish-docs.md] — Added Section 23 linking to modular Hinglish Rust Book</summary>
+
+- **File:** hinglish-docs.md
+- **Change type:** Modified
+- **Reason:** Linked the newly created modular `rust_book/` directory and added Section 23: Sampoorna Rust Grantha with direct chapter links and coverage breakdown.
+
+```diff
+ 21. [Day 20–21 — Production REST API with Database: Axum + sqlx + SQLite (`bookmark_api`)](#21-day-2021--production-rest-api-with-database-axum--sqlx--sqlite-bookmark_api)
+ 22. [Rust Systems Cheatsheet: "Ye Kyun Use Kiya, Wo Kyun Nahi?"](#22-rust-systems-cheatsheet-ye-kyun-use-kiya-wo-kyun-nahi)
++23. [📚 Sampoorna Rust Grantha: The Modular Hinglish Rust Book (`rust_book/`)](#23--sampoorna-rust-grantha-the-modular-hinglish-rust-book-rust_book)
+ 
+ ---
+@@ -476,6 +477,31 @@
+ | **Thread Communication** | `mpsc` Channels | Shared Mutex State | Shared state deadlocks aur lock contention create karta hai; channels pipeline isolation dete hain. |
+ | **High Concurrency I/O (10k+ req)** | Async Tokio Tasks (`tokio::spawn`) | OS Threads (`std::thread::spawn`) | OS threads 2-8MB stack space lete hain aur context switch heavy hota hai; Tokio tasks few hundred bytes lete hain. |
+ | **Database Queries** | `sqlx` Macro Verification | Dynamic ORMs / Raw String SQL | Runtime pe SQL syntax errors nahi aate; compiler schema verify kar leta hai. |
++---
++
++## 23. 📚 Sampoorna Rust Grantha: The Modular Hinglish Rust Book (`rust_book/`)
++
++> **Kyun Banayi Gayi Ye Modular Series? (Mastering Every Single Element of Rust)**  
++> Tumne request kiya tha ki koi bhi cheez piche na chhoote — har ek keyword, har ek primitive type, memory layout, stack/heap dynamics, borrow checker rules, zero-cost abstractions, unsafe mechanics, aur production crates (`tokio`, `axum`, `serde`, `sqlx`, etc.) ke har function aur trade-off ka atomic post-mortem ho.  
++> Isliye humne ek dedicated modular directory banayi hai: [`rust_book/`](file:///c:/Dev/Rust/rust_book/) jo 12 Comprehensive Engineering Volumes me structured hai!
++
++### 🗺️ Modular Book Volumes & Navigation:
++
++| Volume | Chapter File Link | Coverage & Highlights |
++|---|---|---|
++| **Volume 00** | [Blueprint & Ecosystem Catalog](file:///c:/Dev/Rust/rust_book/00_master_index_and_roadmap.md) | Complete curriculum architecture, 5-Pillar Matrix (Why, When, Where, How, Why Not), Crate master list |
++| **Volume 01** | [Core Syntax, Types & Control Flow](file:///c:/Dev/Rust/rust_book/01_core_syntax_types_control_flow.md) | 39 Keywords, 16 Primitive Types, Byte alignment, Mutability, Expressions, `loop { break val; }`, Match guards, `let...else` |
++... (plus Volumes 02 through 12)
++---
++```
+
+</details>
+
+<details>
+<summary>2026-10-08 18:28 IST — [rust_book/01_core_syntax_types_control_flow.md] — Created Volume 1: Core Syntax, Types & Control Flow</summary>
+
+- **File:** rust_book/01_core_syntax_types_control_flow.md
+- **Change type:** Created
+- **Reason:** Comprehensive deep-dive covering all 39 keywords, 16 primitive types, hardware byte alignment, expressions vs statements, advanced control flow, Why/When/Where/Why-Not matrix, and line-by-line syntax walkthrough in knowledgeable + fun Hinglish.
+
+```diff
++ # 📖 Volume 01: Core Syntax, Data Types, Memory Layout & Control Flow
++ ## 🇮🇳 Sampoorna Rust Grantha — Prathama Adhyaya (Chapter 1)
++ 
++ > **Goal:** Rust ke har ek keyword, basic syntax, scalar & compound primitive types, stack byte alignment, mutability rules, expressions, loops, exhaustive pattern matching aur `let-else` constructs ko bare-metal level par samajhna.
++ ... [Full Chapter Content: 320+ lines covering compilation pipeline, keyword catalog, integer overflow mechanics, IEEE-754 floats, ZST, fat pointers, shadowing vs mutability, expressions, loops, pattern matching guards, let-else, diverging functions, 5-pillar trade-off matrix, and runnable demo with line-by-line breakdown]
+```
+
+</details>
+
+<details>
+<summary>2026-10-08 18:26 IST — [rust_book/00_master_index_and_roadmap.md] — Created Master Blueprint for Modular Hinglish Rust Book</summary>
+
+- **File:** rust_book/00_master_index_and_roadmap.md
+- **Change type:** Created
+- **Reason:** Established the 12-volume modular master blueprint and 5-pillar analytical matrix for the Complete Hinglish Rust Book.
+
+```diff
++ # 📚 Sampoorna Rust Grantha (The Complete Rust Book in Hinglish)
++ ## 🧭 Master Blueprint, Domain Architecture & Ecosystem Encyclopedia
++ ... [12 Modular Volumes from Foundations to Unsafe & Macros, with full scope mapping and 5-Pillar Matrix]
+```
+
+</details>
+
+
+<details>
 <summary>2026-10-06 15:08 IST — [hinglish-docs.md] — Created comprehensive Hinglish documentation covering Day 1 to Day 21</summary>
 
 - **File:** hinglish-docs.md
