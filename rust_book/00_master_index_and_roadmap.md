@@ -68,7 +68,7 @@
 ---
 
 ### 📖 Volume 02: Ownership, Borrowing, Lifetimes & Aliasing XOR Mutability
-**File:** [`02_ownership_borrowing_lifetimes.md`](file:///c:/Dev/Rust/rust_book/02_ownership_borrowing_lifetimes.md) *(Status: 📝 In Queue)*
+**File:** [`02_ownership_borrowing_lifetimes.md`](file:///c:/Dev/Rust/rust_book/02_ownership_borrowing_lifetimes.md) *(Status: ✅ Active & Completed)*
 
 - **1. Memory Layout Foundations:**
   - Stack (Fast, fixed-size, LIFO, register-tracked) vs Heap (Dynamic, OS allocator, fragmentation, metadata header).

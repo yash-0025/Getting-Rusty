@@ -33,6 +33,80 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-10-09 23:55 IST — [rust_book/02_ownership_borrowing_lifetimes.md] — Massive expansion covering all atomic roadmap subtopics</summary>
+
+- **File:** rust_book/02_ownership_borrowing_lifetimes.md
+- **Change type:** Modified
+- **Reason:** Expanded Volume 2 into a 620+ line masterwork to cover every single subtopic from the updated roadmap: Drop execution order, `std::mem::drop` vs `forget`, memory leak safety theorem, Partial Moves in structs, Match Ergonomics (`ref`/`ref mut`), Two-Phase Borrows in MIR, The 7 Deadly Borrow Checker Errors with code and fixes, Anonymous lifetimes `'_`, Multiple lifetime subtyping `'b: 'a`, Generic lifetime bounds `T: 'a`, Invariance proof of `&mut T`, Self-Referential Struct dilemma, expanded 12-point systems matrix, and line-by-line syntax breakdown for HRTB and partial moves.
+
+```diff
+- ## 🧭 Table of Contents
+- 1. [Stack vs Heap: Bare-Metal Memory Architecture & Hardware Cache Lines](#1-stack-vs-heap-bare-metal-memory-architecture--hardware-cache-lines)
+- ... [465 lines total]
++ ## 🧭 Table of Contents
++ 1. [Stack vs Heap: Bare-Metal Memory Architecture & Hardware Cache Lines](#1-stack-vs-heap-bare-metal-memory-architecture--hardware-cache-lines)
++ 2. [The 3 Inviolable Laws of Ownership & Deterministic RAII](#2-the-3-inviolable-laws-of-ownership--deterministic-raii)
++ 3. [Drop Mechanics: Execution Order, `std::mem::drop`, `forget` & Memory Leaks](#3-drop-mechanics-execution-order-stdmemdrop-forget--memory-leaks)
++ 4. [Move Semantics vs Copy vs Clone: Byte-Level Mechanics](#4-move-semantics-vs-copy-vs-clone-byte-level-mechanics)
++ 5. [Partial Moves: Moving Fields While Borrowing Structs](#5-partial-moves-moving-fields-while-borrowing-structs)
++ 6. [The Law of Borrowing: Aliasing XOR Mutability & Data Race Elimination](#6-the-law-of-borrowing-aliasing-xor-mutability--data-race-elimination)
++ 7. [Pattern Borrowing: `ref`, `ref mut` & Modern Match Ergonomics](#7-pattern-borrowing-ref-ref-mut--modern-match-ergonomics)
++ 8. [The Borrow Checker, MIR & Non-Lexical Lifetimes (NLL)](#8-the-borrow-checker-mir--non-lexical-lifetimes-nll)
++ 9. [Two-Phase Borrows: The Secret Behind `vec.push(vec.len())`](#9-two-phase-borrows-the-secret-behind-vecpushveclen)
++ 10. [Reborrowing Mechanics: Kyun `&mut T` Function Me Dobara Pass Ho Jata Hai?](#10-reborrowing-mechanics-kyun-mut-t-function-me-dobara-pass-ho-jata-hai)
++ 11. [The 7 Deadly Borrow Checker Errors & How to Fix Them](#11-the-7-deadly-borrow-checker-errors--how-to-fix-them)
++ 12. [Lifetimes Deep Dive: Asliyat Me `'a` Kya Hota Hai?](#12-lifetimes-deep-dive-asliyat-me-a-kya-hota-hai)
++ 13. [The 3 Lifetime Elision Rules (Compiler Ka Silent Magic)](#13-the-3-lifetime-elision-rules-compiler-ka-silent-magic)
++ 14. [Anonymous Lifetimes (`'_`): Where & Why to Use](#14-anonymous-lifetimes-_-where--why-to-use)
++ 15. [Explicit Lifetimes: Functions, Structs, Enums & Impl Blocks](#15-explicit-lifetimes-functions-structs-enums--impl-blocks)
++ 16. [Multiple Lifetime Parameters & Subtyping Bounds (`'b: 'a`)](#16-multiple-lifetime-parameters--subtyping-bounds-b-a)
++ 17. [Generic Lifetime Bounds (`T: 'a`)](#17-generic-lifetime-bounds-t-a)
++ 18. [The Duality of `'static`: Reference Lifetime vs Trait Bound](#18-the-duality-of-static-reference-lifetime-vs-trait-bound)
++ 19. [Subtyping, Variance & The Invariance of `&mut T`](#19-subtyping-variance--the-invariance-of-mut-t)
++ 20. [High-Ranked Trait Bounds (HRTB): `for<'a>`](#20-high-ranked-trait-bounds-hrtb-fora)
++ 21. [Senior Architecture Trap: The Self-Referential Struct Problem](#21-senior-architecture-trap-the-self-referential-struct-problem)
++ 22. ["Why, When, Where, How & Why This Not That" 12-Point Systems Matrix](#22-why-when-where-how--why-this-not-that-12-point-systems-matrix)
++ 23. [Master Working Code & Line-by-Line Syntax Walkthrough](#23-master-working-code--line-by-line-syntax-walkthrough)
+```
+
+</details>
+
+
+<details>
+<summary>2026-10-09 23:44 IST — [rust_book/02_ownership_borrowing_lifetimes.md] — Created Volume 2: Ownership, Borrowing, Lifetimes & Aliasing XOR Mutability</summary>
+
+- **File:** rust_book/02_ownership_borrowing_lifetimes.md
+- **Change type:** Created
+- **Reason:** Comprehensive deep dive into Rust's core memory safety innovations: Stack vs Heap L1/L2 cache lines, 3 Inviolable Laws of Ownership, Move vs Copy vs Clone byte mechanics, Aliasing XOR Mutability, Non-Lexical Lifetimes (NLL), Reborrowing (`&*`, `&mut *`), Lifetimes `'a`, 3 Elision Rules, `'static` duality, Variance & Subtyping, High-Ranked Trait Bounds (`for<'a>`), 6-point systems matrix, and master working code with line-by-line syntax walkthrough.
+
+```diff
++ # 📖 Volume 02: Ownership, Borrowing, Lifetimes & Aliasing XOR Mutability
++ ## 🇮🇳 Sampoorna Rust Grantha — Dvitiya Adhyaya (Chapter 2)
++ 
++ > **Maha-Uddeshya (Mission):**
++ > Ye chapter Rust language ka dimaag aur dil (Heart & Soul) hai...
++ ... [Full Chapter Content: 360+ lines covering Stack vs Heap L1/L2/L3 cache lines, 3 Laws of Ownership, deterministic RAII, shallow memcpy move semantics, double-free prevention, Copy vs Clone, Aliasing XOR Mutability data race elimination, NLL Control Flow Graphs, Two-Phase Borrows, Reborrowing mechanics, Dangling Pointer prevention, Lifetime annotations 'a, 3 Elision Rules, 'static reference vs T: 'static bound, Subtyping, Covariance, Invariance of &mut T, Contravariance of fn arguments, HRTB for<'a>, 6-point matrix, and runnable demo with line-by-line breakdown]
+```
+
+</details>
+
+<details>
+<summary>2026-10-09 23:43 IST — [rust_book/00_master_index_and_roadmap.md] — Updated Volume 2 status to Active & Completed</summary>
+
+- **File:** rust_book/00_master_index_and_roadmap.md
+- **Change type:** Modified
+- **Reason:** Marked Volume 02 as Active & Completed in the master book blueprint.
+
+```diff
+  ### 📖 Volume 02: Ownership, Borrowing, Lifetimes & Aliasing XOR Mutability
+- **File:** [`02_ownership_borrowing_lifetimes.md`](file:///c:/Dev/Rust/rust_book/02_ownership_borrowing_lifetimes.md) *(Status: 📝 In Queue)*
++ **File:** [`02_ownership_borrowing_lifetimes.md`](file:///c:/Dev/Rust/rust_book/02_ownership_borrowing_lifetimes.md) *(Status: ✅ Active & Completed)*
+```
+
+</details>
+
+
+<details>
 <summary>2026-10-08 19:03 IST — [rust_book/01_core_syntax_types_control_flow.md] — Updated Volume 1 with all atomic syllabus additions</summary>
 
 - **File:** rust_book/01_core_syntax_types_control_flow.md
