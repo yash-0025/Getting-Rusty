@@ -33,6 +33,79 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-10-10 15:26 IST — [rust_book/03_structs_enums_pattern_matching.md] — Massive expansion covering all advanced type system mechanics</summary>
+
+- **File:** rust_book/03_structs_enums_pattern_matching.md
+- **Change type:** Modified
+- **Reason:** Upgraded Volume 3 into a comprehensive masterwork covering: Visibility encapsulation and `#[non_exhaustive]` for semver protection, `std::mem::offset_of!` hardware offsets, Arbitrary self receivers (`self: Box<Self>`, `self: Arc<Self>`), Recursive Enums & `Box` indirection, Uninhabited empty enums (`enum Void {}`), `std::mem::discriminant` inspection, `Option::take()` & `replace()` under `&mut self`, Boolean blindness elimination, The Builder Pattern, expanded 15-point systems matrix, and line-by-line syntax walkthrough.
+
+```diff
+- ## 🧭 Table of Contents
+- 1. [Product Types vs Sum Types: The Algebraic Type Theory](#1-product-types-vs-sum-types-the-algebraic-type-theory)
+- ... [480 lines total]
++ ## 🧭 Table of Contents
++ 1. [Product Types vs Sum Types: The Algebraic Type Theory](#1-product-types-vs-sum-types-the-algebraic-type-theory)
++ 2. [Struct Architecture: Named-Field Structs & Compiler Field Reordering](#2-struct-architecture-named-field-structs--compiler-field-reordering)
++ 3. [Field Init Shorthand & Struct Update Syntax (`..base`)](#3-field-init-shorthand--struct-update-syntax-base)
++ 4. [Visibility & Encapsulation: Struct Fields vs Enum Variants & `#[non_exhaustive]`](#4-visibility--encapsulation-struct-fields-vs-enum-variants--non_exhaustive)
++ 5. [Tuple Structs & The Newtype Pattern: Type Safety Without Cost](#5-tuple-structs--the-newtype-pattern-type-safety-without-cost)
++ 6. [Unit Structs: Zero-Sized Types (ZST) & The Typestate Pattern](#6-unit-structs-zero-sized-types-zst--the-typestate-pattern)
++ 7. [Memory Layout Representations: `#[repr(Rust)]`, `#[repr(C)]`, `#[repr(packed)]`, `#[repr(align)]`, `#[repr(transparent)]`](#7-memory-layout-representations-reprrust-reprc-reprpacked-repralign-reprtransparent)
++ 8. [Hardware Field Offsets: `std::mem::offset_of!` (Rust 1.77+)](#8-hardware-field-offsets-stdmemoffset_of-rust-177)
++ 9. [Methods, Associated Functions & Advanced Self Receivers (`Box<Self>`, `Arc<Self>`)](#9-methods-associated-functions--advanced-self-receivers-boxself-arcself)
++ 10. [Enums as Algebraic Data Types: Tagged Unions & Memory Footprints](#10-enums-as-algebraic-data-types-tagged-unions--memory-footprints)
++ 11. [Recursive Enums & The Infinite Size Problem: Indirection with `Box<T>`](#11-recursive-enums--the-infinite-size-problem-indirection-with-boxt)
++ 12. [Empty/Uninhabited Enums: `enum Void {}` & Never Types](#12-emptyuninhabited-enums-enum-void--never-types)
++ 13. [The Null Pointer Optimization (NPO): 8-Byte `Option<&T>` Magic](#13-the-null-pointer-optimization-npo-8-byte-optiont-magic)
++ 14. [Enum Discriminant Inspection: `std::mem::discriminant`](#14-enum-discriminant-inspection-stdmemdiscriminant)
++ 15. [Standard Enums Masterclass: `Option<T>`, `Result<T, E>` & `ControlFlow`](#15-standard-enums-masterclass-optiont-resultt-e--controlflow)
++ 16. [The `Option::take()` & `replace()` Secret Under `&mut self`](#16-the-optiontake--replace-secret-under-mut-self)
++ 17. [Boolean Blindness: Replacing `bool` with Domain Enums](#17-boolean-blindness-replacing-bool-with-domain-enums)
++ 18. [The Builder Pattern: Safe Construction of Complex Structs](#18-the-builder-pattern-safe-construction-of-complex-structs)
++ 19. [Advanced Pattern Matching: Refutable vs Irrefutable Patterns](#19-advanced-pattern-matching-refutable-vs-irrefutable-patterns)
++ 20. [Deep Destructuring, Slicing Patterns (`[first, .., last]`), `@` Bindings & Match Guards](#20-deep-destructuring-slicing-patterns-first--last--bindings--match-guards)
++ 21. ["Why, When, Where, How & Why This Not That" 15-Point Systems Matrix](#21-why-when-where-how--why-this-not-that-15-point-systems-matrix)
++ 22. [Master Working Code & Line-by-Line Syntax Walkthrough](#22-master-working-code--line-by-line-syntax-walkthrough)
+```
+
+</details>
+
+
+<details>
+<summary>2026-10-10 15:00 IST — [rust_book/03_structs_enums_pattern_matching.md] — Created Volume 3: Custom Types, Enums & Algebraic Data Types</summary>
+
+- **File:** rust_book/03_structs_enums_pattern_matching.md
+- **Change type:** Created
+- **Reason:** Comprehensive deep-dive covering Product vs Sum types, Compiler field reordering for padding minimization, Newtype pattern for zero-cost domain safety, Unit structs ZST & Typestate pattern, `#[repr(C)]`/`packed`/`align`/`transparent`, Enums as ADTs & discriminant memory calculation, Null Pointer Optimization (NPO) 8-byte `Option<&T>`, `Option`/`Result`/`ControlFlow` combinators, Refutable vs Irrefutable patterns, Slice patterns, 10-point systems matrix, and master working code with line-by-line walkthrough.
+
+```diff
++ # 📖 Volume 03: Custom Types, Enums & Algebraic Data Types
++ ## 🇮🇳 Sampoorna Rust Grantha — Tritiya Adhyaya (Chapter 3)
++ 
++ > **Maha-Uddeshya (Mission):**
++ > Is chapter ka uddeshya Rust ke type system ki core foundation — Structs, Enums, Algebraic Data Types (ADT)...
++ ... [Full Chapter Content: 480+ lines covering Product vs Sum types, Compiler field reordering optimization, Field init shorthand & struct update syntax, Tuple structs, Newtype pattern, Unit structs ZST 0 bytes, Typestate state-machine pattern, #[repr(Rust)], #[repr(C)], #[repr(packed)], #[repr(align(N))], #[repr(transparent)], Enums as Tagged Unions, Discriminant + largest variant payload math, Null Pointer Optimization 8-byte Option<&T>, Option combinators, Result combinators, ControlFlow early-exit traversals, Refutable vs Irrefutable patterns, Nested destructuring, Slice patterns [genesis, .., tip], 10-point systems matrix, runnable demo and line-by-line breakdown]
+```
+
+</details>
+
+<details>
+<summary>2026-10-10 14:59 IST — [rust_book/00_master_index_and_roadmap.md] — Updated Volume 3 status to Active & Completed</summary>
+
+- **File:** rust_book/00_master_index_and_roadmap.md
+- **Change type:** Modified
+- **Reason:** Marked Volume 03 as Active & Completed in the master book blueprint.
+
+```diff
+  ### 📖 Volume 03: Custom Types, Enums & Algebraic Data Types
+- **File:** [`03_structs_enums_pattern_matching.md`](file:///c:/Dev/Rust/rust_book/03_structs_enums_pattern_matching.md) *(Status: 📝 In Queue)*
++ **File:** [`03_structs_enums_pattern_matching.md`](file:///c:/Dev/Rust/rust_book/03_structs_enums_pattern_matching.md) *(Status: ✅ Active & Completed)*
+```
+
+</details>
+
+
+<details>
 <summary>2026-10-09 23:55 IST — [rust_book/02_ownership_borrowing_lifetimes.md] — Massive expansion covering all atomic roadmap subtopics</summary>
 
 - **File:** rust_book/02_ownership_borrowing_lifetimes.md

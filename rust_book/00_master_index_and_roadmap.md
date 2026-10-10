@@ -101,7 +101,7 @@
 ---
 
 ### 📖 Volume 03: Custom Types, Enums & Algebraic Data Types
-**File:** [`03_structs_enums_pattern_matching.md`](file:///c:/Dev/Rust/rust_book/03_structs_enums_pattern_matching.md) *(Status: 📝 In Queue)*
+**File:** [`03_structs_enums_pattern_matching.md`](file:///c:/Dev/Rust/rust_book/03_structs_enums_pattern_matching.md) *(Status: ✅ Active & Completed)*
 
 - **1. Struct Architecture:**
   - Named-field Structs: Field ordering, memory padding, data locality.
