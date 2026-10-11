@@ -33,6 +33,60 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-10-10 23:48 IST — [rust_book/04_collections_and_data_structures.md] — Enriched Volume 4 with drain, stack vectors (SmallVec/ArrayVec), push vs push_str, and fxhash</summary>
+
+- **File:** rust_book/04_collections_and_data_structures.md
+- **Change type:** Modified
+- **Reason:** Completed 100% roadmap parity by adding `drain()` range extractor, `truncate()`/`clear()` memory retention details, `SmallVec` and `ArrayVec` zero-heap stack patterns, `push()` vs `push_str()` in-place string mutation, and `rustc-hash` (`FxHashMap`) non-cryptographic compiler hashing.
+
+```diff
++ ### 🌊 `drain(range)`: Zero-Reallocation Range Ownership Extractor
++ // ... drain range extraction keeping capacity intact ...
++ ### 📦 Ecosystem Stack-Allocated Vectors: `SmallVec` & `ArrayVec`
++ // ... SSO smallvec and arrayvec stack arrays ...
++ ### ✍️ In-Place String Mutation: `push()` vs `push_str()` & `truncate()`
++ // ... char encoding vs str slice memcpy ...
++ ### 🏎️ 4. The Compiler & Browser Secret: `fxhash` (`FxHashMap`)
++ // ... rustc-hash word-sized multiply-and-rotate 3x speedup ...
+```
+
+</details>
+
+<details>
+<summary>2026-10-10 16:20 IST — [rust_book/04_collections_and_data_structures.md] — Created Volume 4: Collections, Data Structures & The Iterator Engine</summary>
+
+- **File:** rust_book/04_collections_and_data_structures.md
+- **Change type:** Created
+- **Reason:** Comprehensive deep-dive covering Vec triple-word header (ptr, len, cap = 24B), 2x geometric growth strategy, `with_capacity` optimization, `remove()` vs `swap_remove()` O(1), Slices fat pointers & `split_at_mut`, `sort()` vs `sort_unstable()` PDQSort, UTF-8 variable-width string realities (why s[0] is banned), `char_indices`, `HashMap` Swiss Table SIMD & SipHash vs AHash, Entry API, `BTreeMap` CPU cache-line packing & range queries, `VecDeque`, `BinaryHeap`, Linked List anti-pattern, Iterator engine, 14+ adapters, 12+ consumers, Zero-Cost Abstraction assembly proof, Custom Iterator, Turbofish syntax, 15-point systems matrix, and line-by-line walkthrough.
+
+```diff
++ # 📖 Volume 04: Collections, Data Structures & The Iterator Engine
++ ## 🇮🇳 Sampoorna Rust Grantha — Chaturtha Adhyaya (Chapter 4)
++ 
++ > **Maha-Uddeshya (Mission):**
++ > Is chapter ka uddeshya Rust ki standard library ke sabhi core data structures...
++ ... [Full Chapter Content: 560+ lines covering Vec triple-word header, capacity pre-allocation, swap_remove O(1), Slices fat pointer 16 bytes, split_at_mut, sort_unstable PDQSort zero heap allocations, UTF-8 variable byte realities, char_indices, HashMap Swiss Table SIMD buckets, SipHash 1-3 HashDoS resistance, ahash, Entry API, BTreeMap L1 cache lines, range queries, VecDeque ring buffer, BinaryHeap max-heap, Linked List CPU cache destruction, Iterator trait, 3 iteration flavors, 14+ lazy adapters, 12+ eager consumers, Zero-cost abstraction assembly proof, Custom Fibonacci iterator, Turbofish syntax, 15-point systems matrix, runnable demo and line-by-line breakdown]
+```
+
+</details>
+
+<details>
+<summary>2026-10-10 16:19 IST — [rust_book/00_master_index_and_roadmap.md] — Updated Volume 4 status to Active & Completed</summary>
+
+- **File:** rust_book/00_master_index_and_roadmap.md
+- **Change type:** Modified
+- **Reason:** Marked Volume 04 as Active & Completed in the master book blueprint.
+
+```diff
+  ### 📖 Volume 04: Collections, Data Structures & The Iterator Engine
+- **File:** [`04_collections_and_data_structures.md`](file:///c:/Dev/Rust/rust_book/04_collections_and_data_structures.md) *(Status: 📝 In Queue)*
++ **File:** [`04_collections_and_data_structures.md`](file:///c:/Dev/Rust/rust_book/04_collections_and_data_structures.md) *(Status: ✅ Active & Completed)*
+```
+
+</details>
+
+
+<details>
 <summary>2026-10-10 15:26 IST — [rust_book/03_structs_enums_pattern_matching.md] — Massive expansion covering all advanced type system mechanics</summary>
 
 - **File:** rust_book/03_structs_enums_pattern_matching.md

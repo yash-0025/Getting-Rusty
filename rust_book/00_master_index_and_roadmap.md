@@ -127,7 +127,7 @@
 ---
 
 ### 📖 Volume 04: Collections, Data Structures & The Iterator Engine
-**File:** [`04_collections_and_data_structures.md`](file:///c:/Dev/Rust/rust_book/04_collections_and_data_structures.md) *(Status: 📝 In Queue)*
+**File:** [`04_collections_and_data_structures.md`](file:///c:/Dev/Rust/rust_book/04_collections_and_data_structures.md) *(Status: ✅ Active & Completed)*
 
 - **1. Dynamic Array `Vec<T>`:**
   - Triple-word Stack Header: Pointer (8B), Length (8B), Capacity (8B) = 24 bytes total.
