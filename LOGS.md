@@ -33,6 +33,38 @@
 <!-- Newest entries go here, above older ones -->
 
 <details>
+<summary>2026-10-12 23:26 IST — [rust_book/05_error_handling_and_robustness.md] — Created Volume 05: Error Handling & Production Robustness</summary>
+
+- **File:** rust_book/05_error_handling_and_robustness.md
+- **Change type:** Created
+- **Reason:** Comprehensive deep-dive covering Error Philosophy (why exceptions were rejected, hidden control flow), Result<T, E> memory layout & niche optimization, functional combinators (.map, .and_then, .unwrap_or_else), ? operator microscopic desugaring into match + From::from, panic internals (stack unwinding vs immediate abort panic="abort"), catch_unwind & boundary isolation, panic macro family, unwrap hygiene rules, custom std::error::Error from scratch, thiserror library derive macro, anyhow application context chaining (.context, bail!, ensure!, downcast), 15-point systems matrix, and line-by-line syntax walkthrough.
+
+```diff
++ # 📖 Volume 05: Error Handling & Production Robustness
++ ## 🇮🇳 Sampoorna Rust Grantha — Panchama Adhyaya (Chapter 5)
++ 
++ > **Maha-Uddeshya (Mission):**
++ > Is chapter ka uddeshya Rust ke error handling philosophy aur production robustness...
++ ... [Full Chapter Content: 680+ lines covering Result<T, E> memory layout, niche optimization, ? try operator desugaring, From/Into promotion, stack unwinding vs panic="abort", catch_unwind isolation, unwrap hygiene, custom std::error::Error from scratch, thiserror vs anyhow decision matrix, async/thread errors, 15-point systems matrix, working demo and line-by-line breakdown]
+```
+
+</details>
+
+<details>
+<summary>2026-10-12 23:26 IST — [rust_book/00_master_index_and_roadmap.md] — Updated Volume 5 status to Active & Completed</summary>
+
+- **File:** rust_book/00_master_index_and_roadmap.md
+- **Change type:** Modified
+- **Reason:** Marked Volume 05 as Active & Completed in the master blueprint syllabus.
+
+```diff
+- **File:** [`05_error_handling_and_robustness.md`](file:///c:/Dev/Rust/rust_book/05_error_handling_and_robustness.md) *(Status: 📝 In Queue)*
++ **File:** [`05_error_handling_and_robustness.md`](file:///c:/Dev/Rust/rust_book/05_error_handling_and_robustness.md) *(Status: ✅ Active & Completed)*
+```
+
+</details>
+
+<details>
 <summary>2026-10-10 23:48 IST — [rust_book/04_collections_and_data_structures.md] — Enriched Volume 4 with drain, stack vectors (SmallVec/ArrayVec), push vs push_str, and fxhash</summary>
 
 - **File:** rust_book/04_collections_and_data_structures.md

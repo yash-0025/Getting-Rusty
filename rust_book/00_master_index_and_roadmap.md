@@ -162,7 +162,7 @@
 ---
 
 ### 📖 Volume 05: Error Handling & Production Robustness
-**File:** [`05_error_handling_and_robustness.md`](file:///c:/Dev/Rust/rust_book/05_error_handling_and_robustness.md) *(Status: 📝 In Queue)*
+**File:** [`05_error_handling_and_robustness.md`](file:///c:/Dev/Rust/rust_book/05_error_handling_and_robustness.md) *(Status: ✅ Active & Completed)*
 
 - **1. Error Philosophy: Exceptions vs Result:**
   - Why Rust rejects `try / catch`: Hidden control flow, invisible stack unwinding, zero compiler safety.
